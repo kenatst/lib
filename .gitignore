@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode user state (machine-local, never shared)
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+
+# Build artifacts
+build/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xctestrun
+
+# Test results
+*.xcresult
+
+# Swift Package Manager (reserved for future dependencies)
+.build/
+Package.resolved
+Package.pins
+
+# CocoaPods / Carthage are not used in this project
+Pods/
+Carthage/
+
+# Secrets & local environment — never commit credentials or API keys
+.env
+.env.*
+*.entitlements.local
+secrets/
+*.pem
+*.p12
+*.mobileprovision
+
+# Playgrounds / scratch files
+*.playground
