@@ -9,7 +9,8 @@ struct EmberApp: App {
 
     init() {
         let store = EmberStore()
-        let appState = AppState(hasJourney: store.hasJourney)
+        let ageConfirmed = store.state.ageConfirmed
+        let appState = AppState(hasJourney: store.hasJourney, ageConfirmed: ageConfirmed)
         let router = AppRouter()
         _store = State(initialValue: store)
         _appState = State(initialValue: appState)

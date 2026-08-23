@@ -4,9 +4,10 @@ import Testing
 @Suite("App State")
 struct AppStateTests {
 
-    @Test("A fresh install begins in firstRun")
+    @Test("A fresh install begins at the age gate")
     func freshInstall() {
-        #expect(AppState(hasJourney: false).phase == .firstRun)
+        #expect(AppState(hasJourney: false).phase == .ageGate)
+        #expect(AppState(hasJourney: false, ageConfirmed: true).phase == .firstRun)
     }
 
     @Test("Completing onboarding activates the core experience exactly once")
@@ -26,6 +27,7 @@ struct AppStateTests {
     func reset() {
         let state = AppState(hasJourney: true)
         state.resetToFirstRun()
-        #expect(state.phase == .firstRun)
+        // Deletion also erases the age confirmation.
+        #expect(state.phase == .ageGate)
     }
 }

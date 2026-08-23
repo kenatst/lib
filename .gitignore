@@ -39,3 +39,6 @@ secrets/
 
 # Playgrounds / scratch files
 *.playground
+
+# Simulator captures (may contain seeded demo data; keep out of the repo)
+shots/

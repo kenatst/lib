@@ -159,6 +159,10 @@ struct CoupleSpaceView: View {
                 )
                 .lineLimit(2...4)
                 .font(Typography.editorial(.body))
+                .autocorrectionDisabled(true)
+                .textInputAutocapitalization(.sentences)
+                .textContentType(nil)
+                .privacySensitive()
                 .padding(Spacing.md)
                 .background(
                     RoundedRectangle(cornerRadius: Radius.md, style: .continuous)

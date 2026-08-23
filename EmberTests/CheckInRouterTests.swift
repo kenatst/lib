@@ -66,11 +66,16 @@ struct AppStatePacingTests {
     @Test("Phase reflects journey existence and transitions both ways")
     func phases() {
         let fresh = AppState(hasJourney: false)
+        fresh.confirmAge()
         #expect(fresh.phase == .firstRun)
         fresh.activate()
         #expect(fresh.phase == .active)
+        // After activation, age was confirmed along the way — reset lands on welcome.
         fresh.resetToFirstRun()
         #expect(fresh.phase == .firstRun)
+
+        let confirmedFresh = AppState(hasJourney: false, ageConfirmed: true)
+        #expect(confirmedFresh.phase == .firstRun)
 
         let returning = AppState(hasJourney: true)
         #expect(returning.phase == .active)

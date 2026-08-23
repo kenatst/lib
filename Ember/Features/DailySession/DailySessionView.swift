@@ -189,7 +189,10 @@ struct DailySessionView: View {
                     .fill(Palette.cream.opacity(0.9))
                     .strokeBorder(Palette.hairline, lineWidth: 1)
             )
-            .autocorrectionDisabled(false)
+            .autocorrectionDisabled(true)
+            .textInputAutocapitalization(.sentences)
+            .textContentType(nil)
+            .privacySensitive()
         }
     }
 

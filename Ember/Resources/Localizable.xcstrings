@@ -18,6 +18,54 @@
         }
       }
     },
+    "agegate.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is a space for grown conversations about intimacy. Please confirm you are 18 or older."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cet espace accueille des conversations adultes sur l'intimité. Merci de confirmer que vous avez 18 ans ou plus."
+          }
+        }
+      }
+    },
+    "agegate.confirm": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I am 18 or older"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'ai 18 ans ou plus"
+          }
+        }
+      }
+    },
+    "agegate.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER speaks about desire — with adults."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER parle de désir — avec des adultes."
+          }
+        }
+      }
+    },
     "common.back": {
       "localizations": {
         "en": {
@@ -1293,7 +1341,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La familiarité cache des choses à plat. Le visage que vous connaissez par cœur change chaque jour. Regarder encore — lentement, comme pour la première fois — peut rendre le connu tout neuf."
+            "value": "La familiarité cache des choses sous nos yeux. Le visage que vous connaissez par cœur change chaque jour. Regarder encore — lentement, comme pour la première fois — peut rendre le connu tout neuf."
           }
         }
       }
@@ -1373,7 +1421,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Se sentir désiré commence par être vu. Laissez-vous surprendre dans quelque chose de petit et vrai aujourd'hui — en train de fredonner, absorbé·e, sans garde — et remarquez que vous l'avez survécu. C'est toute la leçon."
+            "value": "Se sentir désiré commence par être vu. Laissez-vous surprendre dans quelque chose de petit et vrai aujourd'hui — en train de fredonner, absorbé·e, sans garde — et remarquez que vous y avez survécu. C'est toute la leçon."
           }
         }
       }
@@ -1885,7 +1933,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L'ancienne chanson portait-elle encore une charge ?"
+            "value": "L'ancienne chanson a-t-elle encore résonné en vous ?"
           }
         }
       }
@@ -2077,7 +2125,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choisissez la pratique de ces semaines que vous garderez. Refaites-la une fois aujourd'hui — délibérément, comme une gardienne, plus comme une expérience."
+            "value": "Choisissez la pratique de ces semaines que vous garderez. Refaites-la une fois aujourd'hui — délibérément, non plus en expérience mais en choix."
           }
         }
       }
@@ -2589,7 +2637,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Complétez honnêtement : « On me manque de… » Quel mot est arrivé premier ?"
+            "value": "Complétez honnêtement : « Il me manque de… » Quel mot est arrivé premier ?"
           }
         }
       }
@@ -3965,7 +4013,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Je le remarque Rarement"
+            "value": "Je le remarque rarement"
           }
         }
       }

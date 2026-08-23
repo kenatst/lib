@@ -74,8 +74,8 @@ DISCOVER_FR = [
     "Le jeu, c'est le sérieux qui a quitté ses chaussures. Ce n'est pas puéril — c'est la plus ancienne forme d'intimité : deux créatures qui annoncent la sécurité par le rire. La curiosité compte même quand elle finit en fou rire.",
     "La proximité compose en silence. Une petite chaleur aujourd'hui — une chemise pliée, une tasse préférée posée, une main sur une épaule au passage — pèse plus qu'un grand geste gardé pour un jour jamais venu.",
     "L'autonomie n'est pas la distance. C'est l'espace où le choix vit encore — et le choix rend le désir possible. Retirer l'attente est en soi une invitation ; la pression est l'opposé de l'appétit.",
-    "La familiarité cache des choses à plat. Le visage que vous connaissez par cœur change chaque jour. Regarder encore — lentement, comme pour la première fois — peut rendre le connu tout neuf.",
-    "Se sentir désiré commence par être vu. Laissez-vous surprendre dans quelque chose de petit et vrai aujourd'hui — en train de fredonner, absorbé·e, sans garde — et remarquez que vous l'avez survécu. C'est toute la leçon.",
+    "La familiarité cache des choses sous nos yeux. Le visage que vous connaissez par cœur change chaque jour. Regarder encore — lentement, comme pour la première fois — peut rendre le connu tout neuf.",
+    "Se sentir désiré commence par être vu. Laissez-vous surprendre dans quelque chose de petit et vrai aujourd'hui — en train de fredonner, absorbé·e, sans garde — et remarquez que vous y avez survécu. C'est toute la leçon.",
     "L'affection sans programme reconstruit la confiance dans le contact. Une main qui ne veut rien apprend une langue nouvelle à la peau. Offrez trois contacts sans attente aujourd'hui et recevez-en un sans le rendre comme une dette.",
     # Semaine 3 — Entretenir
     "La nouveauté à la bonne dose est une porte, pas un saut. Une lampe nouvelle, une playlist différente, une heure déplacée — l'attention suit la différence comme un chat suit le mouvement. Les grands gestes font sursauter ; les petits invitent.",
@@ -124,7 +124,7 @@ REFLECT_FR = [
     "Qu'est-ce qui rendrait l'heure qui vient assez sûre pour y vouloir quelque chose ?",
     "Terminez cette phrase sans corriger : « Ce qui me manque, c'est… »",
     # Semaine 2
-    "Complétez honnêtement : « On me manque de… » Quel mot est arrivé premier ?",
+    "Complétez honnêtement : « Il me manque de… » Quel mot est arrivé premier ?",
     "Quand, pour la dernière fois, quelque chose vous a fait sourire à vous-même, seul·e ?",
     "Nommez une petite chaleur de cette semaine que personne d'autre n'aurait remarquée.",
     "Où, dans votre vie, n'avez-vous aucune place pour choisir ? Comment ça se loge dans le corps ?",
@@ -192,7 +192,7 @@ ACT_FR = [
     "Couchez-vous trente minutes plus tôt que ce qui serait justifié. Le désir négocie avec l'épuisement ; gagnez ce marché une fois ce soir.",
     "Suivez aujourd'hui une vraie question sur vous-même. Posez-la en silence, puis laissez-la ouverte pendant que vous marchez, vous lavez, vous attendez.",
     "Dites à voix haute — à cette personne, ou juste à la pièce — si cette semaine ressemble à la distance ou à la proximité. Aucun verdict requis.",
-    "Choisissez la pratique de ces semaines que vous garderez. Refaites-la une fois aujourd'hui — délibérément, comme une gardienne, plus comme une expérience.",
+    "Choisissez la pratique de ces semaines que vous garderez. Refaites-la une fois aujourd'hui — délibérément, non plus en expérience mais en choix.",
 ]
 
 RETURN_EN = [
@@ -238,7 +238,7 @@ RETURN_FR = [
     "Le repos est-il venu ? Quelque chose s'est-il réveillé après ?",
     "La question ouverte vous a-t-elle tenu compagnie ?",
     "Arrivez-vous à nommer votre saison ?",
-    "L'ancienne chanson portait-elle encore une charge ?",
+    "L'ancienne chanson a-t-elle encore résonné en vous ?",
     "Le petit plaisir de demain luit-il déjà un peu ?",
     "Quel gardien emporterez-vous au-delà de ces trois semaines ?",
 ]

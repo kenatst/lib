@@ -18,6 +18,8 @@ final class EmberStore {
     nonisolated struct PersistedState: Codable, Equatable, Sendable {
         /// Bump on any breaking model change; migrate in `load`.
         var schemaVersion: Int = 2
+        /// Adult-content confirmation (18+), set once on first launch.
+        var ageConfirmed: Bool = false
         var intention: DesireIntention?
         var responses: Onboarding.Responses?
         var profile: DesireProfile?
@@ -106,6 +108,11 @@ final class EmberStore {
         state.checkIns.removeAll { $0.dayNumber == checkIn.dayNumber }
         state.checkIns.append(checkIn)
         state.checkIns.sort { $0.dayNumber < $1.dayNumber }
+        save()
+    }
+
+    func setAgeConfirmed() {
+        state.ageConfirmed = true
         save()
     }
 

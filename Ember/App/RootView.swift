@@ -14,6 +14,9 @@ struct RootView: View {
     var body: some View {
         Group {
             switch appState.phase {
+            case .ageGate:
+                AgeGateView()
+                    .transition(.opacity)
             case .firstRun:
                 WelcomeView()
                     .transition(.opacity)

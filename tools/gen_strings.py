@@ -41,6 +41,16 @@ k("welcome.note", "Private by design. Nothing you write leaves this device.",
   "Confidentiel par nature. Rien de ce que vous écrivez ne quitte cet appareil.")
 
 # ---------------------------------------------------------------------------
+# Age gate
+# ---------------------------------------------------------------------------
+k("agegate.title", "EMBER speaks about desire — with adults.",
+  "EMBER parle de désir — avec des adultes.")
+k("agegate.body",
+  "This is a space for grown conversations about intimacy. Please confirm you are 18 or older.",
+  "Cet espace accueille des conversations adultes sur l'intimité. Merci de confirmer que vous avez 18 ans ou plus.")
+k("agegate.confirm", "I am 18 or older", "J'ai 18 ans ou plus")
+
+# ---------------------------------------------------------------------------
 # Journey selection
 # ---------------------------------------------------------------------------
 k("selection.title", "What do you want back?",
@@ -100,7 +110,7 @@ k("q.my.selfconnection.text", "When did you last feel at ease in your own body?"
 k("q.my.selfconnection.recent", "Recently", "Récemment")
 k("q.my.selfconnection.passing", "Sometimes, in passing", "Parfois, fugitivement")
 k("q.my.selfconnection.distant", "It's been a long time", "Cela fait longtemps")
-k("q.my.selfconnection.unsure", "I rarely notice", "Je le remarque Rarement")
+k("q.my.selfconnection.unsure", "I rarely notice", "Je le remarque rarement")
 
 k("q.my.pressure.text", "Wanting more can bring different feelings. Which is loudest?",
   "Vouloir davantage réveille différentes sensations. Laquelle parle le plus fort ?")
