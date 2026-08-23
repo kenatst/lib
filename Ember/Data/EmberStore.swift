@@ -85,8 +85,18 @@ final class EmberStore {
 
     /// Explicit persistence status. Features never guess whether storage
     /// is writable — they render from this.
+    ///
+    /// Invariant #3 (release): a FAILED WRITE must be visible. `.ready` may
+    /// only be reported after a write that actually reached durable storage
+    /// (or a load that proved storage works). After any failed write the
+    /// status becomes `.volatile`: in-memory state stays authoritative for
+    /// THIS session and every later mutation retries the disk — but the UI
+    /// must never claim "saved on device" while volatile.
     nonisolated enum PersistenceStatus: Equatable, Sendable {
         case ready
+        /// Last write failed; content lives in memory only until the next
+        /// successful mutation persists it.
+        case volatile
         case unavailable(UnavailabilityReason)
     }
 
@@ -118,7 +128,7 @@ final class EmberStore {
         // every write path is blocked until a real load succeeds.
         self.state = outcome.state ?? .empty
         switch outcome.status {
-        case .ready:
+        case .ready, .volatile:
             Self.markReady(self)
         case .unavailable(let reason):
             Self.markUnavailable(self, reason)
@@ -278,37 +288,40 @@ final class EmberStore {
 
     // MARK: Deletion (privacy by design)
 
-    /// Erases everything EMBER knows. In-memory state is cleared ONLY after
-    /// the on-disk deletion actually succeeded — a failed deletion must never
-    /// look like success. Callers branch on the outcome.
+    /// Erases everything EMBER knows — LITERALLY everything. The EMBER
+    /// Application Support directory contains only EMBER private state and
+    /// recovery artifacts (state file, quarantines, timestamped recoveries,
+    /// debug seeding files), so deletion removes the directory recursively.
+    /// Success is VERIFIED afterwards: the directory must not exist, or exist
+    /// with zero entries. In-memory state clears ONLY after verified cleanup.
+    ///
+    /// A failed deletion returns .failed and leaves memory untouched — the UI
+    /// stays in the real journey and says so, never claiming an erasure that
+    /// did not happen.
     @discardableResult
     func deleteEverything() -> DeletionOutcome {
-        let url = directory.appendingPathComponent(Self.fileName)
-        let quarantineURL = directory.appendingPathComponent(Self.fileName + Self.quarantineSuffix)
-
         do {
-            try files.removeItem(at: url)
-        } catch {
-            if !files.fileExists(at: url) {
-                continueDeletion(quarantineURL: quarantineURL)
-                return .deleted   // already gone — deletion effectively complete
+            if files.fileExists(at: directory) {
+                try files.removeItem(at: directory)
             }
-            EmberLog.app.fault("Failed to remove state file")
+        } catch {
+            EmberLog.app.fault("Failed to remove EMBER data directory")
             return .failed
         }
-        continueDeletion(quarantineURL: quarantineURL)
-        return .deleted
-    }
 
-    /// Best-effort removal of a stale quarantine alongside a successful
-    /// deletion; failure here does not fail the deletion (the primary file
-    /// containing the sensitive data is already gone).
-    private func continueDeletion(quarantineURL: URL) {
-        if files.fileExists(at: quarantineURL) {
-            try? files.removeItem(at: quarantineURL)
+        // VERIFY: nothing sensitive may remain. Directory absent = clean;
+        // present but empty also counts (an OS can lazily recreate containers).
+        if files.fileExists(at: directory) {
+            let leftovers = files.contentsOfDirectory(at: directory)
+            guard leftovers.isEmpty else {
+                EmberLog.app.fault("Deletion left files behind; refusing to claim success")
+                return .failed
+            }
         }
+
         state = .empty
         persistenceStatus = .ready
+        return .deleted
     }
 
     /// Erases journey progress. Same truthfulness contract as deletion.
@@ -320,7 +333,7 @@ final class EmberStore {
     // MARK: Saving
 
     private func save() {
-        guard persistenceStatus == .ready else {
+        if case .unavailable = persistenceStatus {
             // Never overwrite a file we could not read, and never write over
             // quarantined data before the user has seen what happened.
             // Temporary inability to save always beats destroying private writing.
@@ -333,9 +346,12 @@ final class EmberStore {
             encoder.outputFormatting = [.sortedKeys]
             let data = try encoder.encode(state)
             try files.write(data, to: directory.appendingPathComponent(Self.fileName))
+            // Durable success — including recovery from a previous failure.
+            persistenceStatus = .ready
         } catch {
-            // Never log content. A failed save is surfaced by state divergence,
-            // not by diagnostics containing user data.
+            // Never log content. The failure is surfaced through the status:
+            // the UI must not claim a durable save while volatile.
+            persistenceStatus = .volatile
             EmberLog.app.fault("Failed to persist state")
         }
     }
@@ -421,6 +437,8 @@ nonisolated protocol FileOperating: Sendable {
     func createDirectory(at url: URL) throws
     func removeItem(at url: URL) throws
     func moveItem(at url: URL, to url2: URL) throws
+    /// Names of entries in the directory (used to verify deletion success).
+    func contentsOfDirectory(at url: URL) -> [String]
 }
 
 nonisolated struct DefaultFileOperator: FileOperating {
@@ -446,5 +464,8 @@ nonisolated struct DefaultFileOperator: FileOperating {
     }
     func moveItem(at url: URL, to destination: URL) throws {
         try FileManager.default.moveItem(at: url, to: destination)
+    }
+    func contentsOfDirectory(at url: URL) -> [String] {
+        (try? FileManager.default.contentsOfDirectory(atPath: url.path)) ?? []
     }
 }

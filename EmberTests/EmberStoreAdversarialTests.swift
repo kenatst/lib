@@ -14,6 +14,7 @@ private final class FakeFiles: FileOperating, @unchecked Sendable {
 
     private let lock = NSLock()
     private var storage: [String: Data] = [:]
+    private var directories: Set<String> = []
 
     // Failure injection
     var failRead = false
@@ -28,11 +29,24 @@ private final class FakeFiles: FileOperating, @unchecked Sendable {
 
     init(_ initial: [String: Data] = [:]) {
         storage = initial
+        for path in initial.keys {
+            trackAncestors(path)
+        }
+    }
+
+    /// Records ancestor directories so fileExists(directory) works like a real FS.
+    private func trackAncestors(_ path: String) {
+        var parent = URL(fileURLWithPath: path).deletingLastPathComponent()
+        while parent.path != "/" {
+            directories.insert(parent.path)
+            parent = parent.deletingLastPathComponent()
+        }
     }
 
     func put(_ data: Data, at url: URL) {
         lock.lock(); defer { lock.unlock() }
         storage[url.path] = data
+        trackAncestors(url.path)
     }
     func peek(_ url: URL) -> Data? {
         lock.lock(); defer { lock.unlock() }
@@ -41,7 +55,7 @@ private final class FakeFiles: FileOperating, @unchecked Sendable {
 
     func fileExists(at url: URL) -> Bool {
         lock.lock(); defer { lock.unlock() }
-        return storage[url.path] != nil
+        return storage[url.path] != nil || directories.contains(url.path)
     }
 
     func readData(at url: URL) throws -> Data {
@@ -59,25 +73,38 @@ private final class FakeFiles: FileOperating, @unchecked Sendable {
             throw Fault.denied
         }
         storage[url.path] = data
+        trackAncestors(url.path)
         lock.unlock()
     }
 
     func createDirectory(at url: URL) throws {
         lock.lock(); defer { lock.unlock() }
         directoryCreations.append(url.path)
+        directories.insert(url.path)
+        var parent = url.deletingLastPathComponent()
+        while parent.path != "/" {
+            directories.insert(parent.path)
+            parent = parent.deletingLastPathComponent()
+        }
     }
 
     func removeItem(at url: URL) throws {
         lock.lock()
         removeAttempts.append(url.path)
-        guard storage[url.path] != nil else {
+        let isFile = storage[url.path] != nil
+        let isDir = directories.contains(url.path)
+        guard isFile || isDir else {
             lock.unlock()
-            throw Fault.noSuchFile   // mirrors FileManager on a missing file
+            throw Fault.noSuchFile
         }
         if failRemove {
             lock.unlock()
             throw Fault.denied
         }
+        // Recursive semantics for directories.
+        let prefix = url.path + "/"
+        storage = storage.filter { !$0.key.hasPrefix(prefix) }
+        directories = directories.filter { $0 != url.path && !$0.hasPrefix(prefix) }
         storage.removeValue(forKey: url.path)
         lock.unlock()
     }
@@ -92,6 +119,17 @@ private final class FakeFiles: FileOperating, @unchecked Sendable {
         storage.removeValue(forKey: url.path)
         storage[destination.path] = data
         lock.unlock()
+    }
+
+    func contentsOfDirectory(at url: URL) -> [String] {
+        lock.lock(); defer { lock.unlock() }
+        let prefix = url.path + "/"
+        var names = Set(storage.keys.filter { $0.hasPrefix(prefix) })
+        names.formUnion(directories.filter { $0.hasPrefix(prefix) })
+        return names
+            .filter { !$0.dropFirst(prefix.count).contains("/") }
+            .map { String($0.dropFirst(prefix.count)) }
+            .sorted()
     }
 }
 
@@ -237,11 +275,13 @@ struct EmberStoreAdversarialTests {
         #expect(store.restartJourney() == .failed)
         #expect(store.reflection(for: 7) == "still mine")
 
-        // When removal becomes possible again, deletion truly completes.
+        // When removal becomes possible again, deletion truly completes —
+        // and it removes the ENTIRE private directory, verified.
         files.failRemove = false
         #expect(store.deleteEverything() == .deleted)
         #expect(store.state == .empty)
-        #expect(!files.fileExists(at: dir.appendingPathComponent(EmberStore.fileName)))
+        #expect(!files.fileExists(at: dir))
+        #expect(files.contentsOfDirectory(at: dir).isEmpty)
     }
 
     @Test("Deleting when nothing exists still succeeds (fresh-install idempotence)")
@@ -262,10 +302,12 @@ struct EmberStoreAdversarialTests {
 
         files.failWrite = true
         store.setIntention(.myDesire)
-        #expect(store.persistenceStatus == .ready, "a failed write is not unavailability — state stays trustworthy in memory")
+        #expect(store.persistenceStatus == .volatile,
+                "a failed write must be visible — UI cannot claim a durable save")
 
         files.failWrite = false
         store.markDayComplete(1)
+        #expect(store.persistenceStatus == .ready, "next successful write restores readiness")
         #expect(files.writeAttempts.count >= 2, "next mutation retries the write")
 
         let bytes = try #require(files.peek(dir.appendingPathComponent(EmberStore.fileName)))

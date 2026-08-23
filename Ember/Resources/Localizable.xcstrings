@@ -3650,6 +3650,22 @@
         }
       }
     },
+    "persistence.banner.body.volatile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The last save to this device didn't complete. What you wrote is kept for this session and EMBER will try again automatically."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La dernière sauvegarde sur cet appareil n'a pas abouti. Ce que vous avez écrit est conservé pour cette session et EMBER réessaiera automatiquement."
+          }
+        }
+      }
+    },
     "persistence.banner.title": {
       "localizations": {
         "en": {
@@ -5559,13 +5575,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Held in memory for now — saving is paused, see the notice above."
+            "value": "Kept temporarily in this session. We'll try to save it again."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gardé en mémoire pour l'instant — la sauvegarde est en pause, voir l'avis ci-dessus."
+            "value": "Gardé temporairement dans cette session. Nous réessaierons de l'enregistrer."
           }
         }
       }

@@ -305,7 +305,9 @@ k("session.reflect.prompt", "If anything stirred, keep a line for yourself.",
 k("session.reflect.placeholder", "Written here, kept here.", "Écrit ici, gardé ici.")
 k("session.reflect.save", "Keep privately", "Garder pour moi")
 k("session.reflect.saved", "Kept on this device only.", "Conservé sur cet appareil uniquement.")
-k("session.reflect.held", "Held in memory for now — saving is paused, see the notice above.", "Gardé en mémoire pour l'instant — la sauvegarde est en pause, voir l'avis ci-dessus.")
+k("session.reflect.held",
+  "Kept temporarily in this session. We'll try to save it again.",
+  "Gardé temporairement dans cette session. Nous réessaierons de l'enregistrer.")
 k("session.finish", "Done for today", "J'en fais mon affaire pour aujourd'hui")
 k("session.finish.evening.teaser", "Come back this evening for a soft landing.",
   "Revenez ce soir pour un atterrissage en douceur.")
@@ -428,6 +430,9 @@ k("persistence.banner.body.unreadable",
 k("persistence.banner.body.corrupt",
   "Your data file couldn't be read. Its contents were preserved untouched on this device — nothing has been erased. Restarting the app usually resolves this.",
   "Votre fichier de données n'a pas pu être lu. Son contenu est préservé intact sur cet appareil — rien n'a été effacé. Redémarrer l'app suffit généralement.")
+k("persistence.banner.body.volatile",
+  "The last save to this device didn't complete. What you wrote is kept for this session and EMBER will try again automatically.",
+  "La dernière sauvegarde sur cet appareil n'a pas abouti. Ce que vous avez écrit est conservé pour cette session et EMBER réessaiera automatiquement.")
 
 # ---------------------------------------------------------------------------
 # Paywall (StoreKit) — one product, honest, no dark patterns

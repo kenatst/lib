@@ -160,8 +160,8 @@ struct DailySessionView: View {
 
                 if reflectionSaved {
                     Label {
-                        // Honest confirmation: only claim persistence when
-                        // storage is actually writable.
+                        // Truthful confirmation: only claim durable save when
+                        // the write actually reached storage.
                         Text(store.persistenceStatus == .ready
                              ? "session.reflect.saved"
                              : "session.reflect.held")
