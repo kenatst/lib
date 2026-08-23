@@ -44,9 +44,10 @@ struct JournalView: View {
                 .kerning(1.6)
                 .textCase(.uppercase)
 
-            if let day = JourneyCatalog.day(entry.day),
-               let theme = decodeTheme(day.theme) {
-                Text(String.ember(day.titleKey))
+            // The day's title in the CURRENT journey's theme sequence.
+            if let intention = store.state.intention,
+               let day = JourneyCatalog.day(entry.day, for: intention) {
+                Text(String.ember(day.titleKey(offset: intention.poolOffset)))
                     .emberCaption(Palette.mutedInk.opacity(0.75))
             }
 
@@ -64,8 +65,6 @@ struct JournalView: View {
         .padding(.top, Spacing.lg)
         .accessibilityElement(children: .combine)
     }
-
-    private func decodeTheme(_ theme: DayTheme) -> DayTheme? { theme }
 }
 
 #Preview {

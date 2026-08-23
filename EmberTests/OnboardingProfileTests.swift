@@ -149,17 +149,20 @@ struct JourneyCatalogTests {
             }
         }
         for day in JourneyCatalog.allDays {
-            for key in [day.titleKey, day.discoverKey, day.returnPromptKey] {
-                #expect(catalog[key] != nil, "missing \(key)")
-            }
-            // Theme pools: every reflect/act variant this day could serve,
-            // across all three journeys' offsets and the emphasized variant.
+            // Theme pools: every variant this day could ever serve, across
+            // all journeys' offsets and the emphasized (deepest) variant.
             for offset in 0...2 {
+                #expect(catalog[day.titleKey(offset: offset)] != nil,
+                        "missing \(day.titleKey(offset: offset))")
+                #expect(catalog[day.discoverKey(offset: offset)] != nil,
+                        "missing \(day.discoverKey(offset: offset))")
                 #expect(catalog[day.reflectKey(offset: offset)] != nil,
                         "missing \(day.reflectKey(offset: offset))")
                 #expect(catalog[day.actKey(offset: offset)] != nil,
                         "missing \(day.actKey(offset: offset))")
             }
+            #expect(catalog[day.returnPromptKey] != nil, "missing \(day.returnPromptKey)")
+            #expect(catalog[day.discoverKey(emphasizing: true)] != nil)
             #expect(catalog[day.reflectKey(emphasizing: true)] != nil)
             #expect(catalog[day.actKey(emphasizing: true)] != nil)
         }

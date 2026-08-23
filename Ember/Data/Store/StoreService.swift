@@ -17,6 +17,9 @@ final class StoreService {
     private(set) var entitlement = EntitlementState.free
     private(set) var isLoading = false
     private(set) var lastError: StoreError?
+    /// Set ONLY after an explicit user restore finds no prior purchase —
+    /// never as a side effect of a failed product fetch.
+    private(set) var restoreFoundNothing = false
     /// Set briefly when a purchase completes, for a quiet confirmation.
     private(set) var purchaseCompleted = false
 
@@ -109,10 +112,11 @@ final class StoreService {
     /// App Store restore. Always honest: if nothing to restore, the UI says so.
     func restore() async {
         lastError = nil
+        restoreFoundNothing = false
         do {
             try await engine.restore()
             await refreshEntitlementFromHistory()
-            if !entitlement.isActive { lastError = .productNotFound }  // surfaced as "nothing to restore"
+            if !entitlement.isActive { restoreFoundNothing = true }
         } catch {
             lastError = .failed
         }
@@ -160,6 +164,11 @@ final class StoreService {
     /// Clears the transient purchase-completed flag (UI consumes it).
     func consumePurchaseConfirmation() {
         purchaseCompleted = false
+    }
+
+    /// Test support: re-reads current entitlements from StoreKit.
+    func refreshEntitlementFromHistoryForTesting() async {
+        await refreshEntitlementFromHistory()
     }
 }
 

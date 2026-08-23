@@ -117,12 +117,12 @@ struct DailySessionView: View {
                 .frame(maxWidth: .infinity)
             }
         ) {
-            Text(String.ember(day.titleKey))
+            Text(String.ember(day.titleKey(offset: intention.poolOffset)))
                 .font(Typography.editorial(.title))
                 .foregroundStyle(Palette.wine)
                 .padding(.bottom, Spacing.md)
 
-            Text(String.ember(day.discoverKey))
+            Text(String.ember(day.discoverKey(offset: intention.poolOffset, emphasizing: isThemeEmphasized)))
                 .emberProse(.title3)
         } cta: {
             nextButton("common.continue") {

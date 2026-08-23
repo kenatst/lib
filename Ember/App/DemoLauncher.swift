@@ -54,9 +54,16 @@ enum DemoLauncher {
 
         // Seed an evening check-in (for pacing-note verification). Runs after
         // completion seeding so the check-in lands on the last finished day.
-        if value("-ember-checkin") != nil {
+        if let checkin = value("-ember-checkin") {
             let day = max(1, store.state.completedDays.count)
-            store.recordCheckIn(CheckIn(dayNumber: day, response: .feltDifferent, date: .now))
+            let response: CheckInResponse
+            switch checkin {
+            case "nothing": response = .nothingChanged
+            case "noticed": response = .noticedSomething
+            case "wantMore": response = .wantMore
+            default: response = .feltDifferent
+            }
+            store.recordCheckIn(CheckIn(dayNumber: day, response: response, date: .now))
         }
 
         if let handedOff = value("-ember-handoff") {
@@ -66,36 +73,115 @@ enum DemoLauncher {
 
         // Open a specific scene.
         if let route = value("-ember-route") {
-            appState.activate()
-            switch route {
-            case "welcome":
-                break
-            case "selection":
-                router.setRoot(.journeySelection)
-            case "onboarding":
-                let intention = DesireIntention(rawValue: value("-ember-intention") ?? "") ?? .myDesire
-                router.setRoot(.onboarding(intention))
-            case "profile":
-                router.setRoot(.desireProfile)
-            case "day":
-                let day = Int(value("-ember-day") ?? "") ?? (store.state.completedDays.max() ?? 0) + 1
-                router.setRoot(.day(min(day, JourneyCatalog.totalDays)))
-            case "return":
-                let day = Int(value("-ember-day") ?? "") ?? max(1, store.state.completedDays.count)
-                router.setRoot(.eveningReturn(min(day, JourneyCatalog.totalDays)))
-            case "progress":
-                router.setRoot(.progress)
-            case "journal":
-                router.setRoot(.journal)
-            case "settings":
-                router.setRoot(.settings)
-            case "coupleSetup":
-                router.setRoot(.coupleSetup)
-            case "coupleSpace":
-                router.setRoot(.coupleSpace)
-            default:
-                router.setRoot(.home)
+            applyRoute(route, store: store, appState: appState, router: router)
+            return
+        }
+
+        // Fallback when launch arguments aren't delivered (some simctl/host
+        // combinations drop them): read the same instructions from a file in
+        // Application Support. Lines of key=value:
+        //   intention=myDesire|theirDesire|ourDesire
+        //   completed=<n>   checkin=nothing|noticed|feltDifferent|wantMore
+        //   role=one|two    route=<same values as -ember-route>
+        applyDemoFile(store: store, appState: appState, router: router)
+    }
+
+    private static func applyDemoFile(store: EmberStore, appState: AppState, router: AppRouter) {
+        let fm = FileManager.default
+        guard let appSupport = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return }
+        let file = appSupport
+            .appendingPathComponent("Ember", isDirectory: true)
+            .appendingPathComponent("demo-instructions.txt")
+        guard let raw = try? String(contentsOf: file, encoding: .utf8) else { return }
+        try? fm.removeItem(at: file)   // one-shot
+
+        var vars: [String: String] = [:]
+        for line in raw.split(separator: "\n") {
+            let parts = line.split(separator: "=", maxSplits: 1)
+            guard parts.count == 2 else { continue }
+            vars[String(parts[0]).trimmingCharacters(in: .whitespaces)] =
+                String(parts[1]).trimmingCharacters(in: .whitespaces)
+        }
+
+        if let fresh = vars["fresh"], fresh == "true" {
+            store.deleteEverything()
+        }
+        if let rawIntention = vars["intention"], let intention = DesireIntention(rawValue: rawIntention) {
+            store.setIntention(intention)
+            var responses = Onboarding.Responses()
+            for question in Onboarding.questions(for: intention) {
+                if let option = question.options.first {
+                    responses.record(.init(questionID: question.id, optionID: option.id))
+                }
             }
+            store.recordResponses(responses)
+            store.setProfile(DesireProfileDeriver.derive(from: responses, intention: intention))
+        }
+        if let role = vars["role"] {
+            store.setCoupleRole(role == "two" ? .partnerTwo : .partnerOne)
+        }
+        if let completed = Int(vars["completed"] ?? "") {
+            for day in 1...max(0, min(completed, JourneyCatalog.totalDays)) {
+                store.markDayComplete(day)
+            }
+            if completed >= 2 {
+                store.saveReflection("Something softened tonight, quietly.", day: 2)
+            }
+        }
+        if let checkin = vars["checkin"] {
+            let day = max(1, store.state.completedDays.count)
+            let response: CheckInResponse
+            switch checkin {
+            case "nothing": response = .nothingChanged
+            case "noticed": response = .noticedSomething
+            case "wantMore": response = .wantMore
+            default: response = .feltDifferent
+            }
+            store.recordCheckIn(CheckIn(dayNumber: day, response: response, date: .now))
+        }
+        if let handoff = vars["handoff"] {
+            let role: EmberStore.CoupleRole = (vars["role"] == "two") ? .partnerTwo : .partnerOne
+            store.handOffNote(handoff, from: role.other)
+        }
+        if let route = vars["route"] {
+            applyRoute(route, store: store, appState: appState, router: router)
+        } else {
+            appState.activate()
+        }
+    }
+
+    private static func applyRoute(_ route: String, store: EmberStore, appState: AppState, router: AppRouter) {
+        appState.activate()
+        switch route {
+        case "welcome":
+            break
+        case "selection":
+            router.setRoot(.journeySelection)
+        case "onboarding":
+            let intention = DesireIntention(rawValue: ProcessInfo.processInfo.environment["EMBER_INTENTION"] ?? "") ?? .myDesire
+            router.setRoot(.onboarding(intention))
+        case "profile":
+            router.setRoot(.desireProfile)
+        case "day":
+            let day = Int(ProcessInfo.processInfo.environment["EMBER_DAY"] ?? "") ?? (store.state.completedDays.max() ?? 0) + 1
+            router.setRoot(.day(min(day, JourneyCatalog.totalDays)))
+        case "return":
+            let day = Int(ProcessInfo.processInfo.environment["EMBER_DAY"] ?? "") ?? max(1, store.state.completedDays.count)
+            router.setRoot(.eveningReturn(min(day, JourneyCatalog.totalDays)))
+        case "progress":
+            router.setRoot(.progress)
+        case "journal":
+            router.setRoot(.journal)
+        case "settings":
+            router.setRoot(.settings)
+        case "coupleSetup":
+            router.setRoot(.coupleSetup)
+        case "coupleSpace":
+            router.setRoot(.coupleSpace)
+        case "paywall":
+            router.setRoot(.paywall)
+        default:
+            router.setRoot(.home)
         }
     }
 }

@@ -60,11 +60,9 @@ struct PaywallView: View {
         } message: {
             Text("paywall.restore.empty.body")
         }
-        .onChange(of: storeService.lastError) { _, error in
-            if error == .productNotFound, storeService.entitlement.wasRevoked || !storeService.entitlement.isActive {
-                // Restore finished without finding anything — say so honestly.
-                if !storeService.entitlement.isActive { showRestoreEmpty = true }
-            }
+        .onChange(of: storeService.restoreFoundNothing) { _, foundNothing in
+            // Only an explicit restore with no prior purchase opens this.
+            if foundNothing { showRestoreEmpty = true }
         }
     }
 

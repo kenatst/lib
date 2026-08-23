@@ -130,7 +130,11 @@ struct CoupleArchitectureTests {
 
     @Test("EMBER ships no API surface for reading another space's private words")
     func emberStorePrivacySurface() {
-        let store = EmberStore()
+        // Isolated directory — NEVER the default, or tests pollute the
+        // installed app's real container on this simulator.
+        let dir = FileManager.default.temporaryDirectory
+            .appendingPathComponent("ember-couple-privacy-\(UUID().uuidString)", isDirectory: true)
+        let store = EmberStore(directory: dir)
         store.setCoupleRole(.partnerOne)
         store.saveReflection("only mine", day: 2)
 

@@ -4,25 +4,7 @@
 
   ],
   "products" : [
-    {
-      "displayPrice" : "0.00",
-      "familyShareable" : false,
-      "internalID" : "EMBER001",
-      "localizations" : [
-        {
-          "description" : "The complete adaptive journey, journal and couple mode.",
-          "displayName" : "EMBER Premium Annual",
-          "locale" : "en_US"
-        },
-        {
-          "description" : "Le parcours adaptatif complet, le journal et le mode couple.",
-          "displayName" : "EMBER Premium annuel",
-          "locale" : "fr_FR"
-        }
-      ],
-      "productID" : "com.kenatst.ember.premium.annual",
-      "referenceName" : "EMBER Premium Annual"
-    }
+
   ],
   "settings" : {
     "_applicationInternalID" : "EMBER-Local-Store",

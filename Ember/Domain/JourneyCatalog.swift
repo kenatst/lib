@@ -18,8 +18,16 @@ nonisolated struct JourneyDay: Identifiable, Hashable, Sendable {
     let week: Int            // 1…3
     let theme: DayTheme
 
-    var titleKey: String { "day.\(number).title" }
-    var discoverKey: String { "day.\(number).discover" }
+    // All copy is THEME-pooled. Which variant a day serves is deterministic:
+    // day number + intention offset; emphasized days serve the deepest
+    // variant (3). This keeps every journey sequence internally coherent —
+    // title, idea, practice and evening question always belong together.
+    func titleKey(offset: Int = 0) -> String {
+        "theme.title.\(theme.rawValue).\(Self.poolIndex(number, offset: offset))"
+    }
+    func discoverKey(offset: Int = 0, emphasizing: Bool = false) -> String {
+        "theme.discover.\(theme.rawValue).\(Self.poolIndex(number, offset: offset, emphasizing: emphasizing))"
+    }
 
     /// Deterministic variant selection inside the theme pool.
     /// `offset` differs per intention so journeys diverge in practice.
@@ -37,9 +45,12 @@ nonisolated struct JourneyDay: Identifiable, Hashable, Sendable {
         "theme.return.\(theme.rawValue).\(Self.poolIndex(number, modulo: 2, offset: 0, emphasizing: false))"
     }
 
-    private static func poolIndex(_ number: Int, modulo: Int, offset: Int, emphasizing: Bool) -> Int {
+    private static func poolIndex(_ number: Int, modulo: Int = 3, offset: Int, emphasizing: Bool) -> Int {
         if emphasizing { return modulo }   // the deepest authored variant
         return ((number - 1 + offset) % modulo) + 1
+    }
+    private static func poolIndex(_ number: Int, offset: Int) -> Int {
+        poolIndex(number, offset: offset, emphasizing: false)
     }
 
     var id: Int { number }
@@ -70,14 +81,6 @@ nonisolated enum DayTheme: String, Codable, Sendable {
 // MARK: - Personalization hooks
 
 extension JourneyDay {
-
-    /// Days whose discover/act copy has a variant tuned for a dominant
-    /// dimension get key suffix ".for.<dimension>"; the resolver falls back
-    /// to the base key. This keeps personalization meaningful but bounded.
-    func personalizedDiscoverKey(dominant: Dimension) -> String {
-        let variant = "\(discoverKey).for.\(dominant.rawValue)"
-        return String(localized: String.LocalizationValue(variant)) == variant ? discoverKey : variant
-    }
 
     /// The journey motif evolution for this day (0…1 across 21 days).
     var evolution: Double {

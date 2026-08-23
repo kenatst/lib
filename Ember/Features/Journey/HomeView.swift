@@ -28,6 +28,15 @@ struct HomeView: View {
         )
     }
     private var nextDay: Int { recommendation?.dayNumber ?? 1 }
+
+    /// Today's title in this journey's theme sequence (theme-pooled).
+    private var nextDayTitle: String {
+        guard let intention,
+              let day = JourneyCatalog.day(nextDay, for: intention) else {
+            return String(localized: "home.title")
+        }
+        return String.ember(day.titleKey(offset: intention.poolOffset))
+    }
     private var isJourneyComplete: Bool {
         store.state.completedDays.count >= JourneyCatalog.totalDays
     }
@@ -114,7 +123,7 @@ struct HomeView: View {
                         .kerning(1.8)
                         .textCase(.uppercase)
 
-                    Text(JourneyCatalog.day(nextDay).map { String.ember($0.titleKey) } ?? String(localized: "home.title"))
+                    Text(nextDayTitle)
                         .font(Typography.editorial(.largeTitle))
                         .foregroundStyle(Palette.ink)
                         .padding(.top, Spacing.xs)
