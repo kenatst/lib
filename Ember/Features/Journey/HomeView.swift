@@ -29,10 +29,15 @@ struct HomeView: View {
     }
     private var nextDay: Int { recommendation?.dayNumber ?? 1 }
 
-    /// Today's title in this journey's theme sequence (theme-pooled).
+    /// Today's title in this journey's PLANNED theme sequence.
     private var nextDayTitle: String {
         guard let intention,
-              let day = JourneyCatalog.day(nextDay, for: intention) else {
+              let day = JourneyPlanner.plannedDay(
+                number: nextDay,
+                intention: intention,
+                profile: store.state.profile,
+                checkIns: store.state.checkIns
+              ) else {
             return String(localized: "home.title")
         }
         return String.ember(day.titleKey(offset: intention.poolOffset))

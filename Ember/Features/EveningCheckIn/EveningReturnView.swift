@@ -21,7 +21,13 @@ struct EveningReturnView: View {
 
     private var day: JourneyDay? {
         guard let intention else { return JourneyCatalog.day(dayNumber) }
-        return JourneyCatalog.day(dayNumber, for: intention)
+        // The PLANNED day: theme possibly reordered within bounded adaptation.
+        return JourneyPlanner.plannedDay(
+            number: dayNumber,
+            intention: intention,
+            profile: store.state.profile,
+            checkIns: store.state.checkIns
+        )
     }
 
     var body: some View {
