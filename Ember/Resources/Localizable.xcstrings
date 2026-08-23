@@ -5090,6 +5090,22 @@
         }
       }
     },
+    "settings.journey.header": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your journey"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre parcours"
+          }
+        }
+      }
+    },
     "settings.journey.restart": {
       "localizations": {
         "en": {

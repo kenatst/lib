@@ -72,6 +72,7 @@ struct SettingsView: View {
         .padding(.top, Spacing.lg)
     }
 
+    @ViewBuilder
     private var dataSection: some View {
         VStack(alignment: .leading, spacing: 0) {
             sectionHeader("settings.data.header")
@@ -83,6 +84,12 @@ struct SettingsView: View {
             ) {
                 showDeleteConfirmation = true
             }
+        }
+        .padding(.top, Spacing.lg)
+
+        VStack(alignment: .leading, spacing: 0) {
+            sectionHeader("settings.journey.header")
+                .padding(.bottom, Spacing.sm)
 
             row(icon: "arrow.triangle.2.circlepath", titleKey: "settings.journey.restart") {
                 showRestartConfirmation = true

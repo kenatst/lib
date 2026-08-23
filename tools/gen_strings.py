@@ -331,6 +331,7 @@ k("settings.privacy.body",
   "Everything you write stays on this device, protected at rest.\nNothing is uploaded. There are no accounts, no analytics, no trackers.\nWhat you delete below is deleted for good.",
   "Tout ce que vous écrivez reste sur cet appareil, protégé au repos.\nRien n'est envoyé. Aucun compte, aucun traqueur, aucune publicité.\nCe que vous supprimez ci-dessous l'est définitivement.")
 k("settings.data.header", "Your data", "Vos données")
+k("settings.journey.header", "Your journey", "Votre parcours")
 k("settings.data.delete", "Delete everything EMBER knows", "Tout supprimer")
 k("settings.data.delete.confirm.title", "Delete all EMBER data?",
   "Supprimer toutes les données EMBER ?")

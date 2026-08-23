@@ -88,7 +88,7 @@ struct CoupleSpaceView: View {
                 .textCase(.uppercase)
                 .padding(.top, Spacing.lg)
 
-            Text(asymmetricKey(for: role))
+            Text(String.ember(asymmetricKey(for: role)))
                 .emberProse(.title3)
 
             Text("couple.asymmetric.notice")
