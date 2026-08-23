@@ -352,6 +352,9 @@ k("settings.reminder.time", "At", "À")
 k("settings.reminder.note",
   "Only on this device. A quiet nudge — no content, no streaks.",
   "Sur cet appareil uniquement. Une pensée discrète — sans contenu, sans séries.")
+k("couple.handoff.placeholder",
+  "Something to hand over, in your words…",
+  "Quelque chose à transmettre, avec vos mots…")
 k("reminder.title", "EMBER", "EMBER")
 k("reminder.body",
   "A few quiet minutes are waiting, whenever you're ready.",

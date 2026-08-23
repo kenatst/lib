@@ -9,11 +9,9 @@ struct JournalView: View {
 
     @Environment(EmberStore.self) private var store
 
-    /// (dayNumber, text) pairs, newest first.
+    /// Current space's reflections, newest first. Never shows a partner's.
     private var entries: [(day: Int, text: String)] {
-        store.state.reflections
-            .sorted { $0.key > $1.key }
-            .map { ($0.key, $0.value) }
+        store.journalEntries
     }
 
     var body: some View {

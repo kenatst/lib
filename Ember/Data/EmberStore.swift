@@ -25,7 +25,11 @@ final class EmberStore {
         var profile: DesireProfile?
         var completedDays: [Int] = []
         var checkIns: [CheckIn] = []
-        /// Private reflections, keyed by day. Stays on this device only.
+        /// Private reflections keyed by space ("p1"/"p2"/"solo") and day.
+        /// Stays on this device only; each partner's entries are invisible
+        /// to the other's space.
+        var reflectionsBySpace: [String: [Int: String]] = [:]
+        /// Legacy (pre-couple) single-space reflections, migrated on load.
         var reflections: [Int: String] = [:]
         /// Couple mode: which partner holds this space.
         var coupleRole: CoupleRole?
@@ -35,7 +39,7 @@ final class EmberStore {
         /// Opt-in daily reminder (24h clock). nil = reminders off.
         var reminderHour: Int?
         var reminderMinute: Int = 20
-        /// Unsaved in-progress reflections, keyed by "day.<n>". Cleared on save.
+        /// Unsaved in-progress reflections keyed by "<space>:day.<n>".
         var drafts: [String: String] = [:]
 
         static let empty = PersistedState()
@@ -100,13 +104,40 @@ final class EmberStore {
         save()
     }
 
+    // MARK: Reflection storage — private per space
+
+    /// The storage key of the currently-open space.
+    nonisolated static func spaceKey(role: CoupleRole?) -> String {
+        switch role {
+        case .partnerOne: "p1"
+        case .partnerTwo: "p2"
+        case nil: "solo"
+        }
+    }
+
+    private var currentSpace: String { Self.spaceKey(role: state.coupleRole) }
+
     func saveReflection(_ text: String, day: Int) {
-        state.reflections[day] = text
+        var space = state.reflectionsBySpace[currentSpace] ?? [:]
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            space.removeValue(forKey: day)
+        } else {
+            space[day] = text
+        }
+        state.reflectionsBySpace[currentSpace] = space
         save()
     }
 
     func reflection(for day: Int) -> String? {
-        state.reflections[day]
+        state.reflectionsBySpace[currentSpace]?[day]
+    }
+
+    /// All reflections in the CURRENT space, newest day first. There is no
+    /// API to read another space's reflections — by construction.
+    var journalEntries: [(day: Int, text: String)] {
+        (state.reflectionsBySpace[currentSpace] ?? [:])
+            .sorted { $0.key > $1.key }
+            .map { ($0.key, $0.value) }
     }
 
     func recordCheckIn(_ checkIn: CheckIn) {
@@ -130,7 +161,7 @@ final class EmberStore {
     // MARK: Drafts (in-progress reflections)
 
     func saveDraft(_ text: String, day: Int) {
-        let key = "day.\(day)"
+        let key = "\(currentSpace):day.\(day)"
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             state.drafts.removeValue(forKey: key)
         } else {
@@ -140,11 +171,11 @@ final class EmberStore {
     }
 
     func draft(for day: Int) -> String? {
-        state.drafts["day.\(day)"]
+        state.drafts["\(currentSpace):day.\(day)"]
     }
 
     func clearDraft(day: Int) {
-        state.drafts.removeValue(forKey: "day.\(day)")
+        state.drafts.removeValue(forKey: "\(currentSpace):day.\(day)")
         save()
     }
 
@@ -205,9 +236,13 @@ final class EmberStore {
         let url = directory.appendingPathComponent(fileName)
         guard let data = try? Data(contentsOf: url) else { return .empty }
         if var decoded = try? JSONDecoder().decode(PersistedState.self, from: data) {
-            // Migration hook: decode with defaults for missing fields, then
-            // stamp the current schema version so future migrations can
-            // branch on it. Older files simply gain the new defaults here.
+            // Migration: legacy single-space reflections move to "solo"
+            // (or partnerOne's space if couple mode was already set up).
+            if !decoded.reflections.isEmpty && decoded.reflectionsBySpace.isEmpty {
+                let space = (decoded.coupleRole == .partnerTwo) ? "p2" : (decoded.coupleRole == .partnerOne ? "p1" : "solo")
+                decoded.reflectionsBySpace[space] = decoded.reflections
+                decoded.reflections = [:]
+            }
             decoded.schemaVersion = PersistedState.empty.schemaVersion
             return decoded
         }

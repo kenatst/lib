@@ -882,6 +882,22 @@
         }
       }
     },
+    "couple.handoff.placeholder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something to hand over, in your words…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose à transmettre, avec vos mots…"
+          }
+        }
+      }
+    },
     "couple.invite.body": {
       "localizations": {
         "en": {

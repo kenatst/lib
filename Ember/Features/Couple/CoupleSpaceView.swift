@@ -153,7 +153,7 @@ struct CoupleSpaceView: View {
                 .transition(.opacity)
             } else {
                 TextField(
-                    String(localized: "couple.shared.tonight"),
+                    String.ember("couple.handoff.placeholder"),
                     text: $note,
                     axis: .vertical
                 )

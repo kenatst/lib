@@ -52,7 +52,7 @@ struct ProgressArcView: View {
 
                 dayTicks
 
-                if !store.state.reflections.isEmpty {
+                if !store.journalEntries.isEmpty {
                     Button {
                         Haptics.selection()
                         router.navigate(to: .journal)
