@@ -72,7 +72,17 @@ final class EmberStore {
 
     init(directory: URL? = nil) {
         self.directory = directory ?? Self.defaultDirectory()
-        self.state = Self.load(from: self.directory)
+        let (loaded, ok) = Self.load(from: self.directory)
+        self.state = loaded
+        // A failed read (e.g. locked device) leaves loadedFromDisk false so
+        // save() refuses to clobber the real file with empty defaults.
+        Self.markLoaded(self, ok: ok)
+    }
+
+    private nonisolated static func markLoaded(_ store: EmberStore, ok: Bool) {
+        MainActor.assumeIsolated {
+            store.loadedFromDisk = ok
+        }
     }
 
     nonisolated static func defaultDirectory() -> URL {
@@ -198,11 +208,23 @@ final class EmberStore {
 
     // MARK: Deletion (privacy by design)
 
-    /// Erases everything EMBER knows, immediately, including the file itself.
-    func deleteEverything() {
+    /// Erases everything EMBER knows. Returns false only if the on-disk file
+    /// could not be removed — callers surface that rather than promise a
+    /// deletion that didn't happen.
+    @discardableResult
+    func deleteEverything() -> Bool {
         state = .empty
         let url = directory.appendingPathComponent(Self.fileName)
-        try? FileManager.default.removeItem(at: url)
+        do {
+            try FileManager.default.removeItem(at: url)
+            return true
+        } catch {
+            if (try? FileManager.default.fileExists(atPath: url.path)) == nil {
+                return true   // already gone — deletion is effectively complete
+            }
+            EmberLog.app.fault("Failed to remove state file")
+            return false
+        }
     }
 
     /// Erases journey progress but keeps nothing sensitive either way.
@@ -212,7 +234,18 @@ final class EmberStore {
 
     // MARK: I/O
 
+    /// True once `load` successfully read (or legitimately found) state.
+    /// Guards against clobbering real data after a locked-device launch,
+    /// where `.completeFileProtection` makes the file unreadable.
+    private(set) var loadedFromDisk = false
+
     private func save() {
+        guard loadedFromDisk else {
+            // Never overwrite a possibly-existing file with empty defaults
+            // just because we couldn't read it yet.
+            EmberLog.app.fault("Refusing to save before state is loaded")
+            return
+        }
         do {
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
             let encoder = JSONEncoder()
@@ -232,9 +265,12 @@ final class EmberStore {
         }
     }
 
-    nonisolated private static func load(from directory: URL) -> PersistedState {
+    nonisolated private static func load(from directory: URL) -> (state: PersistedState, ok: Bool) {
         let url = directory.appendingPathComponent(fileName)
-        guard let data = try? Data(contentsOf: url) else { return .empty }
+        guard let data = try? Data(contentsOf: url) else {
+            // No file yet is a legitimate fresh install.
+            return (.empty, true)
+        }
         if var decoded = try? JSONDecoder().decode(PersistedState.self, from: data) {
             // Migration: legacy single-space reflections move to "solo"
             // (or partnerOne's space if couple mode was already set up).
@@ -244,14 +280,16 @@ final class EmberStore {
                 decoded.reflections = [:]
             }
             decoded.schemaVersion = PersistedState.empty.schemaVersion
-            return decoded
+            return (decoded, true)
         }
         // Unreadable or incompatible data is NEVER silently destroyed —
         // quarantine it and start empty. The user's words stay recoverable.
+        // ok=false: saves are refused until a real load succeeds, so the
+        // quarantined file can't be clobbered by empty defaults.
         let backupURL = directory.appendingPathComponent(fileName + ".unreadable")
         try? FileManager.default.removeItem(at: backupURL)
         try? FileManager.default.moveItem(at: url, to: backupURL)
         EmberLog.app.fault("State file unreadable; quarantined")
-        return .empty
+        return (.empty, false)
     }
 }
