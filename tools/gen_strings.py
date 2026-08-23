@@ -418,6 +418,58 @@ k("couple.locked.other",
   "L'espace de %@ lui appartient. Il est impossible de l'ouvrir depuis ici.")
 
 # ---------------------------------------------------------------------------
+# Paywall (StoreKit) — one product, honest, no dark patterns
+# ---------------------------------------------------------------------------
+k("paywall.title", "EMBER Premium", "EMBER Premium")
+k("paywall.headline", "Keep the journey going.", "Continuez le parcours.")
+k("paywall.subline",
+  "The first three days are a gift. Beyond them, the full arc adapts to what your evenings tell it — privately, on this device.",
+  "Les trois premiers jours sont un cadeau. Au-delà, le parcours complet s'adapte à ce que vos soirs lui racontent — en privé, sur cet appareil.")
+k("paywall.price.note", "One subscription. Everything included.", "Un abonnement. Tout est inclus.")
+k("paywall.cta", "Continue for %@", "Continuer — %@")
+k("paywall.price.fineprint",
+  "Renews automatically until cancelled in Settings. No tiers, no trials that quietly convert, no countdowns.",
+  "Renouvellement automatique jusqu'à résiliation dans Réglages. Pas de paliers, pas d'essais qui se convertissent en silence, pas de comptes à rebours.")
+k("paywall.restore", "Restore purchases", "Restaurer les achats")
+k("paywall.restore.empty.title", "Nothing to restore", "Rien à restaurer")
+k("paywall.restore.empty.body",
+  "No previous purchase was found for this Apple Account. If you believe that's wrong, check you're signed in with the right account and try again.",
+  "Aucun achat précédent n'a été trouvé pour ce compte Apple. Si cela vous semble erroné, vérifiez que vous êtes connecté·e avec le bon compte et réessayez.")
+k("paywall.owned", "Your journey is fully open. Thank you for supporting EMBER.", "Votre parcours est entièrement ouvert. Merci de soutenir EMBER.")
+k("paywall.unavailable",
+  "The App Store isn't reachable right now. Your progress is safe — try again in a moment.",
+  "L'App Store est injoignable pour l'instant. Votre progression est en sécurité — réessayez dans un instant.")
+k("paywall.retry", "Try again", "Réessayer")
+k("paywall.error.cancelled", "Purchase cancelled — nothing was charged.", "Achat annulé — rien n'a été facturé.")
+k("paywall.error.pending",
+  "This purchase needs approval (Ask to Buy). EMBER opens fully once it's approved.",
+  "Cet achat attend une approbation (Demande d'achat). EMBER s'ouvrira entièrement une fois approuvé.")
+k("paywall.legal.privacy",
+  "EMBER stores your words on this device only. Purchases are handled by Apple; EMBER never sees your payment details.",
+  "EMBER garde vos mots sur cet appareil uniquement. Les achats passent par Apple ; EMBER ne voit jamais vos informations de paiement.")
+k("paywall.legal.terms",
+  "By continuing you agree to Apple's standard subscription terms.",
+  "En continuant, vous acceptez les conditions d'abonnement standard d'Apple.")
+
+# Premium features (benefit list)
+k("paywall.feature.fullJourney.name", "The complete 21 days", "Les 21 jours complets")
+k("paywall.feature.fullJourney.detail",
+  "Every day of the arc — Noticing, Kindling, Tending — with its evening return.",
+  "Chaque jour du parcours — Remarquer, Attiser, Entretenir — avec son retour du soir.")
+k("paywall.feature.adaptivePlanner.name", "A journey that listens", "Un parcours qui vous écoute")
+k("paywall.feature.adaptivePlanner.detail",
+  "Your evening check-ins reshape the days ahead; your profile deepens the practices.",
+  "Vos retours du soir redessinent les jours à venir ; votre profil approfondit les pratiques.")
+k("paywall.feature.journal.name", "Your private journal", "Votre journal privé")
+k("paywall.feature.journal.detail",
+  "Everything you've written, readable anytime, kept only here.",
+  "Tout ce que vous avez écrit, relisible à tout moment, conservé ici seulement.")
+k("paywall.feature.coupleMode.name", "Our Desire, together", "Notre désir, à deux")
+k("paywall.feature.coupleMode.detail",
+  "Two private spaces, asymmetric steps, and hand-offs only when chosen.",
+  "Deux espaces privés, des étapes asymétriques, et des transmissions uniquement quand vous le choisissez.")
+
+# ---------------------------------------------------------------------------
 # Accessibility extras
 # ---------------------------------------------------------------------------
 k("a11y.sketch.hero", "Hand-drawn sketch of two organic forms approaching each other",

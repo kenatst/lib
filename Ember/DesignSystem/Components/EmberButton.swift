@@ -10,6 +10,7 @@ struct EmberButton: View {
     let title: String
     var icon: String?
     var style: Style = .primary
+    var isLoading = false
     let action: () -> Void
 
     enum Style {
@@ -21,10 +22,16 @@ struct EmberButton: View {
     @Environment(\.isEnabled) private var isEnabled
 
     var body: some View {
-        Text(title)
-            .font(Typography.ui(.body, weight: .medium))
-            .kerning(0.3)
-            .foregroundStyle(foreground)
+        HStack(spacing: Spacing.xs) {
+            if isLoading {
+                ProgressView()
+                    .tint(foreground)
+            }
+            Text(title)
+                .font(Typography.ui(.body, weight: .medium))
+                .kerning(0.3)
+                .foregroundStyle(foreground)
+        }
             .padding(.vertical, 16)
             .frame(maxWidth: .infinity)
             .frame(minHeight: 52)

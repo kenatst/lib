@@ -1,0 +1,76 @@
+{
+  "identifier" : "EMBER-Local-Store",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.00",
+      "familyShareable" : false,
+      "internalID" : "EMBER001",
+      "localizations" : [
+        {
+          "description" : "The complete adaptive journey, journal and couple mode.",
+          "displayName" : "EMBER Premium Annual",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Le parcours adaptatif complet, le journal et le mode couple.",
+          "displayName" : "EMBER Premium annuel",
+          "locale" : "fr_FR"
+        }
+      ],
+      "productID" : "com.kenatst.ember.premium.annual",
+      "referenceName" : "EMBER Premium Annual"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "EMBER-Local-Store",
+    "_developerTeamID" : "LOCALTESTING"
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "EMBER-PREMIUM-GROUP",
+      "localizations" : [
+
+      ],
+      "name" : "EMBER Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "29.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "EMBER-SUB-001",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "The complete adaptive journey, journal and couple mode.",
+              "displayName" : "EMBER Premium Annual",
+              "locale" : "en_US"
+            },
+            {
+              "description" : "Le parcours adaptatif complet, le journal et le mode couple.",
+              "displayName" : "EMBER Premium annuel",
+              "locale" : "fr_FR"
+            }
+          ],
+          "productID" : "com.kenatst.ember.premium.annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "EMBER Premium Annual",
+          "subscriptionGroupID" : "EMBER-PREMIUM-GROUP",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

@@ -3202,6 +3202,390 @@
         }
       }
     },
+    "paywall.cta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue for %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer — %@"
+          }
+        }
+      }
+    },
+    "paywall.error.cancelled": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase cancelled — nothing was charged."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Achat annulé — rien n'a été facturé."
+          }
+        }
+      }
+    },
+    "paywall.error.pending": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This purchase needs approval (Ask to Buy). EMBER opens fully once it's approved."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cet achat attend une approbation (Demande d'achat). EMBER s'ouvrira entièrement une fois approuvé."
+          }
+        }
+      }
+    },
+    "paywall.feature.adaptivePlanner.detail": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your evening check-ins reshape the days ahead; your profile deepens the practices."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos retours du soir redessinent les jours à venir ; votre profil approfondit les pratiques."
+          }
+        }
+      }
+    },
+    "paywall.feature.adaptivePlanner.name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A journey that listens"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un parcours qui vous écoute"
+          }
+        }
+      }
+    },
+    "paywall.feature.coupleMode.detail": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two private spaces, asymmetric steps, and hand-offs only when chosen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux espaces privés, des étapes asymétriques, et des transmissions uniquement quand vous le choisissez."
+          }
+        }
+      }
+    },
+    "paywall.feature.coupleMode.name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Our Desire, together"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notre désir, à deux"
+          }
+        }
+      }
+    },
+    "paywall.feature.fullJourney.detail": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every day of the arc — Noticing, Kindling, Tending — with its evening return."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque jour du parcours — Remarquer, Attiser, Entretenir — avec son retour du soir."
+          }
+        }
+      }
+    },
+    "paywall.feature.fullJourney.name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The complete 21 days"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les 21 jours complets"
+          }
+        }
+      }
+    },
+    "paywall.feature.journal.detail": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything you've written, readable anytime, kept only here."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout ce que vous avez écrit, relisible à tout moment, conservé ici seulement."
+          }
+        }
+      }
+    },
+    "paywall.feature.journal.name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your private journal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre journal privé"
+          }
+        }
+      }
+    },
+    "paywall.headline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep the journey going."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuez le parcours."
+          }
+        }
+      }
+    },
+    "paywall.legal.privacy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER stores your words on this device only. Purchases are handled by Apple; EMBER never sees your payment details."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER garde vos mots sur cet appareil uniquement. Les achats passent par Apple ; EMBER ne voit jamais vos informations de paiement."
+          }
+        }
+      }
+    },
+    "paywall.legal.terms": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "By continuing you agree to Apple's standard subscription terms."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En continuant, vous acceptez les conditions d'abonnement standard d'Apple."
+          }
+        }
+      }
+    },
+    "paywall.owned": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your journey is fully open. Thank you for supporting EMBER."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre parcours est entièrement ouvert. Merci de soutenir EMBER."
+          }
+        }
+      }
+    },
+    "paywall.price.fineprint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renews automatically until cancelled in Settings. No tiers, no trials that quietly convert, no countdowns."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renouvellement automatique jusqu'à résiliation dans Réglages. Pas de paliers, pas d'essais qui se convertissent en silence, pas de comptes à rebours."
+          }
+        }
+      }
+    },
+    "paywall.price.note": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One subscription. Everything included."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un abonnement. Tout est inclus."
+          }
+        }
+      }
+    },
+    "paywall.restore": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore purchases"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer les achats"
+          }
+        }
+      }
+    },
+    "paywall.restore.empty.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No previous purchase was found for this Apple Account. If you believe that's wrong, check you're signed in with the right account and try again."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun achat précédent n'a été trouvé pour ce compte Apple. Si cela vous semble erroné, vérifiez que vous êtes connecté·e avec le bon compte et réessayez."
+          }
+        }
+      }
+    },
+    "paywall.restore.empty.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing to restore"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien à restaurer"
+          }
+        }
+      }
+    },
+    "paywall.retry": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réessayer"
+          }
+        }
+      }
+    },
+    "paywall.subline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The first three days are a gift. Beyond them, the full arc adapts to what your evenings tell it — privately, on this device."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les trois premiers jours sont un cadeau. Au-delà, le parcours complet s'adapte à ce que vos soirs lui racontent — en privé, sur cet appareil."
+          }
+        }
+      }
+    },
+    "paywall.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER Premium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER Premium"
+          }
+        }
+      }
+    },
+    "paywall.unavailable": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The App Store isn't reachable right now. Your progress is safe — try again in a moment."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'App Store est injoignable pour l'instant. Votre progression est en sécurité — réessayez dans un instant."
+          }
+        }
+      }
+    },
     "profile.cta": {
       "localizations": {
         "en": {

@@ -6,6 +6,7 @@ struct EmberApp: App {
     @State private var store: EmberStore
     @State private var appState: AppState
     @State private var router = AppRouter()
+    @State private var storeService = StoreService()
 
     init() {
         let store = EmberStore()
@@ -26,6 +27,7 @@ struct EmberApp: App {
                 .environment(store)
                 .environment(appState)
                 .environment(router)
+                .environment(storeService)
                 .tint(Palette.accent)
                 .preferredColorScheme(.light)
         }

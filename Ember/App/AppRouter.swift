@@ -17,6 +17,7 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case settings
     case coupleSetup
     case coupleSpace
+    case paywall
 }
 
 // MARK: - Router

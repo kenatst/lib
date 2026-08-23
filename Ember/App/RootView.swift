@@ -63,6 +63,8 @@ struct RootView: View {
             CoupleSetupView()
         case .coupleSpace:
             CoupleSpaceView()
+        case .paywall:
+            PaywallView()
         }
     }
 }

@@ -10,6 +10,7 @@ struct HomeView: View {
     @Environment(EmberStore.self) private var store
     @Environment(AppState.self) private var appState
     @Environment(AppRouter.self) private var router
+    @Environment(StoreService.self) private var storeService
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var appeared = false
@@ -241,7 +242,16 @@ struct HomeView: View {
         Haptics.selection()
         if isJourneyComplete {
             router.navigate(to: .progress)
-        } else if store.state.completedDays.contains(nextDay) {
+            return
+        }
+        // Value before the ask: the first three days are free, everywhere.
+        // After that, one quiet paywall stands between the user and day 4 —
+        // never blocking privacy, deletion or what they've already opened.
+        guard storeService.canOpenDay(nextDay) else {
+            router.navigate(to: .paywall)
+            return
+        }
+        if store.state.completedDays.contains(nextDay) {
             router.navigate(to: .eveningReturn(nextDay))
         } else {
             router.navigate(to: .day(nextDay))
@@ -256,6 +266,7 @@ struct HomeView: View {
     .environment(previewHomeStore())
     .environment(AppState(hasJourney: true))
     .environment(AppRouter())
+    .environment(StoreService())
 }
 
 private func previewHomeStore() -> EmberStore {
