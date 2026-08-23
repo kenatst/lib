@@ -106,6 +106,11 @@ enum DemoLauncher {
         if let fresh = vars["fresh"], fresh == "true" {
             store.deleteEverything()
         }
+        // Debug language override (set before any view renders, so it takes
+        // effect this run). Used solely for FR layout QA.
+        if let lang = vars["lang"] {
+            UserDefaults.standard.set([lang], forKey: "AppleLanguages")
+        }
         if let rawIntention = vars["intention"], let intention = DesireIntention(rawValue: rawIntention) {
             store.setIntention(intention)
             var responses = Onboarding.Responses()
