@@ -346,6 +346,16 @@ k("settings.privacy.body",
   "Tout ce que vous écrivez reste sur cet appareil, protégé au repos.\nRien n'est envoyé. Aucun compte, aucun traqueur, aucune publicité.\nCe que vous supprimez ci-dessous l'est définitivement.")
 k("settings.data.header", "Your data", "Vos données")
 k("settings.journey.header", "Your journey", "Votre parcours")
+k("settings.reminder.header", "A gentle reminder", "Un rappel en douceur")
+k("settings.reminder.toggle", "Remind me once a day", "Me rappeler une fois par jour")
+k("settings.reminder.time", "At", "À")
+k("settings.reminder.note",
+  "Only on this device. A quiet nudge — no content, no streaks.",
+  "Sur cet appareil uniquement. Une pensée discrète — sans contenu, sans séries.")
+k("reminder.title", "EMBER", "EMBER")
+k("reminder.body",
+  "A few quiet minutes are waiting, whenever you're ready.",
+  "Quelques minutes tranquilles vous attendent, quand vous voulez.")
 k("settings.data.delete", "Delete everything EMBER knows", "Tout supprimer")
 k("settings.data.delete.confirm.title", "Delete all EMBER data?",
   "Supprimer toutes les données EMBER ?")

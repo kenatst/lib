@@ -87,6 +87,8 @@ struct SettingsView: View {
         }
         .padding(.top, Spacing.lg)
 
+        reminderSection
+
         VStack(alignment: .leading, spacing: 0) {
             sectionHeader("settings.journey.header")
                 .padding(.bottom, Spacing.sm)
@@ -96,6 +98,80 @@ struct SettingsView: View {
             }
         }
         .padding(.top, Spacing.lg)
+    }
+
+    // MARK: Reminders (opt-in, local only)
+
+    @State private var reminderEnabled = false
+    @State private var reminderTime = Date()
+
+    private var reminderSection: some View {
+        VStack(alignment: .leading, spacing: Spacing.sm) {
+            sectionHeader("settings.reminder.header")
+                .padding(.bottom, Spacing.xs)
+
+            Toggle(isOn: Binding(
+                get: { reminderEnabled },
+                set: { newValue in
+                    Task {
+                        if newValue {
+                            let comps = Calendar.current.dateComponents([.hour, .minute], from: reminderTime)
+                            let ok = await ReminderScheduler.shared.enable(
+                                atHour: comps.hour ?? 20,
+                                minute: comps.minute ?? 0
+                            )
+                            if ok {
+                                store.setReminder(hour: comps.hour ?? 20, minute: comps.minute ?? 0)
+                                reminderEnabled = true
+                                Haptics.soft()
+                            } else {
+                                reminderEnabled = false
+                            }
+                        } else {
+                            ReminderScheduler.shared.disable()
+                            store.setReminder(hour: nil, minute: 0)
+                            Haptics.selection()
+                        }
+                    }
+                })) {
+                Text(String.ember("settings.reminder.toggle"))
+                    .font(Typography.ui(.subheadline))
+                    .foregroundStyle(Palette.ink)
+            }
+
+            if reminderEnabled {
+                DatePicker(
+                    String.ember("settings.reminder.time"),
+                    selection: $reminderTime,
+                    displayedComponents: .hourAndMinute
+                )
+                .font(Typography.ui(.subheadline))
+                .tint(Palette.wine)
+                .onChange(of: reminderTime) { _, newValue in
+                    let comps = Calendar.current.dateComponents([.hour, .minute], from: newValue)
+                    Task {
+                        _ = await ReminderScheduler.shared.enable(
+                            atHour: comps.hour ?? 20,
+                            minute: comps.minute ?? 0
+                        )
+                        store.setReminder(hour: comps.hour ?? 20, minute: comps.minute ?? 0)
+                    }
+                }
+
+                Text(String.ember("settings.reminder.note"))
+                    .emberCaption()
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.top, Spacing.lg)
+        .onAppear {
+            if let hour = store.state.reminderHour {
+                reminderEnabled = true
+                reminderTime = Calendar.current.date(
+                    bySettingHour: hour, minute: store.state.reminderMinute, second: 0, of: .now
+                ) ?? .now
+            }
+        }
     }
 
     private var aboutSection: some View {

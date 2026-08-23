@@ -32,6 +32,9 @@ final class EmberStore {
         /// Partner One's handed-off note for Partner Two, and vice versa.
         /// Written ONLY by an explicit user hand-off action; never automatic.
         var handedOffNotes: [CoupleRole: String] = [:]
+        /// Opt-in daily reminder (24h clock). nil = reminders off.
+        var reminderHour: Int?
+        var reminderMinute: Int = 20
 
         static let empty = PersistedState()
     }
@@ -113,6 +116,12 @@ final class EmberStore {
 
     func setAgeConfirmed() {
         state.ageConfirmed = true
+        save()
+    }
+
+    func setReminder(hour: Int?, minute: Int) {
+        state.reminderHour = hour
+        state.reminderMinute = minute
         save()
     }
 

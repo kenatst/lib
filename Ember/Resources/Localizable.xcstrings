@@ -4706,6 +4706,38 @@
         }
       }
     },
+    "reminder.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A few quiet minutes are waiting, whenever you're ready."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelques minutes tranquilles vous attendent, quand vous voulez."
+          }
+        }
+      }
+    },
+    "reminder.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER"
+          }
+        }
+      }
+    },
     "return.close.day": {
       "localizations": {
         "en": {
@@ -5294,6 +5326,70 @@
           "stringUnit": {
             "state": "translated",
             "value": "La confidentialité, simplement"
+          }
+        }
+      }
+    },
+    "settings.reminder.header": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A gentle reminder"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un rappel en douceur"
+          }
+        }
+      }
+    },
+    "settings.reminder.note": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only on this device. A quiet nudge — no content, no streaks."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur cet appareil uniquement. Une pensée discrète — sans contenu, sans séries."
+          }
+        }
+      }
+    },
+    "settings.reminder.time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À"
+          }
+        }
+      }
+    },
+    "settings.reminder.toggle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remind me once a day"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Me rappeler une fois par jour"
           }
         }
       }
