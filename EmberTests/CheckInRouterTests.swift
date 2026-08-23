@@ -4,6 +4,7 @@ import Testing
 
 // MARK: - Evening check-in adaptation
 
+@MainActor
 @Suite("Check-In Adaptation")
 struct CheckInAdapterTests {
 

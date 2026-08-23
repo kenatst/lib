@@ -4,6 +4,7 @@ import Testing
 
 // MARK: - Onboarding branching & profile derivation
 
+@MainActor
 @Suite("Onboarding & Desire Profile")
 struct OnboardingProfileTests {
 
@@ -112,6 +113,7 @@ struct OnboardingProfileTests {
 
 // MARK: - Journey catalog
 
+@MainActor
 @Suite("Journey Catalog")
 struct JourneyCatalogTests {
 

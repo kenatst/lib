@@ -8,6 +8,7 @@ import Testing
 // complete 21-step journey and asserts exhaustion, uniqueness, termination,
 // determinism and bounded adaptation.
 
+@MainActor
 @Suite("JourneyPlanner invariants (full-journey simulations)")
 struct JourneyPlannerSimulationTests {
 

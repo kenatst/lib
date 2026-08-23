@@ -9,6 +9,7 @@ import Testing
 // prove the invariants a backend must also enforce — the protocol shape makes
 // cross-partner private access impossible, and these tests hold it that way.
 
+@MainActor
 @Suite("Couple architecture & privacy")
 struct CoupleArchitectureTests {
 

@@ -8,6 +8,7 @@ import Testing
 // profiles / check-ins / histories receive DIFFERENT next content — and that
 // outcomes stay deterministic and explainable.
 
+@MainActor
 @Suite("JourneyPlanner")
 struct JourneyPlannerTests {
 

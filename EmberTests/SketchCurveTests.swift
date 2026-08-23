@@ -5,6 +5,7 @@ import Testing
 
 // MARK: - Sketch geometry (deterministic illustration engine)
 
+@MainActor
 @Suite("SketchCurve geometry")
 struct SketchCurveTests {
 

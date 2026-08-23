@@ -8,6 +8,7 @@ import Testing
 // simulator via the local .storekit configuration; these tests prove the
 // DECISION layer can never become inconsistent.
 
+@MainActor
 @Suite("Entitlement engine")
 struct EntitlementEngineTests {
 
@@ -99,6 +100,7 @@ struct EntitlementEngineTests {
 
 // MARK: - Gate consistency with the journey contract
 
+@MainActor
 @Suite("Premium gates")
 struct PremiumGateTests {
 

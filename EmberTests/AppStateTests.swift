@@ -1,6 +1,7 @@
 import Testing
 @testable import Ember
 
+@MainActor
 @Suite("App State")
 struct AppStateTests {
 

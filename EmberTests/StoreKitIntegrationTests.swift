@@ -17,28 +17,41 @@ import StoreKitTest
 // event with different semantics and is tested separately. Never conflate them.
 
 @MainActor
-@Suite("StoreKit integration (local config)")
+@Suite("StoreKit integration (local config)", .serialized)
 struct StoreKitIntegrationTests {
 
-    @available(iOS 17.2, *)
-    private func makeSession() throws -> SKTestSession {
-        let session = try SKTestSession(configurationFileNamed: "EmberStoreKitTest")
-        session.disableDialogs = true
-        session.clearTransactions()
-        return session
+    /// Process-wide shared session. SKTestErrorDomain 6 ("session already
+    /// exists") is a teardown race between tests; one long-lived session per
+    /// process avoids it entirely. Tests reset state via clearTransactions().
+    private static let sharedSessionTask: Task<SKTestSession, Error> = Task {
+        var lastError: Error?
+        for attempt in 0..<8 {
+            do {
+                let session = try SKTestSession(configurationFileNamed: "EmberStoreKitTest")
+                session.disableDialogs = true
+                return session
+            } catch let error as NSError where error.domain == "SKTestErrorDomain" {
+                lastError = error
+                try? await Task.sleep(for: .milliseconds(250 * Double(attempt + 1)))
+            } catch {
+                lastError = error
+                break
+            }
+        }
+        throw lastError ?? NSError(domain: "SKTestErrorDomain", code: -1)
     }
 
-    private func settle() async {
-        // StoreKit propagates asynchronously; poll briefly instead of guessing.
-        for _ in 0..<30 {
-            try? await Task.sleep(for: .milliseconds(100))
-        }
+    @available(iOS 17.2, *)
+    private func makeSession() async throws -> SKTestSession {
+        let session = try await Self.sharedSessionTask.value
+        session.clearTransactions()
+        return session
     }
 
     @Test("Products load through the live engine via local configuration")
     func productsLoad() async throws {
         guard #available(iOS 17.2, *) else { Issue.record("requires iOS 17.2+"); return }
-        _ = try makeSession()
+        _ = try await makeSession()
 
         let service = StoreService()
         await service.loadProducts()
@@ -52,7 +65,7 @@ struct StoreKitIntegrationTests {
     @Test("Purchase unlocks every premium day; relaunch restores entitlement")
     func purchaseFlow() async throws {
         guard #available(iOS 17.2, *) else { Issue.record("requires iOS 17.2+"); return }
-        let session = try makeSession()
+        let session = try await makeSession()
 
         let service = StoreService()
         await service.loadProducts()
@@ -60,9 +73,35 @@ struct StoreKitIntegrationTests {
             Issue.record("product missing"); return
         }
 
-        let unlocked = await service.purchase(product)
-        #expect(unlocked)
-        #expect(service.entitlement.isActive)
+        // Wait out the init-time history refresh, then buy. StoreKit
+        // occasionally needs a beat after a session reset before a purchase
+        // succeeds — retry a few times before concluding failure.
+        await service.refreshEntitlementFromHistoryForTesting()
+        var unlocked = false
+        for attempt in 0..<4 {
+            unlocked = await service.purchase(product)
+            if unlocked { break }
+            // Only retry when nothing definitive happened (no user cancel,
+            // no pending approval) — those are terminal results.
+            let terminal = service.lastError == .userCancelled || service.lastError == .pending
+            if terminal { break }
+            try? await Task.sleep(for: .milliseconds(250 * Double(attempt + 1)))
+            await service.loadProducts()
+        }
+        #expect(unlocked, "purchase should succeed (lastError: \(String(describing: service.lastError)))")
+
+        // The purchase transaction can arrive a beat after the purchase call
+        // returns; poll until THIS service's entitlement reflects it.
+        var activeVisible = false
+        for _ in 0..<30 {
+            await service.refreshEntitlementFromHistoryForTesting()
+            if service.entitlement.isActive && service.isUnlocked(.fullJourney) {
+                activeVisible = true
+                break
+            }
+            try? await Task.sleep(for: .milliseconds(100))
+        }
+        #expect(activeVisible, "purchased entitlement must become active")
         for day in 1...JourneyCatalog.totalDays {
             #expect(service.canOpenDay(day))
         }
@@ -72,7 +111,7 @@ struct StoreKitIntegrationTests {
         // propagates asynchronously, so poll briefly.
         let reinstalled = StoreService()
         var recovered = false
-        for _ in 0..<30 {
+        for _ in 0..<60 {
             await reinstalled.refreshEntitlementFromHistoryForTesting()
             if reinstalled.isUnlocked(.fullJourney) { recovered = true; break }
             try? await Task.sleep(for: .milliseconds(100))
@@ -105,7 +144,7 @@ struct StoreKitIntegrationTests {
     @Test("TRUE REFUND via SKTestSession.revocation locks premium immediately; free preview stays open; updates path reacts")
     func refundRevokesPremium() async throws {
         guard #available(iOS 17.2, *) else { Issue.record("requires iOS 17.2+"); return }
-        let session = try makeSession()
+        let session = try await makeSession()
 
         let service = StoreService()
         await service.loadProducts()
