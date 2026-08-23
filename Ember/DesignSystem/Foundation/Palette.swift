@@ -32,10 +32,11 @@ enum Palette {
     static let accent = wine
 
     /// Per-journey tint, used sparingly (motif strokes, small marks).
+    /// All three stay legible on cream; softRose is darkened enough for strokes.
     static func intentionTint(_ intention: DesireIntention) -> Color {
         switch intention {
         case .myDesire: rose
-        case .theirDesire: softRose
+        case .theirDesire: Color(hex: 0xD98FA0)   // deepened softRose for stroke legibility
         case .ourDesire: wine
         }
     }
