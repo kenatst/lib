@@ -28,6 +28,7 @@ k("common.close", "Close", "Fermer")
 k("common.delete", "Delete", "Supprimer")
 k("common.keep", "Keep", "Conserver")
 k("common.cancel", "Cancel", "Annuler")
+k("common.ok", "OK", "OK")
 
 # ---------------------------------------------------------------------------
 # Welcome
@@ -366,6 +367,11 @@ k("settings.data.delete.confirm.title", "Delete all EMBER data?",
 k("settings.data.delete.confirm.message",
   "Your answers, reflections and journey progress will be erased from this device immediately. This cannot be undone.",
   "Vos réponses, vos réflexions et votre progression seront effacées de cet appareil immédiatement. Cette action est irréversible.")
+k("settings.data.delete.failed.title", "Deletion didn't complete",
+  "La suppression n'a pas abouti")
+k("settings.data.delete.failed.body",
+  "Your data is untouched — nothing was erased. EMBER will not pretend otherwise. Try again in a moment; if this keeps happening, restart the app so it can reach your data safely.",
+  "Vos données sont intactes — rien n'a été effacé. EMBER ne prétendra pas le contraire. Réessayez dans un instant ; si cela persiste, relancez l'app pour qu'elle puisse accéder à vos données en sécurité.")
 k("settings.journey.restart", "Begin a different journey", "Commencer un autre parcours")
 k("settings.journey.restart.confirm.message",
   "Your current journey progress and reflections will be erased so you can begin fresh.",

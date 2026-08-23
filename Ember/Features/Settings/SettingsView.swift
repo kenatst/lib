@@ -14,6 +14,9 @@ struct SettingsView: View {
 
     @State private var showDeleteConfirmation = false
     @State private var showRestartConfirmation = false
+    /// Set when a deletion/restart could not actually be performed. The UI
+    /// never claims success for a deletion that did not happen.
+    @State private var showDeletionFailure = false
 
     var body: some View {
         ScrollView {
@@ -34,10 +37,15 @@ struct SettingsView: View {
             titleVisibility: .visible
         ) {
             Button(String(localized: "settings.data.delete"), role: .destructive) {
-                store.deleteEverything()
-                Haptics.soft()
-                appState.resetToFirstRun()
-                router.popToRoot()
+                if store.deleteEverything() == .deleted {
+                    Haptics.soft()
+                    appState.resetToFirstRun()
+                    router.popToRoot()
+                } else {
+                    // Deletion did NOT happen. Stay exactly where we are and
+                    // say so — never fake an erasure of private data.
+                    showDeletionFailure = true
+                }
             }
             Button(String(localized: "common.keep"), role: .cancel) {}
         } message: {
@@ -49,14 +57,25 @@ struct SettingsView: View {
             titleVisibility: .visible
         ) {
             Button(String(localized: "settings.journey.restart"), role: .destructive) {
-                store.restartJourney()
-                Haptics.soft()
-                appState.resetToFirstRun()
-                router.popToRoot()
+                if store.restartJourney() == .deleted {
+                    Haptics.soft()
+                    appState.resetToFirstRun()
+                    router.popToRoot()
+                } else {
+                    showDeletionFailure = true
+                }
             }
             Button(String(localized: "common.keep"), role: .cancel) {}
         } message: {
             Text("settings.journey.restart.confirm.message")
+        }
+        .alert(
+            Text("settings.data.delete.failed.title"),
+            isPresented: $showDeletionFailure
+        ) {
+            Button(String(localized: "common.ok")) { showDeletionFailure = false }
+        } message: {
+            Text("settings.data.delete.failed.body")
         }
     }
 

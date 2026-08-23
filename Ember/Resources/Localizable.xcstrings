@@ -178,6 +178,22 @@
         }
       }
     },
+    "common.ok": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
     "couple.asymmetric.day.1.partnerOne": {
       "localizations": {
         "en": {
@@ -5246,6 +5262,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Supprimer toutes les données EMBER ?"
+          }
+        }
+      }
+    },
+    "settings.data.delete.failed.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your data is untouched — nothing was erased. EMBER will not pretend otherwise. Try again in a moment; if this keeps happening, restart the app so it can reach your data safely."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos données sont intactes — rien n'a été effacé. EMBER ne prétendra pas le contraire. Réessayez dans un instant ; si cela persiste, relancez l'app pour qu'elle puisse accéder à vos données en sécurité."
+          }
+        }
+      }
+    },
+    "settings.data.delete.failed.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deletion didn't complete"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La suppression n'a pas abouti"
           }
         }
       }
