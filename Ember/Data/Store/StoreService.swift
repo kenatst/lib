@@ -39,11 +39,12 @@ final class StoreService {
 
     init(engine: (any StoreEngine)? = nil) {
         self.engine = engine ?? LiveStoreEngine()
-        // Restore whatever App Store already knows at launch (sandbox,
-        // reinstalls, new devices) without user action.
+        // On launch: recover whatever App Store already knows FIRST (the
+        // history refresh terminates), THEN enter the infinite observation
+        // loop. Order matters — observeTransactions never returns.
         updatesTask = Task { [weak self] in
-            await self?.observeTransactions()
             await self?.refreshEntitlementFromHistory()
+            await self?.observeTransactions()
         }
     }
 
@@ -205,6 +206,14 @@ nonisolated struct LiveStoreEngine: StoreEngine {
 
 nonisolated extension Transaction {
     var emberTransaction: VerifiedTransaction {
+        // A revocation (refund, family-sharing loss) must deactivate
+        // immediately — it wins over any expiry math.
+        if revocationDate != nil {
+            return VerifiedTransaction(
+                kind: .revoked(productID: productID),
+                transactionID: id
+            )
+        }
         if let expiration = expirationDate {
             return VerifiedTransaction(
                 kind: .active(productID: productID, expiresAt: expiration),

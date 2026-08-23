@@ -56,7 +56,7 @@ k("theme.title.novelty.2", "Looking Again", "Regarder encore")
 k("theme.title.novelty.3", "A Doorway, Not a Leap", "Une porte, pas un saut")
 k("theme.discover.novelty.1",
   "Novelty right-sized is a doorway, not a leap. One new lamp, one new playlist, one hour rearranged — attention follows difference like a cat follows movement. Grand gestures startle; small ones beckon.",
-  "La nouveauté à la bonne dose est une porte, pas un saut. Une lampe nouvelle, une playlist nouvelle, une heure rearrangée — l'attention suit la différence comme un chat suit le mouvement. Les grands gestes effarouchent ; les petits invitent.")
+  "La nouveauté à la bonne dose est une porte, pas un saut. Une lampe différente, une playlist différente, une heure réagencée — l'attention suit la différence comme un chat suit le mouvement. Les grands gestes effarouchent ; les petits invitent.")
 k("theme.discover.novelty.2",
   "Familiarity hides things in plain sight. The face you know by heart still changes daily. Looking again — slowly, as if for the first time — can make the known feel newly made.",
   "La familiarité cache des choses sous nos yeux. Le visage que vous connaissez par cœur change chaque jour. Regarder encore — lentement, comme pour la première fois — peut rendre le connu tout neuf.")

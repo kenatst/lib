@@ -17,12 +17,15 @@ struct RootView: View {
             case .ageGate:
                 AgeGateView()
                     .transition(.opacity)
+                    .safeAreaInset(edge: .top) { PersistenceBanner() }
             case .firstRun:
                 WelcomeView()
                     .transition(.opacity)
+                    .safeAreaInset(edge: .top) { PersistenceBanner() }
             case .active:
                 navigationStack
                     .transition(.opacity)
+                    .safeAreaInset(edge: .top) { PersistenceBanner() }
             }
         }
         .animation(Motion.resolved(Motion.breathe, reduceMotion: reduceMotion), value: appState.phase)

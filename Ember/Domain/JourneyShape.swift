@@ -10,8 +10,8 @@ import Foundation
 //   * its own flexible-day pool ordering (how the planner may adapt),
 //   * journey-specific emphasis weights used by the planner's scoring.
 //
-// Anchors: day 1 (arrival), day 8 (the turn inward/outward), day 21 (the
-// keeper). Everything else can move within bounded constraints.
+// Anchors: day 1 (arrival), a mid-journey turn (day 8 MY / 9 THEIR /
+// 10 OUR), and day 21 (the keeper). The rest can move within bounds.
 
 nonisolated struct JourneyShape: Sendable {
 

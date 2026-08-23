@@ -113,6 +113,9 @@ nonisolated enum JourneyCatalog {
         )
     }
 
+    /// The journey as lived within an intention. Kept for API completeness;
+    /// the planner and views use `JourneyCatalog.day(_:for:)` instead.
+    @available(*, deprecated, message: "Use day(_:for:) with an intention")
     static func days(for intention: DesireIntention) -> [JourneyDay] {
         allDays
     }

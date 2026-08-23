@@ -3234,6 +3234,22 @@
         }
       }
     },
+    "paywall.error.noproducts": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The subscription couldn't be loaded right now. Your progress is safe — try again in a moment."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'abonnement n'a pas pu être chargé pour l'instant. Votre progression est en sécurité — réessayez dans un instant."
+          }
+        }
+      }
+    },
     "paywall.error.pending": {
       "localizations": {
         "en": {
@@ -3255,13 +3271,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your evening check-ins reshape the days ahead; your profile deepens the practices."
+            "value": "Free for everyone: your evening check-ins reshape the days ahead. Yours continues to adapt through day 21."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vos retours du soir redessinent les jours à venir ; votre profil approfondit les pratiques."
+            "value": "Offert à tout le monde : vos retours du soir redessinent les jours à venir. Le vôtre continue de s'adapter jusqu'au jour 21."
           }
         }
       }
@@ -3287,13 +3303,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Two private spaces, asymmetric steps, and hand-offs only when chosen."
+            "value": "Free for everyone: two private spaces, asymmetric steps, hand-offs only when chosen."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deux espaces privés, des étapes asymétriques, et des transmissions uniquement quand vous le choisissez."
+            "value": "Offert à tout le monde : deux espaces privés, des étapes asymétriques, des transmissions uniquement quand vous le choisissez."
           }
         }
       }
@@ -3319,13 +3335,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Every day of the arc — Noticing, Kindling, Tending — with its evening return."
+            "value": "Every day of the arc — Noticing, Kindling, Tending — with its evening return. This is what your subscription opens."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque jour du parcours — Remarquer, Attiser, Entretenir — avec son retour du soir."
+            "value": "Chaque jour du parcours — Remarquer, Attiser, Entretenir — avec son retour du soir. C'est ce que votre abonnement ouvre."
           }
         }
       }
@@ -3351,13 +3367,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Everything you've written, readable anytime, kept only here."
+            "value": "Free for everyone, always: everything you've written, readable anytime, kept only here."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tout ce que vous avez écrit, relisible à tout moment, conservé ici seulement."
+            "value": "Offert à tout le monde, pour toujours : tout ce que vous avez écrit, relisible à tout moment, conservé ici seulement."
           }
         }
       }
@@ -3426,6 +3442,22 @@
         }
       }
     },
+    "paywall.legal.terms.link": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terms of Use (Apple standard EULA)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conditions d'utilisation (CGU standard d'Apple)"
+          }
+        }
+      }
+    },
     "paywall.owned": {
       "localizations": {
         "en": {
@@ -3447,13 +3479,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Renews automatically until cancelled in Settings. No tiers, no trials that quietly convert, no countdowns."
+            "value": "One year. Renews automatically until cancelled in Settings. No tiers, no trials that quietly convert, no countdowns."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Renouvellement automatique jusqu'à résiliation dans Réglages. Pas de paliers, pas d'essais qui se convertissent en silence, pas de comptes à rebours."
+            "value": "Un an. Renouvellement automatique jusqu'à résiliation dans Réglages. Pas de paliers, pas d'essais qui se convertissent en silence, pas de comptes à rebours."
           }
         }
       }
@@ -3582,6 +3614,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'App Store est injoignable pour l'instant. Votre progression est en sécurité — réessayez dans un instant."
+          }
+        }
+      }
+    },
+    "persistence.banner.body.corrupt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your data file couldn't be read. Its contents were preserved untouched on this device — nothing has been erased. Restarting the app usually resolves this."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre fichier de données n'a pas pu être lu. Son contenu est préservé intact sur cet appareil — rien n'a été effacé. Redémarrer l'app suffit généralement."
+          }
+        }
+      }
+    },
+    "persistence.banner.body.unreadable": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your data exists but can't be opened yet — this often resolves simply by unlocking your iPhone. What you write now is held in memory and would be lost if the app closed."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos données existent mais restent inaccessibles — cela se résout souvent simplement en déverrouillant l'iPhone. Ce que vous écrivez maintenant reste en mémoire et serait perdu si l'app se fermait."
+          }
+        }
+      }
+    },
+    "persistence.banner.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saving is paused"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sauvegarde est en pause"
           }
         }
       }
@@ -5474,6 +5554,22 @@
         }
       }
     },
+    "session.reflect.held": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Held in memory for now — saving is paused, see the notice above."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gardé en mémoire pour l'instant — la sauvegarde est en pause, voir l'avis ci-dessus."
+          }
+        }
+      }
+    },
     "session.reflect.placeholder": {
       "localizations": {
         "en": {
@@ -6221,7 +6317,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choisissez un objet familier et offrez-lui cinq minutes lentes. Laissez-le redevient neuf."
+            "value": "Choisissez un objet familier et offrez-lui cinq minutes lentes. Laissez-le redevenir neuf."
           }
         }
       }
@@ -6589,7 +6685,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La nouveauté à la bonne dose est une porte, pas un saut. Une lampe nouvelle, une playlist nouvelle, une heure rearrangée — l'attention suit la différence comme un chat suit le mouvement. Les grands gestes effarouchent ; les petits invitent."
+            "value": "La nouveauté à la bonne dose est une porte, pas un saut. Une lampe différente, une playlist différente, une heure réagencée — l'attention suit la différence comme un chat suit le mouvement. Les grands gestes effarouchent ; les petits invitent."
           }
         }
       }

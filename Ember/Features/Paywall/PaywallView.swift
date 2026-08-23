@@ -210,8 +210,14 @@ struct PaywallView: View {
         VStack(alignment: .leading, spacing: Spacing.xs) {
             Text("paywall.legal.privacy")
                 .emberCaption(Palette.softRose)
-            Text("paywall.legal.terms")
-                .emberCaption(Palette.softRose)
+
+            // Auto-renewable subscriptions require a functional Terms link.
+            Link(destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!) {
+                Text("paywall.legal.terms.link")
+                    .emberCaption(Palette.softRose)
+                    .underline()
+                    .frame(minHeight: 24, alignment: .leading)
+            }
         }
         .padding(.top, Spacing.xxl)
     }
@@ -239,7 +245,7 @@ struct PaywallView: View {
         case .pending:
             return String(localized: "paywall.error.pending")
         case .productNotFound:
-            return String(localized: "paywall.restore.empty.body")
+            return String(localized: "paywall.error.noproducts")
         default:
             return String(localized: "paywall.unavailable")
         }

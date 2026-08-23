@@ -305,6 +305,7 @@ k("session.reflect.prompt", "If anything stirred, keep a line for yourself.",
 k("session.reflect.placeholder", "Written here, kept here.", "Écrit ici, gardé ici.")
 k("session.reflect.save", "Keep privately", "Garder pour moi")
 k("session.reflect.saved", "Kept on this device only.", "Conservé sur cet appareil uniquement.")
+k("session.reflect.held", "Held in memory for now — saving is paused, see the notice above.", "Gardé en mémoire pour l'instant — la sauvegarde est en pause, voir l'avis ci-dessus.")
 k("session.finish", "Done for today", "J'en fais mon affaire pour aujourd'hui")
 k("session.finish.evening.teaser", "Come back this evening for a soft landing.",
   "Revenez ce soir pour un atterrissage en douceur.")
@@ -418,6 +419,17 @@ k("couple.locked.other",
   "L'espace de %@ lui appartient. Il est impossible de l'ouvrir depuis ici.")
 
 # ---------------------------------------------------------------------------
+# Persistence unavailability banner — honesty when storage can't be reached
+# ---------------------------------------------------------------------------
+k("persistence.banner.title", "Saving is paused", "La sauvegarde est en pause")
+k("persistence.banner.body.unreadable",
+  "Your data exists but can't be opened yet — this often resolves simply by unlocking your iPhone. What you write now is held in memory and would be lost if the app closed.",
+  "Vos données existent mais restent inaccessibles — cela se résout souvent simplement en déverrouillant l'iPhone. Ce que vous écrivez maintenant reste en mémoire et serait perdu si l'app se fermait.")
+k("persistence.banner.body.corrupt",
+  "Your data file couldn't be read. Its contents were preserved untouched on this device — nothing has been erased. Restarting the app usually resolves this.",
+  "Votre fichier de données n'a pas pu être lu. Son contenu est préservé intact sur cet appareil — rien n'a été effacé. Redémarrer l'app suffit généralement.")
+
+# ---------------------------------------------------------------------------
 # Paywall (StoreKit) — one product, honest, no dark patterns
 # ---------------------------------------------------------------------------
 k("paywall.title", "EMBER Premium", "EMBER Premium")
@@ -428,8 +440,8 @@ k("paywall.subline",
 k("paywall.price.note", "One subscription. Everything included.", "Un abonnement. Tout est inclus.")
 k("paywall.cta", "Continue for %@", "Continuer — %@")
 k("paywall.price.fineprint",
-  "Renews automatically until cancelled in Settings. No tiers, no trials that quietly convert, no countdowns.",
-  "Renouvellement automatique jusqu'à résiliation dans Réglages. Pas de paliers, pas d'essais qui se convertissent en silence, pas de comptes à rebours.")
+  "One year. Renews automatically until cancelled in Settings. No tiers, no trials that quietly convert, no countdowns.",
+  "Un an. Renouvellement automatique jusqu'à résiliation dans Réglages. Pas de paliers, pas d'essais qui se convertissent en silence, pas de comptes à rebours.")
 k("paywall.restore", "Restore purchases", "Restaurer les achats")
 k("paywall.restore.empty.title", "Nothing to restore", "Rien à restaurer")
 k("paywall.restore.empty.body",
@@ -447,27 +459,34 @@ k("paywall.error.pending",
 k("paywall.legal.privacy",
   "EMBER stores your words on this device only. Purchases are handled by Apple; EMBER never sees your payment details.",
   "EMBER garde vos mots sur cet appareil uniquement. Les achats passent par Apple ; EMBER ne voit jamais vos informations de paiement.")
+k("paywall.legal.terms.link", "Terms of Use (Apple standard EULA)", "Conditions d'utilisation (CGU standard d'Apple)")
+k("paywall.error.noproducts",
+  "The subscription couldn't be loaded right now. Your progress is safe — try again in a moment.",
+  "L'abonnement n'a pas pu être chargé pour l'instant. Votre progression est en sécurité — réessayez dans un instant.")
 k("paywall.legal.terms",
   "By continuing you agree to Apple's standard subscription terms.",
   "En continuant, vous acceptez les conditions d'abonnement standard d'Apple.")
 
-# Premium features (benefit list)
+# Premium benefits — HONESTY SCOPING: only claims that match what the
+# subscription actually gates (days 4-21). Journal, planner and couple mode
+# are free features; they are framed as "what you'll keep building on",
+# never as things the payment unlocks.
 k("paywall.feature.fullJourney.name", "The complete 21 days", "Les 21 jours complets")
 k("paywall.feature.fullJourney.detail",
-  "Every day of the arc — Noticing, Kindling, Tending — with its evening return.",
-  "Chaque jour du parcours — Remarquer, Attiser, Entretenir — avec son retour du soir.")
+  "Every day of the arc — Noticing, Kindling, Tending — with its evening return. This is what your subscription opens.",
+  "Chaque jour du parcours — Remarquer, Attiser, Entretenir — avec son retour du soir. C'est ce que votre abonnement ouvre.")
 k("paywall.feature.adaptivePlanner.name", "A journey that listens", "Un parcours qui vous écoute")
 k("paywall.feature.adaptivePlanner.detail",
-  "Your evening check-ins reshape the days ahead; your profile deepens the practices.",
-  "Vos retours du soir redessinent les jours à venir ; votre profil approfondit les pratiques.")
+  "Free for everyone: your evening check-ins reshape the days ahead. Yours continues to adapt through day 21.",
+  "Offert à tout le monde : vos retours du soir redessinent les jours à venir. Le vôtre continue de s'adapter jusqu'au jour 21.")
 k("paywall.feature.journal.name", "Your private journal", "Votre journal privé")
 k("paywall.feature.journal.detail",
-  "Everything you've written, readable anytime, kept only here.",
-  "Tout ce que vous avez écrit, relisible à tout moment, conservé ici seulement.")
+  "Free for everyone, always: everything you've written, readable anytime, kept only here.",
+  "Offert à tout le monde, pour toujours : tout ce que vous avez écrit, relisible à tout moment, conservé ici seulement.")
 k("paywall.feature.coupleMode.name", "Our Desire, together", "Notre désir, à deux")
 k("paywall.feature.coupleMode.detail",
-  "Two private spaces, asymmetric steps, and hand-offs only when chosen.",
-  "Deux espaces privés, des étapes asymétriques, et des transmissions uniquement quand vous le choisissez.")
+  "Free for everyone: two private spaces, asymmetric steps, hand-offs only when chosen.",
+  "Offert à tout le monde : deux espaces privés, des étapes asymétriques, des transmissions uniquement quand vous le choisissez.")
 
 # ---------------------------------------------------------------------------
 # Accessibility extras

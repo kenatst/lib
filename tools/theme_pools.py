@@ -136,7 +136,7 @@ k("theme.act.novelty.1",
   "Changez un détail de votre habitude : un autre trajet, tasse, playlist ou lampe. Remarquez comme l'attention suit.")
 k("theme.act.novelty.2",
   "Choose one familiar object and give it five slow minutes. Let it become new.",
-  "Choisissez un objet familier et offrez-lui cinq minutes lentes. Laissez-le redevient neuf.")
+  "Choisissez un objet familier et offrez-lui cinq minutes lentes. Laissez-le redevenir neuf.")
 k("theme.act.novelty.3",
   "Do one small thing differently tonight — brush hair in a new order, sit elsewhere, reverse the ritual.",
   "Faites une petite chose différemment ce soir — coiffez-vous dans un autre ordre, asseyez-vous ailleurs, inversez le rituel.")

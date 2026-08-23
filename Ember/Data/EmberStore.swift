@@ -392,11 +392,17 @@ final class EmberStore {
 
     /// Schema migrations, oldest → current. Pure and ordered.
     nonisolated static func applyMigrations(to state: inout PersistedState) {
-        // v1→v2/v3: legacy single-space reflections move into the space map
-        // (the owner's own space), keeping couple spaces isolated.
-        if !state.reflections.isEmpty && state.reflectionsBySpace.isEmpty {
+        // v1→v3: legacy single-space reflections move into their owner's
+        // space. MERGES rather than replaces — if a newer field already has
+        // content (e.g. a partially migrated file), legacy entries are still
+        // carried over instead of being stranded invisible.
+        if !state.reflections.isEmpty {
             let space = spaceKey(role: state.coupleRole)
-            state.reflectionsBySpace[space] = state.reflections
+            var target = state.reflectionsBySpace[space] ?? [:]
+            for (day, text) in state.reflections where target[day] == nil {
+                target[day] = text
+            }
+            state.reflectionsBySpace[space] = target
             state.reflections = [:]
         }
         state.schemaVersion = PersistedState.empty.schemaVersion

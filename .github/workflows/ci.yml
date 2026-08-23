@@ -9,9 +9,9 @@ on:
 jobs:
   build-test:
     name: Build & Test (iOS)
-    # macos-15 ships Xcode 16.x with an iOS 18+ simulator SDK, which matches
-    # EMBER's deployment target (iOS 18.0). No third-party dependencies, so no
-    # caching beyond DerivedData is worth the complexity.
+    # macos-15 runners ship Xcode 16.x with iOS 18.x simulator SDKs, matching
+    # EMBER's deployment target (iOS 18.0). The destination is DISCOVERED at
+    # runtime rather than pinned, so runner-image updates can't break CI.
     runs-on: macos-15
     timeout-minutes: 60
 
@@ -19,17 +19,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Select Xcode
+      - name: Toolchain info
         run: |
-          ls /Applications | grep -i xcode || true
           xcode-select -p
           xcodebuild -version
+          xcrun simctl list devices available | sed -n '1,40p'
 
-      - name: Build & test on iPhone simulator
+      - name: Discover an available iPhone simulator
+        id: dest
+        run: |
+          PAIR=$(xcrun simctl list devices available | \
+            grep -E "iPhone" | head -1 | sed -E 's/^ *([A-Za-z0-9]+.*) \(([0-9A-F-]{36})\) \(Shutdown\).*/\1/')
+          NAME=$(echo "$PAIR" | sed -E 's/ \([0-9A-F-]{36}\)//')
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "Using simulator: $NAME"
+
+      - name: Build & test
         run: |
           set -o pipefail
           xcodebuild -project Ember.xcodeproj -scheme Ember \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2' \
+            -destination 'platform=iOS Simulator,name=${{ steps.dest.outputs.name }}' \
             test 2>&1 | tail -60
 
       - name: Upload result bundle on failure

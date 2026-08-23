@@ -17,8 +17,8 @@ struct DailySessionView: View {
     @State private var step: Step = .discover
     @State private var reflection = ""
     @State private var reflectionSaved = false
-
-    private var draftKey: String { "day.\(dayNumber)" }
+    /// Debounces draft autosave: one write per pause, not per keystroke.
+    @State private var draftSaveTask: Task<Void, Never>?
 
     private func restoreDraftIfNeeded() {
         if reflection.isEmpty, let draft = store.draft(for: dayNumber) {
@@ -142,17 +142,26 @@ struct DailySessionView: View {
                 reflectionField
                     .onAppear { restoreDraftIfNeeded() }
                     .onChange(of: reflection) { _, newText in
-                        // Autosave the draft as they type — nothing written
-                        // in a vulnerable moment is ever lost.
-                        store.saveDraft(newText, day: dayNumber)
+                        // Autosave the draft as they type — debounced so a
+                        // pause in writing triggers one write, not every key.
+                        draftSaveTask?.cancel()
+                        draftSaveTask = Task {
+                            try? await Task.sleep(for: .seconds(1.2))
+                            guard !Task.isCancelled else { return }
+                            store.saveDraft(newText, day: dayNumber)
+                        }
                     }
 
                 if reflectionSaved {
                     Label {
-                        Text("session.reflect.saved")
+                        // Honest confirmation: only claim persistence when
+                        // storage is actually writable.
+                        Text(store.persistenceStatus == .ready
+                             ? "session.reflect.saved"
+                             : "session.reflect.held")
                             .emberCaption(Palette.mutedInk)
                     } icon: {
-                        Image(systemName: "lock")
+                        Image(systemName: store.persistenceStatus == .ready ? "lock" : "hourglass")
                             .font(.system(size: 11))
                             .foregroundStyle(Palette.rose)
                     }

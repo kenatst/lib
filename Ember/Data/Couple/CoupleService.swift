@@ -131,21 +131,22 @@ nonisolated final class LocalDemoCoupleService: CoupleService, @unchecked Sendab
     func acceptPairing(code: String, as role: CoupleMembership.Role) async throws -> CoupleMembership {
         guard code.count == 6 else { throw CoupleError.invalidCode }
 
+        let pairID = "pair-demo"
         let joiner = CoupleMembership(
             userID: "user-\(UUID().uuidString.prefix(8))",
             role: role,
-            pairID: "pair-demo"
+            pairID: pairID
         )
 
         lock.lock()
         defer { lock.unlock() }
 
-        if revokedPairs.contains(joiner.pairID!) {
+        if revokedPairs.contains(pairID) {
             throw CoupleError.pairRevoked
         }
 
-        var record = pairs[joiner.pairID!] ?? PairRecord(
-            pairID: joiner.pairID!,
+        var record = pairs[pairID] ?? PairRecord(
+            pairID: pairID,
             members: [],
             createdAt: clock()
         )
@@ -168,27 +169,30 @@ nonisolated final class LocalDemoCoupleService: CoupleService, @unchecked Sendab
 
     func shareDayCompletion(_ dayNumber: Int, by member: CoupleMembership) async throws {
         try requireActive(member)
+        guard let pairID = member.pairID else { throw CoupleError.unpaired }
         lock.lock(); defer { lock.unlock() }
-        var set = completionsByPair[member.pairID!]?[member.role] ?? []
+        var set = completionsByPair[pairID]?[member.role] ?? []
         set.insert(dayNumber)
-        completionsByPair[member.pairID!, default: [:]][member.role] = set
+        completionsByPair[pairID, default: [:]][member.role] = set
     }
 
     func sendHandOff(_ note: HandOffNote, from member: CoupleMembership) async throws {
         try requireActive(member)
+        guard let pairID = member.pairID else { throw CoupleError.unpaired }
         // Authorship: you can only send as yourself…
         guard note.fromUserID == member.userID else { throw CoupleError.notAuthorized }
         // …and addressing: only ever to your OPPOSITE role. Nobody, ever,
         // addresses their own role — notes flow across, not back.
         guard note.toRole != member.role else { throw CoupleError.notAuthorized }
         lock.lock(); defer { lock.unlock() }
-        handOffsByPair[member.pairID!, default: []].append(note)
+        handOffsByPair[pairID, default: []].append(note)
     }
 
     func fetchHandOffs(for member: CoupleMembership) async throws -> [HandOffNote] {
         try requireActive(member)
+        guard let pairID = member.pairID else { throw CoupleError.unpaired }
         lock.lock(); defer { lock.unlock() }
-        return (handOffsByPair[member.pairID!] ?? []).filter { $0.toRole == member.role }
+        return (handOffsByPair[pairID] ?? []).filter { $0.toRole == member.role }
     }
 
     // MARK: Revocation
@@ -206,10 +210,10 @@ nonisolated final class LocalDemoCoupleService: CoupleService, @unchecked Sendab
     // MARK: Helpers
 
     private func requireActive(_ member: CoupleMembership) throws {
-        guard member.pairID != nil else { throw CoupleError.unpaired }
+        guard let pairID = member.pairID else { throw CoupleError.unpaired }
         lock.lock(); defer { lock.unlock() }
-        guard !revokedPairs.contains(member.pairID!) else { throw CoupleError.pairRevoked }
-        guard let record = pairs[member.pairID!],
+        guard !revokedPairs.contains(pairID) else { throw CoupleError.pairRevoked }
+        guard let record = pairs[pairID],
               let own = record.membership(of: member.userID),
               own.role == member.role else {
             throw CoupleError.notAuthorized
