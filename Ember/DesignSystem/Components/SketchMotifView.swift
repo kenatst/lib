@@ -13,6 +13,8 @@ struct SketchMotifView: View {
     var evolution: Double = 0.15
     var strokeColor: Color = Palette.wine
     var lineWidth: CGFloat = 2.1
+    /// Ink presence: 0…1. Raise for hero moments, lower for background texture.
+    var inkOpacity: Double = 1.0
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -46,7 +48,7 @@ struct SketchMotifView: View {
                 let path = sketchPath(points.map { $0.applying(transform) })
                 context.stroke(
                     path,
-                    with: .color(strokeColor.opacity(0.88)),
+                    with: .color(strokeColor.opacity(0.88 * inkOpacity)),
                     style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round)
                 )
             }

@@ -22,6 +22,9 @@ enum DemoLauncher {
         }
 
         // Seed journey + profile.
+        if value("-ember-fresh") != nil {
+            store.deleteEverything()
+        }
         if let rawIntention = value("-ember-intention") {
             let intention = DesireIntention(rawValue: rawIntention) ?? .myDesire
             store.setIntention(intention)

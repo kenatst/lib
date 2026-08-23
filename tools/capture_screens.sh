@@ -20,9 +20,9 @@ shot() { # name, then launch args...
   echo "captured $name"
 }
 
-shot 01-welcome
-shot 02-selection -ember-route selection
-shot 03-onboarding-my -ember-intention myDesire -ember-route onboarding
+shot 01-welcome -ember-fresh
+shot 02-selection -ember-fresh -ember-route selection
+shot 03-onboarding-my -ember-fresh -ember-intention myDesire -ember-route onboarding
 shot 04-profile-my -ember-intention myDesire -ember-completed 3 -ember-route profile
 shot 05-home-day1 -ember-intention myDesire -ember-route home
 shot 06-home-progress -ember-intention theirDesire -ember-completed 9 -ember-route home
@@ -32,8 +32,8 @@ shot 09-progress -ember-intention myDesire -ember-completed 9 -ember-route progr
 shot 10-couple-setup -ember-intention ourDesire -ember-route coupleSetup
 shot 11-couple-space -ember-intention ourDesire -ember-role one -ember-handoff "I kept thinking about Thursday." -ember-route coupleSpace
 shot 12-settings -ember-intention myDesire -ember-completed 2 -ember-route settings
-shot 13-welcome-fr -AppleLanguages "(fr)" -AppleLocale fr_FR
-shot 14-selection-fr -AppleLanguages "(fr)" -AppleLocale fr_FR -ember-route selection
+shot 13-welcome-fr -ember-fresh -AppleLanguages "(fr)" -AppleLocale fr_FR
+shot 14-selection-fr -ember-fresh -AppleLanguages "(fr)" -AppleLocale fr_FR -ember-route selection
 shot 15-day-fr -AppleLanguages "(fr)" -AppleLocale fr_FR -ember-intention ourDesire -ember-completed 8 -ember-day 9 -ember-route day
 shot 16-profile-fr -AppleLanguages "(fr)" -AppleLocale fr_FR -ember-intention theirDesire -ember-route profile
 

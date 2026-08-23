@@ -34,7 +34,7 @@ struct ProgressArcView: View {
                     journey: intention,
                     evolution: Double(completed) / Double(JourneyCatalog.totalDays),
                     strokeColor: Palette.intentionTint(intention),
-                    lineWidth: 2.2
+                    lineWidth: 2.5
                 )
                 .frame(height: 300)
                 .frame(maxWidth: .infinity)

@@ -123,12 +123,13 @@ private struct ReturnOption: View {
             HStack(spacing: Spacing.sm) {
                 // Ink dot fills when chosen — quiet selection state.
                 Circle()
-                    .stroke(Palette.rose, lineWidth: 1.4)
-                    .frame(width: 10, height: 10)
+                    .stroke(isSelected ? Palette.wine : Palette.rose.opacity(0.75), lineWidth: isSelected ? 1.6 : 1.4)
+                    .background(Circle().fill(Palette.cream))
+                    .frame(width: 13, height: 13)
                     .overlay {
                         Circle()
-                            .fill(Palette.rose)
-                            .frame(width: 5, height: 5)
+                            .fill(Palette.wine)
+                            .frame(width: 6, height: 6)
                             .opacity(isSelected ? 1 : 0)
                     }
 

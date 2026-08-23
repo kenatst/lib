@@ -82,11 +82,10 @@ struct DailySessionView: View {
                     journey: intention,
                     evolution: day.evolution,
                     strokeColor: Palette.intentionTint(intention),
-                    lineWidth: 1.8
+                    lineWidth: 2.1
                 )
-                .frame(height: 170)
+                .frame(height: 180)
                 .frame(maxWidth: .infinity)
-                .opacity(0.85)
             }
         ) {
             Text(String.ember(day.titleKey))

@@ -80,7 +80,7 @@ struct HomeView: View {
                 journey: intention,
                 evolution: evolutionForProgress,
                 strokeColor: Palette.intentionTint(intention),
-                lineWidth: 2.0
+                lineWidth: 2.3
             )
             .frame(height: 240)
             .frame(maxWidth: .infinity)

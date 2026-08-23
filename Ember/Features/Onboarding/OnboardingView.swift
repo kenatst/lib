@@ -170,8 +170,9 @@ private struct AnswerOption: View {
         Button(action: action) {
             HStack(spacing: Spacing.sm) {
                 Circle()
-                    .stroke(Palette.rose, lineWidth: 1.4)
-                    .frame(width: 9, height: 9)
+                    .stroke(Palette.rose.opacity(0.75), lineWidth: 1.4)
+                    .background(Circle().fill(Palette.cream))
+                    .frame(width: 11, height: 11)
                 Text(String(localized: String.LocalizationValue(textKey)))
                     .font(Typography.editorial(.body))
                     .foregroundStyle(Palette.ink)
