@@ -1,18 +1,17 @@
+import SwiftUI
+
+// MARK: - DesireIntention presentation helpers
+// UI copy for domain intents lives here; the String Catalog holds the text.
+
 extension DesireIntention {
 
+    /// Localized display name.
     var displayName: String {
-        switch self {
-        case .myDesire: String(localized: "intention.myDesire.name")
-        case .theirDesire: String(localized: "intention.theirDesire.name")
-        case .ourDesire: String(localized: "intention.ourDesire.name")
-        }
+        String(localized: String.LocalizationValue(displayNameKey))
     }
 
+    /// Localized promise line.
     var tagline: String {
-        switch self {
-        case .myDesire: String(localized: "intention.myDesire.tagline")
-        case .theirDesire: String(localized: "intention.theirDesire.tagline")
-        case .ourDesire: String(localized: "intention.ourDesire.tagline")
-        }
+        String(localized: String.LocalizationValue(taglineKey))
     }
 }

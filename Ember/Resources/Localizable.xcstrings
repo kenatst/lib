@@ -1,105 +1,5270 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "intention.myDesire.name" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "My Desire"
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "a11y.sketch.hero": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hand-drawn sketch of two organic forms approaching each other"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Croquis dessiné à la main de deux formes organiques qui s'approchent"
           }
         }
       }
     },
-    "intention.myDesire.tagline" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I want to feel desire again."
+    "common.back": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour"
           }
         }
       }
     },
-    "intention.ourDesire.name" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Our Desire"
+    "common.cancel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
           }
         }
       }
     },
-    "intention.ourDesire.tagline" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "We want our spark back."
+    "common.close": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
           }
         }
       }
     },
-    "intention.theirDesire.name" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Their Desire"
+    "common.continue": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
           }
         }
       }
     },
-    "intention.theirDesire.tagline" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I want to feel wanted again."
+    "common.delete": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer"
           }
         }
       }
     },
-    "onboarding.action.continue" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continue"
+    "common.done": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminé"
           }
         }
       }
     },
-    "onboarding.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Onboarding"
+    "common.keep": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conserver"
           }
         }
       }
     },
-    "placeholder.notice" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This screen is an intentional placeholder. The full experience arrives in a future Ember mission."
+    "couple.asymmetric.day.1.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Think of one small thing they used to do that made you feel chosen. Remember it fully; tell no one yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pensez à une petite chose qu'il ou elle faisait et qui vous faisait sentir choisi·e. Souvenez-vous-en entièrement ; n'en parlez à personne encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.1.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recall the exact moment you knew you liked this person. Hold it; share nothing yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retrouvez l'instant précis où vous avez su que vous aimiez cette personne. Gardez-le ; ne partagez rien encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.10.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send one message about something you look forward to with them. No date attached."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyez un message sur quelque chose que vous attendez avec cette personne. Sans date."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.10.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mention, casually, one sound from early days you secretly loved. Nothing more."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mentionnez, en passant, un son des premiers jours que vous aimiez en secret. Rien de plus."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.11.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a song from when you met. Play it once tonight while doing something ordinary."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez une chanson de vos débuts. Jouez-la ce soir en faisant quelque chose d'ordinaire."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.11.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light the same candle as your earliest evenings together — or the one you wish you'd had."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allumez la même bougie que vos premières soirées — ou celle que vous auriez voulu avoir."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.12.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leave one small note somewhere they'll find tomorrow. Sign it with nothing."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déposez un petit mot où il le trouvera demain. Ne le signez pas."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.12.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm their side of the bed before they get in. Don't mention it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réchauffez son côté du lit avant qu'il ou elle n'y entre. N'en parlez pas."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.13.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask them one question tonight you've never asked. Listen without replying about yourself."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posez ce soir une question jamais posée. Écoutez sans répondre en parlant de vous."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.13.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tell them one thing you noticed them doing well this week. Keep it under one sentence."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites une chose que vous l'avez vu·e bien faire cette semaine. Une phrase maximum."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.14.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan ten minutes of tomorrow worth whispering about today. Reveal nothing yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planifiez dix minutes de demain qui valent un murmure aujourd'hui. Ne révélez rien encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.14.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touch their hand once today and leave it there three seconds longer than habit."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez sa main une fois aujourd'hui et laissez-la trois secondes de plus que d'habitude."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.15.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Think of one small thing they used to do that made you feel chosen. Remember it fully; tell no one yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pensez à une petite chose qu'il ou elle faisait et qui vous faisait sentir choisi·e. Souvenez-vous-en entièrement ; n'en parlez à personne encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.15.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recall the exact moment you knew you liked this person. Hold it; share nothing yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retrouvez l'instant précis où vous avez su que vous aimiez cette personne. Gardez-le ; ne partagez rien encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.16.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight, make them a drink the way they like it, wordlessly. That's the whole task."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir, préparez-lui à boire comme il aime, sans un mot. C'est toute la tâche."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.16.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight, move screens away from the table before they sit down. Say nothing about why."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir, éloignez les écrans de la table avant qu'il ou elle ne s'asseye. N'expliquez pas pourquoi."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.17.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send one message about something you look forward to with them. No date attached."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyez un message sur quelque chose que vous attendez avec cette personne. Sans date."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.17.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mention, casually, one sound from early days you secretly loved. Nothing more."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mentionnez, en passant, un son des premiers jours que vous aimiez en secret. Rien de plus."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.18.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a song from when you met. Play it once tonight while doing something ordinary."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez une chanson de vos débuts. Jouez-la ce soir en faisant quelque chose d'ordinaire."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.18.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light the same candle as your earliest evenings together — or the one you wish you'd had."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allumez la même bougie que vos premières soirées — ou celle que vous auriez voulu avoir."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.19.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leave one small note somewhere they'll find tomorrow. Sign it with nothing."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déposez un petit mot où il le trouvera demain. Ne le signez pas."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.19.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm their side of the bed before they get in. Don't mention it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réchauffez son côté du lit avant qu'il ou elle n'y entre. N'en parlez pas."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.2.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight, make them a drink the way they like it, wordlessly. That's the whole task."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir, préparez-lui à boire comme il aime, sans un mot. C'est toute la tâche."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.2.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight, move screens away from the table before they sit down. Say nothing about why."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir, éloignez les écrans de la table avant qu'il ou elle ne s'asseye. N'expliquez pas pourquoi."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.20.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask them one question tonight you've never asked. Listen without replying about yourself."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posez ce soir une question jamais posée. Écoutez sans répondre en parlant de vous."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.20.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tell them one thing you noticed them doing well this week. Keep it under one sentence."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites une chose que vous l'avez vu·e bien faire cette semaine. Une phrase maximum."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.21.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan ten minutes of tomorrow worth whispering about today. Reveal nothing yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planifiez dix minutes de demain qui valent un murmure aujourd'hui. Ne révélez rien encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.21.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touch their hand once today and leave it there three seconds longer than habit."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez sa main une fois aujourd'hui et laissez-la trois secondes de plus que d'habitude."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.3.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send one message about something you look forward to with them. No date attached."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyez un message sur quelque chose que vous attendez avec cette personne. Sans date."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.3.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mention, casually, one sound from early days you secretly loved. Nothing more."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mentionnez, en passant, un son des premiers jours que vous aimiez en secret. Rien de plus."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.4.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a song from when you met. Play it once tonight while doing something ordinary."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez une chanson de vos débuts. Jouez-la ce soir en faisant quelque chose d'ordinaire."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.4.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light the same candle as your earliest evenings together — or the one you wish you'd had."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allumez la même bougie que vos premières soirées — ou celle que vous auriez voulu avoir."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.5.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leave one small note somewhere they'll find tomorrow. Sign it with nothing."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déposez un petit mot où il le trouvera demain. Ne le signez pas."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.5.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm their side of the bed before they get in. Don't mention it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réchauffez son côté du lit avant qu'il ou elle n'y entre. N'en parlez pas."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.6.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask them one question tonight you've never asked. Listen without replying about yourself."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posez ce soir une question jamais posée. Écoutez sans répondre en parlant de vous."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.6.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tell them one thing you noticed them doing well this week. Keep it under one sentence."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites une chose que vous l'avez vu·e bien faire cette semaine. Une phrase maximum."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.7.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan ten minutes of tomorrow worth whispering about today. Reveal nothing yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planifiez dix minutes de demain qui valent un murmure aujourd'hui. Ne révélez rien encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.7.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touch their hand once today and leave it there three seconds longer than habit."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez sa main une fois aujourd'hui et laissez-la trois secondes de plus que d'habitude."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.8.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Think of one small thing they used to do that made you feel chosen. Remember it fully; tell no one yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pensez à une petite chose qu'il ou elle faisait et qui vous faisait sentir choisi·e. Souvenez-vous-en entièrement ; n'en parlez à personne encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.8.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recall the exact moment you knew you liked this person. Hold it; share nothing yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retrouvez l'instant précis où vous avez su que vous aimiez cette personne. Gardez-le ; ne partagez rien encore."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.9.partnerOne": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight, make them a drink the way they like it, wordlessly. That's the whole task."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir, préparez-lui à boire comme il aime, sans un mot. C'est toute la tâche."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.day.9.partnerTwo": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight, move screens away from the table before they sit down. Say nothing about why."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir, éloignez les écrans de la table avant qu'il ou elle ne s'asseye. N'expliquez pas pourquoi."
+          }
+        }
+      }
+    },
+    "couple.asymmetric.notice": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You each received your own step today. Compare notes only if you both choose to."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous avez reçu chacun votre étape du jour. Ne comparez que si vous le décidez tous les deux."
+          }
+        }
+      }
+    },
+    "couple.invite.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For now, EMBER pairs two people on one shared device. Set the code down between you — each space opens only when its owner chooses."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour l'instant, EMBER associe deux personnes sur un appareil partagé. Posez le code entre vous — chaque espace ne s'ouvre que lorsque son propriétaire le décide."
+          }
+        }
+      }
+    },
+    "couple.invite.header": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claim your spaces"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réclamez vos espaces"
+          }
+        }
+      }
+    },
+    "couple.locked.other": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked. %@ keeps the key."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verrouillé. %@ garde la clé."
+          }
+        }
+      }
+    },
+    "couple.privacy.rule": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private reflections stay private. No view, export or reminder will ever surface a partner's words without their explicit hand-off."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les réflexions privées restent privées. Aucun écran, export ou rappel ne révèlera les mots d'un partenaire sans son geste explicite."
+          }
+        }
+      }
+    },
+    "couple.role.first": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partner One"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partenaire un"
+          }
+        }
+      }
+    },
+    "couple.role.question": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who is holding the phone?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui tient le téléphone ?"
+          }
+        }
+      }
+    },
+    "couple.role.second": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partner Two"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partenaire deux"
+          }
+        }
+      }
+    },
+    "couple.setup.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each of you receives a private space and daily steps of your own. What you write stays yours — sharing is always a deliberate hand-off, never automatic."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chacun reçoit un espace privé et ses propres étapes quotidiennes. Ce que vous écrivez vous appartient — partager est toujours un geste volontaire, jamais automatique."
+          }
+        }
+      }
+    },
+    "couple.setup.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One journey, two people"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un parcours, deux personnes"
+          }
+        }
+      }
+    },
+    "couple.shared.tonight": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Together tonight"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ensemble ce soir"
+          }
+        }
+      }
+    },
+    "couple.space.private": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@'s private space"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espace privé — %@"
+          }
+        }
+      }
+    },
+    "couple.switch.space": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch space"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changer d'espace"
+          }
+        }
+      }
+    },
+    "day.1.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight, sit for two unhurried minutes with the lights low and simply notice what you feel — nothing to fix, nothing to reach. If nothing comes, notice that too, kindly."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir, asseyez-vous deux minutes sans hâte, lumières basses, et remarquez simplement ce que vous ressentez — rien à corriger, rien à atteindre. S'il ne vient rien, remarquez-le aussi, avec douceur."
+          }
+        }
+      }
+    },
+    "day.1.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desire often begins as attention. Before wanting anything more, notice what you already feel when the house goes quiet — warmth, numbness, curiosity, nothing. Whatever is there is information, not a verdict."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le désir commence souvent par l'attention. Avant d'en demander davantage, remarquez ce que vous ressentez déjà quand la maison se tait — chaleur, engourdissement, curiosité, rien. Tout ce qui est là est une information, pas un verdict."
+          }
+        }
+      }
+    },
+    "day.1.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When today went quiet for a moment, where did your attention go?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand aujourd'hui s'est tu un instant, où votre attention est-elle allée ?"
+          }
+        }
+      }
+    },
+    "day.1.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did anything soften when you paid attention?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose s'est-il adouci quand vous avez porté attention ?"
+          }
+        }
+      }
+    },
+    "day.1.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noticing"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remarquer"
+          }
+        }
+      }
+    },
+    "day.10.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leave one small warmth for someone — or for future-you: a note, a folded shirt, a favorite mug set out where morning will find it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déposez une petite chaleur pour quelqu'un — ou pour le vous de demain : un mot, une chemise pliée, une tasse préférée là où le matin la trouvera."
+          }
+        }
+      }
+    },
+    "day.10.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closeness compounds quietly. One small warmth today — a folded shirt, a favorite mug set out, a hand on a shoulder passing by — outweighs a grand gesture saved for someday."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La proximité compose en silence. Une petite chaleur aujourd'hui — une chemise pliée, une tasse préférée posée, une main sur une épaule au passage — pèse plus qu'un grand geste gardé pour un jour jamais venu."
+          }
+        }
+      }
+    },
+    "day.10.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name one tiny warmth from this week nobody else would have noticed."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nommez une petite chaleur de cette semaine que personne d'autre n'aurait remarquée."
+          }
+        }
+      }
+    },
+    "day.10.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did you manage to leave — or find — one small warmth?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avez-vous réussi à déposer — ou trouver — une petite chaleur ?"
+          }
+        }
+      }
+    },
+    "day.10.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Small Warmths"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Petites chaleurs"
+          }
+        }
+      }
+    },
+    "day.11.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel or shorten one obligation today. Feel the room it leaves behind. Do not fill it with productivity."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulez ou raccourcissez une obligation aujourd'hui. Sentez la place qu'elle laisse. Ne la remplissez pas de productivité."
+          }
+        }
+      }
+    },
+    "day.11.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autonomy is not distance. It is the space where choice still lives — and choice is where wanting becomes possible. Removing expectation is itself an invitation; pressure is the opposite of appetite."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'autonomie n'est pas la distance. C'est l'espace où le choix vit encore — et le choix rend le désir possible. Retirer l'attente est en soi une invitation ; la pression est l'opposé de l'appétit."
+          }
+        }
+      }
+    },
+    "day.11.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where in your life do you currently have no room to choose? How does that sit in the body?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où, dans votre vie, n'avez-vous aucune place pour choisir ? Comment ça se loge dans le corps ?"
+          }
+        }
+      }
+    },
+    "day.11.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did saying no to something small leave any room behind?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refuser une petite chose a-t-il laissé de la place derrière ?"
+          }
+        }
+      }
+    },
+    "day.11.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elbow Room"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De la place pour respirer"
+          }
+        }
+      }
+    },
+    "day.12.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose one familiar object and give it five minutes of slow attention. Let it become new without changing at all."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un objet familier et donnez-lui cinq minutes d'attention lente. Laissez-le devenir neuf sans changer du tout."
+          }
+        }
+      }
+    },
+    "day.12.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Familiarity hides things in plain sight. The face you know by heart still changes daily. Looking again — slowly, as if for the first time — can make the known feel newly made."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La familiarité cache des choses à plat. Le visage que vous connaissez par cœur change chaque jour. Regarder encore — lentement, comme pour la première fois — peut rendre le connu tout neuf."
+          }
+        }
+      }
+    },
+    "day.12.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look at something familiar as if for the first time. What had you never noticed?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regardez quelque chose de familier comme pour la première fois. Qu'avez-vous jamais remarqué ?"
+          }
+        }
+      }
+    },
+    "day.12.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did the familiar look even slightly new?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le familier a-t-il paru même légèrement neuf ?"
+          }
+        }
+      }
+    },
+    "day.12.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looking Again"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regarder encore"
+          }
+        }
+      }
+    },
+    "day.13.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let someone catch you mid-delight today — humming, dancing badly, absorbed in something trivial. Do not apologize for it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laissez quelqu'un vous surprendre en plein ravissement — en fredonnant, en dansant mal, absorbé·e par un rien. Ne vous excusez pas."
+          }
+        }
+      }
+    },
+    "day.13.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Being wanted begins with being seen. Let yourself be witnessed in something small and true today — mid-hum, mid-absorption, unguarded — and notice that you survived it. That is the whole lesson."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se sentir désiré commence par être vu. Laissez-vous surprendre dans quelque chose de petit et vrai aujourd'hui — en train de fredonner, absorbé·e, sans garde — et remarquez que vous l'avez survécu. C'est toute la leçon."
+          }
+        }
+      }
+    },
+    "day.13.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recall a moment you felt truly seen. Who witnessed you, and what exactly did they see?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Souvenez-vous d'un moment où vous vous êtes senti·e vraiment vu·e. Qui vous regardait, et voyait quoi exactement ?"
+          }
+        }
+      }
+    },
+    "day.13.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did being witnessed feel risky, warm, or both?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Surprendre votre ravissement : risqué, chaleureux, ou les deux ?"
+          }
+        }
+      }
+    },
+    "day.13.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Witnessed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vu·e"
+          }
+        }
+      }
+    },
+    "day.14.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give three no-agenda touches today: a hand on a shoulder, a brush of arms, fingers through hair — yours or theirs. Want nothing back."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offrez trois contacts sans programme aujourd'hui : une main sur une épaule, un bras qui frôle, des doigts dans des cheveux — les vôtres ou les leurs. Sans rien attendre en retour."
+          }
+        }
+      }
+    },
+    "day.14.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affection without agenda rebuilds trust in touch itself. A hand that wants nothing teaches the skin a new language. Give three no-agenda touches today and receive at least one without returning it like a debt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'affection sans programme reconstruit la confiance dans le contact. Une main qui ne veut rien apprend une langue nouvelle à la peau. Offrez trois contacts sans attente aujourd'hui et recevez-en un sans le rendre comme une dette."
+          }
+        }
+      }
+    },
+    "day.14.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Think of affection that asked nothing of you. How did it change the rest of that day?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pensez à une affection qui ne demandait rien. Comment cela a-t-il changé le reste de ce jour-là ?"
+          }
+        }
+      }
+    },
+    "day.14.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did touch without agenda land differently?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le contact sans programme a-t-il atterri autrement ?"
+          }
+        }
+      }
+    },
+    "day.14.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Long Echo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le long écho"
+          }
+        }
+      }
+    },
+    "day.15.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change one detail of your usual tonight: a different route home, cup, playlist, or lamp. Notice how attention follows the difference."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changez un détail de votre habitude ce soir : un trajet, une tasse, une playlist, une lampe. Remarquez comme l'attention suit la différence."
+          }
+        }
+      }
+    },
+    "day.15.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novelty right-sized is a doorway, not a leap. One new lamp, one new playlist, one hour rearranged — attention follows difference like a cat follows movement. Grand gestures startle; small ones beckon."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La nouveauté à la bonne dose est une porte, pas un saut. Une lampe nouvelle, une playlist différente, une heure déplacée — l'attention suit la différence comme un chat suit le mouvement. Les grands gestes font sursauter ; les petits invitent."
+          }
+        }
+      }
+    },
+    "day.15.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which small departure from routine could you make tomorrow without anyone's permission?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quel petit écart de routine pourriez-vous prendre demain sans la permission de personne ?"
+          }
+        }
+      }
+    },
+    "day.15.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did one changed detail change your attention?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un détail changé a-t-il changé votre attention ?"
+          }
+        }
+      }
+    },
+    "day.15.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Right-Sized Newness"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveauté à la bonne dose"
+          }
+        }
+      }
+    },
+    "day.16.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Absorb yourself in something small until you forget to perform. If someone notices, let them see the absorption, not a show."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Absorbez-vous dans quelque chose de petit jusqu'à oublier de jouer. Si quelqu'un remarque, laissez voir l'absorption, pas un spectacle."
+          }
+        }
+      }
+    },
+    "day.16.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is a specific charge in being caught delighting. Not performing pleasure — being absorbed by it. Witnessed joy is disarming precisely because it cannot be faked."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il y a une tension particulière à être surpris·e en plein plaisir. Non pas en train de jouer le plaisir — absorbé·e par lui. La joie surprise désarme parce qu'elle ne peut pas être simulée."
+          }
+        }
+      }
+    },
+    "day.16.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Has anyone ever caught you mid-delight? What were they allowed to see?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On vous a déjà surpris·e en plein ravissement ? Qu'aviez-vous permis de voir ?"
+          }
+        }
+      }
+    },
+    "day.16.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did rest arrive? Did anything wake up after it?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le repos est-il venu ? Quelque chose s'est-il réveillé après ?"
+          }
+        }
+      }
+    },
+    "day.16.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Being Seen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Être vu·e"
+          }
+        }
+      }
+    },
+    "day.17.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recreate one ritual from early days — the same song, the same seat, the same candle. Let memory begin the charging; add nothing forced."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recréez un rituel des premiers jours — la même chanson, la même place, la même bougie. Laissez la mémoire commencer la recharge ; n'ajoutez rien de forcé."
+          }
+        }
+      }
+    },
+    "day.17.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rituals hold tension beautifully. The same candle, the same song, the same seat on the sofa — repetition is not the enemy of desire; it is its memory. What was charged once can be charged again by signal alone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les rituels retiennent admirablement la tension. La même bougie, la même chanson, la même place sur le canapé — la répétition n'est pas l'ennemie du désir ; elle en est la mémoire. Ce qui a été chargé une fois peut l'être à nouveau par le seul signal."
+          }
+        }
+      }
+    },
+    "day.17.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What repeated place or gesture could become charged again if you let it?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quel lieu ou quel geste répété pourrait se recharger si vous le laissiez faire ?"
+          }
+        }
+      }
+    },
+    "day.17.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did the open question keep you company?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La question ouverte vous a-t-elle tenu compagnie ?"
+          }
+        }
+      }
+    },
+    "day.17.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritual and Charge"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rituel et tension"
+          }
+        }
+      }
+    },
+    "day.18.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go to bed thirty minutes earlier than justified. Desire negotiates with exhaustion; win that deal once tonight."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couchez-vous trente minutes plus tôt que ce qui serait justifié. Le désir négocie avec l'épuisement ; gagnez ce marché une fois ce soir."
+          }
+        }
+      }
+    },
+    "day.18.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rest is part of desire. Tired bodies defend themselves with numbness — it is protection, not brokenness. Go earlier, do less, and treat the numbness not as a fault to fix but as a gatekeeper to negotiate with gently."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le repos fait partie du désir. Les corps fatigués se défendent par l'engourdissement — c'est une protection, pas une panne. Couchez-vous plus tôt, faites moins, et traitez l'engourdissement non comme un défaut mais comme un gardien avec qui négocier doucement."
+          }
+        }
+      }
+    },
+    "day.18.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What does tiredness talk you out of wanting? Write its exact words."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contre quelles envies la fatigue vous parle-t-elle ? Écrivez ses mots exacts."
+          }
+        }
+      }
+    },
+    "day.18.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can you name which season you're in yet?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrivez-vous à nommer votre saison ?"
+          }
+        }
+      }
+    },
+    "day.18.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permission to Rest"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La permission de me reposer"
+          }
+        }
+      }
+    },
+    "day.19.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Follow one genuine question about yourself today. Ask it silently, then let it stay open while you walk, wash, wait."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suivez aujourd'hui une vraie question sur vous-même. Posez-la en silence, puis laissez-la ouverte pendant que vous marchez, vous lavez, vous attendez."
+          }
+        }
+      }
+    },
+    "day.19.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curiosity about your own responses is the most durable kind. You are allowed to be a mystery to yourself. The question you cannot answer yet is worth keeping company with — answers rush; curiosity strolls."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La curiosité pour vos propres réactions est la plus durable. Vous avez le droit d'être un mystère pour vous-même. La question à laquelle vous ne répondez pas encore mérite qu'on lui tienne compagnie — les réponses courent ; la curiosité se promène."
+          }
+        }
+      }
+    },
+    "day.19.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask yourself a question you don't know the answer to. Keep it company for a minute."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posez-vous une question dont vous ignorez la réponse. Tenez-lui compagnie une minute."
+          }
+        }
+      }
+    },
+    "day.19.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did the old song hold any charge?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'ancienne chanson portait-elle encore une charge ?"
+          }
+        }
+      }
+    },
+    "day.19.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Question Kept Open"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une question laissée ouverte"
+          }
+        }
+      }
+    },
+    "day.2.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take a slower shower or bath than usual. Treat your own skin as familiar terrain worth revisiting — no goal beyond paying attention differently."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prenez une douche ou un bain plus lent que d'habitude. Traitez votre peau comme un terrain familier qui mérite une autre visite — aucun but au-delà d'une attention différente."
+          }
+        }
+      }
+    },
+    "day.2.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The body keeps its own schedule, and it is not a timetable of obligation. Ease — not effort — is usually the door desire walks through. A body that feels watched performs; a body that feels safe can want."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le corps suit son propre calendrier, et ce n'est pas un emploi du temps d'obligations. L'aise — pas l'effort — est généralement la porte par laquelle le désir entre. Un corps qui se sent observé joue la comédie ; un corps en sécurité peut désirer."
+          }
+        }
+      }
+    },
+    "day.2.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where in your body do you notice ease — even a little? What sits near it?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où, dans votre corps, remarquez-vous de l'aise — même un peu ? Qu'y a-t-il tout près ?"
+          }
+        }
+      }
+    },
+    "day.2.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did your body tell you anything today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre corps vous a-t-il dit quelque chose aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "day.2.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Body's Schedule"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le calendrier du corps"
+          }
+        }
+      }
+    },
+    "day.20.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Say aloud — to them, or just to the room — whether this week feels like distance or closeness. No verdict required."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites à voix haute — à cette personne, ou juste à la pièce — si cette semaine ressemble à la distance ou à la proximité. Aucun verdict requis."
+          }
+        }
+      }
+    },
+    "day.20.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distance and closeness take turns in every long story. Neither is failure. Naming which season you are in dissolves half the confusion — and half the loneliness that comes from misreading weather as character."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La distance et la proximité alternent dans toute longue histoire. Ni l'une ni l'autre n'est un échec. Nommer votre saison dissout la moitié de la confusion — et la moitié de la solitude née de confondre la météo avec le caractère."
+          }
+        }
+      }
+    },
+    "day.20.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Are you in a season of distance or of closeness right now? Name it without judging it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans quelle saison êtes-vous : distance ou proximité ? Nommez-la sans juger."
+          }
+        }
+      }
+    },
+    "day.20.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is tomorrow's small pleasure already glowing a little?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le petit plaisir de demain luit-il déjà un peu ?"
+          }
+        }
+      }
+    },
+    "day.20.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touch Without Agenda"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le contact sans programme"
+          }
+        }
+      }
+    },
+    "day.21.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the one practice from these weeks you'll keep. Do it once more today — deliberately, as a keeper, not an experiment."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez la pratique de ces semaines que vous garderez. Refaites-la une fois aujourd'hui — délibérément, comme une gardienne, plus comme une expérience."
+          }
+        }
+      }
+    },
+    "day.21.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After three weeks, nothing needs to be finished. Something, though, may have stirred — a longer look, an easier laugh, a night you turned toward instead of away. The work now is choosing what to keep."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après trois semaines, rien n'a besoin d'être terminé. Mais quelque chose a peut-être remué — un regard plus long, un rire plus facile, une nuit où vous vous êtes tourné·e vers plutôt que contre. Le travail, maintenant, est de choisir quoi garder."
+          }
+        }
+      }
+    },
+    "day.21.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After these weeks: what do you want to keep? Choose one thing and claim it in writing."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après ces semaines : que voulez-vous garder ? Choisissez une chose et revendiquez-la par écrit."
+          }
+        }
+      }
+    },
+    "day.21.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which keeper will you carry beyond these three weeks?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quel gardien emporterez-vous au-delà de ces trois semaines ?"
+          }
+        }
+      }
+    },
+    "day.21.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Keeper"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que l'on garde"
+          }
+        }
+      }
+    },
+    "day.3.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plant one seed of anticipation: mention lightly that you have something small in mind for later this week. Let the hint do the working."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plantez une graine d'anticipation : évoquez légèrement que vous avez quelque chose de petit en tête pour cette semaine. Laissez l'indice travailler."
+          }
+        }
+      }
+    },
+    "day.3.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anticipation is a sense in its own right. A hint today — a look held a moment longer, a message that promises nothing and implies everything — can do the quiet work of an entire evening."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'anticipation est un sens à part entière. Un indice aujourd'hui — un regard retenu une seconde de plus, un message qui ne promet rien et suggère tout — accomplit tranquillement le travail d'une soirée entière."
+          }
+        }
+      }
+    },
+    "day.3.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If desire arrived tonight like weather, what would the forecast honestly say?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si le désir arrivait ce soir comme une météo, que dirait-elle honnêtement ?"
+          }
+        }
+      }
+    },
+    "day.3.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is there anything you're quietly looking forward to now?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Y a-t-il désormais quelque chose que vous attendez en silence ?"
+          }
+        }
+      }
+    },
+    "day.3.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Sense of Before"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le sens de l'avant"
+          }
+        }
+      }
+    },
+    "day.4.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once today, follow your attention on purpose — watch light move across a wall, listen to one full song, look slowly at a face in a photograph."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois aujourd'hui, suivez votre attention exprès — regardez la lumière traverser un mur, écoutez une chanson entière, contemplez un visage sur une photo."
+          }
+        }
+      }
+    },
+    "day.4.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attention is not a given; it is a practice. What you look at softly tends to warm. What you audit coldly tends to hide. Today, practice looking at one thing — a person, a plant, your own hands — without trying to fix anything about it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'attention n'est pas acquise ; c'est une pratique. Ce que vous regardez doucement tend à se réchauffer. Ce que vous auditez froidement tend à se cacher. Aujourd'hui, regardez une chose — une personne, une plante, vos mains — sans rien vouloir corriger."
+          }
+        }
+      }
+    },
+    "day.4.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What did you look at longer than you needed today? What kept you there?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qu'avez-vous regardé plus longtemps que nécessaire ? Qu'est-ce qui vous y retenait ?"
+          }
+        }
+      }
+    },
+    "day.4.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did you notice where your attention wanted to go?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avez-vous remarqué où votre attention voulait aller ?"
+          }
+        }
+      }
+    },
+    "day.4.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soft Attention"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'attention douce"
+          }
+        }
+      }
+    },
+    "day.5.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear one hour this evening of every expectation — including your own. Leave the hour shapeless and see what wants to grow in it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dégager une heure ce soir de toute attente — y compris la vôtre. Laissez l'heure sans forme et voyez ce qui veut y pousser."
+          }
+        }
+      }
+    },
+    "day.5.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wanting needs room to arrive into. An hour with no agenda is not an empty hour; it is an open door. Desire rarely knocks on a door that is already full."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le désir a besoin de place pour arriver. Une heure sans programme n'est pas une heure vide ; c'est une porte ouverte. Le désir frappe rarement à une porte déjà pleine."
+          }
+        }
+      }
+    },
+    "day.5.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What are you looking forward to that hasn't happened yet? Stay with it one breath."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À quoi attendez-vous qui ne s'est pas encore produit ? Restez-y un souffle."
+          }
+        }
+      }
+    },
+    "day.5.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What was it like to owe the hour nothing?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qu'est-ce que ça faisait de ne rien devoir à l'heure dégagée ?"
+          }
+        }
+      }
+    },
+    "day.5.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Room to Arrive"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La place pour arriver"
+          }
+        }
+      }
+    },
+    "day.6.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Before sleep, name three conditions that would make you feel safe enough to want. Just name them; act on none of them yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avant de dormir, nommez trois conditions qui vous feraient sentir assez en sécurité pour désirer. Nommez-les seulement ; n'y agissez pas encore."
+          }
+        }
+      }
+    },
+    "day.6.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desire listens for safety before it speaks. It asks: can I want something here without owing anything? Can I be clumsy here? The conditions matter more than the mood."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le désir écoute la sécurité avant de parler. Il demande : puis-je vouloir quelque chose ici sans rien devoir ? Puis-je être maladroit ici ? Les conditions comptent plus que l'humeur."
+          }
+        }
+      }
+    },
+    "day.6.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What would make the next hour feel safe enough to want something inside it?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qu'est-ce qui rendrait l'heure qui vient assez sûre pour y vouloir quelque chose ?"
+          }
+        }
+      }
+    },
+    "day.6.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did it feel safer to want something today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous a-t-il semblé plus sûr de vouloir quelque chose aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "day.6.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Conditions"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les conditions"
+          }
+        }
+      }
+    },
+    "day.7.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Write one honest sentence about what you miss — precise, blame-free — and keep it somewhere only you will find it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écrivez une phrase honnête sur ce qui vous manque — précise, sans reproche — et gardez-la où vous seule·e la trouverez."
+          }
+        }
+      }
+    },
+    "day.7.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Words draw maps. When you can say what you miss — precisely, without blame — the territory between you and what you want becomes navigable. Vague longing stays lost; named longing finds roads."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les mots dessinent des cartes. Quand vous pouvez dire ce qui vous manque — précisément, sans reproche — le territoire entre vous et ce que vous voulez devient praticable. L'envie vague reste perdue ; l'envie nommée trouve des routes."
+          }
+        }
+      }
+    },
+    "day.7.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish this sentence without editing: \"What I miss is…\""
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminez cette phrase sans corriger : « Ce qui me manque, c'est… »"
+          }
+        }
+      }
+    },
+    "day.7.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was the honest sentence hard to write? That's information too."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La phrase honnête était-elle difficile à écrire ? C'est une information aussi."
+          }
+        }
+      }
+    },
+    "day.7.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drawing the Map"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dessiner la carte"
+          }
+        }
+      }
+    },
+    "day.8.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Say the sentence from Day 7 aloud when alone. Hear your own voice claim it. Notice what flinches and what steadies."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites la phrase du jour 7 à voix haute, seul·e. Entendez votre propre voix la revendiquer. Remarquez ce qui se cabre et ce qui s'apaise."
+          }
+        }
+      }
+    },
+    "day.8.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Longing has a shape if you let it speak. \"I miss being looked at\" and \"I miss being taken\" are different countries. Naming which country you live in changes everything you might pack."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'envie a une forme si vous la laissez parler. « On me regarde moins » et « je me sens désirable » sont deux pays différents. Savoir dans quel pays vous vivez change tout ce que vous pourriez emporter."
+          }
+        }
+      }
+    },
+    "day.8.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complete the sentence honestly: \"I miss being…\" Which word came first?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complétez honnêtement : « On me manque de… » Quel mot est arrivé premier ?"
+          }
+        }
+      }
+    },
+    "day.8.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did saying the sentence aloud change it?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dire la phrase à voix haute l'a-t-elle changée ?"
+          }
+        }
+      }
+    },
+    "day.8.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What I Miss"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qui me manque"
+          }
+        }
+      }
+    },
+    "day.9.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do one deliberately playful thing: an absurd comment delivered deadpan, a silly walk past a mirror, a game you allow yourself to win."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites une chose résolument ludique : un commentaire absurde au visage fermé, une démarche ridicule devant le miroir, une partie que vous vous autorisez à gagner."
+          }
+        }
+      }
+    },
+    "day.9.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play is seriousness with its shoes off. It is not childish — it is the oldest form of intimacy: two creatures signaling safety through laughter. Curiosity counts even when it ends only in giggles."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le jeu, c'est le sérieux qui a quitté ses chaussures. Ce n'est pas puéril — c'est la plus ancienne forme d'intimité : deux créatures qui annoncent la sécurité par le rire. La curiosité compte même quand elle finit en fou rire."
+          }
+        }
+      }
+    },
+    "day.9.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When did something last make you smile at yourself, alone?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand, pour la dernière fois, quelque chose vous a fait sourire à vous-même, seul·e ?"
+          }
+        }
+      }
+    },
+    "day.9.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did anything make you smile at yourself today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose vous a-t-il fait sourire à vous-même aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "day.9.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seriousness, Off Duty"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le sérieux en congé"
+          }
+        }
+      }
+    },
+    "home.begin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Begin Day %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer le jour %lld"
+          }
+        }
+      }
+    },
+    "home.complete.today": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today is complete. Resting is part of the work."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La journée est faite. Se reposer fait partie du travail."
+          }
+        }
+      }
+    },
+    "home.day.label": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day %lld of 21"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jour %lld sur 21"
+          }
+        }
+      }
+    },
+    "home.link.progress": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See the shape so far"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir le tracé parcouru"
+          }
+        }
+      }
+    },
+    "home.link.settings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
+          }
+        }
+      }
+    },
+    "home.resume": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue Day %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprendre au jour %lld"
+          }
+        }
+      }
+    },
+    "home.step.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An experiment"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une expérience"
+          }
+        }
+      }
+    },
+    "home.step.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An idea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une idée"
+          }
+        }
+      }
+    },
+    "home.step.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A question"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une question"
+          }
+        }
+      }
+    },
+    "home.step.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An evening check-in"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un point du soir"
+          }
+        }
+      }
+    },
+    "home.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd'hui"
+          }
+        }
+      }
+    },
+    "home.wordmark": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER"
+          }
+        }
+      }
+    },
+    "intention.myDesire.name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My Desire"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mon désir"
+          }
+        }
+      }
+    },
+    "intention.myDesire.tagline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I want to feel desire again."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'ai envie de retrouver le désir."
+          }
+        }
+      }
+    },
+    "intention.ourDesire.name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Our Desire"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notre désir"
+          }
+        }
+      }
+    },
+    "intention.ourDesire.tagline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We want our spark back."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nous voulons retrouver notre étincelle."
+          }
+        }
+      }
+    },
+    "intention.theirDesire.name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Their Desire"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leur désir"
+          }
+        }
+      }
+    },
+    "intention.theirDesire.tagline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I miss feeling wanted."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fait de me sentir désiré·e me manque."
+          }
+        }
+      }
+    },
+    "pacing.dose": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glad it landed. Tomorrow leans a little further into anticipation."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heureuse nouvelle. Demain mise un peu plus sur l'anticipation."
+          }
+        }
+      }
+    },
+    "pacing.gentle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No shift yet — that's common this early. Tomorrow moves slower, on purpose."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas encore de changement — c'est fréquent si tôt. Demain ralentit, exprès."
+          }
+        }
+      }
+    },
+    "pacing.thread": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something registered. We'll follow that thread tomorrow."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose a été enregistré. Suivons ce fil demain."
+          }
+        }
+      }
+    },
+    "profile.cta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shape my journey"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Façonner mon parcours"
+          }
+        }
+      }
+    },
+    "profile.dim.anticipation.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anticipation works on you when given room — a hint is often enough."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'anticipation vous touche quand on lui laisse de la place — un indice suffit souvent."
+          }
+        }
+      }
+    },
+    "profile.dim.anticipation.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Looking forward may matter more than the moment itself right now."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En ce moment, l'attente compte peut-être plus que le moment lui-même."
+          }
+        }
+      }
+    },
+    "profile.dim.anticipation.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You answer strongly to anticipation; the approach matters as much as the arrival."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous répondez fortement à l'anticipation : l'approche compte autant que l'arrivée."
+          }
+        }
+      }
+    },
+    "profile.dim.autonomy.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You open when nothing is expected of you; autonomy keeps the door unlocked."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous vous ouvrez quand rien n'est attendu ; l'autonomie garde la porte entrouverte."
+          }
+        }
+      }
+    },
+    "profile.dim.autonomy.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Even gentle pressure may switch desire off — room to choose matters."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Même une légère pression peut éteindre le désir — pouvoir choisir importe."
+          }
+        }
+      }
+    },
+    "profile.dim.autonomy.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Freedom is essential to your desire: choice is what makes wanting possible."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liberté nourrit votre désir : choisir rend possible le fait de vouloir."
+          }
+        }
+      }
+    },
+    "profile.dim.communication.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One honest exchange does more for you than a week of hints."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un seul échange sincère vous fait plus qu'une semaine de sous-entendus."
+          }
+        }
+      }
+    },
+    "profile.dim.communication.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unspoken things may be occupying the room where desire could live."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le non-dit occupe parfois la place où le désir pourrait vivre."
+          }
+        }
+      }
+    },
+    "profile.dim.communication.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Words unlock you — honest talk is part of your intimacy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les mots vous ouvrent — parler vrai fait partie de votre intimité."
+          }
+        }
+      }
+    },
+    "profile.dim.confidence.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For you, confidence grows from small evidence, not big leaps."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chez vous, la confiance naît de petites preuves, pas de grands sauts."
+          }
+        }
+      }
+    },
+    "profile.dim.confidence.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Self-doubt may be standing between you and feeling wanted — gently."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le doute de soi se glisse parfois entre vous et le sentiment d'être désiré·e — doucement."
+          }
+        }
+      }
+    },
+    "profile.dim.confidence.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You carry a quiet assurance your desire can build on."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous portez une assurance tranquille sur laquelle votre désir peut s'appuyer."
+          }
+        }
+      }
+    },
+    "profile.dim.connection.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emotional connection reliably warms things for you — conversation, in the truest sense, is intimacy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le lien émotionnel vous échauffe sûrement — la conversation, au sens propre, fait partie de l'intimité."
+          }
+        }
+      }
+    },
+    "profile.dim.connection.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When closeness runs thin, desire finds little to hold onto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand la proximité s'amincit, le désir trouve peu à quoi s'accrocher."
+          }
+        }
+      }
+    },
+    "profile.dim.connection.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closeness is your engine: when you feel connected, desire follows easily."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La proximité est votre moteur : quand vous vous sentez relié·e, le désir suit."
+          }
+        }
+      }
+    },
+    "profile.dim.emotionalSafety.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Predictable kindness settles you enough to want."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une gentillesse régulière vous apaise assez pour désirer."
+          }
+        }
+      }
+    },
+    "profile.dim.emotionalSafety.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safety first: your desire waits until tension has somewhere to go."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sécurité d'abord : votre désir attend que la tension trouve une issue."
+          }
+        }
+      }
+    },
+    "profile.dim.emotionalSafety.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You have built real safety, and your desire trusts it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous avez bâti une vraie sécurité, et votre désir s'y fie."
+          }
+        }
+      }
+    },
+    "profile.dim.novelty.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A touch of newness reawakens attention — small departures beat grand gestures."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une pointe de nouveauté réveille l'attention — petits écarts valent mieux que grands gestes."
+          }
+        }
+      }
+    },
+    "profile.dim.novelty.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Familiar comfort serves you better than novelty right now."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour l'heure, le familier vous sert mieux que la nouveauté."
+          }
+        }
+      }
+    },
+    "profile.dim.novelty.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novelty wakes your desire quickly; sameness is what dims it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La nouveauté éveille vite votre désir ; c'est la répétition qui l'éteint."
+          }
+        }
+      }
+    },
+    "profile.dim.playfulness.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Playfulness lowers your guard faster than deep conversations do."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le jeu vous désarme plus vite que les grandes conversations."
+          }
+        }
+      }
+    },
+    "profile.dim.playfulness.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seriousness has been guarding something — play may be the way back in."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le sérieux veillait sur quelque chose — le jeu est peut-être le chemin du retour."
+          }
+        }
+      }
+    },
+    "profile.dim.playfulness.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play is your native language of intimacy; laughter opens everything."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le jeu est votre langue maternelle intime ; le rire ouvre tout."
+          }
+        }
+      }
+    },
+    "profile.dim.selfConnection.middle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Small acts of self-attention restore the signal your desire listens for."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De petites attentions à vous-même rétablissent le signal que votre désir écoute."
+          }
+        }
+      }
+    },
+    "profile.dim.selfConnection.opening": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desire often starts as noticing yourself again — that attention may be due."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le désir commence souvent par se remarquer soi-même — cette attention vous attend."
+          }
+        }
+      }
+    },
+    "profile.dim.selfConnection.rich": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You are in touch with yourself, and your desire speaks clearly because of it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous êtes à l'écoute de vous-même, et votre désir s'exprime clairement grâce à cela."
+          }
+        }
+      }
+    },
+    "profile.footer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desire isn't a score. It's weather. This simply maps today's climate."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le désir n'est pas une note. C'est une météo. Ceci trace simplement le climat du jour."
+          }
+        }
+      }
+    },
+    "profile.lede.myDesire": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read this slowly. It describes your desire — no one else's."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lisez lentement. Il décrit votre désir — celui de personne d'autre."
+          }
+        }
+      }
+    },
+    "profile.lede.ourDesire": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two people, one weather system. Here is the climate you described."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux personnes, une même météo. Voici le climat que vous décrivez."
+          }
+        }
+      }
+    },
+    "profile.lede.theirDesire": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This maps the ground attraction grows on — in you, and around you both."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce portrait trace le terrain où l'attraction repousse — en vous comme entre vous."
+          }
+        }
+      }
+    },
+    "profile.standout": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What stands out"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qui ressort"
+          }
+        }
+      }
+    },
+    "profile.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Desire Profile"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre profil du désir"
+          }
+        }
+      }
+    },
+    "progress.chapter.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week one — Noticing"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Première semaine — Remarquer"
+          }
+        }
+      }
+    },
+    "progress.chapter.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week two — Kindling"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deuxième semaine — Attiser"
+          }
+        }
+      }
+    },
+    "progress.chapter.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week three — Tending"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Troisième semaine — Entretenir"
+          }
+        }
+      }
+    },
+    "progress.days.%lld.format": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld of 21 days traced"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld jours sur 21 tracés"
+          }
+        }
+      }
+    },
+    "progress.empty": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your first line appears after Day One."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre premier trait apparaîtra après le premier jour."
+          }
+        }
+      }
+    },
+    "progress.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Shape So Far"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le tracé jusqu'ici"
+          }
+        }
+      }
+    },
+    "q.duration.long": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A year or more"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un an ou davantage"
+          }
+        }
+      }
+    },
+    "q.duration.months": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A few months"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelques mois"
+          }
+        }
+      }
+    },
+    "q.duration.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How long has it felt this way?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depuis combien de temps en êtes-vous là ?"
+          }
+        }
+      }
+    },
+    "q.duration.unsure": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hard to say — it crept up"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficile à dire — c'est venu en douceur"
+          }
+        }
+      }
+    },
+    "q.duration.weeks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A few weeks"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelques semaines"
+          }
+        }
+      }
+    },
+    "q.my.pressure.curiosity": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curiosity"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La curiosité"
+          }
+        }
+      }
+    },
+    "q.my.pressure.guilt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A bit of guilt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une certaine culpabilité"
+          }
+        }
+      }
+    },
+    "q.my.pressure.hope": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quiet hope"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un espoir discret"
+          }
+        }
+      }
+    },
+    "q.my.pressure.pressure": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressure"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pression"
+          }
+        }
+      }
+    },
+    "q.my.pressure.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wanting more can bring different feelings. Which is loudest?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vouloir davantage réveille différentes sensations. Laquelle parle le plus fort ?"
+          }
+        }
+      }
+    },
+    "q.my.selfconnection.distant": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It's been a long time"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela fait longtemps"
+          }
+        }
+      }
+    },
+    "q.my.selfconnection.passing": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sometimes, in passing"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parfois, fugitivement"
+          }
+        }
+      }
+    },
+    "q.my.selfconnection.recent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recently"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récemment"
+          }
+        }
+      }
+    },
+    "q.my.selfconnection.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When did you last feel at ease in your own body?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand vous êtes-vous senti·e, pour la dernière fois, bien dans votre corps ?"
+          }
+        }
+      }
+    },
+    "q.my.selfconnection.unsure": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I rarely notice"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je le remarque Rarement"
+          }
+        }
+      }
+    },
+    "q.my.state.blocked": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Present, but something's in the way"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Présent, mais quelque chose s'y oppose"
+          }
+        }
+      }
+    },
+    "q.my.state.flicker": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Like embers — there, then gone"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À des braises — là, puis parti"
+          }
+        }
+      }
+    },
+    "q.my.state.longing": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Longing without a shape"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une envie floue, sans forme"
+          }
+        }
+      }
+    },
+    "q.my.state.quiet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostly quiet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plutôt silencieux"
+          }
+        }
+      }
+    },
+    "q.my.state.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you tune inward, desire right now feels…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand vous vous écoutez, le désir, aujourd'hui, ressemble à…"
+          }
+        }
+      }
+    },
+    "q.our.curiosity.buried": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buried under to-do lists"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enfouie sous les listes à faire"
+          }
+        }
+      }
+    },
+    "q.our.curiosity.dormant": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dormant, but not gone"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Endormie, mais pas éteinte"
+          }
+        }
+      }
+    },
+    "q.our.curiosity.risky": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There, but it feels risky"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Là, mais elle semble risquée"
+          }
+        }
+      }
+    },
+    "q.our.curiosity.strong": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still very much here"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toujours bien vivante"
+          }
+        }
+      }
+    },
+    "q.our.curiosity.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Curiosity about each other, these days, is…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre curiosité l'un·e pour l'autre, aujourd'hui, est…"
+          }
+        }
+      }
+    },
+    "q.our.rhythm.logistics": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logistics and tiredness"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logistique et fatigue"
+          }
+        }
+      }
+    },
+    "q.our.rhythm.parallel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parallel lives under one roof"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux vies parallèles sous un même toit"
+          }
+        }
+      }
+    },
+    "q.our.rhythm.routine": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loving routine"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une routine tendre"
+          }
+        }
+      }
+    },
+    "q.our.rhythm.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your time together mostly runs on…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre temps à deux tourne surtout au…"
+          }
+        }
+      }
+    },
+    "q.our.rhythm.waves": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waves of closeness and distance"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vagues de proximité et de distance"
+          }
+        }
+      }
+    },
+    "q.our.touch.alive": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alive"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vivants"
+          }
+        }
+      }
+    },
+    "q.our.touch.charged": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Complicated, almost charged"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compliqués, presque électriques"
+          }
+        }
+      }
+    },
+    "q.our.touch.functional": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Functional — hello, goodbye"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fonctionnels — bonjour, au revoir"
+          }
+        }
+      }
+    },
+    "q.our.touch.rare": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rare enough to notice"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assez rares pour qu'on les remarque"
+          }
+        }
+      }
+    },
+    "q.our.touch.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touch between you — even small touches — usually feels…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos contacts, même les plus légers, sont généralement…"
+          }
+        }
+      }
+    },
+    "q.stress.heavy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lot, most days"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beaucoup, presque chaque jour"
+          }
+        }
+      }
+    },
+    "q.stress.light": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not much — life feels manageable"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas trop — la vie reste gérable"
+          }
+        }
+      }
+    },
+    "q.stress.some": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A steady hum of stress"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un stress de fond, constant"
+          }
+        }
+      }
+    },
+    "q.stress.swings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It swings wildly"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela varie énormément"
+          }
+        }
+      }
+    },
+    "q.stress.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How much weight are you carrying lately?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle charge portez-vous ces derniers temps ?"
+          }
+        }
+      }
+    },
+    "q.their.connection.faded": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faded compared to before"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus discrète qu'avant"
+          }
+        }
+      }
+    },
+    "q.their.connection.mixed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good days and far days"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faite de bons jours et de jours lointains"
+          }
+        }
+      }
+    },
+    "q.their.connection.strained": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strained"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tendue"
+          }
+        }
+      }
+    },
+    "q.their.connection.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Between you two lately, the warmth feels…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entre vous deux, ces derniers temps, la chaleur semble…"
+          }
+        }
+      }
+    },
+    "q.their.connection.warm": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm underneath the busyness"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Présente sous les occupations"
+          }
+        }
+      }
+    },
+    "q.their.seen.fade": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It has faded"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela s'est estompé"
+          }
+        }
+      }
+    },
+    "q.their.seen.invisible": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I feel invisible"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je me sens invisible"
+          }
+        }
+      }
+    },
+    "q.their.seen.loaded": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It feels loaded"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C'est devenu délicat"
+          }
+        }
+      }
+    },
+    "q.their.seen.noted": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I still feel noticed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je me sens encore remarqué·e"
+          }
+        }
+      }
+    },
+    "q.their.seen.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Being seen by them — how does it land these days?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se sentir vu·e par cette personne — qu'est-ce que ça donne, aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "q.their.voice.avoided": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostly avoided"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le plus souvent évité"
+          }
+        }
+      }
+    },
+    "q.their.voice.easy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something we can do"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose qu'on sait faire"
+          }
+        }
+      }
+    },
+    "q.their.voice.hard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Possible, but hard"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Possible, mais difficile"
+          }
+        }
+      }
+    },
+    "q.their.voice.oneWay": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I try; it doesn't land"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'essaie, mais cela ne porte pas"
+          }
+        }
+      }
+    },
+    "q.their.voice.text": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saying what you miss out loud is…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dire à voix haute ce qui vous manque, c'est…"
+          }
+        }
+      }
+    },
+    "questions.counter": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld of %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld sur %lld"
+          }
+        }
+      }
+    },
+    "questions.heading": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A few gentle questions, so EMBER follows your situation — not an average."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelques questions en douceur, pour que EMBER suive votre situation — pas une moyenne."
+          }
+        }
+      }
+    },
+    "questions.skipnote": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answer with your gut. You can retell this anytime."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Répondez au ressenti. Vous pourrez toujours y revenir."
+          }
+        }
+      }
+    },
+    "return.close.day": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close the day"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clôturer la journée"
+          }
+        }
+      }
+    },
+    "return.different": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It felt different"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C'était différent"
+          }
+        }
+      }
+    },
+    "return.feltDifferent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It felt different"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C'était différent"
+          }
+        }
+      }
+    },
+    "return.more": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I want more of this"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je veux continuer sur cette lancée"
+          }
+        }
+      }
+    },
+    "return.nothing": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing changed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n'a changé"
+          }
+        }
+      }
+    },
+    "return.nothingChanged": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing changed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n'a changé"
+          }
+        }
+      }
+    },
+    "return.noticed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I noticed something"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'ai remarqué quelque chose"
+          }
+        }
+      }
+    },
+    "return.noticedSomething": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I noticed something"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'ai remarqué quelque chose"
+          }
+        }
+      }
+    },
+    "return.saved": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved. Tomorrow leans on this."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistré. Demain s'appuiera là-dessus."
+          }
+        }
+      }
+    },
+    "return.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No wrong answers. This tunes tomorrow."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune mauvaise réponse. Cela accorde la suite."
+          }
+        }
+      }
+    },
+    "return.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How was it, honestly?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alors, honnêtement ?"
+          }
+        }
+      }
+    },
+    "return.wantMore": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I want more of this"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je veux continuer sur cette lancée"
+          }
+        }
+      }
+    },
+    "selection.begin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
+          }
+        }
+      }
+    },
+    "selection.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the pull you feel most. You can change course later."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez ce qui vous attire le plus. Vous pourrez changer d'orientation plus tard."
+          }
+        }
+      }
+    },
+    "selection.their.note": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Their Desire is about tending the conditions attraction grows in — never about persuading anyone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leur désir, c'est cultiver ce qui permet à l'attraction de revenir — jamais convaincre qui que ce soit."
+          }
+        }
+      }
+    },
+    "selection.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What do you want back?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que voulez-vous retrouver ?"
+          }
+        }
+      }
+    },
+    "session.finish": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done for today"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'en fais mon affaire pour aujourd'hui"
+          }
+        }
+      }
+    },
+    "session.finish.evening.teaser": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Come back this evening for a soft landing."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenez ce soir pour un atterrissage en douceur."
+          }
+        }
+      }
+    },
+    "session.reflect.placeholder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Written here, kept here."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écrit ici, gardé ici."
+          }
+        }
+      }
+    },
+    "session.reflect.prompt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If anything stirred, keep a line for yourself."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si quelque chose a remué, gardez-en une ligne pour vous."
+          }
+        }
+      }
+    },
+    "session.reflect.save": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep privately"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder pour moi"
+          }
+        }
+      }
+    },
+    "session.reflect.saved": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kept on this device only."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conservé sur cet appareil uniquement."
+          }
+        }
+      }
+    },
+    "session.step.act.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experiment"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expérimenter"
+          }
+        }
+      }
+    },
+    "session.step.discover.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discover"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvrir"
+          }
+        }
+      }
+    },
+    "session.step.reflect.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reflect"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se poser la question"
+          }
+        }
+      }
+    },
+    "settings.about.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER is a private space for adults reconnecting with desire and closeness. It offers ideas and experiments — never diagnosis or therapy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER est un espace privé pour les adultes qui renouent avec le désir et la proximité. Il propose des idées et des expériences — jamais un diagnostic ni une thérapie."
+          }
+        }
+      }
+    },
+    "settings.about.header": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About EMBER"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À propos d'EMBER"
+          }
+        }
+      }
+    },
+    "settings.data.delete": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete everything EMBER knows"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout supprimer"
+          }
+        }
+      }
+    },
+    "settings.data.delete.confirm.message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your answers, reflections and journey progress will be erased from this device immediately. This cannot be undone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos réponses, vos réflexions et votre progression seront effacées de cet appareil immédiatement. Cette action est irréversible."
+          }
+        }
+      }
+    },
+    "settings.data.delete.confirm.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete all EMBER data?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer toutes les données EMBER ?"
+          }
+        }
+      }
+    },
+    "settings.data.header": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your data"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos données"
+          }
+        }
+      }
+    },
+    "settings.journey.restart": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Begin a different journey"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer un autre parcours"
+          }
+        }
+      }
+    },
+    "settings.journey.restart.confirm.message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your current journey progress and reflections will be erased so you can begin fresh."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre parcours en cours et vos réflexions seront effacés pour repartir à neuf."
+          }
+        }
+      }
+    },
+    "settings.language.note": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER speaks English and French."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMBER parle anglais et français."
+          }
+        }
+      }
+    },
+    "settings.privacy.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything you write stays on this device, protected at rest.\nNothing is uploaded. There are no accounts, no analytics, no trackers.\nWhat you delete below is deleted for good."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout ce que vous écrivez reste sur cet appareil, protégé au repos.\nRien n'est envoyé. Aucun compte, aucun traqueur, aucune publicité.\nCe que vous supprimez ci-dessous l'est définitivement."
+          }
+        }
+      }
+    },
+    "settings.privacy.header": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy, plainly"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La confidentialité, simplement"
+          }
+        }
+      }
+    },
+    "settings.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
+          }
+        }
+      }
+    },
+    "settings.version": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        }
+      }
+    },
+    "welcome.cta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Begin"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
+        }
+      }
+    },
+    "welcome.note": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private by design. Nothing you write leaves this device."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confidentiel par nature. Rien de ce que vous écrivez ne quitte cet appareil."
+          }
+        }
+      }
+    },
+    "welcome.sub": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start with what you want back."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencez par ce que vous voulez retrouver."
+          }
+        }
+      }
+    },
+    "welcome.tagline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something in you wants to feel closer."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose en vous veut se sentir plus proche."
           }
         }
       }
     }
-  },
-  "version" : "1.0"
+  }
 }

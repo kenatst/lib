@@ -1,8 +1,24 @@
 import Observation
 
+// MARK: - Typed routes
+//
+// One enum drives all navigation. Routes are value types carrying payloads,
+// Hashable for NavigationStack, Sendable for testability.
+
 nonisolated enum AppRoute: Hashable, Sendable {
-    case intentionOverview(DesireIntention)
+    case journeySelection
+    case onboarding(DesireIntention)
+    case desireProfile
+    case home
+    case day(Int)
+    case eveningReturn(Int)
+    case progress
+    case settings
+    case coupleSetup
+    case coupleSpace
 }
+
+// MARK: - Router
 
 @Observable
 final class AppRouter {
@@ -11,6 +27,12 @@ final class AppRouter {
 
     func navigate(to route: AppRoute) {
         path.append(route)
+    }
+
+    /// Replaces the whole stack — used when jumping between major scenes
+    /// (e.g. finishing onboarding lands on Home with no back trail).
+    func setRoot(_ route: AppRoute) {
+        path = [route]
     }
 
     func pop() {

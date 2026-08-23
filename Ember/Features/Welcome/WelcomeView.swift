@@ -1,62 +1,79 @@
 import SwiftUI
 
+// MARK: - WelcomeView — the opening
+//
+// Premium first impression: wordmark, one charged line, the almost-touching
+// motif breathing behind everything, a single CTA. No feature list, no
+// carousel. Editorial restraint.
+
 struct WelcomeView: View {
 
     @Environment(AppRouter.self) private var router
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    @State private var appeared = false
 
     var body: some View {
-        VStack(spacing: Spacing.xl) {
-            Text(verbatim: "Ember")
-                .font(Typography.editorial(.largeTitle))
-                .foregroundStyle(Palette.ink)
+        ZStack {
+            // The motif lives behind and above the text — charged negative space.
+            VStack {
+                SketchMotifView(journey: .theirDesire, evolution: 0.12)
+                    .frame(width: 300, height: 340)
+                    .opacity(appeared ? 0.85 : 0)
+                    .offset(y: appeared ? 0 : 14)
+                Spacer()
+            }
+            .padding(.top, Spacing.xxl)
 
-            VStack(spacing: Spacing.sm) {
-                ForEach(DesireIntention.allCases) { intention in
-                    Button {
+            VStack(spacing: 0) {
+                Spacer()
+                Text("EMBER")
+                    .font(Typography.editorial(.largeTitle))
+                    .kerning(10)
+                    .foregroundStyle(Palette.ink)
+                    .padding(.bottom, Spacing.md)
+
+                Text("welcome.tagline")
+                    .font(Typography.editorial(.title3))
+                    .italic()
+                    .foregroundStyle(Palette.wine)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, Spacing.lg)
+
+                Text("welcome.sub")
+                    .emberCaption()
+                    .padding(.top, Spacing.sm)
+
+                Spacer()
+
+                VStack(spacing: Spacing.md) {
+                    EmberButton(title: String(localized: "welcome.cta")) {
                         Haptics.selection()
-                        router.navigate(to: .intentionOverview(intention))
-                    } label: {
-                        IntentionRow(intention: intention)
+                        router.navigate(to: .journeySelection)
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityElement(children: .combine)
+
+                    Text("welcome.note")
+                        .emberCaption()
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, Spacing.xl)
+                        .padding(.bottom, Spacing.lg)
                 }
+                .opacity(appeared ? 1 : 0)
+                .offset(y: appeared ? 0 : 10)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .padding(.top, Spacing.xl)
-        .padding(.horizontal, Spacing.md)
-        .background(Palette.canvas)
-        .toolbar(.hidden, for: .navigationBar)
-    }
-}
-
-private struct IntentionRow: View {
-
-    let intention: DesireIntention
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: Spacing.xs) {
-            Text(intention.displayName)
-                .font(Typography.editorial(.title3))
-                .foregroundStyle(Palette.ink)
-
-            Text(intention.tagline)
-                .font(Typography.ui(.subheadline))
-                .foregroundStyle(Palette.wine)
+        .navigationBarHidden(true)
+        .onAppear {
+            guard !appeared else { return }
+            withAnimation(Motion.resolved(Motion.ink, reduceMotion: reduceMotion)) {
+                appeared = true
+            }
         }
-        .frame(maxWidth: .infinity, minHeight: 64, alignment: .leading)
-        .padding(Spacing.md)
-        .background(
-            Palette.blush,
-            in: RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-        )
     }
 }
 
 #Preview {
-    NavigationStack {
-        WelcomeView()
-    }
-    .environment(AppRouter())
+    WelcomeView()
+        .environment(AppRouter())
 }

@@ -1,19 +1,31 @@
 import Testing
 @testable import Ember
 
-@MainActor
+@Suite("App State")
 struct AppStateTests {
 
-    @Test("A fresh install begins in onboarding")
-    func freshAppStateStartsInOnboarding() {
-        let appState = AppState()
-        #expect(appState.phase == .onboarding)
+    @Test("A fresh install begins in firstRun")
+    func freshInstall() {
+        #expect(AppState(hasJourney: false).phase == .firstRun)
     }
 
     @Test("Completing onboarding activates the core experience exactly once")
-    func completingOnboardingActivatesCoreExperience() {
-        let appState = AppState()
-        appState.completeOnboarding()
-        #expect(appState.phase == .active)
+    func activation() {
+        let state = AppState(hasJourney: false)
+        state.activate()
+        state.activate()
+        #expect(state.phase == .active)
+    }
+
+    @Test("An existing journey resumes directly in the active experience")
+    func resume() {
+        #expect(AppState(hasJourney: true).phase == .active)
+    }
+
+    @Test("Reset returns to the welcome arc after deletion")
+    func reset() {
+        let state = AppState(hasJourney: true)
+        state.resetToFirstRun()
+        #expect(state.phase == .firstRun)
     }
 }
