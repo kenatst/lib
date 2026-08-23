@@ -278,6 +278,7 @@ struct HomeView: View {
     .environment(StoreService())
 }
 
+@MainActor
 private func previewHomeStore() -> EmberStore {
     let store = EmberStore()
     store.setIntention(.myDesire)

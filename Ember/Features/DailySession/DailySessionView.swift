@@ -348,6 +348,7 @@ private struct SessionStepLayout<Motif: View, Content: View, CTA: View>: View {
     .environment(AppRouter())
 }
 
+@MainActor
 private func previewSessionStore() -> EmberStore {
     let store = EmberStore()
     store.setIntention(.theirDesire)

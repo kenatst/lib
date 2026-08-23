@@ -200,6 +200,7 @@ struct CoupleSpaceView: View {
     .environment(AppRouter())
 }
 
+@MainActor
 private func previewCoupleStore() -> EmberStore {
     let store = EmberStore()
     store.setIntention(.ourDesire)

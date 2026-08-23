@@ -155,6 +155,7 @@ private struct DimensionParagraph: View {
     .environment(AppRouter())
 }
 
+@MainActor
 private func previewStore() -> EmberStore {
     let store = EmberStore()
     store.setIntention(.myDesire)

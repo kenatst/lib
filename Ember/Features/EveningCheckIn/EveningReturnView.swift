@@ -177,6 +177,7 @@ private struct ReturnOption: View {
     .environment(AppRouter())
 }
 
+@MainActor
 private func previewReturnStore() -> EmberStore {
     let store = EmberStore()
     store.setIntention(.ourDesire)

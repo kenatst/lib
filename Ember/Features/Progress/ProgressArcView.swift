@@ -148,6 +148,7 @@ struct ProgressArcView: View {
     .environment(previewProgressStore())
 }
 
+@MainActor
 private func previewProgressStore() -> EmberStore {
     let store = EmberStore()
     store.setIntention(.myDesire)

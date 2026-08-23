@@ -74,6 +74,7 @@ struct JournalView: View {
     .environment(previewJournalStore())
 }
 
+@MainActor
 private func previewJournalStore() -> EmberStore {
     let store = EmberStore()
     store.setIntention(.myDesire)
