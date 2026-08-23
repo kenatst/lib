@@ -18,6 +18,14 @@ struct DailySessionView: View {
     @State private var reflection = ""
     @State private var reflectionSaved = false
 
+    private var draftKey: String { "day.\(dayNumber)" }
+
+    private func restoreDraftIfNeeded() {
+        if reflection.isEmpty, let draft = store.draft(for: dayNumber) {
+            reflection = draft
+        }
+    }
+
     nonisolated enum Step: Int, CaseIterable, Sendable {
         case discover = 0
         case reflect = 1
@@ -111,6 +119,12 @@ struct DailySessionView: View {
         } cta: {
             VStack(alignment: .leading, spacing: Spacing.md) {
                 reflectionField
+                    .onAppear { restoreDraftIfNeeded() }
+                    .onChange(of: reflection) { _, newText in
+                        // Autosave the draft as they type — nothing written
+                        // in a vulnerable moment is ever lost.
+                        store.saveDraft(newText, day: dayNumber)
+                    }
 
                 if reflectionSaved {
                     Label {
@@ -216,6 +230,7 @@ struct DailySessionView: View {
         let trimmed = reflection.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
         store.saveReflection(trimmed, day: dayNumber)
+        store.clearDraft(day: dayNumber)
         Haptics.soft()
         withAnimation(Motion.resolved(Motion.gentle, reduceMotion: reduceMotion)) {
             reflectionSaved = true
@@ -223,6 +238,7 @@ struct DailySessionView: View {
     }
 
     private func completeDay() {
+        saveReflectionIfNeeded()
         store.markDayComplete(dayNumber)
         Haptics.warm()
         router.replace(with: .eveningReturn(dayNumber))

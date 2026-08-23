@@ -35,6 +35,8 @@ final class EmberStore {
         /// Opt-in daily reminder (24h clock). nil = reminders off.
         var reminderHour: Int?
         var reminderMinute: Int = 20
+        /// Unsaved in-progress reflections, keyed by "day.<n>". Cleared on save.
+        var drafts: [String: String] = [:]
 
         static let empty = PersistedState()
     }
@@ -122,6 +124,27 @@ final class EmberStore {
     func setReminder(hour: Int?, minute: Int) {
         state.reminderHour = hour
         state.reminderMinute = minute
+        save()
+    }
+
+    // MARK: Drafts (in-progress reflections)
+
+    func saveDraft(_ text: String, day: Int) {
+        let key = "day.\(day)"
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            state.drafts.removeValue(forKey: key)
+        } else {
+            state.drafts[key] = text
+        }
+        save()
+    }
+
+    func draft(for day: Int) -> String? {
+        state.drafts["day.\(day)"]
+    }
+
+    func clearDraft(day: Int) {
+        state.drafts.removeValue(forKey: "day.\(day)")
         save()
     }
 
