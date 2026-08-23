@@ -318,7 +318,7 @@ k("progress.title", "The Shape So Far", "Le tracé jusqu'ici")
 k("progress.chapter.1", "Week one — Noticing", "Première semaine — Remarquer")
 k("progress.chapter.2", "Week two — Kindling", "Deuxième semaine — Attiser")
 k("progress.chapter.3", "Week three — Tending", "Troisième semaine — Entretenir")
-k("progress.days.%lld.format", "%lld of 21 days traced", "%lld jours sur 21 tracés")
+k("progress.days", "%lld of 21 days traced", "%lld jours sur 21 tracés")
 k("progress.empty", "Your first line appears after Day One.",
   "Votre premier trait apparaîtra après le premier jour.")
 

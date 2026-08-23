@@ -23,7 +23,7 @@ struct ProgressArcView: View {
                     .foregroundStyle(Palette.ink)
                     .padding(.top, Spacing.lg)
 
-                Text("progress.days \(completed)")
+                Text(String.ember("progress.days", completed))
                     .emberCaption(Palette.rose)
                     .kerning(1.6)
                     .textCase(.uppercase)
@@ -77,32 +77,34 @@ struct ProgressArcView: View {
                 .frame(width: 8, height: 8)
                 .padding(.bottom, 2)
 
-            Text("progress.chapter.\(week)")
+            Text(String.ember("progress.chapter.\(week)"))
                 .emberProse(.callout, color: completed >= min(week * 7, JourneyCatalog.totalDays) ? Palette.ink : Palette.mutedInk)
 
             Spacer()
         }
     }
 
-    // MARK: Day ticks — one small mark per day, filled when lived
+    // MARK: Day ticks — one small mark per day, filled when lived.
+    // Aligned with chapter rows so the grid reads as one system.
 
     private var dayTicks: some View {
-        VStack(alignment: .leading, spacing: Spacing.sm) {
+        VStack(alignment: .leading, spacing: Spacing.md) {
             ForEach(0..<3) { week in
-                HStack(spacing: 10) {
+                HStack(spacing: 12) {
                     ForEach(0..<7) { slot in
                         let dayNumber = week * 7 + slot + 1
                         let isDone = store.state.completedDays.contains(dayNumber)
-                        Capsule()
-                            .fill(isDone ? Palette.rose : Palette.blush.opacity(0.5))
-                            .frame(width: isDone ? 18 : 10, height: 3)
+                        Circle()
+                            .fill(isDone ? Palette.wine : Palette.blush)
+                            .frame(width: isDone ? 7 : 5, height: isDone ? 7 : 5)
                     }
                 }
+                .padding(.leading, 16)   // aligns under chapter text
             }
         }
-        .padding(.top, Spacing.xl)
+        .padding(.top, Spacing.lg)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("progress.days \(completed)"))
+        .accessibilityLabel(Text(String.ember("progress.days", completed)))
     }
 }
 

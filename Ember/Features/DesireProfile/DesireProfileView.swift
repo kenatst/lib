@@ -48,7 +48,7 @@ struct DesireProfileView: View {
                 .opacity(appeared ? 1 : 0)
                 .offset(y: appeared ? 0 : 10)
 
-            Text("profile.lede.\(profile.intention.rawValue)")
+            Text(String.ember("profile.lede.\(profile.intention.rawValue)"))
                 .emberProse(.callout, color: Palette.mutedInk)
                 .padding(.top, Spacing.sm)
 

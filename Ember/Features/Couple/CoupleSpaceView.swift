@@ -37,7 +37,7 @@ struct CoupleSpaceView: View {
             .padding(.bottom, Spacing.xxl)
         }
         .scrollBounceBehavior(.basedOnSize)
-        .navigationTitle(Text("couple.space.private \(roleName)"))
+        .navigationTitle(Text(String.ember("couple.space.private", roleName)))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -66,7 +66,7 @@ struct CoupleSpaceView: View {
                 .frame(maxWidth: .infinity)
                 .opacity(0.85)
 
-            Text("couple.space.private \(roleName)")
+            Text(String.ember("couple.space.private", roleName))
                 .font(Typography.editorial(.title2))
                 .foregroundStyle(Palette.ink)
                 .padding(.top, Spacing.sm)

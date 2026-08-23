@@ -49,7 +49,7 @@ struct DailySessionView: View {
                     .frame(width: s == step ? 22 : 12, height: 3)
             }
             Spacer()
-            Text("home.day.label \(dayNumber)")
+            Text(String.ember("home.day.label", dayNumber))
                 .emberCaption(Palette.softRose)
         }
         .padding(.horizontal, Spacing.md)
@@ -89,12 +89,12 @@ struct DailySessionView: View {
                 .opacity(0.85)
             }
         ) {
-            Text(day.titleKey)
+            Text(String.ember(day.titleKey))
                 .font(Typography.editorial(.title))
                 .foregroundStyle(Palette.wine)
                 .padding(.bottom, Spacing.md)
 
-            Text(day.discoverKey)
+            Text(String.ember(day.discoverKey))
                 .emberProse(.title3)
         } cta: {
             nextButton("common.continue") {
@@ -148,7 +148,7 @@ struct DailySessionView: View {
                 .opacity(0.6)
             }
         ) {
-            Text(day.actKey)
+            Text(String.ember(day.actKey))
                 .emberProse(.title3)
         } cta: {
             VStack(spacing: Spacing.md) {
@@ -191,7 +191,7 @@ struct DailySessionView: View {
     // MARK: Helpers
 
     private func nextButton(_ titleKey: String, _ action: @escaping () -> Void) -> some View {
-        EmberButton(title: titleKey) {
+        EmberButton(title: String.ember(titleKey)) {
             Haptics.selection()
             action()
         }
@@ -268,7 +268,7 @@ private struct SessionStepLayout<Motif: View, Content: View, CTA: View>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(eyebrowKey)
+            Text(String.ember(eyebrowKey))
                 .emberCaption(Palette.rose)
                 .kerning(2.2)
                 .textCase(.uppercase)

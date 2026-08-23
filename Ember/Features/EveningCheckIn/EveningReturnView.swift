@@ -23,7 +23,7 @@ struct EveningReturnView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 if let day {
-                    Text(day.returnPromptKey)
+                    Text(String.ember(day.returnPromptKey))
                         .font(Typography.editorial(.largeTitle))
                         .foregroundStyle(Palette.ink)
                         .lineSpacing(6)

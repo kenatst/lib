@@ -91,12 +91,12 @@ struct HomeView: View {
                         .font(Typography.editorial(.title))
                         .foregroundStyle(Palette.ink)
                 } else {
-                    Text("home.day.label \(nextDay)")
+                    Text(String.ember("home.day.label", nextDay))
                         .emberCaption(Palette.rose)
                         .kerning(1.8)
                         .textCase(.uppercase)
 
-                    Text(JourneyCatalog.day(nextDay)?.titleKey ?? "home.title")
+                    Text(JourneyCatalog.day(nextDay).map { String.ember($0.titleKey) } ?? String(localized: "home.title"))
                         .font(Typography.editorial(.largeTitle))
                         .foregroundStyle(Palette.ink)
                         .padding(.top, Spacing.xs)
@@ -120,8 +120,8 @@ struct HomeView: View {
                 title: isJourneyComplete
                     ? String(localized: "progress.title")
                     : (store.state.completedDays.contains(nextDay)
-                        ? String(localized: "home.resume \(nextDay)")
-                        : String(localized: "home.begin \(nextDay)"))
+                        ? String.ember("home.resume", nextDay)
+                        : String.ember("home.begin", nextDay))
             ) {
                 beginDay()
             }
@@ -191,7 +191,7 @@ struct HomeView: View {
                 Image(systemName: icon)
                     .font(.system(size: 15, weight: .light))
                     .foregroundStyle(Palette.rose)
-                Text(titleKey)
+                Text(String.ember(titleKey))
                     .font(Typography.ui(.subheadline))
                     .foregroundStyle(Palette.ink)
                 Spacer()

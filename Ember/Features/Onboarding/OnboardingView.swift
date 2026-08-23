@@ -35,7 +35,7 @@ struct OnboardingView: View {
                         .animation(Motion.gentle, value: index)
                 }
                 Spacer()
-                Text("questions.counter \(index + 1) \(questions.count)")
+                Text(String.ember("questions.counter", index + 1, questions.count))
                     .emberCaption(Palette.softRose)
             }
             .padding(.top, Spacing.md)

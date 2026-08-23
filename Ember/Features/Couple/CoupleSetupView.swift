@@ -54,7 +54,7 @@ struct CoupleSetupView: View {
                             router.replace(with: .coupleSpace)
                         } label: {
                             HStack {
-                                Text(role.nameKey)
+                                Text(String.ember(role.nameKey))
                                     .font(Typography.editorial(.body))
                                     .foregroundStyle(Palette.ink)
                                 Spacer()

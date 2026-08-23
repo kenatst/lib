@@ -102,7 +102,7 @@ struct SettingsView: View {
                 .emberCaption()
 
             if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-                Text("settings.version \(version)")
+                Text(String.ember("settings.version", version))
                     .emberCaption(Palette.softRose)
                     .padding(.top, Spacing.xs)
             }
@@ -113,7 +113,7 @@ struct SettingsView: View {
     // MARK: Rows
 
     private func sectionHeader(_ key: String) -> some View {
-        Text(key)
+        Text(String.ember(key))
             .emberCaption(Palette.rose)
             .kerning(1.8)
             .textCase(.uppercase)
@@ -125,7 +125,7 @@ struct SettingsView: View {
                 Image(systemName: icon)
                     .font(.system(size: 15, weight: .light))
                     .foregroundStyle(Palette.rose)
-                Text(titleKey)
+                Text(String.ember(titleKey))
                     .font(Typography.ui(.subheadline))
                     .foregroundStyle(Palette.ink)
                 Spacer()
@@ -148,7 +148,7 @@ struct SettingsView: View {
                 Image(systemName: icon)
                     .font(.system(size: 15, weight: .light))
                     .foregroundStyle(Palette.wine)
-                Text(titleKey)
+                Text(String.ember(titleKey))
                     .font(Typography.ui(.subheadline, weight: .medium))
                     .foregroundStyle(Palette.wine)
                 Spacer()

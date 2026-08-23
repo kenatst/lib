@@ -84,12 +84,12 @@ private struct JourneyOption: View {
                 .frame(width: 132, height: 150)
                 .frame(maxWidth: .infinity, alignment: intention == .myDesire ? .leading : .trailing)
 
-                Text(intention.displayNameKey)
+                Text(intention.displayName)
                     .font(Typography.editorial(.title2))
                     .foregroundStyle(Palette.ink)
                     .padding(.top, Spacing.sm)
 
-                Text(intention.taglineKey)
+                Text(intention.tagline)
                     .font(Typography.editorial(.callout))
                     .italic()
                     .foregroundStyle(Palette.wine)
