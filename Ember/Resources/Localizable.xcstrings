@@ -3058,6 +3058,22 @@
         }
       }
     },
+    "journal.day.label": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jour %lld"
+          }
+        }
+      }
+    },
     "journal.empty": {
       "localizations": {
         "en": {

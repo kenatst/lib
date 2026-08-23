@@ -85,6 +85,8 @@ enum DemoLauncher {
                 router.setRoot(.eveningReturn(min(day, JourneyCatalog.totalDays)))
             case "progress":
                 router.setRoot(.progress)
+            case "journal":
+                router.setRoot(.journal)
             case "settings":
                 router.setRoot(.settings)
             case "coupleSetup":

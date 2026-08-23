@@ -333,6 +333,7 @@ k("progress.empty", "Your first line appears after Day One.",
   "Votre premier trait apparaîtra après le premier jour.")
 k("journal.title", "Your Words", "Vos mots")
 k("journal.link", "Read your words", "Relire vos mots")
+k("journal.day.label", "Day %lld", "Jour %lld")
 k("journal.empty", "Nothing written yet. When a day stirs something, your words gather here — for you only.",
   "Rien pour l'instant. Quand un jour remue quelque chose, vos mots se rassemblent ici — pour vous seul.")
 
