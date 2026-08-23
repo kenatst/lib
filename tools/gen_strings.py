@@ -391,6 +391,9 @@ k("couple.setup.title", "One journey, two people", "Un parcours, deux personnes"
 k("couple.setup.body",
   "Each of you receives a private space and daily steps of your own. What you write stays yours — sharing is always a deliberate hand-off, never automatic.",
   "Chacun reçoit un espace privé et ses propres étapes quotidiennes. Ce que vous écrivez vous appartient — partager est toujours un geste volontaire, jamais automatique.")
+k("couple.demo.note",
+  "Today this works on one shared device: two spaces side by side. True two-device pairing — where your words stay on your own phone — is coming, and the app is built for it.",
+  "Aujourd'hui, cela fonctionne sur un appareil partagé : deux espaces côte à côte. L'association véritable entre deux téléphones — où vos mots restent sur le vôtre — est à venir, et l'app est déjà pensée pour cela.")
 k("couple.consent",
   "We have both agreed to try this together — and either of us can stop anytime.",
   "Nous avons tous les deux accepté d'essayer ensemble — et chacun peut arrêter à tout moment.")
@@ -410,7 +413,9 @@ k("couple.asymmetric.notice",
 k("couple.privacy.rule",
   "Private reflections stay private. No view, export or reminder will ever surface a partner's words without their explicit hand-off.",
   "Les réflexions privées restent privées. Aucun écran, export ou rappel ne révèlera les mots d'un partenaire sans son geste explicite.")
-k("couple.locked.other", "Locked. %@ keeps the key.", "Verrouillé. %@ garde la clé.")
+k("couple.locked.other",
+  "%@'s space stays theirs. There is no way to open it from here.",
+  "L'espace de %@ lui appartient. Il est impossible de l'ouvrir depuis ici.")
 
 # ---------------------------------------------------------------------------
 # Accessibility extras

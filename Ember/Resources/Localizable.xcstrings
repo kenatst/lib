@@ -898,6 +898,22 @@
         }
       }
     },
+    "couple.demo.note": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today this works on one shared device: two spaces side by side. True two-device pairing — where your words stay on your own phone — is coming, and the app is built for it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd'hui, cela fonctionne sur un appareil partagé : deux espaces côte à côte. L'association véritable entre deux téléphones — où vos mots restent sur le vôtre — est à venir, et l'app est déjà pensée pour cela."
+          }
+        }
+      }
+    },
     "couple.handoff.placeholder": {
       "localizations": {
         "en": {
@@ -951,13 +967,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Locked. %@ keeps the key."
+            "value": "%@'s space stays theirs. There is no way to open it from here."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verrouillé. %@ garde la clé."
+            "value": "L'espace de %@ lui appartient. Il est impossible de l'ouvrir depuis ici."
           }
         }
       }

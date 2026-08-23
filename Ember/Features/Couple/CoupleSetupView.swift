@@ -53,6 +53,13 @@ struct CoupleSetupView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, Spacing.md)
 
+                // Honest labeling: same-device spaces are a demo reality, not
+                // inter-partner privacy across devices.
+                Text("couple.demo.note")
+                    .emberCaption()
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, Spacing.sm)
+
                 Text("couple.role.question")
                     .font(Typography.editorial(.title3))
                     .foregroundStyle(Palette.ink)
