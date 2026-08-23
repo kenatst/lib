@@ -1,39 +1,28 @@
 # EMBER
 
-A premium adult relationship and intimacy wellness application for iOS.
-EMBER helps adults reconnect with desire, attraction, anticipation and
-emotional/physical connection through three journeys:
+A premium adult relationship and intimacy wellness application for iOS. EMBER helps adults reconnect with desire, attraction, anticipation and emotional/physical connection through three journeys:
 
-| Journey       | Promise                        |
-| ------------- | ------------------------------ |
+| Journey | Promise |
+| --- | --- |
 | **My Desire** | "I want to feel desire again." |
-| **Their Desire** | "I want to feel wanted again." — improving the *conditions* around attraction (connection, novelty, confidence, communication, playfulness). EMBER never manipulates another person's feelings, behavior, consent or desire. |
-| **Our Desire** | "We want our spark back." — a paired experience for two adults. Private reflections stay private; they are never automatically exposed to a partner. |
+| **Their Desire** | "I miss feeling wanted." — improving the *conditions* around attraction (connection, novelty, confidence, communication, playfulness). EMBER never manipulates another person's feelings, behavior, consent or desire. |
+| **Our Desire** | "We want our spark back." — a paired experience for two adults with an explicit consent gate. Private reflections stay private; they are never surfaced to a partner automatically. |
 
 ## Status
 
-**Mission 001 — native foundation.** The repository contains a buildable,
-tested Xcode project with the app skeleton: app state machine, typed routing,
-domain seed model, structural design-system foundation, localization-ready
-resources and a Swift Testing suite. There is intentionally **no product UI,
-no backend, no persistence and no visual design system yet.**
+**Mission 002 — product build-out.** The app is a complete, tested product: 18+ age gate, welcome arc, journey selection, adaptive onboarding, qualitative desire profile, 21-day guided journeys (Discover → Reflect → Act → Return) in English and French, evening check-ins that tune pacing notes, a private journal, evolving sketch illustrations as emotional progress, couple mode (Our Desire) with per-space privacy boundaries, opt-in local reminders, and full data deletion.
 
 ## Requirements
 
-- iOS 18.0+ (iPhone, portrait-first)
-- Xcode 16 or newer (developed against Xcode 26 / Swift 6 toolchain)
-- No third-party dependencies. No signing credentials required for simulator builds.
+* iOS 18.0+ (iPhone, portrait-first)
+* Xcode 16 or newer (developed against Xcode 26 / Swift 6 toolchain)
+* No third-party dependencies. No signing credentials required for simulator builds.
 
 ## Open & run
 
-```bash
-open Ember.xcodeproj
-# select the Ember scheme and an iPhone simulator, then Cmd+R
-```
+Select the Ember scheme and an iPhone simulator, then Cmd+R. Command line:
 
-Command line:
-
-```bash
+```shell
 xcodebuild -project Ember.xcodeproj -scheme Ember \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
 
@@ -41,81 +30,62 @@ xcodebuild -project Ember.xcodeproj -scheme Ember \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
 ```
 
-Bundle identifier: `com.kenatst.ember` (temporary). Development team is
-deliberately unset.
+Bundle identifier: `com.kenatst.ember`. Development team is deliberately unset.
 
 ## Architecture
 
-Pragmatic feature-oriented architecture. Folders map to responsibilities;
-Xcode uses file-system synchronized groups, so new files inside `Ember/` are
-picked up automatically without editing the project file.
+Pragmatic feature-oriented architecture. Folders map to responsibilities; Xcode uses file-system synchronized groups, so new files inside `Ember/` are picked up automatically.
 
 ```
 Ember/
-├── App/           EmberApp (@main), AppState, AppRouter/AppRoute, RootView
-├── Core/          Cross-cutting utilities (privacy-conscious os.Logger)
-├── Domain/        Pure value types (DesireIntention)
-├── Data/          Future persistence/repositories (empty by design)
+├── App/             EmberApp (@main), AppState phase machine, AppRouter/AppRoute,
+│                    RootView (typed route→view mapping), DemoLauncher (DEBUG-only screen seeding)
+├── Core/            String resolution helper, privacy-conscious os.Logger,
+│                    ReminderScheduler (opt-in local notifications only)
+├── Domain/          Pure value logic: Onboarding questions & branching,
+│                    DesireProfile derivation, JourneyCatalog (21 days),
+│                    CheckIn adaptation engine
+├── Data/            EmberStore — the single persistence owner (see Privacy)
 ├── DesignSystem/
-│   ├── Foundation/  Spacing, Radius, Typography, Palette tokens
-│   ├── Components/  Future reusable components (empty by design)
-│   ├── Motion/      Reduce Motion-aware animation resolution
-│   └── Haptics/     Subtle feedback wrapper
-├── Features/
-│   ├── Welcome/      Temporary technical landing screen
-│   ├── Onboarding/   Temporary root-phase scaffold
-│   ├── Journey/      Placeholder destination proving typed navigation
-│   ├── DailySession/ EveningCheckIn/ Couple/ Progress/ Paywall/ Settings/  (reserved)
-│   └── DesireIntention+Presentation.swift   UI copy mapping for domain intents
-└── Resources/     Localizable.xcstrings (String Catalog), Assets.xcassets
-EmberTests/        Swift Testing suite (state machine, routing, domain, motion)
+│   ├── Foundation/  Palette (semantic tokens), Typography (serif/sans voices),
+│   │                Spacing, Radius, Motion (Reduce-Motion-aware), Haptics
+│   └── Components/  PaperBackground, EmberButton, EditorialText helpers,
+│                    SketchCurve + SketchMotifView (parametric hand-drawn motifs)
+└── Features/
+    ├── Welcome/         Opening arc + 18+ age gate
+    ├── Journey/         Journey selection, Home ("today")
+    ├── Onboarding/      Adaptive questionnaire (branches by journey)
+    ├── DesireProfile/   Qualitative portrait (no scores shown)
+    ├── DailySession/    Discover → Reflect (private note w/ autosave) → Experiment
+    ├── EveningCheckIn/  The Return: one honest tap that shapes pacing
+    ├── Progress/        Evolving motif + chapters + Journal entry point
+    ├── Couple/          Our Desire: consent gate, asymmetric steps, hand-offs
+    └── Settings/        Privacy statement, deletion, reminders, restart
+EmberTests/           Swift Testing suite (46 tests across 10 suites)
+tools/                gen_strings.py (String Catalog generator, EN+FR),
+                      content_strings.py (21-day editorial content), capture_screens.sh
 ```
 
 Key decisions:
 
-- **State**: `AppState` is a small `@Observable` phase machine
-  (`onboarding → active`). It will later grow first-launch detection,
-  session and journey states backed by real persistence.
-- **Routing**: one `NavigationStack` driven by `[AppRoute]` in `AppRouter`.
-  Route→view mapping lives centrally in `RootView`. Routes carry payloads and
-  are `Hashable`, so deep links can be added without redesign.
-- **Dependency wiring**: `@Observable` objects injected via `.environment()`;
-  views read them with `@Environment`. No singletons, no global mutable state.
-- **Design system**: semantic token namespaces only (`Spacing`, `Radius`,
-  `Typography`, `Palette`, `Motion`). Current color values are provisional
-  placeholders; the visual identity arrives in a dedicated design mission.
-- **Localization**: all user-facing copy lives in
-  `Resources/Localizable.xcstrings` (source language: English; French planned
-  early). Never hardcode production-facing strings in Swift files.
-- **Accessibility**: Dynamic Type scales through text-style-based fonts,
-  Reduce Motion is honored via `Motion.resolved(_:reduceMotion:)`,
-  controls meet minimum touch targets, rows are combined for VoiceOver.
-- **Concurrency**: modern approachable concurrency settings with MainActor
-  default isolation; pure value types are explicitly `nonisolated`.
-
-## Deliberately not implemented yet
-
-Authentication, persistence (SwiftData/Core Data), networking, backend,
-AI services, StoreKit/paywall, push notifications, analytics, couple pairing,
-questionnaires, recommendation logic, journey content, and the final visual
-design system. External SDKs (Supabase, RevenueCat, Firebase, AI providers)
-are intentionally absent.
+* **State**: `AppState` is a small `@Observable` phase machine (ageGate → firstRun → active). `AppRouter` holds `[AppRoute]` for one `NavigationStack`; route→view mapping lives centrally in `RootView`.
+* **Persistence**: `EmberStore` owns everything. JSON in Application Support with `.completeFileProtection`, excluded from backups, schema-versioned; unreadable files are quarantined, never silently destroyed. Reflections and drafts are keyed by space (`solo`/`partnerOne`/`partnerTwo`) — there is no API to read another partner's space.
+* **Design system**: semantic tokens only. Motifs are generated geometry (`SketchCurve`): deterministic polylines with hand-tremor, evolving across the journey — progress is drawn, not counted.
+* **Localization**: every user-facing string lives in `Resources/Localizable.xcstrings` (EN source, full FR), generated from `tools/gen_strings.py` + `tools/content_strings.py`. Never hardcode production-facing strings.
+* **Accessibility**: style-based fonts scale with Dynamic Type, all animations flow through `Motion.resolved(_:reduceMotion:)`, controls meet 44pt targets, decorative art is labeled and hidden from reading order where appropriate.
+* **Concurrency**: approachable-concurrency settings with MainActor default isolation; pure value types are explicitly `nonisolated`.
 
 ## Privacy constraints (binding for all future work)
 
-EMBER will process highly sensitive relationship and intimacy data.
+EMBER processes highly sensitive relationship and intimacy data.
 
-- Collect the minimum necessary data; privacy by default.
-- Private reflections must remain private — never surfaced to a partner automatically.
-- Never log user content or sensitive answers; `EmberLog` is for non-sensitive diagnostics only.
-- Never place sensitive information in analytics events.
-- No secrets or AI provider keys in the client. AI-assisted features must run server-side.
-- Account/data deletion must remain supported as these systems are added.
+* Collect the minimum necessary data; privacy by default. No accounts, no analytics, no tracking; `PrivacyInfo.xcprivacy` declares zero collection.
+* Everything stays on device: file protection at rest, excluded from backups. Deletion in Settings is immediate and real.
+* Private reflections are space-keyed and can never surface to a partner without an explicit hand-off written by their author.
+* Couple mode requires an explicit consent confirmation before any content is unlocked; its daily steps are designed so nothing scripts covert behavior change of a partner.
+* Never log user content; `EmberLog` carries static diagnostics strings only.
+* No secrets or AI keys in the client. If AI is ever introduced it must run server-side with the same boundaries.
 
 > **ATTENTION — future coding agents**
 >
-> Do NOT invent product functionality without explicit direction from the
-> Ember product specification. Do not add screens, content flows, paywalls,
-> backend integrations or dependencies on your own initiative. Extend the
-> existing structure; keep every file purposeful; keep user-facing copy in
-> the String Catalog; keep tests meaningful. When in doubt, stop and ask.
+> Extend the existing structure; keep every file purposeful; keep user-facing copy in the String Catalog via `tools/gen_strings.py` (regenerate after editing); keep tests meaningful and green before committing. The couple-mode ethics rules above are non-negotiable.
