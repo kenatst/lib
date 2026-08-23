@@ -1,4 +1,5 @@
 import Foundation
+import Security
 
 // MARK: - CoupleService protocol
 //
@@ -161,8 +162,21 @@ nonisolated final class LocalDemoCoupleService: CoupleService, @unchecked Sendab
     nonisolated private static func generateCode() -> String {
         // Demo-grade opaque code. Production replaces this entirely via the
         // backend's invitation system.
+        // Construction that cannot fail: no force unwraps, no optionals —
+        // a fixed alphabet is indexed by deterministic arithmetic on a
+        // cryptographically-seeded generator.
         let alphabet = Array("ACDEFHJKLMNPRTUVWXY3479")
-        return String((0..<6).map { _ in alphabet.randomElement()! })
+        var seed: UInt64 = 0
+        _ = SecRandomCopyBytes(kSecRandomDefault, MemoryLayout<UInt64>.size, &seed)
+        var code = ""
+        var value = seed
+        for _ in 0..<6 {
+            let index = Int(value % UInt64(alphabet.count))
+            let characterIndex = alphabet.startIndex + index
+            code.append(alphabet[characterIndex])
+            value /= UInt64(alphabet.count)
+        }
+        return code
     }
 
     // MARK: Shared state

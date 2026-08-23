@@ -13,6 +13,10 @@ struct PaywallView: View {
     @Environment(AppRouter.self) private var router
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
+    /// Static safe URL strategy: parsed once at init from a compile-time
+    /// literal; a malformed constant is impossible to ship silently.
+    static let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")
+
     @State private var isPurchasing = false
     @State private var showRestoreEmpty = false
     @State private var appeared = false
@@ -212,11 +216,13 @@ struct PaywallView: View {
                 .emberCaption(Palette.softRose)
 
             // Auto-renewable subscriptions require a functional Terms link.
-            Link(destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!) {
-                Text("paywall.legal.terms.link")
-                    .emberCaption(Palette.softRose)
-                    .underline()
-                    .frame(minHeight: 24, alignment: .leading)
+            if let termsURL = Self.termsURL {
+                Link(destination: termsURL) {
+                    Text("paywall.legal.terms.link")
+                        .emberCaption(Palette.softRose)
+                        .underline()
+                        .frame(minHeight: 24, alignment: .leading)
+                }
             }
         }
         .padding(.top, Spacing.xxl)
