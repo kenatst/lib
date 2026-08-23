@@ -149,9 +149,19 @@ struct JourneyCatalogTests {
             }
         }
         for day in JourneyCatalog.allDays {
-            for key in [day.titleKey, day.discoverKey, day.reflectKey, day.actKey, day.returnPromptKey] {
+            for key in [day.titleKey, day.discoverKey, day.returnPromptKey] {
                 #expect(catalog[key] != nil, "missing \(key)")
             }
+            // Theme pools: every reflect/act variant this day could serve,
+            // across all three journeys' offsets and the emphasized variant.
+            for offset in 0...2 {
+                #expect(catalog[day.reflectKey(offset: offset)] != nil,
+                        "missing \(day.reflectKey(offset: offset))")
+                #expect(catalog[day.actKey(offset: offset)] != nil,
+                        "missing \(day.actKey(offset: offset))")
+            }
+            #expect(catalog[day.reflectKey(emphasizing: true)] != nil)
+            #expect(catalog[day.actKey(emphasizing: true)] != nil)
         }
         // Couple asymmetric steps for both roles on all days.
         for dayNumber in 1...21 {

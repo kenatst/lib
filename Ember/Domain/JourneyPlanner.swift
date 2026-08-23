@@ -71,6 +71,19 @@ nonisolated enum JourneyPlanner {
         // Dominant dimensions drive affinity scoring.
         let dominant = profile?.dominant ?? []
 
+        // GUARDED RULE: dimensions currently rated "guarded" pull toward
+        // their own nourishing themes, and high-arousal themes (novelty,
+        // play, charged anticipation) yield until the guard lifts. This is
+        // how EMBER lowers challenge for someone whose safety/confidence is
+        // thin right now — explicit, visible, testable.
+        let guarded = profile?.readings.filter { $0.band == .guarded }.map(\.dimension) ?? []
+        func groundedAdjustment(_ theme: DayTheme) -> Double {
+            var adj = 0.0
+            if theme == .novelty || theme == .play || theme == .anticipation { adj -= 2 }
+            if theme == .closeness || theme == .body || theme == .attention { adj += 1 }
+            return adj
+        }
+
         func score(_ day: Int) -> Double {
             let theme = shape.theme(for: day)
             var s = 0.0
@@ -95,6 +108,13 @@ nonisolated enum JourneyPlanner {
                 break
             }
 
+            if !guarded.isEmpty {
+                s += groundedAdjustment(theme)
+                for dimension in guarded {
+                    s += ThemeAffinity.weight(dimension: dimension, theme: theme)
+                }
+            }
+
             if let previousTheme, theme == previousTheme, candidates.count > 1 {
                 s -= 3   // never the exact same flavor two days running if avoidable
             }
@@ -111,7 +131,7 @@ nonisolated enum JourneyPlanner {
         let chosen = ranked[0]
 
         // Emphasis: the two highest-affinity themes across the whole arc,
-        // given the current dominance and intensity — used for copy variants.
+        // given dominance, guard and intensity — used for copy variants.
         var themeScores: [(DayTheme, Double)] = []
         for theme in [DayTheme.attention, .anticipation, .body, .novelty, .communication, .play, .closeness, .autonomy] {
             var s = 0.0
@@ -125,6 +145,12 @@ nonisolated enum JourneyPlanner {
                 if theme == .anticipation || theme == .novelty || theme == .play { s += 2 }
             case .steady:
                 break
+            }
+            if !guarded.isEmpty {
+                s += groundedAdjustment(theme)
+                for dimension in guarded {
+                    s += ThemeAffinity.weight(dimension: dimension, theme: theme)
+                }
             }
             themeScores.append((theme, s))
         }

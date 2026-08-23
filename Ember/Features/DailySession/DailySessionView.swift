@@ -32,8 +32,29 @@ struct DailySessionView: View {
         case act = 2
     }
 
-    private var day: JourneyDay? { JourneyCatalog.day(dayNumber) }
+    private var day: JourneyDay? {
+        guard let intention else { return JourneyCatalog.day(dayNumber) }
+        return JourneyCatalog.day(dayNumber, for: intention)
+    }
     private var intention: DesireIntention? { store.state.intention }
+
+    /// The planner's verdict for this exact day — drives emphasized variants.
+    private var recommendation: DayRecommendation? {
+        guard let intention else { return nil }
+        return JourneyPlanner.recommend(
+            intention: intention,
+            profile: store.state.profile,
+            completedDays: store.state.completedDays,
+            checkIns: store.state.checkIns
+        )
+    }
+
+    /// True when the planner is currently emphasizing THIS day's theme —
+    /// then the session serves the deeper authored variant of the pool.
+    private var isThemeEmphasized: Bool {
+        guard let day, let recommendation else { return false }
+        return recommendation.emphasizedThemes.contains(day.theme)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -115,7 +136,7 @@ struct DailySessionView: View {
             eyebrowKey: "session.step.reflect.title",
             motif: { EmptyView() }
         ) {
-            EditorialQuote(text: String(localized: String.LocalizationValue(day.reflectKey)))
+            EditorialQuote(text: String(localized: String.LocalizationValue(day.reflectKey(offset: intention?.poolOffset ?? 0, emphasizing: isThemeEmphasized))))
         } cta: {
             VStack(alignment: .leading, spacing: Spacing.md) {
                 reflectionField
@@ -166,7 +187,7 @@ struct DailySessionView: View {
                 Text(String.ember("couple.asymmetric.day.\(dayNumber).\(store.state.coupleRole?.rawValue ?? "partnerOne")"))
                     .emberProse(.title3)
             } else {
-                Text(String.ember(day.actKey))
+                Text(String.ember(day.actKey(offset: intention?.poolOffset ?? 0, emphasizing: isThemeEmphasized)))
                     .emberProse(.title3)
             }
         } cta: {

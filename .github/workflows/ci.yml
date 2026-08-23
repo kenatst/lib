@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    name: Build & Test (iOS)
+    # macos-15 ships Xcode 16.x with an iOS 18+ simulator SDK, which matches
+    # EMBER's deployment target (iOS 18.0). No third-party dependencies, so no
+    # caching beyond DerivedData is worth the complexity.
+    runs-on: macos-15
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          ls /Applications | grep -i xcode || true
+          xcode-select -p
+          xcodebuild -version
+
+      - name: Build & test on iPhone simulator
+        run: |
+          set -o pipefail
+          xcodebuild -project Ember.xcodeproj -scheme Ember \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.2' \
+            test 2>&1 | tail -60
+
+      - name: Upload result bundle on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            ~/Library/Developer/Xcode/DerivedData/Logs/Test/*.xcresult
+          retention-days: 7

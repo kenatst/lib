@@ -22,7 +22,10 @@ nonisolated struct JourneyShape: Sendable {
     let anchorDays: Set<Int>
 
     func theme(for number: Int) -> DayTheme {
-        themesByDay[number - 1]
+        // Clamp defensively; the coverage test below guarantees 21 entries,
+        // so this only ever guards against authoring slips.
+        let index = min(max(number - 1, 0), themesByDay.count - 1)
+        return themesByDay[index]
     }
 
     // MARK: The three shapes
@@ -51,6 +54,7 @@ nonisolated struct JourneyShape: Sendable {
             .novelty, .autonomy,
             .play, .closeness, .attention,
             .autonomy, .anticipation, .body,
+            .closeness,
         ],
         anchorDays: [1, 8, 21]
     )
@@ -62,12 +66,13 @@ nonisolated struct JourneyShape: Sendable {
         intention: .theirDesire,
         themesByDay: [
             .attention, .communication, .attention,     // week 1 — being seen
-            .confidence, .anticipation, .communication, .novelty, // week 2 — presence
+            .body, .anticipation, .communication, .novelty, // week 2 — presence
             .closeness,
-            .play, .autonomy, .anticipation, .novelty,  // week 3 — charged again
-            .communication, .confidence,
-            .play, .closeness, .attention,
+            .attention, .autonomy, .anticipation, .novelty, // week 3 — witnessed again (day 9 anchor)
+            .communication, .body,
+            .play, .communication, .attention,
             .autonomy, .anticipation, .closeness,
+            .attention,
         ],
         anchorDays: [1, 9, 21]
     )
@@ -85,6 +90,7 @@ nonisolated struct JourneyShape: Sendable {
             .autonomy, .attention,
             .play, .novelty, .communication,
             .autonomy, .anticipation, .closeness,
+            .closeness,
         ],
         anchorDays: [1, 10, 21]
     )

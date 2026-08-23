@@ -15,7 +15,18 @@ struct HomeView: View {
     @State private var appeared = false
 
     private var intention: DesireIntention? { store.state.intention }
-    private var nextDay: Int { appState.suggestedDayNumber(completedDays: store.state.completedDays) }
+
+    /// The planner's verdict for right now — the single source of "what next".
+    private var recommendation: DayRecommendation? {
+        guard let intention else { return nil }
+        return JourneyPlanner.recommend(
+            intention: intention,
+            profile: store.state.profile,
+            completedDays: store.state.completedDays,
+            checkIns: store.state.checkIns
+        )
+    }
+    private var nextDay: Int { recommendation?.dayNumber ?? 1 }
     private var isJourneyComplete: Bool {
         store.state.completedDays.count >= JourneyCatalog.totalDays
     }
@@ -23,13 +34,7 @@ struct HomeView: View {
     /// The most recent check-in's pacing note, shown once as a quiet line.
     /// This is where evening honesty visibly shapes the journey.
     private var latestPacingNoteKey: String? {
-        store.state.checkIns.last.map { checkIn in
-            CheckInAdapter.adjust(
-                after: checkIn.response,
-                dayNumber: checkIn.dayNumber,
-                dominant: store.state.profile?.dominant ?? []
-            ).pacingNoteKey
-        } ?? nil
+        recommendation?.pacingNoteKey
     }
 
     var body: some View {

@@ -17,7 +17,12 @@ struct EveningReturnView: View {
     @State private var saved = false
     @State private var appeared = false
 
-    private var day: JourneyDay? { JourneyCatalog.day(dayNumber) }
+    private var intention: DesireIntention? { store.state.intention }
+
+    private var day: JourneyDay? {
+        guard let intention else { return JourneyCatalog.day(dayNumber) }
+        return JourneyCatalog.day(dayNumber, for: intention)
+    }
 
     var body: some View {
         ScrollView {

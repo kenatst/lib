@@ -5506,6 +5506,1030 @@
         }
       }
     },
+    "theme.act.anticipation.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plant one seed of anticipation: mention, lightly, that you have something small in mind for later this week."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plantez une graine d'anticipation : évoquez légèrement que vous avez quelque chose en tête pour plus tard cette semaine."
+          }
+        }
+      }
+    },
+    "theme.act.anticipation.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whisper-plan tomorrow's smallest pleasure — the coffee, the light, ten quiet minutes. Then protect it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ourdissez en sourdine le plus petit plaisir de demain — le café, la lumière, dix minutes calmes. Puis protégez-le."
+          }
+        }
+      }
+    },
+    "theme.act.anticipation.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send a single line to someone safe about looking forward to something real. Nothing more needed."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyez une seule ligne, à quelqu'un de sûr, au sujet d'une attente bien réelle. Rien de plus."
+          }
+        }
+      }
+    },
+    "theme.act.attention.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once today, follow your attention on purpose — watch light move, listen to one full song, look slowly at one face."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois aujourd'hui, suivez votre attention exprès — regardez la lumière bouger, écoutez une chanson entière, contemplez lentement un visage."
+          }
+        }
+      }
+    },
+    "theme.act.attention.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick one routine moment — the kettle, the key in the lock — and give it your full attention, as if rehearsing it for memory."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un moment routinier — la bouilloire, la clé dans la serrure — et portez-lui toute votre attention, comme pour le graver."
+          }
+        }
+      }
+    },
+    "theme.act.attention.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sit for two unhurried minutes with the lights low and simply notice what you feel. Nothing to fix."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asseyez-vous deux minutes sans presser, lumière basse, et remarquez simplement ce que vous ressentez. Rien à réparer."
+          }
+        }
+      }
+    },
+    "theme.act.autonomy.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel or shorten one obligation today. Feel the room it leaves behind."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulez ou raccourcissez une obligation aujourd'hui. Sentez la place qu'elle laisse derrière elle."
+          }
+        }
+      }
+    },
+    "theme.act.autonomy.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight, remove all expectations from one hour. Whatever happens — or doesn't — is the point."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir, retirez toute attente d'une heure entière. Ce qui arrive — ou non — est le propos."
+          }
+        }
+      }
+    },
+    "theme.act.autonomy.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Say one clear no today — small, kind, complete. Notice what space survives it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites un non clair aujourd'hui — petit, aimable, définitif. Remarquez l'espace qui lui survit."
+          }
+        }
+      }
+    },
+    "theme.act.body.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take a slower shower or bath than usual. Treat your own skin as terrain worth revisiting."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prenez une douche ou un bain plus lent que d'habitude. Considérez votre peau comme un territoire qui mérite qu'on y retourne."
+          }
+        }
+      }
+    },
+    "theme.act.body.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stretch for three minutes tonight — not to improve anything, just to be informed by your own body."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étirez-vous trois minutes ce soir — non pour progresser, mais pour laisser votre corps vous renseigner."
+          }
+        }
+      }
+    },
+    "theme.act.body.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wear or touch one fabric today purely for how it feels. Let comfort be the whole point."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Portez ou touchez un tissu aujourd'hui rien que pour sa sensation. Que le confort soit tout le propos."
+          }
+        }
+      }
+    },
+    "theme.act.closeness.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leave one small warmth for someone — or for future-you: a note, a folded shirt, a favorite mug set out."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laissez une petite chaleur à quelqu'un — ou au vous futur : un mot, une chemise pliée, la tasse préférée posée."
+          }
+        }
+      }
+    },
+    "theme.act.closeness.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give three no-agenda touches today: a hand on a shoulder, a brush of arms — yours or theirs."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offrez trois contacts sans attente aujourd'hui : une main sur une épaule, un bras effleuré — le vôtre ou le leur."
+          }
+        }
+      }
+    },
+    "theme.act.closeness.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recall one ritual from early days — same song, same seat. Recreate it tonight; let memory charge it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retrouvez un rituel des premiers jours — même chanson, même siège. Recréez-le ce soir ; laissez la mémoire le charger."
+          }
+        }
+      }
+    },
+    "theme.act.communication.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Write one honest sentence about what you miss — and keep it where only you will find it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écrivez une phrase honnête sur ce qui vous manque — et gardez-la où vous seul·e la trouverez."
+          }
+        }
+      }
+    },
+    "theme.act.communication.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Say aloud — to them, or just to yourself — one true thing about this week. No editing for effect."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites à voix haute — à eux, ou à vous seul·e — une chose vraie à propos de cette semaine. Sans mise en scène."
+          }
+        }
+      }
+    },
+    "theme.act.communication.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask someone (or answer, in writing) one question you've never dared: what do you miss most?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Posez à quelqu'un (ou répondez par écrit) une question jamais osée : qu'est-ce qui te manque le plus ?"
+          }
+        }
+      }
+    },
+    "theme.act.novelty.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change one detail of your usual: a different route, cup, playlist, or lamp. Notice how attention follows."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changez un détail de votre habitude : un autre trajet, tasse, playlist ou lampe. Remarquez comme l'attention suit."
+          }
+        }
+      }
+    },
+    "theme.act.novelty.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose one familiar object and give it five slow minutes. Let it become new."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un objet familier et offrez-lui cinq minutes lentes. Laissez-le redevient neuf."
+          }
+        }
+      }
+    },
+    "theme.act.novelty.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do one small thing differently tonight — brush hair in a new order, sit elsewhere, reverse the ritual."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites une petite chose différemment ce soir — coiffez-vous dans un autre ordre, asseyez-vous ailleurs, inversez le rituel."
+          }
+        }
+      }
+    },
+    "theme.act.play.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do one deliberately playful thing today: an absurd comment, a silly walk past a mirror, a game you win alone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites une chose résolument joueuse aujourd'hui : un commentaire absurde, une démarche ridicule devant le miroir, une partie gagnée seul·e."
+          }
+        }
+      }
+    },
+    "theme.act.play.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let someone catch you mid-delight today — humming, dancing, absorbed. Don't apologize for it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laissez quelqu'un vous surprendre en plein ravissement — fredonnant, dansant, absorbé·e. Ne vous excusez pas."
+          }
+        }
+      }
+    },
+    "theme.act.play.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make one ordinary task absurdly enjoyable tonight — music too loud, race against the timer, dessert first."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rendez une tâche ordinaire absurment agréable ce soir — musique trop forte, course contre le minuteur, dessert d'abord."
+          }
+        }
+      }
+    },
+    "theme.reflect.anticipation.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What are you quietly looking forward to right now? Let it be specific."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qu'attendez-vous avec une impatience discrète, en ce moment ? Précisez."
+          }
+        }
+      }
+    },
+    "theme.reflect.anticipation.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When was the last time the waiting itself felt good?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La dernière fois que l'attente elle-même vous a fait du bien, c'était quand ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.anticipation.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What could you promise tomorrow — softly, with no deadline attached?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que pourriez-vous promettre à demain — doucement, sans échéance ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.attention.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What did you notice today that you usually walk straight past?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qu'avez-vous remarqué aujourd'hui d'habitude traversé sans un regard ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.attention.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where did your attention rest today, even for a breath — and what kept it there?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où votre attention s'est-elle posée aujourd'hui, ne serait-ce qu'un souffle — et qu'est-ce qui l'a retenue ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.attention.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If your attention had a place of its own today, where would it have been sitting?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si votre attention avait un lieu à elle aujourd'hui, où se serait-elle assise ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.autonomy.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where did you choose freely today — even in something tiny?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où avez-vous choisi librement aujourd'hui — même dans une broutille ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.autonomy.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What expectation on you feels heaviest right now? Whose voice is it in?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle attente pèse le plus sur vous en ce moment ? À quelle voix appartient-elle ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.autonomy.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If nothing were expected of you tonight, what would you reach for first?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si l'on n'attendait rien de vous ce soir, vers quoi iriez-vous d'abord ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.body.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where in your body is there ease right now? Even a small patch counts."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où, dans votre corps, y a-t-il de l'aise en ce moment ? Même une petite zone compte."
+          }
+        }
+      }
+    },
+    "theme.reflect.body.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What did your body ask for today — and did you hear it before evening?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De quoi votre corps a-t-il eu besoin aujourd'hui — et l'avez-vous entendu avant le soir ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.body.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which sensation today felt most like you?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle sensation d'aujourd'hui vous a semblé la plus fidèle à vous-même ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.closeness.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who did you feel closest to today — including future-you or memory?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De qui vous êtes-vous senti·e le plus proche aujourd'hui — y compris vous futur·e ou un souvenir ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.closeness.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What small warmth reached you this week that nobody planned?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle petite chaleur est arrivée jusqu'à vous cette semaine sans que personne l'ait prévue ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.closeness.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is this a season of closeness or distance for you? Name it without judging it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Êtes-vous dans une saison de proximité ou de distance ? Nommez-la sans la juger."
+          }
+        }
+      }
+    },
+    "theme.reflect.communication.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If one sentence could carry how you feel lately, what would it say?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si une phrase pouvait porter ce que vous ressentez ces temps-ci, laquelle serait-ce ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.communication.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What do you wish someone would ask you? Ask yourself first."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que souhaiteriez-vous qu'on vous demande ? Posez-vous d'abord la question vous-même."
+          }
+        }
+      }
+    },
+    "theme.reflect.communication.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What have you been saying with silence lately?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qu'avez-vous dit récemment par votre silence ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.novelty.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What was the smallest new thing in your day? Did it change anything after it?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle a été la plus petite chose nouvelle de votre journée ? A-t-elle changé ce qui a suivi ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.novelty.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What familiar thing did you manage to see as if for the first time?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle chose familière avez-vous réussi à voir comme pour la première fois ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.novelty.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What would \"new\" look like this week at a dose that doesn't scare you?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À quoi ressemblerait « du nouveau » cette semaine, à une dose qui ne vous effraie pas ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.play.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When did you last laugh at something no one else saw?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand avez-vous ri pour la dernière fois de quelque chose que personne d'autre n'a vu ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.play.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What would play look like for you now — not as it was when you were ten?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À quoi ressemblerait le jeu pour vous maintenant — pas comme à dix ans ?"
+          }
+        }
+      }
+    },
+    "theme.reflect.play.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What's the most unserious thing you secretly enjoy? Defend it in one line."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle est la chose la moins sérieuse dont vous jouissez en secret ? Défendez-la en une ligne."
+          }
+        }
+      }
+    },
+    "theme.return.anticipation.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is there anything you're quietly looking forward to now?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Y a-t-il quelque chose que vous attendez déjà, discrètement ?"
+          }
+        }
+      }
+    },
+    "theme.return.anticipation.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did the waiting itself feel different today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'attente elle-même vous a-t-elle paru différente aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "theme.return.attention.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did anything warm up under your attention today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose s'est-il réchauffé sous votre attention aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "theme.return.attention.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where did noticing take you today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où la remarque vous a-t-elle mené·e aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "theme.return.autonomy.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did choosing freely leave any trace today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un choix libre vous a-t-il laissé une trace aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "theme.return.autonomy.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did saying no (to something small) leave any room behind?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre non (à quelque chose de petit) a-t-il laissé de l'espace derrière lui ?"
+          }
+        }
+      }
+    },
+    "theme.return.body.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did your body tell you anything today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre corps vous a-t-il dit quelque chose aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "theme.return.body.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did ease show up anywhere in your body today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De l'aise est-elle apparue quelque part dans votre corps aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "theme.return.closeness.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did any warmth land — given, received, or remembered?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une chaleur est-elle arrivée à bon port — donnée, reçue ou souvenir ?"
+          }
+        }
+      }
+    },
+    "theme.return.closeness.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Can you name which season you're in yet?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrivez-vous à nommer votre saison ?"
+          }
+        }
+      }
+    },
+    "theme.return.communication.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was it hard to keep your words honest today? That's information too."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A-t-il été difficile de garder vos mots honnêtes aujourd'hui ? C'est aussi une information."
+          }
+        }
+      }
+    },
+    "theme.return.communication.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did saying (or writing) one true thing cost less than expected?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dire (ou écrire) une chose vraie a-t-il coûté moins cher que prévu ?"
+          }
+        }
+      }
+    },
+    "theme.return.novelty.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did the familiar look even slightly new?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le familier vous a-t-il semblé un peu neuf ?"
+          }
+        }
+      }
+    },
+    "theme.return.novelty.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did one changed detail change anything after it?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un détail changé a-t-il modifié ce qui suivait ?"
+          }
+        }
+      }
+    },
+    "theme.return.play.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Did anything make you smile at yourself today?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelque chose vous a-t-il fait sourire de vous aujourd'hui ?"
+          }
+        }
+      }
+    },
+    "theme.return.play.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was there room today for something unserious?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Y a-t-il eu de la place aujourd'hui pour quelque chose de peu sérieux ?"
+          }
+        }
+      }
+    },
     "welcome.cta": {
       "localizations": {
         "en": {
