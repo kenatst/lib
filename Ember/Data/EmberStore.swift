@@ -16,6 +16,8 @@ final class EmberStore {
     // MARK: Persisted state
 
     nonisolated struct PersistedState: Codable, Equatable, Sendable {
+        /// Bump on any breaking model change; migrate in `load`.
+        var schemaVersion: Int = 2
         var intention: DesireIntention?
         var responses: Onboarding.Responses?
         var profile: DesireProfile?
@@ -148,6 +150,11 @@ final class EmberStore {
             let data = try encoder.encode(state)
             let url = directory.appendingPathComponent(Self.fileName)
             try data.write(to: url, options: [.atomic, .completeFileProtection])
+            // Keep EMBER data out of any device backup — it lives here only.
+            var mutableURL = url
+            var values = URLResourceValues()
+            values.isExcludedFromBackup = true
+            _ = try? mutableURL.setResourceValues(values)
         } catch {
             // Never log content. A failed save is surfaced by state divergence,
             // not by diagnostics containing user data.
@@ -158,7 +165,19 @@ final class EmberStore {
     nonisolated private static func load(from directory: URL) -> PersistedState {
         let url = directory.appendingPathComponent(fileName)
         guard let data = try? Data(contentsOf: url) else { return .empty }
-        guard let decoded = try? JSONDecoder().decode(PersistedState.self, from: data) else { return .empty }
-        return decoded
+        if var decoded = try? JSONDecoder().decode(PersistedState.self, from: data) {
+            // Migration hook: decode with defaults for missing fields, then
+            // stamp the current schema version so future migrations can
+            // branch on it. Older files simply gain the new defaults here.
+            decoded.schemaVersion = PersistedState.empty.schemaVersion
+            return decoded
+        }
+        // Unreadable or incompatible data is NEVER silently destroyed —
+        // quarantine it and start empty. The user's words stay recoverable.
+        let backupURL = directory.appendingPathComponent(fileName + ".unreadable")
+        try? FileManager.default.removeItem(at: backupURL)
+        try? FileManager.default.moveItem(at: url, to: backupURL)
+        EmberLog.app.fault("State file unreadable; quarantined")
+        return .empty
     }
 }

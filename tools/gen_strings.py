@@ -68,8 +68,8 @@ k("selection.begin", "Continue", "Continuer")
 k("questions.heading", "A few gentle questions, so EMBER follows your situation — not an average.",
   "Quelques questions en douceur, pour que EMBER suive votre situation — pas une moyenne.")
 k("questions.counter", "Question %lld of %lld", "Question %lld sur %lld")
-k("questions.skipnote", "Answer with your gut. You can retell this anytime.",
-  "Répondez au ressenti. Vous pourrez toujours y revenir.")
+k("questions.skipnote", "Answer with your gut — it knows more than you think.",
+  "Répondez au ressenti — il en sait plus que vous ne croyez.")
 
 # Shared
 k("q.duration.text", "How long has it felt this way?",
@@ -302,8 +302,8 @@ k("session.finish.evening.teaser", "Come back this evening for a soft landing.",
 # Evening return
 # ---------------------------------------------------------------------------
 k("return.title", "How was it, honestly?", "Alors, honnêtement ?")
-k("return.subtitle", "No wrong answers. This tunes tomorrow.",
-  "Aucune mauvaise réponse. Cela accorde la suite.")
+k("return.subtitle", "No wrong answers. Your evening shapes what comes next.",
+  "Aucune mauvaise réponse. Votre soir dessine la suite.")
 k("return.nothing", "Nothing changed", "Rien n'a changé")
 k("return.noticed", "I noticed something", "J'ai remarqué quelque chose")
 k("return.different", "It felt different", "C'était différent")
@@ -321,6 +321,10 @@ k("progress.chapter.3", "Week three — Tending", "Troisième semaine — Entret
 k("progress.days", "%lld of 21 days traced", "%lld jours sur 21 tracés")
 k("progress.empty", "Your first line appears after Day One.",
   "Votre premier trait apparaîtra après le premier jour.")
+k("journal.title", "Your Words", "Vos mots")
+k("journal.link", "Read your words", "Relire vos mots")
+k("journal.empty", "Nothing written yet. When a day stirs something, your words gather here — for you only.",
+  "Rien pour l'instant. Quand un jour remue quelque chose, vos mots se rassemblent ici — pour vous seul.")
 
 # ---------------------------------------------------------------------------
 # Settings
@@ -357,6 +361,9 @@ k("couple.setup.title", "One journey, two people", "Un parcours, deux personnes"
 k("couple.setup.body",
   "Each of you receives a private space and daily steps of your own. What you write stays yours — sharing is always a deliberate hand-off, never automatic.",
   "Chacun reçoit un espace privé et ses propres étapes quotidiennes. Ce que vous écrivez vous appartient — partager est toujours un geste volontaire, jamais automatique.")
+k("couple.consent",
+  "We have both agreed to try this together — and either of us can stop anytime.",
+  "Nous avons tous les deux accepté d'essayer ensemble — et chacun peut arrêter à tout moment.")
 k("couple.role.question", "Who is holding the phone?", "Qui tient le téléphone ?")
 k("couple.role.first", "Partner One", "Partenaire un")
 k("couple.role.second", "Partner Two", "Partenaire deux")

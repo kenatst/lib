@@ -83,21 +83,23 @@ nonisolated enum DesireProfileDeriver {
             readings.append(DimensionReading(dimension: dimension, strength: strength))
         }
 
-        // Order: strongest signal first (by |strength|), stable tie-break by
-        // declaration order so derivation is deterministic.
+        // Editorial order: rich strengths lead, middle follows, guarded
+        // ("growth areas") close gently. Ties break by declaration order so
+        // derivation stays deterministic.
         let declaredOrder = Dimension.allCases
-        readings.sort { lhs, rhs in
-            let l = abs(lhs.strength)
-            let r = abs(rhs.strength)
-            if l != r { return l > r }
-            return declaredOrder.firstIndex(of: lhs.dimension)! < declaredOrder.firstIndex(of: rhs.dimension)!
+        func rank(_ r: DimensionReading) -> Int {
+            switch r.band {
+            case .rich: 0
+            case .middle: 1
+            case .guarded: 2
+            }
         }
-
-        // Guarantee every core dimension has a reading so no paragraph is missing.
-        for dimension in Dimension.allCases where !readings.contains(where: { $0.dimension == dimension }) {
-            // Unasked dimensions get a neutral reading only if some other
-            // journey asked about them indirectly; otherwise omitted.
-            continue
+        readings.sort { lhs, rhs in
+            let l = rank(lhs)
+            let r = rank(rhs)
+            if l != r { return l < r }
+            if lhs.strength != rhs.strength { return abs(lhs.strength) > abs(rhs.strength) }
+            return declaredOrder.firstIndex(of: lhs.dimension)! < declaredOrder.firstIndex(of: rhs.dimension)!
         }
 
         return DesireProfile(readings: readings, intention: intention)

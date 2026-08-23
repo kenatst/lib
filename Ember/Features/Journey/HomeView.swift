@@ -20,6 +20,18 @@ struct HomeView: View {
         store.state.completedDays.count >= JourneyCatalog.totalDays
     }
 
+    /// The most recent check-in's pacing note, shown once as a quiet line.
+    /// This is where evening honesty visibly shapes the journey.
+    private var latestPacingNoteKey: String? {
+        store.state.checkIns.last.map { checkIn in
+            CheckInAdapter.adjust(
+                after: checkIn.response,
+                dayNumber: checkIn.dayNumber,
+                dominant: store.state.profile?.dominant ?? []
+            ).pacingNoteKey
+        } ?? nil
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
@@ -114,6 +126,16 @@ struct HomeView: View {
                 Text(stepSummary)
                     .emberProse(.footnote, color: Palette.mutedInk)
                     .padding(.top, Spacing.sm)
+            }
+
+            if let noteKey = latestPacingNoteKey,
+               store.state.completedDays.contains(nextDay - 1) {
+                Text(String.ember(noteKey))
+                    .font(Typography.editorialItalic(.footnote))
+                    .foregroundStyle(Palette.rose)
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, Spacing.md)
             }
 
             EmberButton(

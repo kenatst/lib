@@ -11,6 +11,8 @@ struct CoupleSetupView: View {
     @Environment(EmberStore.self) private var store
     @Environment(AppRouter.self) private var router
 
+    @State private var bothAgreed = false
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
@@ -28,6 +30,16 @@ struct CoupleSetupView: View {
                 Text("couple.setup.body")
                     .emberProse()
                     .padding(.top, Spacing.sm)
+
+                // Consent gate: both partners must have agreed before any
+                // couple content is shown. Non-negotiable.
+                Toggle(isOn: $bothAgreed) {
+                    Text(String.ember("couple.consent"))
+                        .emberProse(.callout)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .tint(Palette.wine)
+                .padding(.vertical, Spacing.md)
 
                 Text("couple.privacy.rule")
                     .font(Typography.ui(.footnote))
@@ -49,6 +61,7 @@ struct CoupleSetupView: View {
                 VStack(spacing: Spacing.sm) {
                     ForEach(EmberStore.CoupleRole.allCases, id: \.rawValue) { role in
                         Button {
+                            guard bothAgreed else { return }
                             Haptics.selection()
                             store.setCoupleRole(role)
                             router.replace(with: .coupleSpace)
@@ -73,6 +86,8 @@ struct CoupleSetupView: View {
                             .contentShape(Rectangle())
                         }
                         .buttonStyle(PressableStyle())
+                        .disabled(!bothAgreed)
+                        .opacity(bothAgreed ? 1 : 0.45)
                         .accessibilityHint(Text("couple.switch.space"))
                     }
                 }

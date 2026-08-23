@@ -13,6 +13,7 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case day(Int)
     case eveningReturn(Int)
     case progress
+    case journal
     case settings
     case coupleSetup
     case coupleSpace

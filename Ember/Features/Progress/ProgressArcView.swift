@@ -8,6 +8,7 @@ import SwiftUI
 struct ProgressArcView: View {
 
     @Environment(EmberStore.self) private var store
+    @Environment(AppRouter.self) private var router
 
     private var intention: DesireIntention {
         store.state.intention ?? .myDesire
@@ -50,6 +51,34 @@ struct ProgressArcView: View {
                 }
 
                 dayTicks
+
+                if !store.state.reflections.isEmpty {
+                    Button {
+                        Haptics.selection()
+                        router.navigate(to: .journal)
+                    } label: {
+                        HStack(spacing: Spacing.sm) {
+                            Image(systemName: "book")
+                                .font(.system(size: 15, weight: .light))
+                                .foregroundStyle(Palette.rose)
+                            Text(String.ember("journal.link"))
+                                .font(Typography.ui(.subheadline))
+                                .foregroundStyle(Palette.ink)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 12))
+                                .foregroundStyle(Palette.softRose)
+                        }
+                        .padding(.vertical, 14)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityAddTraits(.isButton)
+                    .overlay(alignment: .top) {
+                        Rectangle().fill(Palette.hairline).frame(height: 1)
+                    }
+                    .padding(.top, Spacing.lg)
+                }
             }
             .padding(.horizontal, Spacing.md)
             .padding(.bottom, Spacing.xxl)
@@ -71,14 +100,18 @@ struct ProgressArcView: View {
     }
 
     private func chapterRow(_ week: Int) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: Spacing.sm) {
+        let daysInWeek = min(week * 7, JourneyCatalog.totalDays) - (week - 1) * 7
+        let chapterComplete = completed >= (week - 1) * 7 + daysInWeek
+        let chapterStarted = completed > (week - 1) * 7
+
+        return HStack(alignment: .firstTextBaseline, spacing: Spacing.sm) {
             Circle()
-                .fill(completed >= week * 7 - (7 - min(week * 7, completed)) && completed >= min(week * 7, completed) ? Palette.wine : Palette.blush)
+                .fill(chapterComplete ? Palette.wine : (chapterStarted ? Palette.rose : Palette.blush))
                 .frame(width: 8, height: 8)
                 .padding(.bottom, 2)
 
             Text(String.ember("progress.chapter.\(week)"))
-                .emberProse(.callout, color: completed >= min(week * 7, JourneyCatalog.totalDays) ? Palette.ink : Palette.mutedInk)
+                .emberProse(.callout, color: chapterStarted ? Palette.ink : Palette.mutedInk)
 
             Spacer()
         }

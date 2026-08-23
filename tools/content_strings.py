@@ -269,39 +269,40 @@ k("pacing.dose",
   "Heureuse nouvelle. Demain mise un peu plus sur l'anticipation.")
 
 # Couple asymmetric steps — each partner receives their own instruction;
-# neither needs to know the other's. A pool is cycled across 21 days so no
-# two consecutive days repeat.
+# neither needs to know the other's. ETHICS RULE: instructions may never script
+# covert behavior change of the partner. Surprise is only ever allowed about a
+# concrete gesture/gift, and even then the partner learns of the app's role.
 COUPLE_PAIRS_EN = [
-    ("Think of one small thing they used to do that made you feel chosen. Remember it fully; tell no one yet.",
-     "Recall the exact moment you knew you liked this person. Hold it; share nothing yet."),
-    ("Tonight, make them a drink the way they like it, wordlessly. That's the whole task.",
-     "Tonight, move screens away from the table before they sit down. Say nothing about why."),
-    ("Send one message about something you look forward to with them. No date attached.",
-     "Mention, casually, one sound from early days you secretly loved. Nothing more."),
-    ("Choose a song from when you met. Play it once tonight while doing something ordinary.",
-     "Light the same candle as your earliest evenings together — or the one you wish you'd had."),
-    ("Leave one small note somewhere they'll find tomorrow. Sign it with nothing.",
-     "Warm their side of the bed before they get in. Don't mention it."),
+    ("Think of one small thing they used to do that made you feel chosen. Remember it fully; tell them tonight.",
+     "Recall the exact moment you knew you liked this person. Tell them one detail of it tonight."),
+    ("Tonight, make them a drink the way they like it, and say it's because you felt like it.",
+     "Tonight, suggest dinner with no screens at the table — and say why you want it."),
+    ("Message them about something you look forward to doing together. Name it.",
+     "Tell them, plainly, one sound or habit from your early days you'd like back."),
+    ("Choose a song from when you met. Play it tonight and tell them why.",
+     "Light a candle at dinner and tell them it's for the two of you."),
+    ("Leave one small note somewhere they'll find tomorrow. Sign it.",
+     "Warm their side of the bed before they get in, and wish them a soft night."),
     ("Ask them one question tonight you've never asked. Listen without replying about yourself.",
      "Tell them one thing you noticed them doing well this week. Keep it under one sentence."),
-    ("Plan ten minutes of tomorrow worth whispering about today. Reveal nothing yet.",
-     "Touch their hand once today and leave it there three seconds longer than habit."),
+    ("Tell them one small plan you have for tomorrow that involves them. Let them ask questions.",
+     "Touch their hand today and leave it there three seconds longer than habit — and smile."), 
 ]
 COUPLE_PAIRS_FR = [
-    ("Pensez à une petite chose qu'il ou elle faisait et qui vous faisait sentir choisi·e. Souvenez-vous-en entièrement ; n'en parlez à personne encore.",
-     "Retrouvez l'instant précis où vous avez su que vous aimiez cette personne. Gardez-le ; ne partagez rien encore."),
-    ("Ce soir, préparez-lui à boire comme il aime, sans un mot. C'est toute la tâche.",
-     "Ce soir, éloignez les écrans de la table avant qu'il ou elle ne s'asseye. N'expliquez pas pourquoi."),
-    ("Envoyez un message sur quelque chose que vous attendez avec cette personne. Sans date.",
-     "Mentionnez, en passant, un son des premiers jours que vous aimiez en secret. Rien de plus."),
-    ("Choisissez une chanson de vos débuts. Jouez-la ce soir en faisant quelque chose d'ordinaire.",
-     "Allumez la même bougie que vos premières soirées — ou celle que vous auriez voulu avoir."),
-    ("Déposez un petit mot où il le trouvera demain. Ne le signez pas.",
-     "Réchauffez son côté du lit avant qu'il ou elle n'y entre. N'en parlez pas."),
+    ("Pensez à une petite chose qu'il ou elle faisait et qui vous faisait sentir choisi·e. Rappelez-la, et dites-le leur ce soir.",
+     "Retrouvez l'instant précis où vous avez su que vous aimiez cette personne. Racontez-leur un détail ce soir."),
+    ("Ce soir, préparez-lui à boire comme il aime — et dites que c'est par envie.",
+     "Ce soir, proposez un dîner sans écrans — et dites pourquoi vous en avez envie."),
+    ("Envoyez un message sur quelque chose que vous attendez de faire ensemble. Nommez-le.",
+     "Dites simplement quel son ou quelle habitude des premiers jours vous aimeriez retrouver."),
+    ("Choisissez une chanson de vos débuts. Jouez-la ce soir et dites pourquoi.",
+     "Allumez une bougie au dîner et dites que c'est pour vous deux."),
+    ("Déposez un petit mot où il le trouvera demain. Signez-le.",
+     "Réchauffez son côté du lit avant qu'il ou elle n'y entre, et souhaitez une douce nuit."),
     ("Posez ce soir une question jamais posée. Écoutez sans répondre en parlant de vous.",
      "Dites une chose que vous l'avez vu·e bien faire cette semaine. Une phrase maximum."),
-    ("Planifiez dix minutes de demain qui valent un murmure aujourd'hui. Ne révélez rien encore.",
-     "Touchez sa main une fois aujourd'hui et laissez-la trois secondes de plus que d'habitude."),
+    ("Annoncez un petit plan pour demain qui les inclut. Laissez-les poser des questions.",
+     "Touchez sa main aujourd'hui trois secondes de plus que d'habitude — et souriez."),
 ]
 
 for day in range(1, 22):

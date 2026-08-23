@@ -147,8 +147,14 @@ struct DailySessionView: View {
                 .opacity(0.6)
             }
         ) {
-            Text(String.ember(day.actKey))
-                .emberProse(.title3)
+            if store.state.intention == .ourDesire {
+                // OUR DESIRE: the Act is today's asymmetric couple step.
+                Text(String.ember("couple.asymmetric.day.\(dayNumber).\(store.state.coupleRole?.rawValue ?? "partnerOne")"))
+                    .emberProse(.title3)
+            } else {
+                Text(String.ember(day.actKey))
+                    .emberProse(.title3)
+            }
         } cta: {
             VStack(spacing: Spacing.md) {
                 EmberButton(title: String(localized: "session.finish")) {

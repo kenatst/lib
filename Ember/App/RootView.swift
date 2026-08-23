@@ -52,6 +52,8 @@ struct RootView: View {
             EveningReturnView(dayNumber: dayNumber)
         case .progress:
             ProgressArcView()
+        case .journal:
+            JournalView()
         case .settings:
             SettingsView()
         case .coupleSetup:

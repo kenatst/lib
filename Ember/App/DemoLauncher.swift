@@ -52,6 +52,13 @@ enum DemoLauncher {
             }
         }
 
+        // Seed an evening check-in (for pacing-note verification). Runs after
+        // completion seeding so the check-in lands on the last finished day.
+        if value("-ember-checkin") != nil {
+            let day = max(1, store.state.completedDays.count)
+            store.recordCheckIn(CheckIn(dayNumber: day, response: .feltDifferent, date: .now))
+        }
+
         if let handedOff = value("-ember-handoff") {
             let role: EmberStore.CoupleRole = (value("-ember-role") == "two") ? .partnerTwo : .partnerOne
             store.handOffNote(handedOff, from: role.other)

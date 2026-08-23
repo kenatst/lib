@@ -76,7 +76,7 @@ nonisolated enum Onboarding {
         options: [
             .init(id: .weeks, textKey: "q.duration.weeks", dimension: .anticipation, score: 1),
             .init(id: .months, textKey: "q.duration.months", dimension: .novelty, score: 0),
-            .init(id: .aYearOrMore, textKey: "q.duration.long", dimension: .connection, score: -1),
+            .init(id: .aYearOrMore, textKey: "q.duration.long", dimension: .anticipation, score: -1),
             .init(id: .creptUp, textKey: "q.duration.unsure", dimension: .selfConnection, score: -1),
         ]
     )
