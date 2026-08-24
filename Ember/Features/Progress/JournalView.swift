@@ -84,7 +84,9 @@ struct JournalView: View {
                 }
             } else if let dateLabel = entry.dateLabel {
                 // Ongoing entry: quiet calendar date, no course numbering.
-                Text(dateLabel)
+                Text(EmberDateFormatting.display(
+                    LocalDay.unchecked(dateLabel)
+                ))
                     .emberCaption(Palette.rose)
                     .kerning(1.6)
 

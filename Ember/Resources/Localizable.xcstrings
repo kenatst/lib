@@ -1250,6 +1250,22 @@
         }
       }
     },
+    "date.today": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd’hui"
+          }
+        }
+      }
+    },
     "day.1.act": {
       "localizations": {
         "en": {

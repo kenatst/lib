@@ -14,12 +14,15 @@ struct ProgressArcView: View {
         store.state.intention ?? .myDesire
     }
 
-    /// Sessions ever lived — ongoing measure (legacy days migrate in).
-    private var completed: Int { store.state.sessionHistory.count }
+    /// Sessions genuinely lived — an Act completion is the source of truth.
+    /// Merely opening a frozen plan must not inflate progress.
+    private var completed: Int { store.countCompletedSessions() }
 
     private var exploredThemes: [DayTheme] {
         var seen = Set<DayTheme>()
-        return store.state.sessionHistory.compactMap { record in
+        return store.state.sessionHistory
+            .filter { $0.completedMovements.contains(.act) }
+            .compactMap { record in
             seen.insert(record.theme).inserted ? record.theme : nil
         }
     }

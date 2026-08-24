@@ -80,8 +80,8 @@ struct DailySessionView: View {
     var body: some View {
         VStack(spacing: 0) {
             stepIndicator
-            if let day, let intention {
-                content(for: day, intention: intention)
+            if let day, let plan, let intention {
+                content(for: day, plan: plan, intention: intention)
             } else {
                 unavailableView
             }
@@ -96,7 +96,7 @@ struct DailySessionView: View {
             HStack(alignment: .firstTextBaseline) {
                 SectionEyebrow(key: "daily.guide.eyebrow")
                 Spacer()
-                Text(resolvedSessionID.flatMap { store.state.dailyPlans[$0]?.day.description }
+                Text(resolvedSessionID.flatMap { store.state.dailyPlans[$0].map { EmberDateFormatting.display($0.day) } }
                      ?? String.ember("home.day.label", dayNumber))
                     .emberCaption(Palette.softRose)
             }
@@ -118,13 +118,13 @@ struct DailySessionView: View {
     // MARK: Content
 
     @ViewBuilder
-    private func content(for day: JourneyDay, intention: DesireIntention) -> some View {
+    private func content(for day: JourneyDay, plan: DailyPlan, intention: DesireIntention) -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 switch step {
-                case .discover: discoverStep(day, intention: intention)
-                case .reflect: reflectStep(day)
-                case .act: actStep(day)
+                case .discover: discoverStep(day, plan: plan, intention: intention)
+                case .reflect: reflectStep(day, plan: plan)
+                case .act: actStep(day, plan: plan)
                 }
             }
             .padding(.horizontal, Spacing.md)
@@ -133,7 +133,7 @@ struct DailySessionView: View {
         .scrollBounceBehavior(.basedOnSize)
     }
 
-    private func discoverStep(_ day: JourneyDay, intention: DesireIntention) -> some View {
+    private func discoverStep(_ day: JourneyDay, plan: DailyPlan, intention: DesireIntention) -> some View {
         SessionStepLayout(
             eyebrowKey: "session.step.discover.title",
             motif: {
@@ -153,12 +153,12 @@ struct DailySessionView: View {
             }
         ) {
             // FROZEN PLAN CONTENT: resolved from the plan's stable IDs.
-            Text(String.ember(plan!.titleContentID.localizationKey))
+            Text(String.ember(plan.titleContentID.localizationKey))
                 .font(Typography.editorial(.title))
                 .foregroundStyle(Palette.wine)
                 .padding(.bottom, Spacing.md)
 
-            Text(String.ember(plan!.discoverContentID.localizationKey))
+            Text(String.ember(plan.discoverContentID.localizationKey))
                 .emberProse(.title3)
         } cta: {
             nextButton("common.continue") {
@@ -167,12 +167,12 @@ struct DailySessionView: View {
         }
     }
 
-    private func reflectStep(_ day: JourneyDay) -> some View {
+    private func reflectStep(_ day: JourneyDay, plan: DailyPlan) -> some View {
         SessionStepLayout(
             eyebrowKey: "session.step.reflect.title",
             motif: { EmptyView() }
         ) {
-            EditorialQuote(text: String.ember(plan!.reflectContentID.localizationKey))
+            EditorialQuote(text: String.ember(plan.reflectContentID.localizationKey))
         } cta: {
             VStack(alignment: .leading, spacing: Spacing.md) {
                 reflectionField
@@ -216,7 +216,7 @@ struct DailySessionView: View {
         }
     }
 
-    private func actStep(_ day: JourneyDay) -> some View {
+    private func actStep(_ day: JourneyDay, plan: DailyPlan) -> some View {
         SessionStepLayout(
             eyebrowKey: "session.step.act.title",
             motif: {
@@ -232,7 +232,7 @@ struct DailySessionView: View {
         ) {
             if store.state.intention == .ourDesire,
                let space = store.state.coupleRole.map({ $0 == .partnerOne ? CoupleSpace.partnerOne : .partnerTwo }),
-               let assignment = plan?.coupleAssignmentIDs?[space] {
+               let assignment = plan.coupleAssignmentIDs?[space] {
                 // OUR DESIRE: the frozen plan's asymmetric assignment for THIS role.
                 Text(String.ember(assignment.localizationKey))
                     .emberProse(.title3)
@@ -241,7 +241,7 @@ struct DailySessionView: View {
                 Text(String.ember("couple.asymmetric.day.\(dayNumber).\(store.state.coupleRole?.rawValue ?? "partnerOne")"))
                     .emberProse(.title3)
             } else {
-                Text(String.ember(plan!.actContentID.localizationKey))
+                Text(String.ember(plan.actContentID.localizationKey))
                     .emberProse(.title3)
             }
         } cta: {

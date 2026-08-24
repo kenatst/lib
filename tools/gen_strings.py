@@ -32,6 +32,7 @@ k("common.delete", "Delete", "Supprimer")
 k("common.keep", "Keep", "Conserver")
 k("common.cancel", "Cancel", "Annuler")
 k("common.ok", "OK", "OK")
+k("date.today", "Today", "Aujourd’hui")
 
 # ---------------------------------------------------------------------------
 # Welcome
