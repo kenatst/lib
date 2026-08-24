@@ -206,16 +206,17 @@ struct HomeView: View {
             router.navigate(to: .paywall)
             return
         }
-        // Freeze/open today's plan, then enter the session.
-        _ = store.planForToday()
-        let lived = store.countCompletedSessions()
-        let hasLivedToday = store.state.sessionHistory.contains {
-            $0.id == store.currentPlanID && $0.completedMovements.contains(.act)
-        }
-        if hasLivedToday {
-            router.navigate(to: .eveningReturn(lived + 1))
+        // Freeze/open today's plan, then enter THIS session. Route identity =
+        // frozen session ID; no derived day number can misroute the Return.
+        guard let sessionID = store.currentPlanID else { return }
+        let plan = store.planForToday()
+        let actDone = store.state.sessionHistory.first {
+            $0.id == plan?.id
+        }?.completedMovements.contains(.act) ?? false
+        if actDone {
+            router.navigate(to: .eveningReturn(sessionID))
         } else {
-            router.navigate(to: .day(lived + 1))
+            router.navigate(to: .dailySession(sessionID))
         }
     }
 }

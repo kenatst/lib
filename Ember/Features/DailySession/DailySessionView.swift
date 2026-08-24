@@ -8,7 +8,20 @@ import SwiftUI
 
 struct DailySessionView: View {
 
-    let dayNumber: Int
+    /// ONGOING IDENTITY: this view is bound to ONE frozen session.
+    private let sessionID: String?
+    /// Legacy numbered entry point (migration-era routes only).
+    private let dayNumber: Int
+
+    init(sessionID: String) {
+        self.sessionID = sessionID
+        self.dayNumber = 0
+    }
+
+    init(dayNumber: Int) {
+        self.sessionID = nil
+        self.dayNumber = dayNumber
+    }
 
     @Environment(EmberStore.self) private var store
     @Environment(AppRouter.self) private var router
@@ -21,9 +34,12 @@ struct DailySessionView: View {
     @State private var draftSaveTask: Task<Void, Never>?
 
     private func restoreDraftIfNeeded() {
-        guard let sessionID = store.currentPlanID else { return }
-        if reflection.isEmpty, let draft = store.sessionDraft(for: sessionID) ?? store.draft(for: dayNumber) {
-            reflection = draft
+        if reflection.isEmpty {
+            if let sid = resolvedSessionID, let draft = store.sessionDraft(for: sid) {
+                reflection = draft
+            } else if sessionID == nil, let legacy = store.draft(for: dayNumber) {
+                reflection = legacy
+            }
         }
     }
 
@@ -35,9 +51,14 @@ struct DailySessionView: View {
 
     // TODAY IS SNAPSHOTTED (Mission 004): everything on screen resolves from
     // the FROZEN DailyPlan — never recomputed from mutable state. Tonight's
-    // check-in cannot retroactively change what today shows.
+    // check-in cannot retroactively change what today shows. When routed by
+    // session ID, THIS exact session renders even if the calendar has rolled.
+    private var resolvedSessionID: String? { sessionID ?? store.currentPlanID }
     private var plan: DailyPlan? {
-        store.planForToday()
+        if let sessionID, let bound = store.state.dailyPlans[sessionID] {
+            return bound
+        }
+        return store.planForToday()
     }
     private var intention: DesireIntention? { store.state.intention }
 
@@ -78,7 +99,9 @@ struct DailySessionView: View {
                     .frame(width: s == step ? 22 : 12, height: 3)
             }
             Spacer()
-            Text(String.ember("home.day.label", dayNumber))
+            // ONGOING: sessions are labeled by date, not course number.
+            Text(resolvedSessionID.flatMap { store.state.dailyPlans[$0]?.day.description }
+                 ?? String.ember("home.day.label", dayNumber))
                 .emberCaption(Palette.softRose)
         }
         .padding(.horizontal, Spacing.md)
@@ -149,8 +172,8 @@ struct DailySessionView: View {
                         draftSaveTask = Task {
                             try? await Task.sleep(for: .seconds(1.2))
                             guard !Task.isCancelled else { return }
-                            if let sessionID = store.currentPlanID {
-                                store.saveSessionDraft(newText, sessionID: sessionID)
+                            if let sid = resolvedSessionID {
+                                store.saveSessionDraft(newText, sessionID: sid)
                             } else {
                                 store.saveDraft(newText, day: dayNumber)
                             }
@@ -270,10 +293,10 @@ struct DailySessionView: View {
     private func saveReflectionIfNeeded() {
         let trimmed = reflection.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
-        // ONGOING ENGINE: reflections attach to the frozen session ID.
-        if let sessionID = store.currentPlanID {
-            store.saveSessionReflection(trimmed, sessionID: sessionID)
-            store.saveSessionDraft("", sessionID: sessionID)
+        // ONGOING ENGINE: reflections attach to THIS frozen session ID.
+        if let sid = resolvedSessionID {
+            store.saveSessionReflection(trimmed, sessionID: sid)
+            store.saveSessionDraft("", sessionID: sid)
         } else {
             store.saveReflection(trimmed, day: dayNumber)
             store.clearDraft(day: dayNumber)
@@ -291,7 +314,12 @@ struct DailySessionView: View {
         store.markMovement(.act)
         store.completeTodaySession()
         Haptics.warm()
-        router.replace(with: .eveningReturn(dayNumber))
+        // Route identity = THIS frozen session, whatever the clock says next.
+        if let sessionID = resolvedSessionID {
+            router.replace(with: .eveningReturn(sessionID))
+        } else {
+            router.replace(with: .eveningReturnLegacy(dayNumber))
+        }
     }
 
     private var unavailableView: some View {

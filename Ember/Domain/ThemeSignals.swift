@@ -8,7 +8,10 @@ import Foundation
 //
 // Rules:
 //   * Bounded: resonance ∈ [-3, +3]; one check-in can never dominate.
-//   * Decaying: old evidence fades so months-old misses stop mattering.
+//   * Projection: signals are rebuilt from sessionHistory — each session
+//     contributes at most once via its final stored state.
+//   * Low-resonance decays when positive evidence arrives (re-exposure),
+//     so early cold streaks fade instead of haunting forever.
 //   * Never shown to users as numbers. Internal scoring only.
 
 nonisolated struct ThemeSignal: Equatable, Sendable, Codable {
@@ -85,5 +88,46 @@ nonisolated enum SignalUpdater {
 
     private static func clamp(_ value: Double) -> Double {
         max(-3, min(3, value))
+    }
+}
+
+// MARK: - History projection (source of truth)
+//
+// LearnedSignals is a deterministic CACHE of sessionHistory — never an
+// independently accumulated log. Rebuilding from history is idempotent:
+// each session contributes AT MOST ONCE using its FINAL stored state, so
+// changing a Return answer ten times yields exactly the same signals as
+// recording the final answer once.
+
+nonisolated enum SignalProjector {
+
+    nonisolated static func rebuild(from history: [DailySessionRecord]) -> LearnedSignals {
+        var signals = LearnedSignals.empty
+
+        // Chronological by canonical day key; stable for equal keys.
+        let ordered = history.sorted { lhs, rhs in
+            if lhs.day.storageKey != rhs.day.storageKey {
+                return lhs.day.storageKey < rhs.day.storageKey
+            }
+            return lhs.id < rhs.id
+        }
+
+        // Collapse to the FINAL stored state per session id, applied once.
+        let latestBySession: [String: DailySessionRecord] = {
+            var latest: [String: DailySessionRecord] = [:]
+            for record in ordered {
+                latest[record.id] = record   // later entries overwrite earlier ones
+            }
+            return latest
+        }()
+
+        for record in latestBySession.values.sorted(by: { $0.id < $1.id }) {
+            SignalUpdater.apply(record, to: &signals, today: record.day)
+        }
+
+        signals.completedSessionCount = latestBySession.values.filter {
+            $0.completedMovements.contains(.act)
+        }.count
+        return signals
     }
 }

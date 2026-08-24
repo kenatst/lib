@@ -94,11 +94,11 @@ struct AppRouterTests {
         let router = AppRouter()
         router.navigate(to: .journeySelection)
         router.navigate(to: .onboarding(.myDesire))
-        router.navigate(to: .day(4))
-        router.navigate(to: .eveningReturn(4))
-        #expect(router.path == [.journeySelection, .onboarding(.myDesire), .day(4), .eveningReturn(4)])
+        router.navigate(to: .dailySession("2026-06-04#theirDesire"))
+        router.navigate(to: .eveningReturn("2026-06-04#theirDesire"))
+        #expect(router.path == [.journeySelection, .onboarding(.myDesire), .dailySession("2026-06-04#theirDesire"), .eveningReturn("2026-06-04#theirDesire")])
         router.pop()
-        #expect(router.path.last == .day(4))
+        #expect(router.path.last == .dailySession("2026-06-04#theirDesire"))
         router.popToRoot()
         #expect(router.path.isEmpty)
         router.pop() // popping empty is a safe no-op
@@ -117,9 +117,9 @@ struct AppRouterTests {
     @Test("replace swaps the top route in place")
     func replaceTop() {
         let router = AppRouter()
-        router.navigate(to: .day(3))
-        router.replace(with: .eveningReturn(3))
-        #expect(router.path == [.eveningReturn(3)])
+        router.navigate(to: .dailySession("s-3"))
+        router.replace(with: .eveningReturn("s-3"))
+        #expect(router.path == [.eveningReturn("s-3")])
         router.replace(with: .home) // on non-empty stack, still swaps top
         #expect(router.path == [.home])
         let empty = AppRouter()
@@ -129,8 +129,11 @@ struct AppRouterTests {
 
     @Test("Routes with different payloads stay distinct")
     func payloadIdentity() {
-        #expect(AppRoute.day(3) != AppRoute.day(4))
+        // ONGOING IDENTITY: session-ID routes differ per session, and the same
+        // session always maps to the same route (stable reopen target).
+        #expect(AppRoute.dailySession("a") != AppRoute.dailySession("b"))
+        #expect(AppRoute.dailySession("2026-06-04#myDesire") == AppRoute.dailySession("2026-06-04#myDesire"))
+        #expect(AppRoute.eveningReturn("s") != AppRoute.dailySession("s"))
         #expect(AppRoute.onboarding(.myDesire) != AppRoute.onboarding(.theirDesire))
-        #expect(AppRoute.day(3) == AppRoute.day(3))
     }
 }

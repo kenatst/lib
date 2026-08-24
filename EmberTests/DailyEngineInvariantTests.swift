@@ -25,14 +25,14 @@ struct DailyEngineInvariantTests {
     func idempotentPlanning() {
         let first = DailyEngine.planForToday(
             today: day(0), intention: .myDesire, profile: nil,
-            checkIns: [], plans: [:], history: [], signals: .empty,
+            plans: [:], history: [], signals: .empty,
             coupleRole: nil
         )
         let storePlans = [first.id: first]
         // Second call same day must return the SAME frozen plan untouched.
         let second = DailyEngine.planForToday(
             today: day(0), intention: .myDesire, profile: nil,
-            checkIns: [], plans: storePlans, history: [], signals: .empty,
+            plans: storePlans, history: [], signals: .empty,
             coupleRole: nil
         )
         #expect(first == second)
@@ -43,18 +43,14 @@ struct DailyEngineInvariantTests {
     func checkInCannotMutateToday() {
         var plan = DailyEngine.planForToday(
             today: day(0), intention: .theirDesire, profile: nil,
-            checkIns: [], plans: [:], history: [], signals: .empty,
+            plans: [:], history: [], signals: .empty,
             coupleRole: nil
         )
-
-        // Tonight: the user answers "wantMore" — a strong signal.
-        let tonight = CheckIn(dayNumber: 1, response: .wantMore, date: .now)
 
         // The frozen plan must be bit-identical before/after recording it.
         let before = plan
         _ = DailyEngine.planForToday(
             today: day(0), intention: .theirDesire, profile: nil,
-            checkIns: [tonight],                       // check-in exists now
             plans: [plan.id: plan],                    // plan already frozen
             history: [], signals: .empty, coupleRole: nil
         )
@@ -63,7 +59,7 @@ struct DailyEngineInvariantTests {
         // Even a fresh recommendation for TOMORROW changes nothing about today.
         let tomorrowPlan = DailyEngine.planForToday(
             today: day(1), intention: .theirDesire, profile: nil,
-            checkIns: [tonight], plans: [plan.id: plan],
+            plans: [plan.id: plan],
             history: [], signals: .empty, coupleRole: nil
         )
         #expect(tomorrowPlan.day != plan.day)
@@ -84,7 +80,6 @@ struct DailyEngineInvariantTests {
         ]
         let raisedPlan = DailyEngine.planForToday(
             today: day(10), intention: .myDesire, profile: nil,
-            checkIns: [CheckIn(dayNumber: 10, response: .wantMore, date: .now)],
             plans: [:], history: wantMoreHistory, signals: .empty,
             coupleRole: nil
         )
@@ -96,7 +91,6 @@ struct DailyEngineInvariantTests {
         )]
         let gentlePlan = DailyEngine.planForToday(
             today: day(10), intention: .myDesire, profile: nil,
-            checkIns: [CheckIn(dayNumber: 10, response: .nothingChanged, date: .now)],
             plans: [:], history: calmHistory, signals: .empty,
             coupleRole: nil
         )
@@ -117,7 +111,7 @@ struct DailyEngineInvariantTests {
         ]
         let plan = DailyEngine.planForToday(
             today: day(60), intention: .ourDesire, profile: nil,
-            checkIns: [], plans: [:], history: history, signals: .empty,
+            plans: [:], history: history, signals: .empty,
             coupleRole: nil
         )
         #expect(plan.day == day(60))
@@ -136,7 +130,7 @@ struct DailyEngineInvariantTests {
         for offset in 0..<5 {
             let plan = DailyEngine.planForToday(
                 today: day(offset), intention: .myDesire, profile: nil,
-                checkIns: [], plans: plans, history: history, signals: signals,
+                plans: plans, history: history, signals: signals,
                 coupleRole: nil
             )
             plans[plan.id] = plan
@@ -158,15 +152,15 @@ struct DailyEngineInvariantTests {
 
     @Test("Identical state produces identical plans (determinism)")
     func deterministicPlanning() {
-        func makePlan(checkIns: [CheckIn]) -> DailyPlan {
+        func makePlan() -> DailyPlan {
             DailyEngine.planForToday(
                 today: day(3), intention: .theirDesire, profile: nil,
-                checkIns: checkIns, plans: [:], history: [], signals: .empty,
+                plans: [:], history: [], signals: .empty,
                 coupleRole: nil
             )
         }
-        let a = makePlan(checkIns: [])
-        let b = makePlan(checkIns: [])
+        let a = makePlan()
+        let b = makePlan()
         // createdAt is a real timestamp (diagnostics only); everything that
         // defines the EXPERIENCE must be identical:
         #expect(a.id == b.id)
@@ -192,7 +186,7 @@ struct DailyEngineInvariantTests {
         for offset in 0..<200 {
             let plan = DailyEngine.planForToday(
                 today: day(offset), intention: .myDesire, profile: nil,
-                checkIns: [], plans: plans, history: history, signals: signals,
+                plans: plans, history: history, signals: signals,
                 coupleRole: nil
             )
             #expect(plans[plan.id] == nil, "day \(offset): plan collision")
@@ -210,13 +204,13 @@ struct DailyEngineInvariantTests {
     func journeysDiverge() {
         // Same day, same blank slate — different intentions → different plans.
         let my = DailyEngine.planForToday(today: day(2), intention: .myDesire,
-                                          profile: nil, checkIns: [], plans: [:],
+                                          profile: nil, plans: [:],
                                           history: [], signals: .empty, coupleRole: nil)
         let their = DailyEngine.planForToday(today: day(2), intention: .theirDesire,
-                                             profile: nil, checkIns: [], plans: [:],
+                                             profile: nil, plans: [:],
                                              history: [], signals: .empty, coupleRole: nil)
         let our = DailyEngine.planForToday(today: day(2), intention: .ourDesire,
-                                           profile: nil, checkIns: [], plans: [:],
+                                           profile: nil, plans: [:],
                                            history: [], signals: .empty, coupleRole: nil)
 
         // IDs must differ (different recommendation spaces)...
@@ -230,7 +224,7 @@ struct DailyEngineInvariantTests {
             for offset in 0..<7 {
                 let plan = DailyEngine.planForToday(
                     today: day(offset), intention: intention, profile: nil,
-                    checkIns: [], plans: plans, history: history,
+                    plans: plans, history: history,
                     signals: .empty, coupleRole: nil
                 )
                 themes.insert(plan.theme)
@@ -250,7 +244,7 @@ struct DailyEngineInvariantTests {
     func coupleAsymmetryFrozen() {
         let plan = DailyEngine.planForToday(
             today: day(1), intention: .ourDesire, profile: nil,
-            checkIns: [], plans: [:], history: [], signals: .empty,
+            plans: [:], history: [], signals: .empty,
             coupleRole: .partnerOne
         )
         let assignments = plan.coupleAssignmentIDs
@@ -263,7 +257,7 @@ struct DailyEngineInvariantTests {
         // Solo journeys never carry assignments.
         let solo = DailyEngine.planForToday(
             today: day(1), intention: .myDesire, profile: nil,
-            checkIns: [], plans: [:], history: [], signals: .empty,
+            plans: [:], history: [], signals: .empty,
             coupleRole: nil
         )
         #expect(solo.coupleAssignmentIDs == nil)
@@ -325,13 +319,13 @@ struct DailyEngineInvariantTests {
         // With NO learned signal, novelty should rank high.
         let naivePlan = DailyEngine.planForToday(
             today: day(10), intention: .myDesire, profile: noveltyLovingProfile,
-            checkIns: [], plans: [:], history: [], signals: .empty,
+            plans: [:], history: [], signals: .empty,
             coupleRole: nil
         )
         // With strong negative evidence, the engine should hesitate.
         let learnedPlan = DailyEngine.planForToday(
             today: day(10), intention: .myDesire, profile: noveltyLovingProfile,
-            checkIns: [], plans: [:], history: history, signals: signals,
+            plans: [:], history: history, signals: signals,
             coupleRole: nil
         )
         // Not asserting exact themes — asserting the SIGNAL CHANGED THE PLAN.

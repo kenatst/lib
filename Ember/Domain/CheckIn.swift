@@ -14,13 +14,47 @@ nonisolated enum CheckInResponse: String, Codable, CaseIterable, Sendable {
     var textKey: String { "return.\(rawValue)" }
 }
 
-nonisolated struct CheckIn: Codable, Equatable, Sendable, Identifiable {
-    /// The day this check-in closes.
+nonisolated struct CheckIn: Equatable, Sendable, Identifiable {
+    /// The day this check-in closes (legacy course number; still the unique
+    /// key for pre-engine data).
     let dayNumber: Int
     let response: CheckInResponse
     let date: Date
+    /// The frozen session this Return belongs to (ongoing engine). nil for
+    /// legacy/migrated entries. When present, sessionID is the uniqueness key.
+    var sessionID: String?
 
-    var id: Int { dayNumber }
+    var id: String { sessionID ?? "legacy.\(dayNumber)" }
+
+    init(dayNumber: Int, response: CheckInResponse, date: Date, sessionID: String? = nil) {
+        self.dayNumber = dayNumber
+        self.response = response
+        self.date = date
+        self.sessionID = sessionID
+    }
+}
+
+extension CheckIn: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case dayNumber, response, date, sessionID
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        self.dayNumber = try c.decode(Int.self, forKey: .dayNumber)
+        self.response = try c.decode(CheckInResponse.self, forKey: .response)
+        self.date = try c.decode(Date.self, forKey: .date)
+        // Legacy files have no sessionID — decode as nil, never fail.
+        self.sessionID = try? c.decodeIfPresent(String.self, forKey: .sessionID)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(dayNumber, forKey: .dayNumber)
+        try c.encode(response, forKey: .response)
+        try c.encode(date, forKey: .date)
+        try c.encodeIfPresent(sessionID, forKey: .sessionID)
+    }
 }
 
 // MARK: - Adaptation engine

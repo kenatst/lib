@@ -173,10 +173,10 @@ enum DemoLauncher {
             router.setRoot(.desireProfile)
         case "day":
             let day = Int(ProcessInfo.processInfo.environment["EMBER_DAY"] ?? "") ?? (store.state.completedDays.max() ?? 0) + 1
-            router.setRoot(.day(min(day, JourneyCatalog.totalDays)))
+            router.setRoot(.dailySession(store.currentPlanID ?? "debug"))
         case "return":
             let day = Int(ProcessInfo.processInfo.environment["EMBER_DAY"] ?? "") ?? max(1, store.state.completedDays.count)
-            router.setRoot(.eveningReturn(min(day, JourneyCatalog.totalDays)))
+            router.setRoot(.eveningReturn(store.currentPlanID ?? "debug"))
         case "progress":
             router.setRoot(.progress)
         case "journal":

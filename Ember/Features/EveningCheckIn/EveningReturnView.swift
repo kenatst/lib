@@ -7,7 +7,20 @@ import SwiftUI
 
 struct EveningReturnView: View {
 
-    let dayNumber: Int
+    /// ONGOING IDENTITY: bound to ONE frozen session when routed by ID.
+    private let sessionID: String?
+    /// Legacy numbered entry point (migration-era routes only).
+    private let dayNumber: Int
+
+    init(sessionID: String) {
+        self.sessionID = sessionID
+        self.dayNumber = 0
+    }
+
+    init(dayNumber: Int) {
+        self.sessionID = nil
+        self.dayNumber = dayNumber
+    }
 
     @Environment(EmberStore.self) private var store
     @Environment(AppRouter.self) private var router
@@ -24,6 +37,9 @@ struct EveningReturnView: View {
     // return answered after midnight still lands on the right day.
     @State private var capturedSessionID: String?
     private var plan: DailyPlan? {
+        if let sessionID, let bound = store.state.dailyPlans[sessionID] {
+            return bound
+        }
         if capturedSessionID == nil { _ = store.planForToday() }
         return store.state.dailyPlans[capturedSessionID ?? store.currentPlanID ?? ""]
     }
@@ -116,12 +132,12 @@ struct EveningReturnView: View {
         // Save immediately — one tap is enough; no "submit" ceremony.
         // This response updates HISTORY + learned signals against the CAPTURED
         // session; the frozen plan on screen is untouched. Only TOMORROW bends.
-        let sessionID = capturedSessionID ?? store.currentPlanID ?? ""
+        let targetSession = self.sessionID ?? capturedSessionID ?? store.currentPlanID ?? ""
         store.recordCheckIn(
             CheckIn(dayNumber: dayNumber, response: candidate, date: .now),
-            forSession: sessionID
+            forSession: targetSession
         )
-        if capturedSessionID == nil { capturedSessionID = sessionID }
+        if capturedSessionID == nil { capturedSessionID = targetSession }
         withAnimation(Motion.resolved(Motion.gentle, reduceMotion: reduceMotion, delay: 0.2)) {
             saved = true
         }

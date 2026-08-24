@@ -98,13 +98,13 @@ struct CoupleDailyPlanningTests {
         let day = LocalDay.validating("2026-07-01")!
         let planA = DailyEngine.planForToday(
             today: day, intention: .ourDesire, profile: nil,
-            checkIns: [], plans: [:], history: [], signals: .empty,
+            plans: [:], history: [], signals: .empty,
             coupleRole: .partnerOne
         )
         // Partner B's device plans the SAME calendar day independently.
         let planB = DailyEngine.planForToday(
             today: day, intention: .ourDesire, profile: nil,
-            checkIns: [], plans: [:], history: [], signals: .empty,
+            plans: [:], history: [], signals: .empty,
             coupleRole: .partnerTwo
         )
 

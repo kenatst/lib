@@ -50,14 +50,14 @@ struct DailyEngineSimulationTests {
 
             let plan = DailyEngine.planForToday(
                 today: day, intention: intention, profile: profile,
-                checkIns: [], plans: plans, history: history,
+                plans: plans, history: history,
                 signals: signals, coupleRole: nil
             )
 
             // IDEMPOTENCY: re-planning same day returns identical plan.
             let replan = DailyEngine.planForToday(
                 today: day, intention: intention, profile: profile,
-                checkIns: [], plans: [plan.id: plan], history: history,
+                plans: [plan.id: plan], history: history,
                 signals: signals, coupleRole: nil
             )
             #expect(replan == plan, "day \(offset): frozen plan mutated on re-plan")
@@ -203,7 +203,7 @@ struct DailyEngineSimulationTests {
             for offset in 0..<45 {
                 let plan = DailyEngine.planForToday(
                     today: day, intention: .ourDesire, profile: nil,
-                    checkIns: [], plans: plans, history: history,
+                    plans: plans, history: history,
                     signals: signals, coupleRole: nil
                 )
                 fingerprints.append("\(plan.id)|\(plan.theme)|\(plan.discoverContentID.key)")

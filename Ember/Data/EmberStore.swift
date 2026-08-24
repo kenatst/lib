@@ -334,34 +334,40 @@ final class EmberStore {
         return result
     }
 
-    /// Records a Return for a SPECIFIC frozen session — used when the evening
-    /// stretches past midnight, so the response lands on the day the user
-    /// actually experienced, not whichever day the clock now says.
+    /// Records a Return against a frozen session ID. Ongoing uniqueness:
+    /// one final answer per SESSION (changing your answer replaces it — the
+    /// engine trains once on the final state, never per tap).
     func recordCheckIn(_ checkIn: CheckIn, forSession sessionID: String) {
-        state.checkIns.removeAll { $0.dayNumber == checkIn.dayNumber }
-        state.checkIns.append(checkIn)
-        state.checkIns.sort { $0.dayNumber < $1.dayNumber }
+        var incoming = checkIn
+        incoming.sessionID = sessionID
+        // Ongoing uniqueness key = sessionID (never a course day number).
+        state.checkIns.removeAll { $0.sessionID == sessionID }
+        state.checkIns.append(incoming)
+
         if let index = state.sessionHistory.firstIndex(where: { $0.id == sessionID }) {
-            state.sessionHistory[index].checkInResponse = checkIn.response
-            SignalUpdater.apply(state.sessionHistory[index], to: &state.learnedSignals,
-                                today: state.sessionHistory[index].day)
+            state.sessionHistory[index].checkInResponse = incoming.response
         }
+        // Signals are a projection of history — rebuild deterministically so
+        // repeated answers can never double-train the engine.
+        state.learnedSignals = SignalProjector.rebuild(from: state.sessionHistory)
         save()
     }
 
+    /// Legacy entry point (pre-engine data + migration-era callers). Uniqueness
+    /// remains legacy dayNumber; ongoing flows must use forSession instead.
     func recordCheckIn(_ checkIn: CheckIn) {
-        state.checkIns.removeAll { $0.dayNumber == checkIn.dayNumber }
+        if let sessionID = checkIn.sessionID {
+            recordCheckIn(checkIn, forSession: sessionID)
+            return
+        }
+        state.checkIns.removeAll { $0.sessionID == nil && $0.dayNumber == checkIn.dayNumber }
         state.checkIns.append(checkIn)
         state.checkIns.sort { $0.dayNumber < $1.dayNumber }
-        // The response also lands on TODAY'S history record — feeding FUTURE
-        // plans only. Today's plan itself is already frozen and unaffected.
         if let planID = currentPlanID,
            let plan = state.dailyPlans[planID],
            let index = state.sessionHistory.firstIndex(where: { $0.id == plan.id }) {
             state.sessionHistory[index].checkInResponse = checkIn.response
-            // LEARNED SIGNALS (production loop): fold tonight's honesty into
-            // the slow-moving per-theme resonance that steers tomorrow.
-            SignalUpdater.apply(state.sessionHistory[index], to: &state.learnedSignals, today: today)
+            state.learnedSignals = SignalProjector.rebuild(from: state.sessionHistory)
         }
         save()
     }
@@ -386,7 +392,6 @@ final class EmberStore {
             today: today,
             intention: intention,
             profile: state.profile,
-            checkIns: state.checkIns,
             plans: state.dailyPlans,
             history: state.sessionHistory,
             signals: state.learnedSignals,
@@ -433,13 +438,11 @@ final class EmberStore {
     func completeTodaySession() {
         guard let planID = currentPlanID else { return }
         markMovement(.act)
-        if let index = state.sessionHistory.firstIndex(where: { $0.id == planID }),
-           !state.sessionHistory[index].completedMovements.isEmpty {
-            let wasCounted = state.sessionHistory[index].completedMovements.contains(.act)
-            if wasCounted && state.freeSessionsUsed < countCompletedSessions() {
-                state.freeSessionsUsed = countCompletedSessions()
-            }
-        }
+        // Keep the projection consistent with history after completion.
+        state.learnedSignals = SignalProjector.rebuild(from: state.sessionHistory)
+        state.freeSessionsUsed = [state.freeSessionsUsed,
+                                  state.learnedSignals.completedSessionCount,
+                                  countCompletedSessions()].max() ?? state.freeSessionsUsed
         save()
     }
 

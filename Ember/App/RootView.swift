@@ -52,9 +52,15 @@ struct RootView: View {
             DesireProfileView()
         case .home:
             HomeView()
+        case .dailySession(let sessionID):
+            DailySessionView(sessionID: sessionID)
+        case .eveningReturn(let sessionID):
+            EveningReturnView(sessionID: sessionID)
+        // LEGACY numbered routes resolve through the same views, which fall
+        // back to the current frozen plan for content.
         case .day(let number):
             DailySessionView(dayNumber: number)
-        case .eveningReturn(let dayNumber):
+        case .eveningReturnLegacy(let dayNumber):
             EveningReturnView(dayNumber: dayNumber)
         case .progress:
             ProgressArcView()

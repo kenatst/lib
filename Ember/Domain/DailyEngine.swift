@@ -63,15 +63,37 @@ nonisolated enum DailyEngine {
 
     // MARK: Dose
 
-    /// Maps the evening-honesty dose (reduced/steady/raised semantics kept)
-    /// onto the engine's gentle/steady/deeper vocabulary.
-    nonisolated static func intensity(from checkIns: [CheckIn]) -> Intensity {
-        guard let last = checkIns.max(by: { $0.dayNumber < $1.dayNumber }) else { return .steady }
-        switch last.response {
+    /// Today's dose comes from SESSION HISTORY — the most recent Return in
+    /// real calendar chronology — never from legacy day-numbered CheckIns.
+    ///
+    /// Semantics:
+    ///   * today's Return changes TOMORROW's dose (it isn't consulted for the
+    ///     plan it belongs to — that plan was frozen before the answer),
+    ///   * a missed Return is neutral: the last answered Return stands,
+    ///   * skipped days add nothing, and legacy/duplicate CheckIns can't
+    ///     distort ongoing planning because they aren't an input here.
+    nonisolated static func intensity(from history: [DailySessionRecord]) -> Intensity {
+        guard let latest = latestAnsweredRecord(in: history),
+              let response = latest.checkInResponse else { return .steady }
+        switch response {
         case .nothingChanged: return .gentle
         case .wantMore: return .deeper
         case .noticedSomething, .feltDifferent: return .steady
         }
+    }
+
+    /// The most recent session carrying a completed Return, by canonical day.
+    nonisolated static func latestAnsweredRecord(
+        in history: [DailySessionRecord]
+    ) -> DailySessionRecord? {
+        history
+            .filter { $0.checkInResponse != nil }
+            .max { lhs, rhs in
+                if lhs.day.storageKey != rhs.day.storageKey {
+                    return lhs.day.storageKey < rhs.day.storageKey
+                }
+                return lhs.id < rhs.id
+            }
     }
 
     // MARK: Planning
@@ -83,11 +105,15 @@ nonisolated enum DailyEngine {
     ///   - plans: known frozen plans (persisted store)
     ///   - history: session records (persisted store)
     ///   - signals: learned signals (persisted store)
+    /// - Parameters:
+    ///   - today: canonical local day (injectable for tests/simulations)
+    ///   - plans: known frozen plans (persisted store)
+    ///   - history: session records (persisted store) — dose + recency source
+    ///   - signals: learned signals (persisted store; a projection of history)
     static func planForToday(
         today: LocalDay,
         intention: DesireIntention,
         profile: DesireProfile?,
-        checkIns: [CheckIn],
         plans: [String: DailyPlan],
         history: [DailySessionRecord],
         signals: LearnedSignals,
@@ -98,7 +124,9 @@ nonisolated enum DailyEngine {
             return existing                       // IDEMPOTENT — never re-recommend
         }
 
-        let intensity = self.intensity(from: checkIns)
+        // DOSE SOURCE OF TRUTH: session history. The legacy [CheckIn] array
+        // no longer drives ongoing personalization.
+        let intensity = self.intensity(from: history)
         let theme = selectTheme(
             intention: intention,
             profile: profile,

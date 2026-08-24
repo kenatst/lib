@@ -10,8 +10,17 @@ nonisolated enum AppRoute: Hashable, Sendable {
     case onboarding(DesireIntention)
     case desireProfile
     case home
+
+    // ONGOING IDENTITY (004B): routes carry the frozen session ID — never a
+    // course number. Reopening today's session always lands on THIS session.
+    case dailySession(String)
+    case eveningReturn(String)
+
+    /// LEGACY numbered routes. Kept solely so migration-era deep links and
+    /// DEBUG seeding still resolve; no ongoing flow may navigate through them.
     case day(Int)
-    case eveningReturn(Int)
+    case eveningReturnLegacy(Int)
+
     case progress
     case journal
     case settings
