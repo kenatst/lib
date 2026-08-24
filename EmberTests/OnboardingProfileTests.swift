@@ -197,3 +197,55 @@ enum CompiledStringsTests {
         (try load(language: "en"), try load(language: "fr"))
     }
 }
+
+
+@Suite("Ongoing content library completeness (004)")
+struct OngoingLibraryCompletenessTests {
+
+    @Test("Every ongoing pool variant exists EN+FR")
+    func allVariantsExist() throws {
+        let catalog = try CompiledStringsTests.load()
+        for theme in DayTheme.allCases {
+            // Discover/reflect/act: 6 variants each.
+            for variant in 1...6 {
+                for movement in ["discover", "reflect", "act"] {
+                    let key = "theme.\(movement).\(theme.rawValue).\(variant)"
+                    #expect(catalog[key] != nil, "missing \(key)")
+                }
+                if variant <= 3 {
+                    #expect(catalog["theme.title.\(theme.rawValue).\(variant)"] != nil,
+                            "missing title \(variant)")
+                }
+            }
+            // Return prompts: 4 variants.
+            for variant in 1...4 {
+                let key = "theme.return.\(theme.rawValue).\(variant)"
+                #expect(catalog[key] != nil, "missing \(key)")
+            }
+        }
+        // Engine/home/paywall ongoing copy.
+        for key in ["home.today.cta", "home.today.label", "home.suggestion.line",
+                    "progress.days", "paywall.feature.ongoingGuide.name",
+                    "paywall.feature.ongoingGuide.detail", "session.reflect.held"] {
+            #expect(catalog[key] != nil, "missing ongoing key \(key)")
+        }
+    }
+
+    @Test("French translations are present and non-empty for the new pools")
+    func frenchComplete() throws {
+        let fr = try CompiledStringsTests.load(language: "fr")
+        for theme in DayTheme.allCases {
+            for variant in [4, 5, 6] {
+                for movement in ["discover", "reflect", "act"] {
+                    let key = "theme.\(movement).\(theme.rawValue).\(variant)"
+                    let value = fr[key]
+                    #expect(value != nil && !(value?.isEmpty ?? true), "FR missing for \(key)")
+                }
+            }
+            for variant in [3, 4] {
+                let key = "theme.return.\(theme.rawValue).\(variant)"
+                #expect(fr[key] != nil, "FR missing for \(key)")
+            }
+        }
+    }
+}

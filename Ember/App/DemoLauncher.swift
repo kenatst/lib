@@ -42,7 +42,8 @@ enum DemoLauncher {
             store.setCoupleRole(coupleRole == "two" ? .partnerTwo : .partnerOne)
         }
 
-        // Mark days complete (and give a couple of them reflections).
+        // Mark days complete (and give a couple of them reflections). Also
+        // seeds the ongoing engine's legacy-migrated history via migration.
         if let completed = Int(value("-ember-completed") ?? "") {
             for day in 1...max(0, min(completed, JourneyCatalog.totalDays)) {
                 store.markDayComplete(day)
@@ -70,6 +71,9 @@ enum DemoLauncher {
             let role: EmberStore.CoupleRole = (value("-ember-role") == "two") ? .partnerTwo : .partnerOne
             store.handOffNote(handedOff, from: role.other)
         }
+
+        // Freeze today's plan so QA sees exactly what users see.
+        _ = store.planForToday()
 
         // Open a specific scene.
         if let route = value("-ember-route") {
