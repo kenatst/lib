@@ -17,39 +17,21 @@ struct HomeView: View {
 
     private var intention: DesireIntention? { store.state.intention }
 
-    /// The planner's verdict for right now — the single source of "what next".
-    private var recommendation: DayRecommendation? {
-        guard let intention else { return nil }
-        return JourneyPlanner.recommend(
-            intention: intention,
-            profile: store.state.profile,
-            completedDays: store.state.completedDays,
-            checkIns: store.state.checkIns
-        )
-    }
-    private var nextDay: Int { recommendation?.dayNumber ?? 1 }
+    // ONGOING DAILY GUIDE (Mission 004): Home answers "what does EMBER
+    // suggest today?" — from the FROZEN daily plan, never a numbered course.
+    private var todayPlan: DailyPlan? { store.planForToday() }
 
-    /// Today's title in this journey's PLANNED theme sequence.
-    private var nextDayTitle: String {
-        guard let intention,
-              let day = JourneyPlanner.plannedDay(
-                number: nextDay,
-                intention: intention,
-                profile: store.state.profile,
-                checkIns: store.state.checkIns
-              ) else {
-            return String(localized: "home.title")
-        }
-        return String.ember(day.titleKey(offset: intention.poolOffset))
-    }
-    private var isJourneyComplete: Bool {
-        store.state.completedDays.count >= JourneyCatalog.totalDays
+    private var todayTitle: String {
+        guard let plan = todayPlan else { return String(localized: "home.title") }
+        return String.ember(plan.titleContentID.localizationKey)
     }
 
-    /// The most recent check-in's pacing note, shown once as a quiet line.
-    /// This is where evening honesty visibly shapes the journey.
-    private var latestPacingNoteKey: String? {
-        recommendation?.pacingNoteKey
+    /// Session lived state for the motif drawing (0…1), capped — the sketch
+    /// keeps evolving forever but the drawing API is bounded.
+    private var evolutionForProgress: Double {
+        let lived = Double(store.countCompletedSessions())
+        // Slow the pace: each session adds a little; never "complete".
+        return min(1, 0.08 + lived * 0.02)
     }
 
     var body: some View {
@@ -118,53 +100,20 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
 
             Group {
-                if isJourneyComplete {
-                    Text("progress.title")
-                        .font(Typography.editorial(.title))
-                        .foregroundStyle(Palette.ink)
-                } else {
-                    Text(String.ember("home.day.label", nextDay))
-                        .emberCaption(Palette.rose)
-                        .kerning(1.8)
-                        .textCase(.uppercase)
-
-                    Text(nextDayTitle)
-                        .font(Typography.editorial(.largeTitle))
-                        .foregroundStyle(Palette.ink)
-                        .padding(.top, Spacing.xs)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-            .padding(.top, Spacing.lg)
-
-            if isJourneyComplete {
-                Text("home.complete.today")
-                    .emberProse(.callout, color: Palette.mutedInk)
-                    .padding(.top, Spacing.sm)
-            } else {
-                // The four movements of a day, as one quiet line.
-                Text(stepSummary)
-                    .emberProse(.footnote, color: Palette.mutedInk)
-                    .padding(.top, Spacing.sm)
-            }
-
-            if let noteKey = latestPacingNoteKey,
-               store.state.completedDays.contains(nextDay - 1) {
-                Text(String.ember(noteKey))
-                    .font(Typography.editorialItalic(.footnote))
-                    .foregroundStyle(Palette.rose)
-                    .lineSpacing(3)
+                // ONGOING: no numbered course label — today's theme title only.
+                Text(todayTitle)
+                    .font(Typography.editorial(.largeTitle))
+                    .foregroundStyle(Palette.ink)
+                    .padding(.top, Spacing.lg)
                     .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, Spacing.md)
             }
 
-            EmberButton(
-                title: isJourneyComplete
-                    ? String(localized: "progress.title")
-                    : (store.state.completedDays.contains(nextDay)
-                        ? String.ember("home.resume", nextDay)
-                        : String.ember("home.begin", nextDay))
-            ) {
+            // The four movements of a day, as one quiet line.
+            Text(stepSummary)
+                .emberProse(.footnote, color: Palette.mutedInk)
+                .padding(.top, Spacing.sm)
+
+            EmberButton(title: String(localized: "home.today.cta")) {
                 beginDay()
             }
             .padding(.top, Spacing.lg)
@@ -183,13 +132,6 @@ struct HomeView: View {
             + String(localized: "home.step.reflect") + " · "
             + String(localized: "home.step.act") + " · "
             + String(localized: "home.step.return")
-    }
-
-    private var evolutionForProgress: Double {
-        let completed = Double(store.state.completedDays.count)
-        let base = completed / Double(JourneyCatalog.totalDays)
-        // Nudge slightly ahead so the motif always feels alive on the active day.
-        return min(1, base + 0.05)
     }
 
     private var emptyStateCard: some View {
@@ -254,21 +196,23 @@ struct HomeView: View {
 
     private func beginDay() {
         Haptics.selection()
-        if isJourneyComplete {
-            router.navigate(to: .progress)
-            return
-        }
-        // Value before the ask: the first three days are free, everywhere.
-        // After that, one quiet paywall stands between the user and day 4 —
-        // never blocking privacy, deletion or what they've already opened.
-        guard storeService.canOpenDay(nextDay) else {
+        // ONGOING ACCESS: gated by completed sessions, not day numbers.
+        // The calendar can never refill the allowance.
+        guard storeService.canStartDailySession(
+            completedSessions: store.countCompletedSessions()) else {
             router.navigate(to: .paywall)
             return
         }
-        if store.state.completedDays.contains(nextDay) {
-            router.navigate(to: .eveningReturn(nextDay))
+        // Freeze/open today's plan, then enter the session.
+        _ = store.planForToday()
+        let lived = store.countCompletedSessions()
+        let hasLivedToday = store.state.sessionHistory.contains {
+            $0.id == store.currentPlanID && $0.completedMovements.contains(.act)
+        }
+        if hasLivedToday {
+            router.navigate(to: .eveningReturn(lived + 1))
         } else {
-            router.navigate(to: .day(nextDay))
+            router.navigate(to: .day(lived + 1))
         }
     }
 }

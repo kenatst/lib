@@ -67,7 +67,7 @@ extension DesireIntention {
     }
 }
 
-nonisolated enum DayTheme: String, Codable, Sendable {
+nonisolated enum DayTheme: String, Codable, CaseIterable, Sendable {
     case attention      // noticing what's already there
     case anticipation   // the approach
     case body           // self-connection, ease

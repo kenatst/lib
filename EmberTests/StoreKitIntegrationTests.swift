@@ -104,7 +104,7 @@ struct StoreKitIntegrationTests {
         var activeVisible = false
         for _ in 0..<30 {
             await service.refreshEntitlementFromHistoryForTesting()
-            if service.entitlement.isActive && service.isUnlocked(.fullJourney) {
+            if service.entitlement.isActive && service.isUnlocked(.ongoingGuide) {
                 activeVisible = true
                 break
             }
@@ -122,7 +122,7 @@ struct StoreKitIntegrationTests {
         var recovered = false
         for _ in 0..<60 {
             await reinstalled.refreshEntitlementFromHistoryForTesting()
-            if reinstalled.isUnlocked(.fullJourney) { recovered = true; break }
+            if reinstalled.isUnlocked(.ongoingGuide) { recovered = true; break }
             try? await Task.sleep(for: .milliseconds(100))
         }
         #expect(recovered, "entitlement must survive relaunch")
@@ -142,7 +142,7 @@ struct StoreKitIntegrationTests {
         var expiredVisible = false
         for _ in 0..<30 {
             await service.refreshEntitlementFromHistoryForTesting()
-            if !service.isUnlocked(.fullJourney) { expiredVisible = true; break }
+            if !service.isUnlocked(.ongoingGuide) { expiredVisible = true; break }
             try? await Task.sleep(for: .milliseconds(100))
         }
         #expect(expiredVisible, "expiry must remove premium access")
@@ -179,12 +179,12 @@ struct StoreKitIntegrationTests {
         var revokedSeen = false
         var sawActiveBefore = service.entitlement.isActive
         for _ in 0..<60 {
-            if !service.entitlement.isActive || !service.isUnlocked(.fullJourney) {
+            if !service.entitlement.isActive || !service.isUnlocked(.ongoingGuide) {
                 revokedSeen = true
                 break
             }
             await service.refreshEntitlementFromHistoryForTesting()
-            if !service.entitlement.isActive || !service.isUnlocked(.fullJourney) {
+            if !service.entitlement.isActive || !service.isUnlocked(.ongoingGuide) {
                 revokedSeen = true
                 break
             }
@@ -192,7 +192,7 @@ struct StoreKitIntegrationTests {
         }
         #expect(revokedSeen, "refund must deactivate premium (updates or entitlements)")
         #expect(sawActiveBefore, "sanity: purchase was active before refund")
-        #expect(!service.isUnlocked(.fullJourney))
+        #expect(!service.isUnlocked(.ongoingGuide))
 
         // Refund is never punitive: the free preview remains open.
         #expect(service.canOpenDay(1))
@@ -204,7 +204,7 @@ struct StoreKitIntegrationTests {
         var stillRevoked = false
         for _ in 0..<20 {
             await relaunched.refreshEntitlementFromHistoryForTesting()
-            if !relaunched.isUnlocked(.fullJourney) { stillRevoked = true; break }
+            if !relaunched.isUnlocked(.ongoingGuide) { stillRevoked = true; break }
             try? await Task.sleep(for: .milliseconds(100))
         }
         #expect(stillRevoked, "revoked entitlement must not unlock on relaunch")

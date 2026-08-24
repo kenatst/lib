@@ -56,7 +56,7 @@ struct EntitlementEngineTests {
         )
         // isActive flag may still be set (StoreKit hasn't notified yet), but the
         // time-aware gate refuses.
-        #expect(!EntitlementEngine.isUnlocked(.fullJourney, in: state, now: now))
+        #expect(!EntitlementEngine.isUnlocked(.ongoingGuide, in: state, now: now))
         #expect(!EntitlementEngine.canOpenDay(4, entitlement: state, now: now))
     }
 

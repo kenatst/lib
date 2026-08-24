@@ -7,7 +7,7 @@ import Foundation
 // what a transaction MEANS, `StoreService` only reports what happened.
 
 nonisolated enum PremiumFeature: String, CaseIterable, Sendable {
-    case fullJourney          // all 21 days beyond the free preview
+    case ongoingGuide         // the ongoing daily guide beyond the free allowance
     case adaptivePlanner      // check-in-driven adaptation & emphasized variants
     case journal              // private reflections archive
     case coupleMode           // Our Desire spaces + asymmetric steps
@@ -68,17 +68,21 @@ nonisolated enum EntitlementEngine {
         return true
     }
 
-    /// Free preview: days 1–3 demonstrate the full experience (Discover,
-    /// Reflect, Act, Return) on any journey. Everything beyond is premium.
+    /// Free preview: the first few completed daily sessions demonstrate the
+    /// full experience on any journey. Ongoing access beyond that is premium.
+    /// Day NUMBERS no longer exist as product logic; this constant remains
+    /// only for legacy-day compatibility during migration.
     nonisolated static let freeDayLimit = 3
+    nonisolated static let freeSessionAllowance = AccessPolicy.freeSessionAllowance
 
-    static func isFreeDay(_ dayNumber: Int) -> Bool {
+    nonisolated static func isFreeDay(_ dayNumber: Int) -> Bool {
         dayNumber <= freeDayLimit
     }
 
-    /// The honest gate answer for "can this user live this day?".
     static func canOpenDay(_ dayNumber: Int, entitlement: EntitlementState, now: Date) -> Bool {
-        isFreeDay(dayNumber) || isUnlocked(.fullJourney, in: entitlement, now: now)
+        // Legacy numbered-day flow (pre-daily-engine routes). New gating for
+        // ongoing sessions lives in AccessPolicy/completedSessions.
+        isFreeDay(dayNumber) || isUnlocked(.ongoingGuide, in: entitlement, now: now)
     }
 }
 

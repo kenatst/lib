@@ -28,7 +28,7 @@ final class EmberStore {
 
     nonisolated struct PersistedState: Codable, Equatable, Sendable {
         /// Bump on any breaking model change; migrate in `load`.
-        var schemaVersion: Int = 3
+        var schemaVersion: Int = 4
         /// Adult-content confirmation (18+), set once on first launch.
         var ageConfirmed: Bool = false
         var intention: DesireIntention?
@@ -52,6 +52,19 @@ final class EmberStore {
         var reminderMinute: Int = 20
         /// Unsaved in-progress reflections keyed by "<space>:day.<n>".
         var drafts: [String: String] = [:]
+
+        // MARK: Daily Engine (v4) — ongoing daily guide
+
+        /// Frozen plans by plan ID ("<localDay>#<intention>"). Today's plan
+        /// lives here; it is NEVER regenerated once present.
+        var dailyPlans: [String: DailyPlan] = [:]
+        /// Ongoing session history — what actually happened each day.
+        var sessionHistory: [DailySessionRecord] = []
+        /// Slow-moving learned signals per theme (the evolving profile).
+        var learnedSignals: LearnedSignals = .empty
+        /// Number of completed daily sessions charged against the free
+        /// allowance. Never resets on its own; a calendar day cannot refill it.
+        var freeSessionsUsed: Int = 0
 
         static let empty = PersistedState()
     }
@@ -117,12 +130,16 @@ final class EmberStore {
     nonisolated static let quarantineSuffix = ".unreadable"
     private let directory: URL
     private let files: any FileOperating
+    /// Calendar for local-day identity. Injected so tests can simulate
+    /// midnight crossings, DST boundaries and timezone travel deterministically.
+    private let calendar: Calendar
 
     var hasJourney: Bool { state.intention != nil }
 
-    init(directory: URL? = nil, files: (any FileOperating)? = nil) {
+    init(directory: URL? = nil, files: (any FileOperating)? = nil, calendar: Calendar? = nil) {
         self.directory = directory ?? Self.defaultDirectory()
         self.files = files ?? DefaultFileOperator()
+        self.calendar = calendar ?? .current
         let outcome = Self.loadState(from: self.directory, files: self.files)
         // Unreadable/corrupt starts hold an empty PLACEHOLDER in memory only;
         // every write path is blocked until a real load succeeds.
@@ -252,7 +269,96 @@ final class EmberStore {
         state.checkIns.removeAll { $0.dayNumber == checkIn.dayNumber }
         state.checkIns.append(checkIn)
         state.checkIns.sort { $0.dayNumber < $1.dayNumber }
+        // The response also lands on TODAY'S history record — feeding FUTURE
+        // plans only. Today's plan itself is already frozen and unaffected.
+        if let planID = currentPlanID,
+           let plan = state.dailyPlans[planID],
+           let index = state.sessionHistory.firstIndex(where: { $0.id == plan.id }) {
+            state.sessionHistory[index].checkInResponse = checkIn.response
+        }
         save()
+    }
+
+    // MARK: Daily Engine
+
+    /// The plan ID for today under the current intention.
+    var currentPlanID: String? {
+        guard let intention = state.intention else { return nil }
+        return DailyEngine.planID(day: today, intention: intention)
+    }
+
+    /// Today, in the user's calendar (identity calendar injected at init).
+    var today: LocalDay { LocalCalendar.day(for: Date(), in: calendar) }
+
+    /// IDEMPOTENT today access: returns the frozen plan for today, creating
+    /// it only if absent. Opening the app 20 times returns identical plans.
+    @discardableResult
+    func planForToday() -> DailyPlan? {
+        guard let intention = state.intention else { return nil }
+        let plan = DailyEngine.planForToday(
+            today: today,
+            intention: intention,
+            profile: state.profile,
+            checkIns: state.checkIns,
+            plans: state.dailyPlans,
+            history: state.sessionHistory,
+            signals: state.learnedSignals,
+            coupleRole: state.coupleRole.map {
+                $0 == .partnerOne ? CoupleSpace.partnerOne : .partnerTwo
+            }
+        )
+        if state.dailyPlans[plan.id] == nil {
+            // Freeze it — first creation only.
+            state.dailyPlans[plan.id] = plan
+            // Record that these content units were served (cooldown bookkeeping).
+            if let index = state.sessionHistory.firstIndex(where: { $0.id == plan.id }) {
+                state.sessionHistory[index].servedIDs.formUnion(plan.allContentKeys)
+            } else {
+                state.sessionHistory.append(DailySessionRecord(
+                    id: plan.id,
+                    day: plan.day,
+                    intention: plan.intention,
+                    theme: plan.theme,
+                    servedIDs: plan.allContentKeys
+                ))
+            }
+            save()
+        }
+        return plan
+    }
+
+    /// Marks a movement complete on today's record. Never touches the plan.
+    func markMovement(_ movement: Movement, complete: Bool = true) {
+        guard let planID = currentPlanID else { return }
+        if let index = state.sessionHistory.firstIndex(where: { $0.id == planID }) {
+            if complete {
+                state.sessionHistory[index].completedMovements.insert(movement)
+            } else {
+                state.sessionHistory[index].completedMovements.remove(movement)
+            }
+            save()
+        }
+    }
+
+    /// A daily session is COMPLETE when its Act has been lived (Discover +
+    /// Act minimum; Return is evening and optional). Drives free-allowance
+    /// counting and history — not any finite completion.
+    func completeTodaySession() {
+        guard let planID = currentPlanID else { return }
+        markMovement(.act)
+        if let index = state.sessionHistory.firstIndex(where: { $0.id == planID }),
+           !state.sessionHistory[index].completedMovements.isEmpty {
+            let wasCounted = state.sessionHistory[index].completedMovements.contains(.act)
+            if wasCounted && state.freeSessionsUsed < countCompletedSessions() {
+                state.freeSessionsUsed = countCompletedSessions()
+            }
+        }
+        save()
+    }
+
+    /// Sessions with a completed Act — the real "days lived" measure.
+    func countCompletedSessions() -> Int {
+        state.sessionHistory.filter { $0.completedMovements.contains(.act) }.count
     }
 
     func setAgeConfirmed() {
@@ -432,7 +538,8 @@ final class EmberStore {
         return LoadOutcome(state: nil, status: .unavailable(.corruptQuarantined))
     }
 
-    /// Schema migrations, oldest → current. Pure and ordered.
+    /// Schema migrations, oldest → current. Pure, ordered and IDEMPOTENT:
+    /// running twice yields the same state as running once.
     nonisolated static func applyMigrations(to state: inout PersistedState) {
         // v1→v3: legacy single-space reflections move into their owner's
         // space. MERGES rather than replaces — if a newer field already has
@@ -447,7 +554,63 @@ final class EmberStore {
             state.reflectionsBySpace[space] = target
             state.reflections = [:]
         }
+
+        // v3→v4 (Daily Engine): the finite 21-day course becomes an ongoing
+        // daily guide. Legacy numbered history is preserved HONESTLY as
+        // session records flagged with their legacy day number — no invented
+        // calendar dates. Check-ins migrate onto the same records so learned
+        // signals can be seeded from real history without fabrication.
+        if state.schemaVersion < 4 {
+            if let intention = state.intention {
+                let existingIDs = Set(state.sessionHistory.map(\.id))
+                // Order preserved: check-ins stay attached to their day.
+                let responsesByDay = Dictionary(uniqueKeysWithValues:
+                    state.checkIns.map { ($0.dayNumber, $0.response) })
+                for dayNumber in state.completedDays.sorted() where dayNumber >= 1 && dayNumber <= 21 {
+                    let theme = JourneyShape.shape(for: intention)
+                        .theme(for: dayNumber)
+                    let id = "legacy-day.\(dayNumber)#\(intention.rawValue)"
+                    guard !existingIDs.contains(id) else { continue }
+                    state.sessionHistory.append(DailySessionRecord(
+                        id: id,
+                        day: legacyAnchorDay(offset: dayNumber - 1),
+                        intention: intention,
+                        theme: theme,
+                        servedIDs: [],
+                        completedMovements: [.discover, .reflect, .act],
+                        checkInResponse: responsesByDay[dayNumber],
+                        legacyDayNumber: dayNumber
+                    ))
+                }
+            }
+            // Seed the free-allowance counter from lived sessions so an
+            // existing user is not accidentally reset to "brand new free".
+            if state.freeSessionsUsed < state.completedDays.count {
+                state.freeSessionsUsed = state.completedDays.count
+            }
+            // Seed learned signals from migrated history (bounded, slow).
+            if state.learnedSignals == .empty {
+                var signals = LearnedSignals.empty
+                let today = LocalCalendar.today(in: .current)
+                for record in state.sessionHistory {
+                    SignalUpdater.apply(record, to: &signals, today: today)
+                }
+                state.learnedSignals = signals
+            }
+        }
+
         state.schemaVersion = PersistedState.empty.schemaVersion
+    }
+
+    /// Honest anchor for legacy records: the epoch of the daily engine, plus
+    /// the legacy position. These dates say "on or before launch of the
+    /// ongoing engine", never a claimed real calendar day. Deterministic;
+    /// ordering by legacy number is preserved.
+    private nonisolated static func legacyAnchorDay(offset: Int) -> LocalDay {
+        let base = LocalDay(storageKey: "2026-01-01")
+        var day = base
+        for _ in 0..<max(0, offset) { day = day.next() }
+        return day
     }
 }
 

@@ -19,22 +19,20 @@ struct EveningReturnView: View {
 
     private var intention: DesireIntention? { store.state.intention }
 
-    private var day: JourneyDay? {
-        guard let intention else { return JourneyCatalog.day(dayNumber) }
-        // The PLANNED day: theme possibly reordered within bounded adaptation.
-        return JourneyPlanner.plannedDay(
-            number: dayNumber,
-            intention: intention,
-            profile: store.state.profile,
-            checkIns: store.state.checkIns
-        )
+    // CURRENT-DAY IMMUTABILITY (Mission 004): tonight's prompt comes from the
+    // FROZEN plan. Recording this evening's response below can never change
+    // what is displayed here — the plan was frozen this morning.
+    private var plan: DailyPlan? { store.planForToday() }
+
+    private var returnPromptKey: String? {
+        plan?.returnPromptID.localizationKey
     }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                if let day {
-                    Text(String.ember(day.returnPromptKey))
+                if let promptKey = returnPromptKey {
+                    Text(String.ember(promptKey))
                         .font(Typography.editorial(.largeTitle))
                         .foregroundStyle(Palette.ink)
                         .lineSpacing(6)
@@ -108,6 +106,8 @@ struct EveningReturnView: View {
             response = candidate
         }
         // Save immediately — one tap is enough; no "submit" ceremony.
+        // This response updates HISTORY + learned signals; the frozen plan on
+        // screen is untouched. It can only influence TOMORROW.
         store.recordCheckIn(
             CheckIn(dayNumber: dayNumber, response: candidate, date: .now)
         )

@@ -32,34 +32,27 @@ struct DailySessionView: View {
         case act = 2
     }
 
-    private var day: JourneyDay? {
-        guard let intention else { return JourneyCatalog.day(dayNumber) }
-        // The PLANNED day: theme possibly reordered within bounded adaptation.
-        return JourneyPlanner.plannedDay(
-            number: dayNumber,
-            intention: intention,
-            profile: store.state.profile,
-            checkIns: store.state.checkIns
-        )
+    // TODAY IS SNAPSHOTTED (Mission 004): everything on screen resolves from
+    // the FROZEN DailyPlan — never recomputed from mutable state. Tonight's
+    // check-in cannot retroactively change what today shows.
+    private var plan: DailyPlan? {
+        store.planForToday()
     }
     private var intention: DesireIntention? { store.state.intention }
 
-    /// The planner's verdict for this exact day — drives emphasized variants.
-    private var recommendation: DayRecommendation? {
-        guard let intention else { return nil }
-        return JourneyPlanner.recommend(
-            intention: intention,
-            profile: store.state.profile,
-            completedDays: store.state.completedDays,
-            checkIns: store.state.checkIns
-        )
+    private var day: JourneyDay? {
+        guard let plan else { return nil }
+        // Motif evolution still needs a 0…1 position for the sketch; derive it
+        // from session history count (ongoing), capped for the drawing API.
+        let lived = store.countCompletedSessions()
+        let evolutionSlot = (lived % 21)
+        return JourneyDay(number: max(1, evolutionSlot), week: min(3, evolutionSlot / 7 + 1), theme: plan.theme)
     }
 
-    /// True when the planner is currently emphasizing THIS day's theme —
-    /// then the session serves the deeper authored variant of the pool.
+    /// True when the frozen plan emphasizes its own theme — deeper variant.
     private var isThemeEmphasized: Bool {
-        guard let day, let recommendation else { return false }
-        return recommendation.emphasizedThemes.contains(day.theme)
+        guard let plan else { return false }
+        return plan.emphasizedThemes.contains(plan.theme)
     }
 
     var body: some View {
@@ -123,12 +116,13 @@ struct DailySessionView: View {
                 .frame(maxWidth: .infinity)
             }
         ) {
-            Text(String.ember(day.titleKey(offset: intention.poolOffset)))
+            // FROZEN PLAN CONTENT: resolved from the plan's stable IDs.
+            Text(String.ember(plan!.titleContentID.localizationKey))
                 .font(Typography.editorial(.title))
                 .foregroundStyle(Palette.wine)
                 .padding(.bottom, Spacing.md)
 
-            Text(String.ember(day.discoverKey(offset: intention.poolOffset, emphasizing: isThemeEmphasized)))
+            Text(String.ember(plan!.discoverContentID.localizationKey))
                 .emberProse(.title3)
         } cta: {
             nextButton("common.continue") {
@@ -142,7 +136,7 @@ struct DailySessionView: View {
             eyebrowKey: "session.step.reflect.title",
             motif: { EmptyView() }
         ) {
-            EditorialQuote(text: String(localized: String.LocalizationValue(day.reflectKey(offset: intention?.poolOffset ?? 0, emphasizing: isThemeEmphasized))))
+            EditorialQuote(text: String.ember(plan!.reflectContentID.localizationKey))
         } cta: {
             VStack(alignment: .leading, spacing: Spacing.md) {
                 reflectionField
@@ -197,12 +191,18 @@ struct DailySessionView: View {
                 .opacity(0.6)
             }
         ) {
-            if store.state.intention == .ourDesire {
-                // OUR DESIRE: the Act is today's asymmetric couple step.
+            if store.state.intention == .ourDesire,
+               let space = store.state.coupleRole.map({ $0 == .partnerOne ? CoupleSpace.partnerOne : .partnerTwo }),
+               let assignment = plan?.coupleAssignmentIDs?[space] {
+                // OUR DESIRE: the frozen plan's asymmetric assignment for THIS role.
+                Text(String.ember(assignment.localizationKey))
+                    .emberProse(.title3)
+            } else if store.state.intention == .ourDesire {
+                // Legacy fallback: the authored per-day pair (migration era).
                 Text(String.ember("couple.asymmetric.day.\(dayNumber).\(store.state.coupleRole?.rawValue ?? "partnerOne")"))
                     .emberProse(.title3)
             } else {
-                Text(String.ember(day.actKey(offset: intention?.poolOffset ?? 0, emphasizing: isThemeEmphasized)))
+                Text(String.ember(plan!.actContentID.localizationKey))
                     .emberProse(.title3)
             }
         } cta: {
@@ -275,7 +275,10 @@ struct DailySessionView: View {
 
     private func completeDay() {
         saveReflectionIfNeeded()
-        store.markDayComplete(dayNumber)
+        // ONGOING ENGINE: record movements + completion; no numbered course.
+        store.markMovement(.discover)
+        store.markMovement(.act)
+        store.completeTodaySession()
         Haptics.warm()
         router.replace(with: .eveningReturn(dayNumber))
     }

@@ -283,6 +283,7 @@ k("profile.cta", "Shape my journey", "Façonner mon parcours")
 k("home.wordmark", "EMBER", "EMBER")
 k("home.title", "Today", "Aujourd'hui")
 k("home.day.label", "Day %lld of 21", "Jour %lld sur 21")
+k("home.today.cta", "Begin today's session", "Commencer la séance du jour")
 k("home.begin", "Begin Day %lld", "Commencer le jour %lld")
 k("home.resume", "Continue Day %lld", "Reprendre au jour %lld")
 k("home.complete.today", "Today is complete. Resting is part of the work.",
@@ -441,10 +442,8 @@ k("persistence.banner.body.volatile",
 # Paywall (StoreKit) — one product, honest, no dark patterns
 # ---------------------------------------------------------------------------
 k("paywall.title", "EMBER Premium", "EMBER Premium")
-k("paywall.headline", "Keep the journey going.", "Continuez le parcours.")
-k("paywall.subline",
-  "The first three days are a gift. Beyond them, the full arc adapts to what your evenings tell it — privately, on this device.",
-  "Les trois premiers jours sont un cadeau. Au-delà, le parcours complet s'adapte à ce que vos soirs lui racontent — en privé, sur cet appareil.")
+k("paywall.headline", "Keep EMBER going with you.", "Gardez EMBER à vos côtés.")
+k("paywall.subline", "The first three daily sessions are a gift. Beyond them, every day keeps adapting to you — for months and years, not weeks.", "Vos trois premières séances sont un cadeau. Ensuite, chaque jour continue de s'adapter à vous — pendant des mois et des années, pas des semaines.")
 k("paywall.price.note", "One subscription. Everything included.", "Un abonnement. Tout est inclus.")
 k("paywall.cta", "Continue for %@", "Continuer — %@")
 k("paywall.price.fineprint",
@@ -479,10 +478,8 @@ k("paywall.legal.terms",
 # subscription actually gates (days 4-21). Journal, planner and couple mode
 # are free features; they are framed as "what you'll keep building on",
 # never as things the payment unlocks.
-k("paywall.feature.fullJourney.name", "The complete 21 days", "Les 21 jours complets")
-k("paywall.feature.fullJourney.detail",
-  "Every day of the arc — Noticing, Kindling, Tending — with its evening return. This is what your subscription opens.",
-  "Chaque jour du parcours — Remarquer, Attiser, Entretenir — avec son retour du soir. C'est ce que votre abonnement ouvre.")
+k("paywall.feature.ongoingGuide.name", "The ongoing daily guide", "Le guide quotidien sans fin")
+k("paywall.feature.ongoingGuide.detail", "Every day beyond your first three sessions — for as long as you use EMBER.", "Chaque jour au-delà de vos trois premières séances — aussi longtemps qu'utiliser EMBER.")
 k("paywall.feature.adaptivePlanner.name", "A journey that listens", "Un parcours qui vous écoute")
 k("paywall.feature.adaptivePlanner.detail",
   "Free for everyone: your evening check-ins reshape the days ahead. Yours continues to adapt through day 21.",

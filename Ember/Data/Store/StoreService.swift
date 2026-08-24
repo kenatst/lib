@@ -158,6 +158,16 @@ final class StoreService {
         EntitlementEngine.canOpenDay(dayNumber, entitlement: entitlement, now: now)
     }
 
+    /// Ongoing-access gate: can this user begin today's daily session?
+    /// `completedSessions` comes from EmberStore.countCompletedSessions().
+    func canStartDailySession(completedSessions: Int, now: Date = .now) -> Bool {
+        AccessPolicy.canStartDailySession(
+            completedSessions: completedSessions,
+            entitlement: entitlement,
+            now: now
+        )
+    }
+
     func isUnlocked(_ feature: PremiumFeature, now: Date = .now) -> Bool {
         EntitlementEngine.isUnlocked(feature, in: entitlement, now: now)
     }
