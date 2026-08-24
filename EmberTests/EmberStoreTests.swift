@@ -57,6 +57,22 @@ struct EmberStoreTests {
         #expect(store.state.completedDays == [1, 3])
     }
 
+    @Test("Progress counts lived sessions, not merely generated plans")
+    func generatedPlanDoesNotInflateProgress() {
+        let store = makeStore()
+        store.setIntention(.myDesire)
+        _ = store.planForToday()
+
+        #expect(store.state.sessionHistory.count == 1)
+        #expect(store.countCompletedSessions() == 0)
+
+        store.markMovement(.discover)
+        #expect(store.countCompletedSessions() == 0)
+
+        store.completeTodaySession()
+        #expect(store.countCompletedSessions() == 1)
+    }
+
     @Test("Check-in replaces the same day and keeps chronological order")
     func checkIns() {
         let store = makeStore()
