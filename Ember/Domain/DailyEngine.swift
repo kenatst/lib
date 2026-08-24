@@ -37,6 +37,9 @@ nonisolated enum CoupleSpace: String, Codable, Sendable {
 
 nonisolated enum DailyEngine {
 
+    /// Deterministic epoch for ongoing-day arithmetic (couple rotation).
+    nonisolated static let legacyEpoch = LocalDay.unchecked("2026-01-01")
+
     nonisolated enum Intensity: String, Codable, CaseIterable, Sendable {
         case gentle
         case steady
@@ -55,7 +58,7 @@ nonisolated enum DailyEngine {
 
     /// Canonical plan/session ID: "<day>#<intention>".
     nonisolated static func planID(day: LocalDay, intention: DesireIntention) -> String {
-        "\(day.storageKey)#\(intention.rawValue)"
+        "\(day.description)#\(intention.rawValue)"
     }
 
     // MARK: Dose
@@ -150,20 +153,41 @@ nonisolated enum DailyEngine {
         let dominant = profile?.dominant ?? []
         let guarded = profile?.readings.filter { $0.band == .guarded }.map(\.dimension) ?? []
 
-        // Recent themes (last 4 sessions) get a saturation penalty so the
-        // engine cannot loop on one note even when everything else loves it.
-        let recentThemes = history.suffix(4).map(\.theme)
+        // Recent themes get strong saturation penalties so the engine cannot
+        // loop on one note: yesterday −3.5, two days ago −2.5, etc. This keeps
+        // exact-content pools ahead of demand (a theme recurring every ≥3 days
+        // gives its 6-unit pool 18 days of coverage).
+        let recentSix = history.suffix(6).map(\.theme)
         var recencyPenalty: [DayTheme: Double] = [:]
-        for (index, theme) in recentThemes.reversed().enumerated() {
-            recencyPenalty[theme, default: 0] += 2.2 - Double(index) * 0.55
+        let penalties = [3.5, 2.8, 2.1, 1.5, 1.0, 0.6]
+        for theme in Set(recentSix) {
+            var penalty = 0.0
+            for (distance, p) in penalties.enumerated() {
+                if distance < recentSix.count,
+                   recentSix[recentSix.count - 1 - distance] == theme {
+                    penalty += p
+                }
+            }
+            recencyPenalty[theme] = penalty
         }
 
         // Position within the shape's arc — the engine still walks the authored
         // rhythm as its base pulse, cycling forever after the seed 21 days.
         let seedPosition = seedPosition(forToday: today, history: history, shape: shape)
 
+        // HARD NO-REPEAT RULE: neither of the two most recent sessions' themes
+        // may be chosen. A daily guide that keeps repeating its headline idea
+        // reads as broken; every other consideration yields to this. Two
+        // (not one) because skipped days can otherwise make "yesterday" a
+        // poor proxy for "recently".
+        let recentThemes = Set(history.suffix(2).map(\.theme))
+
         var scores: [DayTheme: Double] = [:]
         for theme in DayTheme.allCases {
+            if recentThemes.contains(theme) {
+                scores[theme] = -1000
+                continue
+            }
             var s = 0.0
 
             // 1. Journey affinity: each intention weights themes differently.
@@ -304,9 +328,9 @@ nonisolated enum DailyEngine {
         signals: LearnedSignals
     ) -> ContentBundle {
         func lastServedDay(_ key: String) -> Int? {
-            // Days since last serving; nil if never served.
+            // Days AGO the unit was last served; nil if never.
             for record in history.reversed() where record.servedIDs.contains(key) {
-                return record.day.days(since: today)
+                return today.days(since: record.day)
             }
             return nil
         }
@@ -330,18 +354,27 @@ nonisolated enum DailyEngine {
                     return candidate
                 }
             }
-            // All hot (small-library edge): least-recent wins anyway — rare,
-            // deliberate repetition instead of a broken promise.
+            // All soft windows hot (hot theme, finite pool): enforce a HARD
+            // one-week minimum spacing per exact unit via LRU. With a 6-unit
+            // pool this still guarantees ≥6-day gaps even under daily
+            // recurrence; the 30-day goal resumes as soon as the theme cools.
+            for candidate in ranked {
+                if (lastServedDay(candidate.key) ?? Int.max) >= 7 {
+                    return candidate
+                }
+            }
+            // Degenerate (>6 consecutive days on one theme): least-recent.
             return ranked.first ?? candidates[0]
         }
 
-        // Titles share the discover pool namespace in copy ("theme.title.<t>.<n>").
+        // Titles keep the original 3-variant pool; the rest grew to 6
+        // (returns to 4) with Mission 004's library expansion.
         return ContentBundle(
             title: pick(.discover, prefixOverride: "title", modulo: 3),
-            discover: pick(.discover, modulo: 3),
-            reflect: pick(.reflect, modulo: 3),
-            act: pick(.act, modulo: 3),
-            returnPrompt: pick(.returnPrompt, modulo: 2)
+            discover: pick(.discover, modulo: 6),
+            reflect: pick(.reflect, modulo: 6),
+            act: pick(.act, modulo: 6),
+            returnPrompt: pick(.returnPrompt, modulo: 4)
         )
     }
 
@@ -360,7 +393,7 @@ nonisolated enum DailyEngine {
         let themeOrder: [DayTheme] = [.attention, .anticipation, .body, .novelty,
                                       .communication, .play, .closeness, .autonomy]
         let themeIndex = themeOrder.firstIndex(of: theme) ?? 0
-        let seed = abs(today.days(since: LocalDay(storageKey: "2026-01-01"))) + themeIndex * 3
+        let seed = abs(today.days(since: legacyEpoch)) + themeIndex * 3
         let pairIndex = (seed % poolSize) + 1
         return [
             .partnerOne: ContentID("couple.asymmetric.pair.\(pairIndex).partnerOne"),

@@ -15,7 +15,7 @@ nonisolated struct ThemeSignal: Equatable, Sendable, Codable {
     var exposureCount: Int = 0
     var positiveResonance: Double = 0     // noticedSomething/feltDifferent/wantMore
     var lowResonance: Double = 0          // nothingChanged
-    var lastServedKey: String?            // LocalDay.storageKey of most recent exposure
+    var lastServedKey: String?            // LocalDay key (description) of most recent exposure
 }
 
 nonisolated struct LearnedSignals: Equatable, Sendable, Codable {
@@ -50,7 +50,7 @@ nonisolated enum SignalUpdater {
     ) {
         var signal = signals.themes[record.theme] ?? ThemeSignal()
         signal.exposureCount += 1
-        signal.lastServedKey = record.day.storageKey
+        signal.lastServedKey = record.day.description
 
         if let response = record.checkInResponse {
             let delta = weights[response] ?? 0

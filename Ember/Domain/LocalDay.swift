@@ -17,14 +17,33 @@ import Foundation
 // "is this the same day as that other day?"
 
 nonisolated struct LocalDay: Equatable, Comparable, Hashable, Sendable, Codable {
-    /// Canonical form "yyyy-MM-dd" in the Gregorian calendar.
+    /// Canonical form "yyyy-MM-dd" in the Gregorian calendar. Readable for
+    /// assertions and persistence; construction stays validated.
     let storageKey: String
+
+    /// Failable factory — validates and normalizes via real calendar math
+    /// (rejects e.g. 2026-02-31). Test/simulation/migration entry point.
+    nonisolated static func validating(_ key: String) -> LocalDay? {
+        parseKey(key)
+    }
 
     static func < (lhs: LocalDay, rhs: LocalDay) -> Bool {
         lhs.storageKey < rhs.storageKey
     }
 
     var description: String { storageKey }
+
+    /// Internal unchecked init for trusted internal callers (LocalCalendar,
+    /// next(), Codable). Key MUST already be canonical yyyy-MM-dd.
+    fileprivate init(unchecked key: String) {
+        self.storageKey = key
+    }
+
+    /// Same-domain trusted factory (DailyEngine epoch). Not for parsing user
+    /// or persisted data — that path is `validating(_:)`.
+    nonisolated static func unchecked(_ key: String) -> LocalDay {
+        LocalDay(unchecked: key)
+    }
 }
 
 nonisolated enum LocalCalendar {
@@ -42,7 +61,7 @@ nonisolated enum LocalCalendar {
     /// Production passes Calendar.current; tests pass fixed zones.
     static func day(for date: Date, in calendar: Calendar) -> LocalDay {
         let components = calendar.dateComponents([.year, .month, .day], from: date)
-        return LocalDay(storageKey: format(year: components.year ?? 2000,
+        return LocalDay(unchecked: LocalCalendar.format(year: components.year ?? 2000,
                                            month: components.month ?? 1,
                                            day: components.day ?? 1))
     }
@@ -68,7 +87,7 @@ extension LocalDay {
             return self
         }
         let comps = LocalCalendar.identity.dateComponents([.year, .month, .day], from: next)
-        return LocalDay(storageKey: Self.formatKey(comps))
+        return LocalDay(unchecked: Self.formatKey(comps))
     }
 
     /// Days between two LocalDays (absolute). Pure key arithmetic.
@@ -113,6 +132,6 @@ extension LocalDay {
         guard roundTrip.day == d, roundTrip.month == m, roundTrip.year == y else {
             return nil
         }
-        return LocalDay(storageKey: LocalCalendar.format(year: y, month: m, day: d))
+        return LocalDay(unchecked: LocalCalendar.format(year: y, month: m, day: d))
     }
 }

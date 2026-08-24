@@ -50,15 +50,17 @@ nonisolated enum ContentLibrary {
         var units: [ContentUnit] = []
 
         // Theme-pool units — the backbone of ongoing daily variety.
+        // Variants 1–3 are the original pools; 4–6 added by Mission 004 so
+        // cooldowns can hold over months of daily use. Returns have 4.
         for theme in DayTheme.allCases {
-            for variant in 1...3 {
-                units.append(unit("theme.title.\(theme.rawValue).\(variant)", movement: .discover, theme: theme))
-                units.append(unit("theme.discover.\(theme.rawValue).\(variant)", movement: .discover, theme: theme))
-                units.append(unit("theme.reflect.\(theme.rawValue).\(variant)", movement: .reflect, theme: theme))
-                units.append(unit("theme.act.\(theme.rawValue).\(variant)", movement: .act, theme: theme))
+            units.append(unit("theme.title.\(theme.rawValue).1", movement: .discover, theme: theme, modulo: 3))
+            for variant in 1...6 {
+                units.append(unit("theme.discover.\(theme.rawValue).\(variant)", movement: .discover, theme: theme, modulo: 6))
+                units.append(unit("theme.reflect.\(theme.rawValue).\(variant)", movement: .reflect, theme: theme, modulo: 6))
+                units.append(unit("theme.act.\(theme.rawValue).\(variant)", movement: .act, theme: theme, modulo: 6))
             }
-            for variant in 1...2 {
-                units.append(unit("theme.return.\(theme.rawValue).\(variant)", movement: .returnPrompt, theme: theme))
+            for variant in 1...4 {
+                units.append(unit("theme.return.\(theme.rawValue).\(variant)", movement: .returnPrompt, theme: theme, modulo: 4))
             }
         }
 
@@ -75,25 +77,30 @@ nonisolated enum ContentLibrary {
         return units
     }
 
-    private static func unit(_ key: String, movement: Movement, theme: DayTheme) -> ContentUnit {
+    private static func unit(_ key: String, movement: Movement, theme: DayTheme, modulo: Int = 3) -> ContentUnit {
         ContentUnit(
             id: ContentID(key),
             movement: movement,
             theme: theme,
             eligibleIntentions: [],
             intensityBand: [],
-            cooldownDays: defaultCooldown(for: movement)
+            cooldownDays: defaultCooldown(for: movement, poolSize: modulo)
         )
     }
 
-    /// Discover ideas linger longest; acts need the most breathing room.
-    nonisolated static func defaultCooldown(for movement: Movement) -> Int {
+    /// Cooldowns are sized to the POOL: with N variants and a theme recurring
+    /// every ~8 days, a 30-day promise needs N >= ceil(30/8)+1 = 5. Pools of
+    /// 6 hold comfortably; smaller pools get proportionally shorter promises
+    /// so no unit ever has to repeat "deliberately" inside its window.
+    nonisolated static func defaultCooldown(for movement: Movement, poolSize: Int = 6) -> Int {
+        let base: Int
         switch movement {
-        case .discover: 30      // an idea shouldn't repeat within a month
-        case .reflect: 14
-        case .act: 21
-        case .returnPrompt: 10
+        case .discover: base = 30
+        case .reflect: base = 20
+        case .act: base = 24
+        case .returnPrompt: base = 16
         }
+        return min(base, max(7, poolSize * 7))
     }
 
     /// Lookup: all units for one movement + theme.

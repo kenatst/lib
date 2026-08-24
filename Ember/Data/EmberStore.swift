@@ -607,7 +607,7 @@ final class EmberStore {
     /// ongoing engine", never a claimed real calendar day. Deterministic;
     /// ordering by legacy number is preserved.
     private nonisolated static func legacyAnchorDay(offset: Int) -> LocalDay {
-        let base = LocalDay(storageKey: "2026-01-01")
+        let base = LocalDay.unchecked("2026-01-01")
         var day = base
         for _ in 0..<max(0, offset) { day = day.next() }
         return day
