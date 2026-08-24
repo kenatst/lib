@@ -2,7 +2,10 @@
 """Generates Ember/Resources/Localizable.xcstrings from structured definitions.
 
 Source of truth for ALL user-facing copy (English + French).
-Run from repo root:  python3 tools/gen_strings.py [--merge tools/content_strings.py]
+Run from repo root:
+  python3 tools/gen_strings.py --merge tools/content_strings.py \\
+    --merge tools/theme_titles_discovers.py --merge tools/theme_pools.py \\
+    --merge tools/ongoing_library.py
 
 Every entry: key -> (english, french). Plurals/format use %lld / %@.
 """
@@ -35,8 +38,10 @@ k("common.ok", "OK", "OK")
 # ---------------------------------------------------------------------------
 k("welcome.tagline", "Something in you wants to feel closer.",
   "Quelque chose en vous veut se sentir plus proche.")
-k("welcome.sub", "Start with what you want back.",
-  "Commencez par ce que vous voulez retrouver.")
+k("welcome.headline", "Desire doesn't disappear.\nIt changes.",
+  "Le désir ne disparaît pas.\nIl change.")
+k("welcome.sub", "A private daily guide to notice what is moving in you — and what might move again.",
+  "Un guide quotidien et confidentiel pour observer ce qui vous anime — et ce qui pourrait vous animer à nouveau.")
 k("welcome.cta", "Begin", "Commencer")
 k("welcome.note", "Private by design. Nothing you write leaves this device.",
   "Confidentiel par nature. Rien de ce que vous écrivez ne quitte cet appareil.")
@@ -44,6 +49,7 @@ k("welcome.note", "Private by design. Nothing you write leaves this device.",
 # ---------------------------------------------------------------------------
 # Age gate
 # ---------------------------------------------------------------------------
+k("agegate.eyebrow", "For adults", "Pour adultes")
 k("agegate.title", "EMBER speaks about desire — with adults.",
   "EMBER parle de désir — avec des adultes.")
 k("agegate.body",
@@ -79,6 +85,8 @@ k("selection.begin", "Continue", "Continuer")
 k("questions.heading", "A few gentle questions, so EMBER follows your situation — not an average.",
   "Quelques questions en douceur, pour que EMBER suive votre situation — pas une moyenne.")
 k("questions.counter", "Question %lld of %lld", "Question %lld sur %lld")
+k("questions.private", "Just between us", "Rien qu'entre nous")
+k("questions.reveal.cta", "Reveal my portrait", "Découvrir mon portrait")
 k("questions.skipnote", "Answer with your gut — it knows more than you think.",
   "Répondez au ressenti — il en sait plus que vous ne croyez.")
 
@@ -170,7 +178,8 @@ k("q.our.curiosity.risky", "There, but it feels risky", "Là, mais elle semble r
 # ---------------------------------------------------------------------------
 # Desire profile
 # ---------------------------------------------------------------------------
-k("profile.title", "Your Desire Profile", "Votre profil du désir")
+k("profile.eyebrow", "A portrait, not a score", "Un portrait, pas une note")
+k("profile.title", "Here's where desire seems to meet you.", "Voici où le désir semble vous rejoindre.")
 k("profile.lede.myDesire",
   "Read this slowly. It describes your desire — no one else's.",
   "Lisez lentement. Il décrit votre désir — celui de personne d'autre.")
@@ -275,20 +284,24 @@ k("profile.dim.emotionalSafety.rich",
 k("profile.footer",
   "Desire isn't a score. It's weather. This simply maps today's climate.",
   "Le désir n'est pas une note. C'est une météo. Ceci trace simplement le climat du jour.")
-k("profile.cta", "Shape my journey", "Façonner mon parcours")
+k("profile.cta", "See what is waiting today", "Voir ce qui vous attend aujourd'hui")
 
 # ---------------------------------------------------------------------------
 # Home
 # ---------------------------------------------------------------------------
 k("home.wordmark", "EMBER", "EMBER")
 k("home.title", "Today", "Aujourd'hui")
+k("home.today.eyebrow", "Today", "Aujourd'hui")
+k("home.today.supporting", "One idea to hold, one question to notice, one invitation to carry into your day.",
+  "Une idée à garder, une question à écouter, une invitation à emporter dans votre journée.")
 k("home.day.label", "Session %lld", "Séance %lld")
-k("home.today.cta", "Begin today's session", "Commencer la séance du jour")
+k("home.today.cta", "Begin today", "Commencer aujourd'hui")
 k("home.begin", "Begin Day %lld", "Commencer le jour %lld")
 k("home.resume", "Continue Day %lld", "Reprendre au jour %lld")
 k("home.complete.today", "Today is complete. Resting is part of the work.",
   "La journée est faite. Se reposer fait partie du travail.")
 k("home.link.progress", "See the shape so far", "Voir le tracé parcouru")
+k("home.link.journal", "Open your private journal", "Ouvrir votre journal privé")
 k("home.link.settings", "Settings", "Réglages")
 k("home.step.discover", "An idea", "Une idée")
 k("home.step.reflect", "A question", "Une question")
@@ -298,12 +311,19 @@ k("home.step.return", "An evening check-in", "Un point du soir")
 # ---------------------------------------------------------------------------
 # Daily session
 # ---------------------------------------------------------------------------
+k("daily.guide.eyebrow", "Your daily guide", "Votre guide du jour")
+k("daily.movement.discover", "Discover", "Découvrir")
+k("daily.movement.reflect", "Reflect", "Réfléchir")
+k("daily.movement.act", "Act", "Agir")
+k("daily.movement.return", "Return", "Revenir")
 k("session.step.discover.title", "Discover", "Découvrir")
 k("session.step.reflect.title", "Reflect", "Se poser la question")
-k("session.step.act.title", "Experiment", "Expérimenter")
+k("session.step.act.title", "Act", "Agir")
 k("session.reflect.prompt", "If anything stirred, keep a line for yourself.",
   "Si quelque chose a remué, gardez-en une ligne pour vous.")
 k("session.reflect.placeholder", "Written here, kept here.", "Écrit ici, gardé ici.")
+k("session.reflect.privacy", "This page is yours. It is never shared automatically.",
+  "Cette page est à vous. Elle n'est jamais partagée automatiquement.")
 k("session.reflect.save", "Keep privately", "Garder pour moi")
 k("session.reflect.saved", "Kept on this device only.", "Conservé sur cet appareil uniquement.")
 k("session.reflect.held",
@@ -316,6 +336,7 @@ k("session.finish.evening.teaser", "Come back this evening for a soft landing.",
 # ---------------------------------------------------------------------------
 # Evening return
 # ---------------------------------------------------------------------------
+k("return.eyebrow", "A quiet return", "Un retour au calme")
 k("return.title", "How was it, honestly?", "Alors, honnêtement ?")
 k("return.subtitle", "No wrong answers. Your evening shapes what comes next.",
   "Aucune mauvaise réponse. Votre soir dessine la suite.")
@@ -332,18 +353,31 @@ k("return.close.day", "Close the day", "Clôturer la journée")
 # ---------------------------------------------------------------------------
 # Progress
 # ---------------------------------------------------------------------------
-k("progress.title", "The Shape So Far", "Le tracé jusqu'ici")
+k("progress.eyebrow", "Your history", "Votre histoire")
+k("progress.title", "What is unfolding", "Ce qui se dessine")
+k("progress.themes", "Themes encountered", "Thèmes rencontrés")
+k("progress.history", "In your own words", "Avec vos propres mots")
 k("progress.chapter.1", "Week one — Noticing", "Première semaine — Remarquer")
 k("progress.chapter.2", "Week two — Kindling", "Deuxième semaine — Attiser")
 k("progress.chapter.3", "Week three — Tending", "Troisième semaine — Entretenir")
 k("progress.days", "%lld sessions traced", "%lld séances tracées")
-k("progress.empty", "Your first line appears after Day One.",
-  "Votre premier trait apparaîtra après le premier jour.")
+k("progress.empty", "Your first line appears after you explore a session.",
+  "Votre premier trait apparaîtra après votre première séance.")
+k("journal.eyebrow", "Private archive", "Archives privées")
+k("journal.private", "Only your words, kept on this device.", "Vos mots seulement, conservés sur cet appareil.")
 k("journal.title", "Your Words", "Vos mots")
 k("journal.link", "Read your words", "Relire vos mots")
 k("journal.day.label", "Day %lld", "Jour %lld")
 k("journal.empty", "Nothing written yet. When a day stirs something, your words gather here — for you only.",
   "Rien pour l'instant. Quand un jour remue quelque chose, vos mots se rassemblent ici — pour vous seul.")
+k("journal.theme.attention", "Attention", "Attention")
+k("journal.theme.anticipation", "Anticipation", "Anticipation")
+k("journal.theme.body", "Body and ease", "Corps et aisance")
+k("journal.theme.novelty", "Novelty", "Nouveauté")
+k("journal.theme.communication", "Communication", "Communication")
+k("journal.theme.play", "Play", "Jeu")
+k("journal.theme.closeness", "Closeness", "Proximité")
+k("journal.theme.autonomy", "Room to choose", "Liberté de choisir")
 
 # ---------------------------------------------------------------------------
 # Settings
@@ -394,6 +428,8 @@ k("settings.language.note", "EMBER speaks English and French.",
 # ---------------------------------------------------------------------------
 # Couple mode (Our Desire)
 # ---------------------------------------------------------------------------
+k("couple.eyebrow", "Two people, one shared space", "Deux personnes, un espace partagé")
+k("couple.private.eyebrow", "Your side of the page", "Votre côté de la page")
 k("couple.setup.title", "One journey, two people", "Un parcours, deux personnes")
 k("couple.setup.body",
   "Each of you receives a private space and daily steps of your own. What you write stays yours — sharing is always a deliberate hand-off, never automatic.",
@@ -441,8 +477,9 @@ k("persistence.banner.body.volatile",
 # ---------------------------------------------------------------------------
 # Paywall (StoreKit) — one product, honest, no dark patterns
 # ---------------------------------------------------------------------------
-k("paywall.title", "EMBER Premium", "EMBER Premium")
-k("paywall.headline", "Keep EMBER going with you.", "Gardez EMBER à vos côtés.")
+k("paywall.title", "Continue with EMBER", "Continuer avec EMBER")
+k("paywall.eyebrow", "The guide continues", "Le guide continue")
+k("paywall.headline", "Keep discovering what moves you.", "Continuez à découvrir ce qui vous anime.")
 k("paywall.subline", "The first three daily sessions are a gift. Beyond them, every day keeps adapting to you — for months and years, not weeks.", "Vos trois premières séances sont un cadeau. Ensuite, chaque jour continue de s'adapter à vous — pendant des mois et des années, pas des semaines.")
 k("paywall.price.note", "One subscription. Everything included.", "Un abonnement. Tout est inclus.")
 k("paywall.cta", "Continue for %@", "Continuer — %@")
@@ -478,11 +515,11 @@ k("paywall.legal.terms",
 # subscription actually gates (days 4-21). Journal, planner and couple mode
 # are free features; they are framed as "what you'll keep building on",
 # never as things the payment unlocks.
-k("paywall.feature.ongoingGuide.name", "The ongoing daily guide", "Le guide quotidien sans fin")
+k("paywall.feature.ongoingGuide.name", "A new guide shaped around you", "Un nouveau guide façonné autour de vous")
 k("paywall.feature.ongoingGuide.detail", "Every day beyond your first three sessions — for as long as you use EMBER.", "Chaque jour au-delà de vos trois premières séances — aussi longtemps qu'utiliser EMBER.")
-k("paywall.feature.adaptivePlanner.name", "A journey that listens", "Un parcours qui vous écoute")
+k("paywall.feature.adaptivePlanner.name", "An experience that adapts over time", "Une expérience qui s'adapte au fil du temps")
 k("paywall.feature.adaptivePlanner.detail", "Free for everyone: your evening check-ins reshape the days ahead. Premium keeps that adaptation running for as long as you use EMBER.", "Gratuit pour toutes et tous : vos check-ins du soir façonnent les jours à venir. L'abonnement fait durer cette adaptation aussi longtemps qu'utiliser EMBER.")
-k("paywall.feature.journal.name", "Your private journal", "Votre journal privé")
+k("paywall.feature.journal.name", "Your private history and reflections", "Votre histoire et vos réflexions privées")
 k("paywall.feature.journal.detail",
   "Free for everyone, always: everything you've written, readable anytime, kept only here.",
   "Offert à tout le monde, pour toujours : tout ce que vous avez écrit, relisible à tout moment, conservé ici seulement.")

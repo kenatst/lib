@@ -35,16 +35,37 @@ struct DesireProfileView: View {
     @ViewBuilder
     private func content(for profile: DesireProfile) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            SketchMotifView(journey: profile.intention, evolution: 0.3)
-                .frame(width: 170, height: 190)
+            ZStack {
+                EditorialSketchView(
+                    scene: .bloom,
+                    color: Palette.intentionTint(profile.intention),
+                    wash: Palette.blush,
+                    lineWidth: 1.35
+                )
+
+                SketchMotifView(
+                    journey: profile.intention,
+                    evolution: 0.32,
+                    strokeColor: Palette.intentionTint(profile.intention),
+                    lineWidth: 1.45,
+                    inkOpacity: 0.58
+                )
+                .padding(42)
+            }
+                .frame(height: 238)
                 .frame(maxWidth: .infinity)
                 .padding(.top, Spacing.lg)
-                .opacity(appeared ? 0.9 : 0)
+                .opacity(appeared ? 1 : 0)
+
+            SectionEyebrow(key: "profile.eyebrow")
+                .padding(.top, Spacing.lg)
 
             Text("profile.title")
                 .font(Typography.editorial(.largeTitle))
                 .foregroundStyle(Palette.ink)
-                .padding(.top, Spacing.lg)
+                .lineSpacing(6)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, Spacing.sm)
                 .opacity(appeared ? 1 : 0)
                 .offset(y: appeared ? 0 : 10)
 
@@ -52,13 +73,14 @@ struct DesireProfileView: View {
                 .emberProse(.callout, color: Palette.mutedInk)
                 .padding(.top, Spacing.sm)
 
-            Text("profile.standout")
-                .emberCaption(Palette.rose)
-                .kerning(1.6)
-                .textCase(.uppercase)
+            EditorialDivider()
+                .frame(width: 54)
                 .padding(.top, Spacing.xl)
 
-            ForEach(Array(profile.readings.enumerated()), id: \.element.dimension) { index, reading in
+            SectionEyebrow(key: "profile.standout")
+                .padding(.top, Spacing.md)
+
+            ForEach(Array(profile.readings.prefix(3).enumerated()), id: \.element.dimension) { index, reading in
                 DimensionParagraph(reading: reading, delay: 0.2 + Double(index) * 0.12)
                     .padding(.top, Spacing.lg)
             }

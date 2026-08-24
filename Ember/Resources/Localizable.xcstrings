@@ -50,6 +50,22 @@
         }
       }
     },
+    "agegate.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For adults"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour adultes"
+          }
+        }
+      }
+    },
     "agegate.title": {
       "localizations": {
         "en": {
@@ -914,6 +930,22 @@
         }
       }
     },
+    "couple.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two people, one shared space"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux personnes, un espace partagé"
+          }
+        }
+      }
+    },
     "couple.handoff.placeholder": {
       "localizations": {
         "en": {
@@ -990,6 +1022,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les réflexions privées restent privées. Aucun écran, export ou rappel ne révèlera les mots d'un partenaire sans son geste explicite."
+          }
+        }
+      }
+    },
+    "couple.private.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your side of the page"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre côté de la page"
           }
         }
       }
@@ -1118,6 +1166,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "Changer d'espace"
+          }
+        }
+      }
+    },
+    "daily.guide.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your daily guide"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre guide du jour"
+          }
+        }
+      }
+    },
+    "daily.movement.act": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Act"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agir"
+          }
+        }
+      }
+    },
+    "daily.movement.discover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discover"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvrir"
+          }
+        }
+      }
+    },
+    "daily.movement.reflect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reflect"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réfléchir"
+          }
+        }
+      }
+    },
+    "daily.movement.return": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Return"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenir"
           }
         }
       }
@@ -2850,6 +2978,22 @@
         }
       }
     },
+    "home.link.journal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open your private journal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir votre journal privé"
+          }
+        }
+      }
+    },
     "home.link.progress": {
       "localizations": {
         "en": {
@@ -2999,13 +3143,29 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Begin today's session"
+            "value": "Begin today"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Commencer la séance du jour"
+            "value": "Commencer aujourd'hui"
+          }
+        }
+      }
+    },
+    "home.today.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd'hui"
           }
         }
       }
@@ -3022,6 +3182,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "AUJOURD'HUI"
+          }
+        }
+      }
+    },
+    "home.today.supporting": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One idea to hold, one question to notice, one invitation to carry into your day."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une idée à garder, une question à écouter, une invitation à emporter dans votre journée."
           }
         }
       }
@@ -3170,6 +3346,22 @@
         }
       }
     },
+    "journal.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Private archive"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archives privées"
+          }
+        }
+      }
+    },
     "journal.link": {
       "localizations": {
         "en": {
@@ -3182,6 +3374,150 @@
           "stringUnit": {
             "state": "translated",
             "value": "Relire vos mots"
+          }
+        }
+      }
+    },
+    "journal.private": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only your words, kept on this device."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos mots seulement, conservés sur cet appareil."
+          }
+        }
+      }
+    },
+    "journal.theme.anticipation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anticipation"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anticipation"
+          }
+        }
+      }
+    },
+    "journal.theme.attention": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attention"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attention"
+          }
+        }
+      }
+    },
+    "journal.theme.autonomy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Room to choose"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liberté de choisir"
+          }
+        }
+      }
+    },
+    "journal.theme.body": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Body and ease"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corps et aisance"
+          }
+        }
+      }
+    },
+    "journal.theme.closeness": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closeness"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proximité"
+          }
+        }
+      }
+    },
+    "journal.theme.communication": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Communication"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Communication"
+          }
+        }
+      }
+    },
+    "journal.theme.novelty": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novelty"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveauté"
+          }
+        }
+      }
+    },
+    "journal.theme.play": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeu"
           }
         }
       }
@@ -3314,6 +3650,22 @@
         }
       }
     },
+    "paywall.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The guide continues"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le guide continue"
+          }
+        }
+      }
+    },
     "paywall.feature.adaptivePlanner.detail": {
       "localizations": {
         "en": {
@@ -3335,13 +3687,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A journey that listens"
+            "value": "An experience that adapts over time"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un parcours qui vous écoute"
+            "value": "Une expérience qui s'adapte au fil du temps"
           }
         }
       }
@@ -3399,13 +3751,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your private journal"
+            "value": "Your private history and reflections"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Votre journal privé"
+            "value": "Votre histoire et vos réflexions privées"
           }
         }
       }
@@ -3431,13 +3783,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The ongoing daily guide"
+            "value": "A new guide shaped around you"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le guide quotidien sans fin"
+            "value": "Un nouveau guide façonné autour de vous"
           }
         }
       }
@@ -3447,13 +3799,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keep EMBER going with you."
+            "value": "Keep discovering what moves you."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gardez EMBER à vos côtés."
+            "value": "Continuez à découvrir ce qui vous anime."
           }
         }
       }
@@ -3639,13 +3991,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "EMBER Premium"
+            "value": "Continue with EMBER"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "EMBER Premium"
+            "value": "Continuer avec EMBER"
           }
         }
       }
@@ -3735,13 +4087,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Shape my journey"
+            "value": "See what is waiting today"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Façonner mon parcours"
+            "value": "Voir ce qui vous attend aujourd'hui"
           }
         }
       }
@@ -4178,6 +4530,22 @@
         }
       }
     },
+    "profile.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A portrait, not a score"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un portrait, pas une note"
+          }
+        }
+      }
+    },
     "profile.footer": {
       "localizations": {
         "en": {
@@ -4263,13 +4631,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your Desire Profile"
+            "value": "Here's where desire seems to meet you."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Votre profil du désir"
+            "value": "Voici où le désir semble vous rejoindre."
           }
         }
       }
@@ -4343,13 +4711,61 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your first line appears after Day One."
+            "value": "Your first line appears after you explore a session."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Votre premier trait apparaîtra après le premier jour."
+            "value": "Votre premier trait apparaîtra après votre première séance."
+          }
+        }
+      }
+    },
+    "progress.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your history"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre histoire"
+          }
+        }
+      }
+    },
+    "progress.history": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In your own words"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec vos propres mots"
+          }
+        }
+      }
+    },
+    "progress.themes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Themes encountered"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thèmes rencontrés"
           }
         }
       }
@@ -4359,13 +4775,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The Shape So Far"
+            "value": "What is unfolding"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le tracé jusqu'ici"
+            "value": "Ce qui se dessine"
           }
         }
       }
@@ -5282,6 +5698,38 @@
         }
       }
     },
+    "questions.private": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Just between us"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien qu'entre nous"
+          }
+        }
+      }
+    },
+    "questions.reveal.cta": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal my portrait"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvrir mon portrait"
+          }
+        }
+      }
+    },
     "questions.skipnote": {
       "localizations": {
         "en": {
@@ -5358,6 +5806,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "C'était différent"
+          }
+        }
+      }
+    },
+    "return.eyebrow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A quiet return"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un retour au calme"
           }
         }
       }
@@ -5666,6 +6130,22 @@
         }
       }
     },
+    "session.reflect.privacy": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This page is yours. It is never shared automatically."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette page est à vous. Elle n'est jamais partagée automatiquement."
+          }
+        }
+      }
+    },
     "session.reflect.prompt": {
       "localizations": {
         "en": {
@@ -5719,13 +6199,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Experiment"
+            "value": "Act"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Expérimenter"
+            "value": "Agir"
           }
         }
       }
@@ -9298,6 +9778,22 @@
         }
       }
     },
+    "welcome.headline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desire doesn't disappear.\nIt changes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le désir ne disparaît pas.\nIl change."
+          }
+        }
+      }
+    },
     "welcome.note": {
       "localizations": {
         "en": {
@@ -9319,13 +9815,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Start with what you want back."
+            "value": "A private daily guide to notice what is moving in you — and what might move again."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Commencez par ce que vous voulez retrouver."
+            "value": "Un guide quotidien et confidentiel pour observer ce qui vous anime — et ce qui pourrait vous animer à nouveau."
           }
         }
       }

@@ -55,19 +55,34 @@ struct EveningReturnView: View {
                 if capturedSessionID == nil { capturedSessionID = store.currentPlanID }
             }
             VStack(alignment: .leading, spacing: 0) {
+                EditorialSketchView(
+                    scene: saved ? .bloom : .moonThread,
+                    color: saved ? Palette.rose : Palette.wine,
+                    wash: saved ? Palette.blush : Palette.paper,
+                    lineWidth: 1.45
+                )
+                .id(saved)
+                .frame(height: 188)
+                .padding(.horizontal, Spacing.lg)
+                .padding(.top, Spacing.md)
+                .transition(.opacity)
+
+                SectionEyebrow(key: "return.eyebrow")
+                    .padding(.top, Spacing.sm)
+
                 if let promptKey = returnPromptKey {
                     Text(String.ember(promptKey))
                         .font(Typography.editorial(.largeTitle))
                         .foregroundStyle(Palette.ink)
                         .lineSpacing(6)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.top, Spacing.xl)
+                        .padding(.top, Spacing.sm)
                         .opacity(appeared ? 1 : 0)
                 } else {
                     Text("return.title")
                         .font(Typography.editorial(.largeTitle))
                         .foregroundStyle(Palette.ink)
-                        .padding(.top, Spacing.xl)
+                        .padding(.top, Spacing.sm)
                 }
 
                 Text("return.subtitle")
@@ -115,6 +130,7 @@ struct EveningReturnView: View {
             .padding(.horizontal, Spacing.md)
         }
         .scrollBounceBehavior(.basedOnSize)
+        .background(PaperBackground(tint: Palette.paper))
         .navigationBarBackButtonHidden(saved)
         .onAppear {
             guard !appeared else { return }
@@ -162,40 +178,7 @@ private struct ReturnOption: View {
     @State private var appeared = false
 
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: Spacing.sm) {
-                // Ink dot fills when chosen — quiet selection state.
-                Circle()
-                    .stroke(isSelected ? Palette.wine : Palette.rose.opacity(0.75), lineWidth: isSelected ? 1.6 : 1.4)
-                    .background(Circle().fill(Palette.cream))
-                    .frame(width: 13, height: 13)
-                    .overlay {
-                        Circle()
-                            .fill(Palette.wine)
-                            .frame(width: 6, height: 6)
-                            .opacity(isSelected ? 1 : 0)
-                    }
-
-                Text(String(localized: String.LocalizationValue(textKey)))
-                    .font(Typography.editorial(.body))
-                    .foregroundStyle(isSelected ? Palette.wine : Palette.ink)
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                Spacer(minLength: 0)
-            }
-            .padding(.vertical, 16)
-            .padding(.horizontal, Spacing.md)
-            .frame(minHeight: 52)
-            .background(
-                RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-                    .fill(isSelected ? Palette.blush.opacity(0.55) : Palette.cream.opacity(0.85))
-                    .strokeBorder(isSelected ? Palette.rose : Palette.hairline, lineWidth: 1)
-            )
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(PressableStyle())
-        .accessibilityAddTraits(isSelected ? [.isSelected] : [])
+        QuietOption(textKey: textKey, isSelected: isSelected, action: action)
         .opacity(appeared ? 1 : 0)
         .offset(x: appeared ? 0 : 14)
         .onAppear {

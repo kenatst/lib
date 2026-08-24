@@ -92,20 +92,27 @@ struct DailySessionView: View {
     // MARK: Step indicator — quiet ink ticks
 
     private var stepIndicator: some View {
-        HStack(spacing: Spacing.xs) {
-            ForEach(Step.allCases, id: \.rawValue) { s in
-                Capsule()
-                    .fill(s.rawValue <= step.rawValue ? Palette.rose : Palette.blush)
-                    .frame(width: s == step ? 22 : 12, height: 3)
+        VStack(alignment: .leading, spacing: Spacing.sm) {
+            HStack(alignment: .firstTextBaseline) {
+                SectionEyebrow(key: "daily.guide.eyebrow")
+                Spacer()
+                Text(resolvedSessionID.flatMap { store.state.dailyPlans[$0]?.day.description }
+                     ?? String.ember("home.day.label", dayNumber))
+                    .emberCaption(Palette.softRose)
             }
-            Spacer()
-            // ONGOING: sessions are labeled by date, not course number.
-            Text(resolvedSessionID.flatMap { store.state.dailyPlans[$0]?.day.description }
-                 ?? String.ember("home.day.label", dayNumber))
-                .emberCaption(Palette.softRose)
+
+            DailyStepIndicator(
+                steps: [
+                    "daily.movement.discover",
+                    "daily.movement.reflect",
+                    "daily.movement.act"
+                ],
+                currentIndex: step.rawValue
+            )
         }
         .padding(.horizontal, Spacing.md)
-        .padding(.top, Spacing.sm)
+        .padding(.top, Spacing.md)
+        .padding(.bottom, Spacing.xs)
     }
 
     // MARK: Content
@@ -130,13 +137,18 @@ struct DailySessionView: View {
         SessionStepLayout(
             eyebrowKey: "session.step.discover.title",
             motif: {
-                SketchMotifView(
-                    journey: intention,
-                    evolution: day.evolution,
-                    strokeColor: Palette.intentionTint(intention),
-                    lineWidth: 2.1
-                )
-                .frame(height: 180)
+                ZStack {
+                    InkWashShape()
+                        .fill(Palette.blush.opacity(0.38))
+                    SketchMotifView(
+                        journey: intention,
+                        evolution: day.evolution,
+                        strokeColor: Palette.intentionTint(intention),
+                        lineWidth: 2.1
+                    )
+                    .padding(Spacing.sm)
+                }
+                .frame(height: 210)
                 .frame(maxWidth: .infinity)
             }
         ) {
@@ -208,15 +220,14 @@ struct DailySessionView: View {
         SessionStepLayout(
             eyebrowKey: "session.step.act.title",
             motif: {
-                SketchMotifView(
-                    journey: store.state.intention ?? .myDesire,
-                    evolution: min(1, day.evolution + 0.06),
-                    strokeColor: Palette.intentionTint(store.state.intention ?? .myDesire),
-                    lineWidth: 1.6
+                EditorialSketchView(
+                    scene: .threshold,
+                    color: Palette.intentionTint(store.state.intention ?? .myDesire),
+                    wash: Palette.paper,
+                    lineWidth: 1.3
                 )
-                .frame(height: 120)
+                .frame(height: 150)
                 .frame(maxWidth: .infinity)
-                .opacity(0.6)
             }
         ) {
             if store.state.intention == .ourDesire,
@@ -252,25 +263,17 @@ struct DailySessionView: View {
             Text("session.reflect.prompt")
                 .emberCaption()
 
-            TextField(
-                String(localized: "session.reflect.placeholder"),
-                text: $reflection,
-                axis: .vertical
-            )
-            .lineLimit(3...6)
-            .font(Typography.editorial(.body))
-            .foregroundStyle(Palette.ink)
-            .scrollContentBackground(.hidden)
-            .padding(Spacing.md)
-            .background(
-                RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-                    .fill(Palette.cream.opacity(0.9))
-                    .strokeBorder(Palette.hairline, lineWidth: 1)
-            )
-            .autocorrectionDisabled(true)
-            .textInputAutocapitalization(.sentences)
-            .textContentType(nil)
-            .privacySensitive()
+            PaperField(placeholderKey: "session.reflect.placeholder", text: $reflection)
+
+            Label {
+                Text("session.reflect.privacy")
+                    .emberCaption(Palette.mutedInk)
+            } icon: {
+                Image(systemName: "lock")
+                    .font(.system(size: 10, weight: .light))
+                    .foregroundStyle(Palette.rose)
+            }
+            .padding(.top, 4)
         }
     }
 
@@ -370,10 +373,7 @@ private struct SessionStepLayout<Motif: View, Content: View, CTA: View>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(String.ember(eyebrowKey))
-                .emberCaption(Palette.rose)
-                .kerning(2.2)
-                .textCase(.uppercase)
+            SectionEyebrow(key: eyebrowKey)
                 .padding(.top, Spacing.lg)
 
             motif

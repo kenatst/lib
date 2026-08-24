@@ -18,6 +18,37 @@ struct JournalView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .top, spacing: Spacing.md) {
+                    VStack(alignment: .leading, spacing: Spacing.xs) {
+                        SectionEyebrow(key: "journal.eyebrow")
+                        Text("journal.title")
+                            .font(Typography.editorial(.largeTitle))
+                            .foregroundStyle(Palette.ink)
+                        Label {
+                            Text("journal.private")
+                                .emberCaption(Palette.mutedInk)
+                        } icon: {
+                            Image(systemName: "lock")
+                                .font(.system(size: 10, weight: .light))
+                                .foregroundStyle(Palette.rose)
+                        }
+                    }
+
+                    Spacer(minLength: 0)
+
+                    EditorialSketchView(
+                        scene: .ribbon,
+                        wash: Palette.paper,
+                        lineWidth: 1.15
+                    )
+                    .frame(width: 108, height: 100)
+                }
+                .padding(.top, Spacing.lg)
+
+                EditorialDivider()
+                    .frame(width: 54)
+                    .padding(.top, Spacing.md)
+
                 if entries.isEmpty {
                     Text("journal.empty")
                         .emberProse(.callout, color: Palette.mutedInk)
@@ -33,8 +64,7 @@ struct JournalView: View {
             .padding(.bottom, Spacing.xxl)
         }
         .scrollBounceBehavior(.basedOnSize)
-        .navigationTitle(Text("journal.title"))
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     @ViewBuilder
@@ -57,6 +87,12 @@ struct JournalView: View {
                 Text(dateLabel)
                     .emberCaption(Palette.rose)
                     .kerning(1.6)
+
+                if let sessionID = entry.sessionID,
+                   let theme = store.state.dailyPlans[sessionID]?.theme {
+                    Text(String.ember("journal.theme.\(theme.rawValue)"))
+                        .emberCaption(Palette.mutedInk.opacity(0.78))
+                }
             }
 
             Text(entry.text)

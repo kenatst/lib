@@ -9,62 +9,69 @@ import SwiftUI
 struct WelcomeView: View {
 
     @Environment(AppRouter.self) private var router
+    @Environment(AppState.self) private var appState
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     @State private var appeared = false
 
     var body: some View {
         GeometryReader { proxy in
-            ZStack {
-                // Motif: high in the frame, cropped softly at the leading edge.
-                SketchMotifView(journey: .theirDesire, evolution: 0.1)
-                    .frame(width: proxy.size.width * 1.05, height: 330)
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .offset(y: -60)
-                    .opacity(appeared ? 0.75 : 0)
-
+            ScrollView {
                 VStack(spacing: 0) {
-                    Spacer()
-                        .frame(maxHeight: proxy.size.height * 0.30)
-
                     Text("EMBER")
                         .font(Typography.editorial(.largeTitle))
                         .kerning(12)
                         .foregroundStyle(Palette.wine)
-                        .padding(.leading, 12)   // optically recenter tracked caps
+                        .padding(.leading, 12)
+                        .padding(.top, Spacing.lg)
 
-                    Text("welcome.tagline")
-                        .font(Typography.editorial(.title3))
-                        .italic()
+                    EditorialSketchView(scene: .profiles, wash: Palette.blush, lineWidth: 1.65)
+                        .frame(height: min(300, proxy.size.height * 0.34))
+                        .padding(.top, Spacing.sm)
+                        .opacity(appeared ? 1 : 0)
+
+                    Text("welcome.headline")
+                        .font(Typography.editorial(.largeTitle))
                         .foregroundStyle(Palette.ink)
                         .multilineTextAlignment(.center)
+                        .lineSpacing(5)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal, Spacing.lg)
-                        .padding(.top, Spacing.md)
+                        .padding(.horizontal, Spacing.md)
+                        .opacity(appeared ? 1 : 0)
+                        .offset(y: appeared ? 0 : 10)
 
                     Text("welcome.sub")
                         .emberProse(.subheadline, color: Palette.mutedInk)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, Spacing.xl)
                         .padding(.top, Spacing.xs)
 
-                    Spacer()
+                    EditorialDivider(width: 46)
+                        .frame(width: 46)
+                        .padding(.top, Spacing.lg)
 
                     VStack(spacing: Spacing.lg) {
                         EmberButton(title: String(localized: "welcome.cta")) {
                             Haptics.selection()
-                            router.navigate(to: .journeySelection)
+                            appState.activate()
+                            router.setRoot(.journeySelection)
                         }
 
                         Text("welcome.note")
                             .emberCaption()
                             .multilineTextAlignment(.center)
-                            .padding(.horizontal, Spacing.xl)
+                            .padding(.horizontal, Spacing.lg)
                     }
                     .opacity(appeared ? 1 : 0)
                     .offset(y: appeared ? 0 : 10)
-                    .padding(.bottom, Spacing.xl)
+                    .padding(.top, Spacing.xl)
+                    .padding(.horizontal, Spacing.md)
+                    .padding(.bottom, Spacing.lg)
                 }
+                .frame(minHeight: proxy.size.height)
             }
+            .scrollBounceBehavior(.basedOnSize)
         }
         .navigationBarHidden(true)
         .onAppear {
@@ -79,4 +86,5 @@ struct WelcomeView: View {
 #Preview {
     WelcomeView()
         .environment(AppRouter())
+        .environment(AppState(ageConfirmed: true))
 }
