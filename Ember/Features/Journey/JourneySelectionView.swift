@@ -29,9 +29,13 @@ struct JourneySelectionView: View {
                     .padding(.trailing, Spacing.xl)
                     .opacity(appeared ? 1 : 0)
 
+                EditorialDivider()
+                    .frame(width: 54)
+                    .padding(.top, Spacing.lg)
+
                 ForEach(Array(DesireIntention.allCases.enumerated()), id: \.element) { index, intention in
-                    JourneyOption(intention: intention, delay: 0.15 + Double(index) * 0.14)
-                        .padding(.top, Spacing.lg)
+                    JourneyOption(intention: intention, index: index, delay: 0.15 + Double(index) * 0.14)
+                        .padding(.top, index == 0 ? Spacing.md : Spacing.sm)
                 }
             }
             .padding(.horizontal, Spacing.md)
@@ -53,6 +57,7 @@ struct JourneySelectionView: View {
 private struct JourneyOption: View {
 
     let intention: DesireIntention
+    let index: Int
     let delay: TimeInterval
 
     @Environment(AppRouter.self) private var router
@@ -60,12 +65,19 @@ private struct JourneyOption: View {
 
     @State private var appeared = false
 
-    /// Editorial asymmetry: each row indents differently.
-    private var leadingInset: CGFloat {
+    private var scene: EditorialSketchScene {
         switch intention {
-        case .myDesire: return 0
-        case .theirDesire: return Spacing.lg
-        case .ourDesire: return Spacing.sm
+        case .myDesire: return .handOnHeart
+        case .theirDesire: return .profiles
+        case .ourDesire: return .almostTouching
+        }
+    }
+
+    private var wash: Color {
+        switch intention {
+        case .myDesire: return Palette.paper
+        case .theirDesire: return Palette.blush
+        case .ourDesire: return Palette.softRose.opacity(0.72)
         }
     }
 
@@ -74,48 +86,15 @@ private struct JourneyOption: View {
             Haptics.selection()
             router.navigate(to: .onboarding(intention))
         } label: {
-            VStack(alignment: .leading, spacing: 0) {
-                SketchMotifView(
-                    journey: intention,
-                    evolution: 0.08,
-                    strokeColor: Palette.intentionTint(intention),
-                    lineWidth: 1.9
-                )
-                .frame(width: 132, height: 150)
-                .frame(maxWidth: .infinity, alignment: intention == .myDesire ? .leading : .trailing)
-
-                Text(intention.displayName)
-                    .font(Typography.editorial(.title2))
-                    .foregroundStyle(Palette.ink)
-                    .padding(.top, Spacing.sm)
-
-                Text(intention.tagline)
-                    .font(Typography.editorial(.callout))
-                    .italic()
-                    .foregroundStyle(Palette.wine)
-                    .padding(.top, 4)
-
-                if intention == .theirDesire {
-                    Text("selection.their.note")
-                        .emberCaption()
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.top, Spacing.xs)
-                }
-
-                Path { path in
-                    path.move(to: CGPoint(x: 0, y: 6))
-                    path.addLine(to: CGPoint(x: 44, y: 6))
-                }
-                .stroke(Palette.softRose, style: StrokeStyle(lineWidth: 1.4, lineCap: .round))
-                .padding(.top, Spacing.sm)
+            HStack(alignment: .center, spacing: Spacing.md) {
+                if index.isMultiple(of: 2) { artwork }
+                copy
+                if !index.isMultiple(of: 2) { artwork }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, leadingInset)
-            .padding(Spacing.md)
-            .background {
-                RoundedRectangle(cornerRadius: Radius.lg, style: .continuous)
-                    .fill(Palette.cream.opacity(0.72))
-                    .strokeBorder(Palette.hairline, lineWidth: 1)
+            .padding(.vertical, Spacing.sm)
+            .overlay(alignment: .bottom) {
+                Rectangle().fill(Palette.hairline).frame(height: 1)
             }
             .contentShape(Rectangle())
         }
@@ -130,6 +109,47 @@ private struct JourneyOption: View {
                 appeared = true
             }
         }
+    }
+
+    private var artwork: some View {
+        EditorialSketchView(
+            scene: scene,
+            color: Palette.intentionTint(intention),
+            wash: wash,
+            lineWidth: 1.45
+        )
+        .frame(width: 112, height: 138)
+    }
+
+    private var copy: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Text(intention.displayName)
+                .font(Typography.editorial(.title2))
+                .foregroundStyle(Palette.ink)
+
+            Text(intention.tagline)
+                .font(Typography.editorial(.callout))
+                .italic()
+                .foregroundStyle(Palette.wine)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if intention == .theirDesire {
+                Text("selection.their.note")
+                    .emberCaption()
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            HStack(spacing: 6) {
+                Text("selection.begin")
+                    .font(Typography.ui(.caption, weight: .medium))
+                    .foregroundStyle(Palette.wine)
+                Image(systemName: "arrow.right")
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundStyle(Palette.rose)
+            }
+            .padding(.top, 3)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

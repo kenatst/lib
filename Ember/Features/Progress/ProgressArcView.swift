@@ -17,36 +17,41 @@ struct ProgressArcView: View {
     /// Sessions ever lived — ongoing measure (legacy days migrate in).
     private var completed: Int { store.state.sessionHistory.count }
 
+    private var exploredThemes: [DayTheme] {
+        var seen = Set<DayTheme>()
+        return store.state.sessionHistory.compactMap { record in
+            seen.insert(record.theme).inserted ? record.theme : nil
+        }
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                SectionEyebrow(key: "progress.eyebrow")
+                    .padding(.top, Spacing.lg)
+
                 Text("progress.title")
                     .font(Typography.editorial(.largeTitle))
                     .foregroundStyle(Palette.ink)
-                    .padding(.top, Spacing.lg)
-
-                Text(String.ember("progress.days", completed))
-                    .emberCaption(Palette.rose)
-                    .kerning(1.6)
-                    .textCase(.uppercase)
                     .padding(.top, Spacing.xs)
 
-                // The evolving motif — the emotional progress bar.
-                // ONGOING: patterns explored, not completion percentage.
-                // The motif keeps evolving slowly forever; it never "finishes".
-                SketchMotifView(
-                    journey: intention,
-                    evolution: min(1, 0.08 + Double(completed) * 0.02),
-                    strokeColor: Palette.intentionTint(intention),
-                    lineWidth: 2.5
-                )
-                .frame(height: 300)
+                Text(String.ember("progress.days", completed))
+                    .emberProse(.callout, color: Palette.mutedInk)
+                    .padding(.top, Spacing.sm)
+
+                ZStack {
+                    InkWashShape().fill(Palette.blush.opacity(0.38))
+                    SketchMotifView(
+                        journey: intention,
+                        evolution: min(1, 0.08 + Double(completed) * 0.02),
+                        strokeColor: Palette.intentionTint(intention),
+                        lineWidth: 2.5
+                    )
+                    .padding(Spacing.md)
+                }
+                .frame(height: 310)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Spacing.lg)
-
-                if !store.state.completedDays.isEmpty {
-                    chapters
-                }
 
                 if completed == 0 {
                     Text("progress.empty")
@@ -55,14 +60,29 @@ struct ProgressArcView: View {
                         .padding(.top, Spacing.md)
                 }
 
-                // LEGACY GRID: only for users who lived the numbered course.
-                // Ongoing sessions never write completedDays, so new users
-                // don't see a stale 21-slot map.
-                if !store.state.completedDays.isEmpty {
-                    dayTicks
+                if !exploredThemes.isEmpty {
+                    SectionEyebrow(key: "progress.themes")
+                        .padding(.top, Spacing.md)
+
+                    VStack(alignment: .leading, spacing: 0) {
+                        ForEach(exploredThemes, id: \.rawValue) { theme in
+                            HStack(spacing: Spacing.sm) {
+                                EditorialDivider(color: Palette.rose, width: 26)
+                                    .frame(width: 26)
+                                Text(String.ember("journal.theme.\(theme.rawValue)"))
+                                    .font(Typography.editorial(.body))
+                                    .foregroundStyle(Palette.ink)
+                            }
+                            .padding(.vertical, 9)
+                        }
+                    }
+                    .padding(.top, Spacing.sm)
                 }
 
                 if !store.allJournalEntries.isEmpty {
+                    SectionEyebrow(key: "progress.history")
+                        .padding(.top, Spacing.xl)
+
                     Button {
                         Haptics.selection()
                         router.navigate(to: .journal)
@@ -87,7 +107,7 @@ struct ProgressArcView: View {
                     .overlay(alignment: .top) {
                         Rectangle().fill(Palette.hairline).frame(height: 1)
                     }
-                    .padding(.top, Spacing.lg)
+                    .padding(.top, Spacing.sm)
                 }
             }
             .padding(.horizontal, Spacing.md)
@@ -98,57 +118,6 @@ struct ProgressArcView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    // MARK: Chapters
-
-    private var chapters: some View {
-        VStack(alignment: .leading, spacing: Spacing.md) {
-            chapterRow(1)
-            chapterRow(2)
-            chapterRow(3)
-        }
-        .padding(.top, Spacing.md)
-    }
-
-    private func chapterRow(_ week: Int) -> some View {
-        let daysInWeek = min(week * 7, JourneyCatalog.totalDays) - (week - 1) * 7
-        let chapterComplete = completed >= (week - 1) * 7 + daysInWeek
-        let chapterStarted = completed > (week - 1) * 7
-
-        return HStack(alignment: .firstTextBaseline, spacing: Spacing.sm) {
-            Circle()
-                .fill(chapterComplete ? Palette.wine : (chapterStarted ? Palette.rose : Palette.blush))
-                .frame(width: 8, height: 8)
-                .padding(.bottom, 2)
-
-            Text(String.ember("progress.chapter.\(week)"))
-                .emberProse(.callout, color: chapterStarted ? Palette.ink : Palette.mutedInk)
-
-            Spacer()
-        }
-    }
-
-    // MARK: Day ticks — one small mark per day, filled when lived.
-    // Aligned with chapter rows so the grid reads as one system.
-
-    private var dayTicks: some View {
-        VStack(alignment: .leading, spacing: Spacing.md) {
-            ForEach(0..<3) { week in
-                HStack(spacing: 12) {
-                    ForEach(0..<7) { slot in
-                        let dayNumber = week * 7 + slot + 1
-                        let isDone = store.state.completedDays.contains(dayNumber)
-                        Circle()
-                            .fill(isDone ? Palette.wine : Palette.blush)
-                            .frame(width: isDone ? 7 : 5, height: isDone ? 7 : 5)
-                    }
-                }
-                .padding(.leading, 16)   // aligns under chapter text
-            }
-        }
-        .padding(.top, Spacing.lg)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(String.ember("progress.days", completed)))
-    }
 }
 
 #Preview {

@@ -22,16 +22,21 @@ struct EmberButton: View {
     @Environment(\.isEnabled) private var isEnabled
 
     var body: some View {
-        HStack(spacing: Spacing.xs) {
-            if isLoading {
-                ProgressView()
-                    .tint(foreground)
+        Button(action: action) {
+            HStack(spacing: Spacing.xs) {
+                if isLoading {
+                    ProgressView()
+                        .tint(foreground)
+                } else if let icon {
+                    Image(systemName: icon)
+                        .font(.system(size: 15, weight: .medium))
+                }
+                Text(title)
+                    .font(Typography.ui(.body, weight: .medium))
+                    .kerning(0.3)
+                    .foregroundStyle(foreground)
             }
-            Text(title)
-                .font(Typography.ui(.body, weight: .medium))
-                .kerning(0.3)
-                .foregroundStyle(foreground)
-        }
+            .foregroundStyle(foreground)
             .padding(.vertical, 16)
             .frame(maxWidth: .infinity)
             .frame(minHeight: 52)
@@ -43,6 +48,9 @@ struct EmberButton: View {
             )
             .opacity(isEnabled ? 1 : 0.45)
             .contentShape(Rectangle())
+        }
+        .buttonStyle(PressableStyle())
+        .disabled(isLoading)
     }
 
     private var foreground: Color {

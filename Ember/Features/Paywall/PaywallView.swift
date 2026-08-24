@@ -73,18 +73,25 @@ struct PaywallView: View {
     // MARK: Pieces
 
     private var motifHeader: some View {
-        SketchMotifView(journey: .myDesire, evolution: 0.55)
-            .frame(height: 170)
+        EditorialSketchView(
+            scene: .ribbon,
+            color: Palette.wine,
+            wash: Palette.blush,
+            lineWidth: 1.55
+        )
+            .frame(height: 190)
             .frame(maxWidth: .infinity)
-            .opacity(0.9)
-            .padding(.top, Spacing.lg)
+            .padding(.top, Spacing.md)
     }
 
     private var titleBlock: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
+            SectionEyebrow(key: "paywall.eyebrow")
+
             Text("paywall.headline")
                 .font(Typography.editorial(.largeTitle))
                 .foregroundStyle(Palette.ink)
+                .lineSpacing(6)
                 .fixedSize(horizontal: false, vertical: true)
 
             Text("paywall.subline")
@@ -96,27 +103,20 @@ struct PaywallView: View {
 
     private var benefits: some View {
         VStack(alignment: .leading, spacing: Spacing.md) {
-            ForEach(PremiumFeature.allCases, id: \.rawValue) { feature in
+            ForEach(Array(PremiumFeature.allCases.prefix(3)), id: \.rawValue) { feature in
                 HStack(alignment: .firstTextBaseline, spacing: Spacing.sm) {
-                    Circle()
-                        .stroke(Palette.rose, lineWidth: 1.3)
-                        .frame(width: 8, height: 8)
-                        .padding(.top, 5)
+                    EditorialDivider(color: Palette.rose, width: 24)
+                        .frame(width: 24)
 
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(String.ember(feature.nameKey))
-                            .font(Typography.editorial(.body))
-                            .foregroundStyle(Palette.ink)
-                        Text(String.ember(feature.detailKey))
-                            .font(Typography.ui(.footnote))
-                            .foregroundStyle(Palette.mutedInk)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
+                    Text(String.ember(feature.nameKey))
+                        .font(Typography.editorial(.body))
+                        .foregroundStyle(Palette.ink)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .accessibilityElement(children: .combine)
             }
         }
-        .padding(.top, Spacing.xl)
+        .padding(.top, Spacing.lg)
     }
 
     @ViewBuilder

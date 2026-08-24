@@ -16,11 +16,27 @@ struct CoupleSetupView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                SketchMotifView(journey: .ourDesire, evolution: 0.45)
-                    .frame(height: 200)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, Spacing.lg)
-                    .opacity(0.9)
+                ZStack {
+                    EditorialSketchView(
+                        scene: .almostTouching,
+                        color: Palette.wine,
+                        wash: Palette.blush,
+                        lineWidth: 1.45
+                    )
+                    SketchMotifView(
+                        journey: .ourDesire,
+                        evolution: 0.45,
+                        lineWidth: 1.25,
+                        inkOpacity: 0.45
+                    )
+                    .padding(54)
+                }
+                .frame(height: 224)
+                .frame(maxWidth: .infinity)
+                .padding(.top, Spacing.md)
+
+                SectionEyebrow(key: "couple.eyebrow")
+                    .padding(.top, Spacing.md)
 
                 Text("couple.setup.title")
                     .font(Typography.editorial(.largeTitle))
@@ -45,11 +61,13 @@ struct CoupleSetupView: View {
                     .font(Typography.ui(.footnote))
                     .foregroundStyle(Palette.wine)
                     .lineSpacing(4)
-                    .padding(Spacing.md)
-                    .background(
-                        RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-                            .fill(Palette.blush.opacity(0.35))
-                    )
+                    .padding(.vertical, Spacing.md)
+                    .padding(.leading, Spacing.md)
+                    .padding(.trailing, Spacing.sm)
+                    .background(Palette.blush.opacity(0.32))
+                    .overlay(alignment: .leading) {
+                        Rectangle().fill(Palette.wine).frame(width: 2)
+                    }
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, Spacing.md)
 
@@ -65,34 +83,17 @@ struct CoupleSetupView: View {
                     .foregroundStyle(Palette.ink)
                     .padding(.top, Spacing.xl)
 
-                VStack(spacing: Spacing.sm) {
-                    ForEach(EmberStore.CoupleRole.allCases, id: \.rawValue) { role in
-                        Button {
+                VStack(spacing: 0) {
+                    ForEach(Array(EmberStore.CoupleRole.allCases.enumerated()), id: \.element.rawValue) { index, role in
+                        QuietOption(
+                            textKey: role.nameKey,
+                            mark: index == 0 ? "I" : "II"
+                        ) {
                             guard bothAgreed else { return }
                             Haptics.selection()
                             store.setCoupleRole(role)
                             router.replace(with: .coupleSpace)
-                        } label: {
-                            HStack {
-                                Text(String.ember(role.nameKey))
-                                    .font(Typography.editorial(.body))
-                                    .foregroundStyle(Palette.ink)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 12))
-                                    .foregroundStyle(Palette.softRose)
-                            }
-                            .padding(.vertical, 16)
-                            .padding(.horizontal, Spacing.md)
-                            .frame(minHeight: 52)
-                            .background(
-                                RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-                                    .fill(Palette.cream.opacity(0.85))
-                                    .strokeBorder(Palette.hairline, lineWidth: 1)
-                            )
-                            .contentShape(Rectangle())
                         }
-                        .buttonStyle(PressableStyle())
                         .disabled(!bothAgreed)
                         .opacity(bothAgreed ? 1 : 0.45)
                         .accessibilityHint(Text("couple.switch.space"))

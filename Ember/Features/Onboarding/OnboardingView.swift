@@ -25,34 +25,39 @@ struct OnboardingView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Progress as quiet ink marks, not bars.
-            HStack(spacing: Spacing.xs) {
-                ForEach(Array(questions.enumerated()), id: \.offset) { qIndex, _ in
-                    Capsule()
-                        .fill(qIndex < index ? Palette.rose : Palette.blush)
-                        .frame(width: qIndex == index ? 22 : 12, height: 3)
-                        .animation(Motion.gentle, value: index)
-                }
-                Spacer()
-                Text(String.ember("questions.counter", index + 1, questions.count))
-                    .emberCaption(Palette.softRose)
-            }
-            .padding(.top, Spacing.md)
+        GeometryReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(spacing: Spacing.xs) {
+                        ForEach(Array(questions.enumerated()), id: \.offset) { qIndex, _ in
+                            Capsule()
+                                .fill(qIndex <= index ? Palette.rose : Palette.blush)
+                                .frame(width: qIndex == index ? 22 : 12, height: 3)
+                        }
+                        Spacer()
+                        Text(String.ember("questions.counter", min(index + 1, questions.count), questions.count))
+                            .emberCaption(Palette.softRose)
+                    }
+                    .animation(Motion.resolved(Motion.gentle, reduceMotion: reduceMotion), value: index)
+                    .padding(.top, Spacing.md)
 
-            if index < questions.count {
-                questionView(questions[index])
-                    .id(index)
-                    .transition(directionForward
-                        ? .asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
-                                      removal: .move(edge: .leading).combined(with: .opacity))
-                        : .asymmetric(insertion: .move(edge: .leading).combined(with: .opacity),
-                                      removal: .move(edge: .trailing).combined(with: .opacity)))
-            } else {
-                completingView
+                    if index < questions.count {
+                        questionView(questions[index])
+                            .id(index)
+                            .transition(directionForward
+                                ? .asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
+                                              removal: .move(edge: .leading).combined(with: .opacity))
+                                : .asymmetric(insertion: .move(edge: .leading).combined(with: .opacity),
+                                              removal: .move(edge: .trailing).combined(with: .opacity)))
+                    } else {
+                        completingView
+                    }
+                }
+                .frame(minHeight: proxy.size.height, alignment: .top)
+                .padding(.horizontal, Spacing.md)
             }
+            .scrollBounceBehavior(.basedOnSize)
         }
-        .padding(.horizontal, Spacing.md)
         .navigationBarBackButtonHidden(index > 0 && index < questions.count)
         .toolbar {
             if index < questions.count {
@@ -72,26 +77,42 @@ struct OnboardingView: View {
 
     @ViewBuilder
     private func questionView(_ question: Onboarding.Question) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.xl) {
-            Text(String(localized: String.LocalizationValue(question.textKey)))
-                .font(Typography.editorial(.title))
-                .foregroundStyle(Palette.ink)
-                .lineSpacing(6)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.top, Spacing.xl)
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .top) {
+                SectionEyebrow(key: "questions.private")
+                    .padding(.top, Spacing.md)
+                Spacer()
+                EditorialSketchView(
+                    scene: contextualScene(for: question.id),
+                    color: Palette.intentionTint(intention),
+                    wash: Palette.paper,
+                    lineWidth: 1.25
+                )
+                .frame(width: 116, height: 96)
+            }
+            .padding(.top, Spacing.sm)
 
-            VStack(spacing: Spacing.sm) {
+            Text(String(localized: String.LocalizationValue(question.textKey)))
+                .font(Typography.editorial(.largeTitle))
+                .foregroundStyle(Palette.ink)
+                .lineSpacing(7)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, Spacing.md)
+
+            VStack(spacing: 0) {
                 ForEach(Array(question.options.enumerated()), id: \.element.id) { optionIndex, option in
                     AnswerOption(
                         textKey: option.textKey,
+                        mark: "—",
                         delay: 0.06 * Double(optionIndex)
                     ) {
                         select(option)
                     }
                 }
             }
+            .padding(.top, Spacing.xl)
 
-            Spacer(minLength: 0)
+            Spacer(minLength: Spacing.xl)
 
             Text("questions.skipnote")
                 .emberCaption(Palette.mutedInk.opacity(0.8))
@@ -105,12 +126,15 @@ struct OnboardingView: View {
     private var completingView: some View {
         VStack(spacing: 0) {
             Spacer()
-            SketchMotifView(journey: intention, evolution: 0.2)
-                .frame(width: 180, height: 210)
-                .opacity(0.7)
+            EditorialSketchView(
+                scene: .bloom,
+                color: Palette.intentionTint(intention),
+                wash: Palette.paper
+            )
+            .frame(width: 220, height: 230)
             Spacer()
 
-            EmberButton(title: String(localized: "profile.cta")) {
+            EmberButton(title: String(localized: "questions.reveal.cta")) {
                 finish()
             }
             .padding(.bottom, Spacing.lg)
@@ -125,6 +149,16 @@ struct OnboardingView: View {
     // MARK: Actions
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private func contextualScene(for question: Onboarding.QuestionID) -> EditorialSketchScene {
+        switch question {
+        case .duration: .threshold
+        case .stress: .ribbon
+        case .myState, .mySelfConnection, .myPressure: .handOnHeart
+        case .theirConnection, .theirVoice, .theirSeen: .profiles
+        case .ourRhythm, .ourTouch, .ourCuriosity: .almostTouching
+        }
+    }
 
     private func select(_ option: Onboarding.Question.Option) {
         guard index < questions.count else { return }
@@ -160,6 +194,7 @@ struct OnboardingView: View {
 private struct AnswerOption: View {
 
     let textKey: String
+    let mark: String
     let delay: TimeInterval
     let action: () -> Void
 
@@ -167,30 +202,7 @@ private struct AnswerOption: View {
     @State private var appeared = false
 
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: Spacing.sm) {
-                Circle()
-                    .stroke(Palette.rose.opacity(0.75), lineWidth: 1.4)
-                    .background(Circle().fill(Palette.cream))
-                    .frame(width: 11, height: 11)
-                Text(String(localized: String.LocalizationValue(textKey)))
-                    .font(Typography.editorial(.body))
-                    .foregroundStyle(Palette.ink)
-                    .multilineTextAlignment(.leading)
-                    .fixedSize(horizontal: false, vertical: true)
-                Spacer(minLength: 0)
-            }
-            .padding(.vertical, 16)
-            .padding(.horizontal, Spacing.md)
-            .frame(minHeight: 52)
-            .background(
-                RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-                    .fill(Palette.cream.opacity(0.85))
-                    .strokeBorder(Palette.hairline, lineWidth: 1)
-            )
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(PressableStyle())
+        QuietOption(textKey: textKey, mark: mark, action: action)
         .opacity(appeared ? 1 : 0)
         .offset(x: appeared ? 0 : 18)
         .onAppear {

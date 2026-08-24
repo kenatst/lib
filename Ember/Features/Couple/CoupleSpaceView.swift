@@ -60,10 +60,16 @@ struct CoupleSpaceView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
-            SketchMotifView(journey: .ourDesire, evolution: motifEvolution)
-                .frame(height: 150)
+            EditorialSketchView(
+                scene: .profiles,
+                color: Palette.wine,
+                wash: role == .partnerOne ? Palette.paper : Palette.blush,
+                lineWidth: 1.35
+            )
+                .frame(height: 170)
                 .frame(maxWidth: .infinity)
-                .opacity(0.85)
+
+            SectionEyebrow(key: "couple.private.eyebrow")
 
             Text(String.ember("couple.space.private", roleName))
                 .font(Typography.editorial(.title2))
@@ -71,10 +77,6 @@ struct CoupleSpaceView: View {
                 .padding(.top, Spacing.sm)
         }
         .padding(.top, Spacing.md)
-    }
-
-    private var motifEvolution: Double {
-        min(1, 0.35 + Double(store.countCompletedSessions()) * 0.02)
     }
 
     // MARK: Asymmetric step
@@ -125,12 +127,14 @@ struct CoupleSpaceView: View {
                 Text(received)
                     .emberProse(.callout, color: Palette.wine)
                     .italic()
-                    .padding(Spacing.md)
+                    .padding(.vertical, Spacing.md)
+                    .padding(.leading, Spacing.md)
+                    .padding(.trailing, Spacing.sm)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(
-                        RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-                            .fill(Palette.blush.opacity(0.4))
-                    )
+                    .background(Palette.blush.opacity(0.35))
+                    .overlay(alignment: .leading) {
+                        Rectangle().fill(Palette.rose).frame(width: 2)
+                    }
                     .padding(.top, Spacing.xs)
             }
         }
@@ -156,22 +160,10 @@ struct CoupleSpaceView: View {
                 .padding(.top, Spacing.sm)
                 .transition(.opacity)
             } else {
-                TextField(
-                    String.ember("couple.handoff.placeholder"),
+                PaperField(
+                    placeholderKey: "couple.handoff.placeholder",
                     text: $note,
-                    axis: .vertical
-                )
-                .lineLimit(2...4)
-                .font(Typography.editorial(.body))
-                .autocorrectionDisabled(true)
-                .textInputAutocapitalization(.sentences)
-                .textContentType(nil)
-                .privacySensitive()
-                .padding(Spacing.md)
-                .background(
-                    RoundedRectangle(cornerRadius: Radius.md, style: .continuous)
-                        .fill(Palette.cream.opacity(0.9))
-                        .strokeBorder(Palette.hairline, lineWidth: 1)
+                    lineLimit: 2...4
                 )
                 .padding(.top, Spacing.sm)
 

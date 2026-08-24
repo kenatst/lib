@@ -39,7 +39,7 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 0) {
                 header
                 if let intention {
-                    dayCard(for: intention)
+                    todayEditorial(for: intention)
                 } else {
                     emptyStateCard
                 }
@@ -88,50 +88,56 @@ struct HomeView: View {
     }
 
     @ViewBuilder
-    private func dayCard(for intention: DesireIntention) -> some View {
+    private func todayEditorial(for intention: DesireIntention) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            SketchMotifView(
-                journey: intention,
-                evolution: evolutionForProgress,
-                strokeColor: Palette.intentionTint(intention),
-                lineWidth: 2.3
-            )
-            .frame(height: 240)
-            .frame(maxWidth: .infinity)
+            ZStack {
+                InkWashShape()
+                    .fill(Palette.blush.opacity(0.42))
+                    .padding(.vertical, 12)
 
-            Group {
-                // ONGOING: no numbered course label — today's theme title only.
-                Text(todayTitle)
-                    .font(Typography.editorial(.largeTitle))
-                    .foregroundStyle(Palette.ink)
-                    .padding(.top, Spacing.lg)
-                    .fixedSize(horizontal: false, vertical: true)
+                SketchMotifView(
+                    journey: intention,
+                    evolution: evolutionForProgress,
+                    strokeColor: Palette.intentionTint(intention),
+                    lineWidth: 2.3
+                )
+                .padding(.horizontal, Spacing.md)
             }
+            .frame(height: 272)
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, -Spacing.md)
 
-            // The four movements of a day, as one quiet line.
-            Text(stepSummary)
-                .emberProse(.footnote, color: Palette.mutedInk)
+            SectionEyebrow(key: "home.today.eyebrow")
+                .padding(.top, Spacing.lg)
+
+            Text(todayTitle)
+                .font(Typography.editorial(.largeTitle))
+                .foregroundStyle(Palette.ink)
+                .lineSpacing(6)
                 .padding(.top, Spacing.sm)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text("home.today.supporting")
+                .emberProse(.callout, color: Palette.mutedInk)
+                .padding(.top, Spacing.sm)
+
+            DailyStepIndicator(
+                steps: [
+                    "daily.movement.discover",
+                    "daily.movement.reflect",
+                    "daily.movement.act",
+                    "daily.movement.return"
+                ],
+                currentIndex: nil
+            )
+            .padding(.top, Spacing.lg)
 
             EmberButton(title: String(localized: "home.today.cta")) {
                 beginDay()
             }
             .padding(.top, Spacing.lg)
         }
-        .padding(Spacing.lg)
-        .background(
-            RoundedRectangle(cornerRadius: Radius.lg, style: .continuous)
-                .fill(Palette.cream.opacity(0.75))
-                .strokeBorder(Palette.hairline, lineWidth: 1)
-        )
-        .padding(.top, Spacing.lg)
-    }
-
-    private var stepSummary: String {
-        String(localized: "home.step.discover") + " · "
-            + String(localized: "home.step.reflect") + " · "
-            + String(localized: "home.step.act") + " · "
-            + String(localized: "home.step.return")
+        .padding(.top, Spacing.sm)
     }
 
     private var emptyStateCard: some View {
@@ -146,21 +152,19 @@ struct HomeView: View {
             }
             .padding(.top, Spacing.sm)
         }
-        .padding(Spacing.lg)
-        .background(
-            RoundedRectangle(cornerRadius: Radius.lg, style: .continuous)
-                .fill(Palette.cream.opacity(0.75))
-                .strokeBorder(Palette.hairline, lineWidth: 1)
-        )
+        .padding(.vertical, Spacing.xl)
         .padding(.top, Spacing.lg)
     }
 
     private var footerLinks: some View {
         VStack(spacing: 0) {
             if intention == .ourDesire || store.state.coupleRole != nil {
-                footerLink(icon: "figure.2.and.child.holdinghands", titleKey: "couple.setup.title") {
+                footerLink(icon: "person.2", titleKey: "couple.setup.title") {
                     router.navigate(to: .coupleSetup)
                 }
+            }
+            footerLink(icon: "book.closed", titleKey: "home.link.journal") {
+                router.navigate(to: .journal)
             }
             footerLink(icon: "text.book.closed", titleKey: "home.link.progress") {
                 router.navigate(to: .progress)
