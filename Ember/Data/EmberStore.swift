@@ -334,6 +334,21 @@ final class EmberStore {
         return result
     }
 
+    /// Records a Return for a SPECIFIC frozen session — used when the evening
+    /// stretches past midnight, so the response lands on the day the user
+    /// actually experienced, not whichever day the clock now says.
+    func recordCheckIn(_ checkIn: CheckIn, forSession sessionID: String) {
+        state.checkIns.removeAll { $0.dayNumber == checkIn.dayNumber }
+        state.checkIns.append(checkIn)
+        state.checkIns.sort { $0.dayNumber < $1.dayNumber }
+        if let index = state.sessionHistory.firstIndex(where: { $0.id == sessionID }) {
+            state.sessionHistory[index].checkInResponse = checkIn.response
+            SignalUpdater.apply(state.sessionHistory[index], to: &state.learnedSignals,
+                                today: state.sessionHistory[index].day)
+        }
+        save()
+    }
+
     func recordCheckIn(_ checkIn: CheckIn) {
         state.checkIns.removeAll { $0.dayNumber == checkIn.dayNumber }
         state.checkIns.append(checkIn)
@@ -344,6 +359,9 @@ final class EmberStore {
            let plan = state.dailyPlans[planID],
            let index = state.sessionHistory.firstIndex(where: { $0.id == plan.id }) {
             state.sessionHistory[index].checkInResponse = checkIn.response
+            // LEARNED SIGNALS (production loop): fold tonight's honesty into
+            // the slow-moving per-theme resonance that steers tomorrow.
+            SignalUpdater.apply(state.sessionHistory[index], to: &state.learnedSignals, today: today)
         }
         save()
     }
@@ -633,8 +651,11 @@ final class EmberStore {
             if let intention = state.intention {
                 let existingIDs = Set(state.sessionHistory.map(\.id))
                 // Order preserved: check-ins stay attached to their day.
-                let responsesByDay = Dictionary(uniqueKeysWithValues:
-                    state.checkIns.map { ($0.dayNumber, $0.response) })
+                // Tolerate corrupt/duplicated persisted input: never trap.
+                let responsesByDay = Dictionary(
+                    state.checkIns.map { ($0.dayNumber, $0.response) },
+                    uniquingKeysWith: { _, new in new }
+                )
                 for dayNumber in state.completedDays.sorted() where dayNumber >= 1 && dayNumber <= 21 {
                     let theme = JourneyShape.shape(for: intention)
                         .theme(for: dayNumber)

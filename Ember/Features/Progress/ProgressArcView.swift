@@ -44,7 +44,9 @@ struct ProgressArcView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Spacing.lg)
 
-                chapters
+                if !store.state.completedDays.isEmpty {
+                    chapters
+                }
 
                 if completed == 0 {
                     Text("progress.empty")
@@ -53,7 +55,12 @@ struct ProgressArcView: View {
                         .padding(.top, Spacing.md)
                 }
 
-                dayTicks
+                // LEGACY GRID: only for users who lived the numbered course.
+                // Ongoing sessions never write completedDays, so new users
+                // don't see a stale 21-slot map.
+                if !store.state.completedDays.isEmpty {
+                    dayTicks
+                }
 
                 if !store.allJournalEntries.isEmpty {
                     Button {

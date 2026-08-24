@@ -339,3 +339,45 @@ struct DailyEngineInvariantTests {
         #expect(naivePlan.theme != learnedPlan.theme || learnedPlan.theme != .novelty)
     }
 }
+
+@MainActor
+@Suite("Production signal loop (red-team H1 regression)")
+struct ProductionSignalLoopTests {
+
+    @Test("recordCheckIn feeds learned signals — the production path works")
+    func recordCheckInUpdatesSignals() throws {
+        let dir = FileManager.default.temporaryDirectory
+            .appendingPathComponent("ember-sigloop-\(UUID().uuidString)", isDirectory: true)
+        let store = EmberStore(directory: dir)
+        defer { try? FileManager.default.removeItem(at: dir) }
+
+        store.setIntention(.theirDesire)
+        #expect(store.state.learnedSignals == .empty, "starts empty")
+
+        // Live a session, then answer tonight's Return through the REAL UI path.
+        _ = store.planForToday()
+        let theme = store.state.dailyPlans[store.currentPlanID ?? ""]?.theme ?? .attention
+        store.completeTodaySession()
+        store.recordCheckIn(CheckIn(dayNumber: 1, response: .wantMore, date: .now))
+
+        let resonance = SignalUpdater.resonance(for: theme, in: store.state.learnedSignals)
+        #expect(resonance > 0,
+                "wantMore must raise the served theme's resonance via recordCheckIn itself")
+        #expect(store.state.learnedSignals.completedSessionCount >= 1)
+    }
+
+    @Test("Migration tolerates duplicated check-in day numbers without trapping")
+    func migrationToleratesDuplicateCheckIns() {
+        var state = EmberStore.PersistedState.empty
+        state.schemaVersion = 3
+        state.intention = .myDesire
+        state.completedDays = [1, 2]
+        // Corrupt-ish history: same day answered twice.
+        state.checkIns = [
+            CheckIn(dayNumber: 1, response: .feltDifferent, date: .now),
+            CheckIn(dayNumber: 1, response: .nothingChanged, date: .now),
+        ]
+        EmberStore.applyMigrations(to: &state)
+        #expect(state.sessionHistory.count == 2, "no trap; migration completed")
+    }
+}

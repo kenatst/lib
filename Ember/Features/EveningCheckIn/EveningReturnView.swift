@@ -20,9 +20,13 @@ struct EveningReturnView: View {
     private var intention: DesireIntention? { store.state.intention }
 
     // CURRENT-DAY IMMUTABILITY (Mission 004): tonight's prompt comes from the
-    // FROZEN plan. Recording this evening's response below can never change
-    // what is displayed here — the plan was frozen this morning.
-    private var plan: DailyPlan? { store.planForToday() }
+    // FROZEN plan. The session ID is captured when the view appears so a
+    // return answered after midnight still lands on the right day.
+    @State private var capturedSessionID: String?
+    private var plan: DailyPlan? {
+        if capturedSessionID == nil { _ = store.planForToday() }
+        return store.state.dailyPlans[capturedSessionID ?? store.currentPlanID ?? ""]
+    }
 
     private var returnPromptKey: String? {
         plan?.returnPromptID.localizationKey
@@ -30,6 +34,10 @@ struct EveningReturnView: View {
 
     var body: some View {
         ScrollView {
+            Color.clear.frame(height: 0).onAppear {
+                _ = store.planForToday()
+                if capturedSessionID == nil { capturedSessionID = store.currentPlanID }
+            }
             VStack(alignment: .leading, spacing: 0) {
                 if let promptKey = returnPromptKey {
                     Text(String.ember(promptKey))
@@ -106,11 +114,14 @@ struct EveningReturnView: View {
             response = candidate
         }
         // Save immediately — one tap is enough; no "submit" ceremony.
-        // This response updates HISTORY + learned signals; the frozen plan on
-        // screen is untouched. It can only influence TOMORROW.
+        // This response updates HISTORY + learned signals against the CAPTURED
+        // session; the frozen plan on screen is untouched. Only TOMORROW bends.
+        let sessionID = capturedSessionID ?? store.currentPlanID ?? ""
         store.recordCheckIn(
-            CheckIn(dayNumber: dayNumber, response: candidate, date: .now)
+            CheckIn(dayNumber: dayNumber, response: candidate, date: .now),
+            forSession: sessionID
         )
+        if capturedSessionID == nil { capturedSessionID = sessionID }
         withAnimation(Motion.resolved(Motion.gentle, reduceMotion: reduceMotion, delay: 0.2)) {
             saved = true
         }

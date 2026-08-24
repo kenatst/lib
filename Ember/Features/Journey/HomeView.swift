@@ -198,8 +198,11 @@ struct HomeView: View {
         Haptics.selection()
         // ONGOING ACCESS: gated by completed sessions, not day numbers.
         // The calendar can never refill the allowance.
+        // Monotone counter: max of the persisted allowance usage and the
+        // derived count — un-completing a movement can never re-open free.
         guard storeService.canStartDailySession(
-            completedSessions: store.countCompletedSessions()) else {
+            completedSessions: max(store.state.freeSessionsUsed,
+                                   store.countCompletedSessions())) else {
             router.navigate(to: .paywall)
             return
         }
