@@ -147,12 +147,19 @@ final class EmberStore {
         }
     }
 
-    /// Recovery attempt after an unavailable start (e.g. device was locked at
+    /// Recovery attempt after an UNAVAILABLE start (device was locked at
     /// launch and has since been unlocked). Re-reads from disk; if the real
     /// state becomes readable it replaces whatever in-memory placeholder is
     /// present, so nothing the user did while locked is written over it.
+    ///
+    /// RELEASE INVARIANT (write truth): .volatile memory is AUTHORITATIVE —
+    /// it holds user content that never reached disk. Recovery therefore
+    /// NEVER runs while volatile: replacing that content with stale disk data
+    /// would silently destroy private writing. The volatile state heals only
+    /// through the next successful mutation (save retries on every change).
     func retryLoading() {
-        guard persistenceStatus != .ready else { return }
+        // Only a placeholder (unavailable start) may be wholesale-replaced.
+        guard case .unavailable = persistenceStatus else { return }
         let outcome = Self.loadState(from: directory, files: files)
         if outcome.status == .ready, let recovered = outcome.state {
             // Replace the in-memory placeholder wholesale: whatever the user
@@ -163,6 +170,17 @@ final class EmberStore {
         } else if case .unavailable(let reason) = outcome.status {
             persistenceStatus = .unavailable(reason)
         }
+    }
+
+    /// Explicit recovery for the volatile case: re-persists the authoritative
+    /// in-memory content to disk. Called when the environment signals that
+    /// storage may work again (scenePhase active, network/IO restoration).
+    /// Never overwrites memory with disk — the disk write is the retry.
+    @discardableResult
+    func retrySaving() -> Bool {
+        guard case .volatile = persistenceStatus else { return persistenceStatus == .ready }
+        save()
+        return persistenceStatus == .ready
     }
 
     nonisolated static func defaultDirectory() -> URL {
@@ -311,8 +329,16 @@ final class EmberStore {
 
         // VERIFY: nothing sensitive may remain. Directory absent = clean;
         // present but empty also counts (an OS can lazily recreate containers).
+        // FAILS CLOSED: an unreadable listing throws → .failed, never a
+        // false "clean" claim over surviving private bytes.
         if files.fileExists(at: directory) {
-            let leftovers = files.contentsOfDirectory(at: directory)
+            let leftovers: [String]
+            do {
+                leftovers = try files.contentsOfDirectory(at: directory)
+            } catch {
+                EmberLog.app.fault("Could not verify deletion; refusing to claim success")
+                return .failed
+            }
             guard leftovers.isEmpty else {
                 EmberLog.app.fault("Deletion left files behind; refusing to claim success")
                 return .failed
@@ -438,7 +464,9 @@ nonisolated protocol FileOperating: Sendable {
     func removeItem(at url: URL) throws
     func moveItem(at url: URL, to url2: URL) throws
     /// Names of entries in the directory (used to verify deletion success).
-    func contentsOfDirectory(at url: URL) -> [String]
+    /// Throws on IO/permission errors — deletion verification FAILS CLOSED:
+    /// an unreadable listing must never be treated as "empty = clean".
+    func contentsOfDirectory(at url: URL) throws -> [String]
 }
 
 nonisolated struct DefaultFileOperator: FileOperating {
@@ -465,7 +493,7 @@ nonisolated struct DefaultFileOperator: FileOperating {
     func moveItem(at url: URL, to destination: URL) throws {
         try FileManager.default.moveItem(at: url, to: destination)
     }
-    func contentsOfDirectory(at url: URL) -> [String] {
-        (try? FileManager.default.contentsOfDirectory(atPath: url.path)) ?? []
+    func contentsOfDirectory(at url: URL) throws -> [String] {
+        try FileManager.default.contentsOfDirectory(atPath: url.path)
     }
 }

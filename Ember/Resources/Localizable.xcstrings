@@ -5330,6 +5330,22 @@
         }
       }
     },
+    "return.held": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kept for this session — we'll save it as soon as the device lets us."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gardé pour cette session — nous l'enregistrerons dès que l'appareil le permettra."
+          }
+        }
+      }
+    },
     "return.more": {
       "localizations": {
         "en": {

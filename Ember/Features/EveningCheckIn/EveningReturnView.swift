@@ -68,10 +68,15 @@ struct EveningReturnView: View {
                 if saved {
                     VStack(alignment: .leading, spacing: Spacing.md) {
                         Label {
-                            Text("return.saved")
+                            // Truthful confirmation: never claim a durable
+                            // save while persistence is volatile.
+                            Text(store.persistenceStatus == .ready
+                                 ? "return.saved"
+                                 : "return.held")
                                 .emberProse(.callout, color: Palette.wine)
                         } icon: {
-                            Image(systemName: "moon.stars")
+                            Image(systemName: store.persistenceStatus == .ready
+                                  ? "moon.stars" : "hourglass")
                                 .foregroundStyle(Palette.rose)
                         }
                         .transition(.opacity)

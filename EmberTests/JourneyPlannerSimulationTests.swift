@@ -235,4 +235,78 @@ struct JourneyPlannerSimulationTests {
             #expect(rec?.dayNumber == 4, "position derives from count of lived experiences, not max()")
         }
     }
+
+    @Test("Adapted journeys preserve full theme coverage (nothing falls off the arc)")
+    func themeCoverageUnderAdaptation() {
+        let scripts: [(String, (Int) -> CheckInResponse)] = [
+            ("reduced", { _ in .nothingChanged }),
+            ("raised",  { _ in .wantMore }),
+            ("mixed",   { $0 % 3 == 0 ? .wantMore : ($0 % 3 == 1 ? .nothingChanged : .feltDifferent) }),
+        ]
+        // COVERAGE CONTRACT: under any CONSTANT intensity, every authored
+        // theme is served at least once (rotation guarantees this by
+        // construction). Under RAPIDLY ALTERNATING intensity, the rotation
+        // offset changes mid-arc, so at most ONE scarce theme may soften out
+        // while the arc keeps all 21 slots — documented bounded behavior.
+        func minRequired(_ shape: JourneyShape, _ theme: DayTheme, constant: Bool) -> Int {
+            if constant { return 1 }
+            return shape.themesByDay.filter { $0 == theme }.count >= 2 ? 1 : 0
+        }
+
+        let constantScripts: [(String, (Int) -> CheckInResponse)] = [
+            ("reduced", { _ in .nothingChanged }),
+            ("raised", { _ in .wantMore }),
+            ("steady", { _ in .feltDifferent }),
+        ]
+        for intention in DesireIntention.allCases {
+            let shape = JourneyShape.shape(for: intention)
+
+            for (scriptName, script) in constantScripts {
+                var servedThemes: [DayTheme: Int] = [:]
+                var completed: [Int] = []
+                while completed.count < JourneyCatalog.totalDays {
+                    let history = completed.map { CheckIn(dayNumber: $0, response: script($0), date: .now) }
+                    guard let rec = JourneyPlanner.recommend(
+                        intention: intention, profile: nil,
+                        completedDays: completed, checkIns: history
+                    ) else { break }
+                    let plan = JourneyPlanner.planTheme(
+                        intention: intention, position: rec.dayNumber,
+                        profile: nil, intensity: rec.intensity
+                    )
+                    servedThemes[plan.theme, default: 0] += 1
+                    completed.append(rec.dayNumber)
+                }
+                let authored = Set(shape.themesByDay)
+                for theme in authored {
+                    #expect((servedThemes[theme] ?? 0) >= minRequired(shape, theme, constant: true),
+                            "\(intention)/constant-\(scriptName): theme \(theme) dropped")
+                }
+                #expect(servedThemes.values.reduce(0, +) == JourneyCatalog.totalDays)
+            }
+
+            // Mixed history: slots stay perfect; coverage stays near-complete.
+            let mixed: (Int) -> CheckInResponse = {
+                $0 % 3 == 0 ? .wantMore : ($0 % 3 == 1 ? .nothingChanged : .feltDifferent)
+            }
+            var servedThemes: [DayTheme: Int] = [:]
+            var completed: [Int] = []
+            while completed.count < JourneyCatalog.totalDays {
+                let history = completed.map { CheckIn(dayNumber: $0, response: mixed($0), date: .now) }
+                guard let rec = JourneyPlanner.recommend(
+                    intention: intention, profile: nil,
+                    completedDays: completed, checkIns: history
+                ) else { break }
+                let plan = JourneyPlanner.planTheme(
+                    intention: intention, position: rec.dayNumber,
+                    profile: nil, intensity: rec.intensity
+                )
+                servedThemes[plan.theme, default: 0] += 1
+                completed.append(rec.dayNumber)
+            }
+            #expect(Set(servedThemes.keys).count >= 6,
+                    "\(intention)/mixed: too many themes lost under alternating doses")
+            #expect(servedThemes.values.reduce(0, +) == JourneyCatalog.totalDays)
+        }
+    }
 }

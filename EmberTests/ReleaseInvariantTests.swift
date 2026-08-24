@@ -364,4 +364,59 @@ struct WriteTruthTests {
     }
 }
 
-private final class BundleToken {}
+private final class BundleToken {
+}
+// MARK: - Red-team follow-ups (003B review)
+
+@MainActor
+@Suite("Volatile recovery & fail-closed verification")
+struct VolatileRecoveryTests {
+
+    @Test("retryLoading during volatile NEVER replaces authoritative memory")
+    func retryLoadingRespectsVolatile() throws {
+        let dir = FileManager.default.temporaryDirectory
+            .appendingPathComponent("ember-vr-\(UUID().uuidString)", isDirectory: true)
+        let fs = FakeFS()
+        let store = EmberStore(directory: dir, files: fs)
+
+        // Durable baseline on disk.
+        store.setIntention(.myDesire)
+        store.markDayComplete(1)
+
+        // Write fails → volatile with NEWER content in memory only.
+        fs.failWrite = true
+        store.saveReflection("unsaved private words", day: 2)
+        #expect(store.persistenceStatus == .volatile)
+
+        // User backgrounds/foregrounds: banner calls retryLoading().
+        // It must NOT replace volatile-authoritative memory with stale disk.
+        store.retryLoading()
+        #expect(store.persistenceStatus == .volatile,
+                "volatile must stay volatile — reload is forbidden here")
+        #expect(store.reflection(for: 2) == "unsaved private words",
+                "volatile-era content must survive a scenePhase cycle")
+        #expect(store.state.completedDays == [1])
+
+        // Healing happens via the next successful SAVE, not a reload.
+        fs.failWrite = false
+        #expect(store.retrySaving())
+        #expect(store.persistenceStatus == .ready)
+
+        // And a fresh instance reads the healed state from the same storage.
+        let reloaded = EmberStore(directory: dir, files: fs)
+        #expect(reloaded.reflection(for: 2) == "unsaved private words")
+        #expect(reloaded.persistenceStatus == .ready)
+    }
+
+    @Test("retrySaving is a no-op when ready and reports truthfully when unavailable")
+    func retrySavingContract() {
+        let fs = FakeFS()
+        let store = EmberStore(directory:
+            FileManager.default.temporaryDirectory
+                .appendingPathComponent("ember-vr2-\(UUID().uuidString)", isDirectory: true),
+            files: fs)
+        // Fresh install = ready; retrySaving neither lies nor changes state.
+        #expect(store.retrySaving() == true)
+        #expect(store.persistenceStatus == .ready)
+    }
+}

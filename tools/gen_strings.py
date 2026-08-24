@@ -323,6 +323,9 @@ k("return.noticed", "I noticed something", "J'ai remarqué quelque chose")
 k("return.different", "It felt different", "C'était différent")
 k("return.more", "I want more of this", "Je veux continuer sur cette lancée")
 k("return.saved", "Saved. Tomorrow leans on this.", "Enregistré. Demain s'appuiera là-dessus.")
+k("return.held",
+  "Kept for this session — we'll save it as soon as the device lets us.",
+  "Gardé pour cette session — nous l'enregistrerons dès que l'appareil le permettra.")
 k("return.close.day", "Close the day", "Clôturer la journée")
 
 # ---------------------------------------------------------------------------
