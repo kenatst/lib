@@ -346,7 +346,7 @@ struct WriteTruthTests {
         emberStore.recordCheckIn(CheckIn(dayNumber: 1, response: .noticedSomething, date: .now))
 
         #expect(emberStore.persistenceStatus == .volatile)
-        #expect(emberStore.journalEntries.map(\.text).sorted() == ["first", "second"].sorted())
+        #expect(emberStore.allJournalEntries.map(\.text).sorted() == ["first", "second"].sorted())
         #expect(emberStore.state.completedDays == [1])
     }
 

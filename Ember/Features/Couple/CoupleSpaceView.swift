@@ -20,9 +20,8 @@ struct CoupleSpaceView: View {
         store.state.coupleRole ?? .partnerOne
     }
 
-    private var nextDay: Int {
-        min(JourneyCatalog.totalDays, (store.state.completedDays.max() ?? 0) + 1)
-    }
+    /// Today's frozen couple plan (idempotent; same plan all day).
+    private var todayPlan: DailyPlan? { store.planForToday() }
 
     var body: some View {
         ScrollView {
@@ -75,7 +74,7 @@ struct CoupleSpaceView: View {
     }
 
     private var motifEvolution: Double {
-        Double(store.state.completedDays.count) / Double(JourneyCatalog.totalDays) + 0.35
+        min(1, 0.35 + Double(store.countCompletedSessions()) * 0.02)
     }
 
     // MARK: Asymmetric step
@@ -99,10 +98,15 @@ struct CoupleSpaceView: View {
         .padding(.top, Spacing.xs)
     }
 
-    /// Asymmetric challenges: each partner receives their own step. The keys
-    /// differ per role; neither partner needs to see the other's instruction.
+    /// Asymmetric challenges: each partner receives their own step from the
+    /// frozen daily plan. Neither partner needs the other's instruction.
     private func asymmetricKey(for role: EmberStore.CoupleRole) -> String {
-        let day = min(nextDay, JourneyCatalog.totalDays)
+        let space: CoupleSpace = role == .partnerOne ? .partnerOne : .partnerTwo
+        if let assignment = todayPlan?.coupleAssignmentIDs?[space] {
+            return assignment.localizationKey
+        }
+        // Legacy fallback (pre-engine plans): authored per-day pairs.
+        let day = store.countCompletedSessions() % JourneyCatalog.totalDays + 1
         return "couple.asymmetric.day.\(day).\(role.rawValue)"
     }
 

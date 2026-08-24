@@ -141,7 +141,7 @@ struct CoupleArchitectureTests {
 
         // Switching spaces changes what the CURRENT reader sees…
         store.setCoupleRole(.partnerTwo)
-        #expect(store.journalEntries.isEmpty)
+        #expect(store.allJournalEntries.isEmpty)
 
         // …but there exists no method taking a role parameter to read another
         // space's reflections. reflection(for:)/journalEntries/draft(for:) all

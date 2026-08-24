@@ -38,8 +38,11 @@ final class EmberStore {
         var checkIns: [CheckIn] = []
         /// Private reflections keyed by space ("p1"/"p2"/"solo") and day.
         /// Stays on this device only; each partner's entries are invisible
-        /// to the other's space.
+        /// to the other's space. LEGACY: day-numbered (pre-daily-engine).
         var reflectionsBySpace: [String: [Int: String]] = [:]
+        /// Ongoing-engine reflections keyed by space and SESSION ID.
+        /// New entries land here; legacy day-numbered entries remain intact.
+        var sessionReflectionsBySpace: [String: [String: String]] = [:]
         /// Legacy (pre-couple) single-space reflections, migrated on load.
         var reflections: [Int: String] = [:]
         /// Couple mode: which partner holds this space.
@@ -257,12 +260,78 @@ final class EmberStore {
         state.reflectionsBySpace[currentSpace]?[day]
     }
 
-    /// All reflections in the CURRENT space, newest day first. There is no
-    /// API to read another space's reflections — by construction.
-    var journalEntries: [(day: Int, text: String)] {
-        (state.reflectionsBySpace[currentSpace] ?? [:])
-            .sorted { $0.key > $1.key }
-            .map { ($0.key, $0.value) }
+    // MARK: Session-keyed reflections (ongoing engine)
+
+    /// Saves a private reflection attached to a session ID (never a course
+    /// number). Empty text deletes.
+    func saveSessionReflection(_ text: String, sessionID: String) {
+        var space = state.sessionReflectionsBySpace[currentSpace] ?? [:]
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            space.removeValue(forKey: sessionID)
+        } else {
+            space[sessionID] = text
+        }
+        state.sessionReflectionsBySpace[currentSpace] = space
+        save()
+    }
+
+    func sessionReflection(for sessionID: String) -> String? {
+        state.sessionReflectionsBySpace[currentSpace]?[sessionID]
+    }
+
+    /// Drafts keyed by session ID.
+    func saveSessionDraft(_ text: String, sessionID: String) {
+        let key = "\(currentSpace):session.\(sessionID)"
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            state.drafts.removeValue(forKey: key)
+        } else {
+            state.drafts[key] = text
+        }
+        save()
+    }
+
+    func sessionDraft(for sessionID: String) -> String? {
+        state.drafts["\(currentSpace):session.\(sessionID)"]
+    }
+
+    /// One journal row: either an ongoing session entry (with its calendar
+    /// date) or a legacy day-numbered entry. Private to the current space.
+    nonisolated struct JournalEntry: Equatable, Sendable {
+        let sessionID: String?
+        let legacyDayNumber: Int?
+        let dateLabel: String?      // canonical yyyy-MM-dd for ongoing entries
+        let text: String
+    }
+
+    /// Combined journal for the current space: ongoing sessions first
+    /// (newest calendar day first), then legacy day-numbered entries.
+    /// There is no API to read another space — by construction.
+    var allJournalEntries: [JournalEntry] {
+        var result: [JournalEntry] = []
+        let planByID = state.dailyPlans
+        let sessionEntries = state.sessionReflectionsBySpace[currentSpace] ?? [:]
+        let sortedSessions = sessionEntries.sorted { lhs, rhs in
+            let lDay = planByID[lhs.key]?.day.storageKey ?? ""
+            let rDay = planByID[rhs.key]?.day.storageKey ?? ""
+            return lDay > rDay
+        }
+        for (sessionID, text) in sortedSessions {
+            result.append(JournalEntry(
+                sessionID: sessionID,
+                legacyDayNumber: nil,
+                dateLabel: planByID[sessionID]?.day.description,
+                text: text
+            ))
+        }
+        for (day, text) in (state.reflectionsBySpace[currentSpace] ?? [:]).sorted(by: { $0.key > $1.key }) {
+            result.append(JournalEntry(
+                sessionID: nil,
+                legacyDayNumber: day,
+                dateLabel: nil,
+                text: text
+            ))
+        }
+        return result
     }
 
     func recordCheckIn(_ checkIn: CheckIn) {

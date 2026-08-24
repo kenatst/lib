@@ -50,8 +50,8 @@ final class AppState {
 
     // MARK: Derived session context (non-persisted)
 
-    /// The next day to live, derived from completed days — suggests pacing
-    /// without ever shaming the user.
+    /// Legacy numbered-day helper retained only for migration-era views.
+    /// The ongoing engine derives "today" from the calendar, not counters.
     func suggestedDayNumber(completedDays: [Int]) -> Int {
         min(JourneyCatalog.totalDays, (completedDays.max() ?? 0) + 1)
     }

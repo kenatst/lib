@@ -21,7 +21,8 @@ struct DailySessionView: View {
     @State private var draftSaveTask: Task<Void, Never>?
 
     private func restoreDraftIfNeeded() {
-        if reflection.isEmpty, let draft = store.draft(for: dayNumber) {
+        guard let sessionID = store.currentPlanID else { return }
+        if reflection.isEmpty, let draft = store.sessionDraft(for: sessionID) ?? store.draft(for: dayNumber) {
             reflection = draft
         }
     }
@@ -148,7 +149,11 @@ struct DailySessionView: View {
                         draftSaveTask = Task {
                             try? await Task.sleep(for: .seconds(1.2))
                             guard !Task.isCancelled else { return }
-                            store.saveDraft(newText, day: dayNumber)
+                            if let sessionID = store.currentPlanID {
+                                store.saveSessionDraft(newText, sessionID: sessionID)
+                            } else {
+                                store.saveDraft(newText, day: dayNumber)
+                            }
                         }
                     }
 
@@ -265,8 +270,14 @@ struct DailySessionView: View {
     private func saveReflectionIfNeeded() {
         let trimmed = reflection.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
-        store.saveReflection(trimmed, day: dayNumber)
-        store.clearDraft(day: dayNumber)
+        // ONGOING ENGINE: reflections attach to the frozen session ID.
+        if let sessionID = store.currentPlanID {
+            store.saveSessionReflection(trimmed, sessionID: sessionID)
+            store.saveSessionDraft("", sessionID: sessionID)
+        } else {
+            store.saveReflection(trimmed, day: dayNumber)
+            store.clearDraft(day: dayNumber)
+        }
         Haptics.soft()
         withAnimation(Motion.resolved(Motion.gentle, reduceMotion: reduceMotion)) {
             reflectionSaved = true

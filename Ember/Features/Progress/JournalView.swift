@@ -2,16 +2,17 @@ import SwiftUI
 
 // MARK: - JournalView
 //
-// Your own words, back to you. Lists every saved reflection with its day.
-// Private by definition — this view is the only reader of reflections.
+// Your own words, back to you. Ongoing sessions show their calendar date;
+// legacy day-numbered entries keep their original labels. Private by
+// definition — this view is the only reader of reflections.
 
 struct JournalView: View {
 
     @Environment(EmberStore.self) private var store
 
     /// Current space's reflections, newest first. Never shows a partner's.
-    private var entries: [(day: Int, text: String)] {
-        store.journalEntries
+    private var entries: [EmberStore.JournalEntry] {
+        store.allJournalEntries
     }
 
     var body: some View {
@@ -23,7 +24,7 @@ struct JournalView: View {
                         .italic()
                         .padding(.top, Spacing.xl)
                 } else {
-                    ForEach(entries, id: \.day) { entry in
+                    ForEach(Array(entries.enumerated()), id: \.offset) { _, entry in
                         journalRow(entry)
                     }
                 }
@@ -37,18 +38,25 @@ struct JournalView: View {
     }
 
     @ViewBuilder
-    private func journalRow(_ entry: (day: Int, text: String)) -> some View {
+    private func journalRow(_ entry: EmberStore.JournalEntry) -> some View {
         VStack(alignment: .leading, spacing: Spacing.xs) {
-            Text(String.ember("journal.day.label", entry.day))
-                .emberCaption(Palette.rose)
-                .kerning(1.6)
-                .textCase(.uppercase)
+            if let legacyDay = entry.legacyDayNumber {
+                // Legacy entry: keep the original day-number label.
+                Text(String.ember("journal.day.label", legacyDay))
+                    .emberCaption(Palette.rose)
+                    .kerning(1.6)
+                    .textCase(.uppercase)
 
-            // The day's title in the CURRENT journey's theme sequence.
-            if let intention = store.state.intention,
-               let day = JourneyCatalog.day(entry.day, for: intention) {
-                Text(String.ember(day.titleKey(offset: intention.poolOffset)))
-                    .emberCaption(Palette.mutedInk.opacity(0.75))
+                if let intention = store.state.intention,
+                   let day = JourneyCatalog.day(legacyDay, for: intention) {
+                    Text(String.ember(day.titleKey(offset: intention.poolOffset)))
+                        .emberCaption(Palette.mutedInk.opacity(0.75))
+                }
+            } else if let dateLabel = entry.dateLabel {
+                // Ongoing entry: quiet calendar date, no course numbering.
+                Text(dateLabel)
+                    .emberCaption(Palette.rose)
+                    .kerning(1.6)
             }
 
             Text(entry.text)
@@ -78,9 +86,7 @@ struct JournalView: View {
 private func previewJournalStore() -> EmberStore {
     let store = EmberStore()
     store.setIntention(.myDesire)
-    store.markDayComplete(1)
-    store.markDayComplete(4)
-    store.saveReflection("The quiet was easier tonight.", day: 1)
-    store.saveReflection("I noticed the light on the wall and stayed.", day: 4)
+    _ = store.planForToday()
+    store.saveSessionReflection("The quiet was easier tonight.", sessionID: store.currentPlanID ?? "")
     return store
 }

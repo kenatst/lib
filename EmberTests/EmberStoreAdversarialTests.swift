@@ -331,7 +331,7 @@ struct EmberStoreAdversarialTests {
 
         #expect(store.persistenceStatus == .ready)
         #expect(store.reflection(for: 3) == "from the days before spaces")
-        #expect(store.journalEntries.count == 1)
+        #expect(store.allJournalEntries.count == 1)
         #expect(store.state.reflections.isEmpty, "legacy field drained after migration")
         #expect(store.state.reflectionsBySpace["solo"]?[3] == "from the days before spaces")
     }
