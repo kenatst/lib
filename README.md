@@ -10,16 +10,19 @@ A premium adult relationship and intimacy wellness application for iOS. EMBER he
 
 ## Status
 
-**Mission 003 — commercial credibility, true personalization, production couple architecture.** Building on the complete product (18+ age gate, welcome arc, journey selection, adaptive onboarding, qualitative desire profile, 21-day guided journeys in English and French, evening check-ins, private journal, evolving sketch illustrations, opt-in local reminders, full data deletion), this mission added:
+**Mission 004 — the ongoing daily engine.** EMBER is no longer a 21-day program: it is an ongoing daily guide. Every calendar day the engine freezes one coherent experience (Discover / Reflect / Act / Return), chosen from the authored seed library by journey intention × desire profile × learned signals − recency saturation. There is no final day; missed days create no backlog; a returning user simply gets today.
 
-* **Persistence truth machine** — absent vs unreadable vs corrupt files are distinct states; a locked-device launch can never clobber private data; corruption is quarantined byte-for-byte; deletion failure is surfaced honestly instead of faked.
-* **JourneyPlanner** — deterministic personalization: intention × desire-profile × completed days × evening check-ins decide which day comes next (bounded reordering with protected anchor days), today's dose (reduced/steady/raised), and which authored copy variants are served. Guarded dimensions lower challenge; "nothing changed" visibly slows the journey.
-* **Three genuinely different journeys** — each intention has its own 21-day theme sequence and its own rotation through theme pools (title, idea, practice, evening question always belong to one theme). Same day number, different journey → different experience.
-* **Production couple architecture** — `CoupleService` protocol defines the two-device contract (anonymous identity, pairing, shared completions, explicit hand-offs to the opposite role only, unpair revocation) with no API through which a partner could request the other's private reflections. The shipped same-device mode is labeled honestly as a demo reality.
-* **StoreKit 2 monetization** — one annual subscription, free preview of days 1–3, time-aware entitlement gates, restore purchases with an honest "nothing to restore" state, SKTestSession integration tests covering purchase/reload/refund. No dark patterns anywhere on the paywall.
-* **CI** — GitHub Actions build + test workflow.
+Key systems:
 
-81 Swift Testing tests across 16 suites, including adversarial persistence tests and real StoreKit integration tests.
+- **DailyEngine** — idempotent `planForToday()`: today's plan is created once and frozen forever (IDs only, localized at render). Deterministic: same state → same plan.
+- **ContentLibrary** — the original 21-day arc plus theme pools (6 variants per theme for Discover/Reflect/Act, 4 Return prompts) as addressable content units with per-movement cooldowns.
+- **ThemeSignals** — bounded, decaying per-theme resonance learned from evening Returns; the evolving layer above the immutable onboarding profile.
+- **LocalDay** — canonical local calendar-day identity (DST/timezone-safe via injected Calendar).
+- **Migration v4** — legacy numbered history becomes honest session records (no invented dates); journal, check-ins, profile, reflections all preserved; free-session allowance carries over.
+- **AccessPolicy** — free = first three completed sessions ever (the calendar can never reset it); premium = unlimited ongoing adaptive guide. StoreKit 2 with true refund handling.
+- **Couple mode** — OUR DESIRE plans freeze asymmetric assignments per partner from one shared plan identity; private reflections remain structurally unreachable by the partner.
+
+142 Swift Testing tests across 28 suites — including 30/90/180-day user simulations asserting uniqueness, cooldown honesty, bounded signal drift and determinism. GitHub Actions CI green.
 
 ## Requirements
 
@@ -52,7 +55,7 @@ Ember/
 ├── Core/            String resolution helper, privacy-conscious os.Logger,
 │                    ReminderScheduler (opt-in local notifications only)
 ├── Domain/          Pure value logic: Onboarding questions & branching,
-│                    DesireProfile derivation, JourneyCatalog (21 days),
+│                    DesireProfile derivation, ContentLibrary + DailyEngine (ongoing),
 │                    CheckIn adaptation engine
 ├── Data/            EmberStore — the single persistence owner (see Privacy)
 ├── DesignSystem/
