@@ -2839,13 +2839,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Day %lld of 21"
+            "value": "Session %lld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jour %lld sur 21"
+            "value": "Séance %lld"
           }
         }
       }
@@ -3319,13 +3319,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Free for everyone: your evening check-ins reshape the days ahead. Yours continues to adapt through day 21."
+            "value": "Free for everyone: your evening check-ins reshape the days ahead. Premium keeps that adaptation running for as long as you use EMBER."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Offert à tout le monde : vos retours du soir redessinent les jours à venir. Le vôtre continue de s'adapter jusqu'au jour 21."
+            "value": "Gratuit pour toutes et tous : vos check-ins du soir façonnent les jours à venir. L'abonnement fait durer cette adaptation aussi longtemps qu'utiliser EMBER."
           }
         }
       }
@@ -4327,13 +4327,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld of 21 days traced"
+            "value": "%lld sessions traced"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld jours sur 21 tracés"
+            "value": "%lld séances tracées"
           }
         }
       }

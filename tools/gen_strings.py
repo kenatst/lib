@@ -282,7 +282,7 @@ k("profile.cta", "Shape my journey", "Façonner mon parcours")
 # ---------------------------------------------------------------------------
 k("home.wordmark", "EMBER", "EMBER")
 k("home.title", "Today", "Aujourd'hui")
-k("home.day.label", "Day %lld of 21", "Jour %lld sur 21")
+k("home.day.label", "Session %lld", "Séance %lld")
 k("home.today.cta", "Begin today's session", "Commencer la séance du jour")
 k("home.begin", "Begin Day %lld", "Commencer le jour %lld")
 k("home.resume", "Continue Day %lld", "Reprendre au jour %lld")
@@ -336,7 +336,7 @@ k("progress.title", "The Shape So Far", "Le tracé jusqu'ici")
 k("progress.chapter.1", "Week one — Noticing", "Première semaine — Remarquer")
 k("progress.chapter.2", "Week two — Kindling", "Deuxième semaine — Attiser")
 k("progress.chapter.3", "Week three — Tending", "Troisième semaine — Entretenir")
-k("progress.days", "%lld of 21 days traced", "%lld jours sur 21 tracés")
+k("progress.days", "%lld sessions traced", "%lld séances tracées")
 k("progress.empty", "Your first line appears after Day One.",
   "Votre premier trait apparaîtra après le premier jour.")
 k("journal.title", "Your Words", "Vos mots")
@@ -481,9 +481,7 @@ k("paywall.legal.terms",
 k("paywall.feature.ongoingGuide.name", "The ongoing daily guide", "Le guide quotidien sans fin")
 k("paywall.feature.ongoingGuide.detail", "Every day beyond your first three sessions — for as long as you use EMBER.", "Chaque jour au-delà de vos trois premières séances — aussi longtemps qu'utiliser EMBER.")
 k("paywall.feature.adaptivePlanner.name", "A journey that listens", "Un parcours qui vous écoute")
-k("paywall.feature.adaptivePlanner.detail",
-  "Free for everyone: your evening check-ins reshape the days ahead. Yours continues to adapt through day 21.",
-  "Offert à tout le monde : vos retours du soir redessinent les jours à venir. Le vôtre continue de s'adapter jusqu'au jour 21.")
+k("paywall.feature.adaptivePlanner.detail", "Free for everyone: your evening check-ins reshape the days ahead. Premium keeps that adaptation running for as long as you use EMBER.", "Gratuit pour toutes et tous : vos check-ins du soir façonnent les jours à venir. L'abonnement fait durer cette adaptation aussi longtemps qu'utiliser EMBER.")
 k("paywall.feature.journal.name", "Your private journal", "Votre journal privé")
 k("paywall.feature.journal.detail",
   "Free for everyone, always: everything you've written, readable anytime, kept only here.",

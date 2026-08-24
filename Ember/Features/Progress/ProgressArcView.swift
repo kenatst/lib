@@ -14,7 +14,8 @@ struct ProgressArcView: View {
         store.state.intention ?? .myDesire
     }
 
-    private var completed: Int { store.state.completedDays.count }
+    /// Sessions ever lived — ongoing measure (legacy days migrate in).
+    private var completed: Int { store.state.sessionHistory.count }
 
     var body: some View {
         ScrollView {
@@ -31,9 +32,11 @@ struct ProgressArcView: View {
                     .padding(.top, Spacing.xs)
 
                 // The evolving motif — the emotional progress bar.
+                // ONGOING: patterns explored, not completion percentage.
+                // The motif keeps evolving slowly forever; it never "finishes".
                 SketchMotifView(
                     journey: intention,
-                    evolution: Double(completed) / Double(JourneyCatalog.totalDays),
+                    evolution: min(1, 0.08 + Double(completed) * 0.02),
                     strokeColor: Palette.intentionTint(intention),
                     lineWidth: 2.5
                 )

@@ -3,7 +3,7 @@ import UserNotifications
 
 // MARK: - ReminderScheduler (local notifications only)
 //
-// A 21-day practice needs a gentle door back. One soft daily reminder at an
+// An ongoing daily practice needs a gentle door back. One soft daily reminder at an
 // hour the user chooses — never marketing, never streak pressure. The content
 // of notifications is generic; nothing user-written ever leaves the device,
 // and scheduling is entirely opt-in.
